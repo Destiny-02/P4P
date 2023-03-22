@@ -1,0 +1,126 @@
+﻿first Name Compare
+last Name Compare
+tax ID Compare
+Employee
+Nett
+PAYE
+YTD
+compare
+compare
+compare
+deduction
+deduction
+end Date
+end Date
+family Name
+family Name
+get Deduction
+get End Date
+get Family Name
+get Given Name
+get Gross
+get Hours
+get Nett
+get PAYE
+get Rate
+get Start Date
+get Tax ID
+get YTD
+given Name
+given Name
+gross
+hours
+payroll
+person 1
+person 1
+person 1
+person 2
+person 2
+person 2
+rate
+rate
+set Deduction
+set End Date
+set Family Name
+set Given Name
+set Rate
+set Start Date
+set Tax ID
+start Date
+start Date
+tax ID
+tax ID
+DPs
+File Input
+File Input
+YTD
+burden
+deduction
+e
+e
+e
+filename
+first Name Compare
+hours
+last Name Compare
+line
+list
+output
+output
+payroll
+person
+person
+person
+person
+person
+person
+processing
+rate
+read File
+split String
+tax ID
+tax ID
+time Stamp
+total PAYE
+Hourly Wage
+Hourly Wage
+YTD
+compute Gross
+compute Nett
+compute PAYE
+deduction
+end Date
+family Name
+get Gross
+get Nett
+get PAYE
+get YTD
+given Name
+hours
+payroll
+rate
+start Date
+tax ID
+Payroll
+args
+main
+new File
+payroll
+Salaried Wage
+Salaried Wage
+YTD
+compute Nett
+compute PAYE
+deduction
+end Date
+family Name
+get Gross
+get Nett
+get PAYE
+get YTD
+given Name
+hours
+payroll
+rate
+start Date
+tax ID
