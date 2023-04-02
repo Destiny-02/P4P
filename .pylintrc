@@ -1,0 +1,8 @@
+[MAIN]
+
+indent-string="  " # this means 2 spaces
+
+disable=
+  missing-module-docstring,
+  missing-function-docstring,
+  invalid-name # this rule enforces snake_case
