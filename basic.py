@@ -1,4 +1,8 @@
 import json
+from porter2stemmer import Porter2Stemmer
+import splitIdentifier as s
+
+stemmer = Porter2Stemmer()
 
 def txtToSet(filename):
     data = set()
@@ -16,15 +20,19 @@ def txtToSet(filename):
             data.add(word)
     return data
 
-def jsonToSet(filename: str) -> set:
-  data = set()
+def jsonToSet(filename: str) -> dict:
+  data = {}
   with open(filename, encoding="utf-8") as jsonFile:
     parserOutputJson = json.load(jsonFile)
 
     for item in parserOutputJson['identifiers']:
-      words: list[str] = item['name'].split("_") # we only support snake_case for this basic PoC
+      words: list[str] = s.splitIdentifier(item['name'])
       for word in words:
-        data.add(word)
+        stemmedWord = stemmer.stem(word)
+        if stemmedWord in data:
+          data[stemmedWord] += 1
+        else:
+          data[stemmedWord] = 1
 
   return data
 
@@ -34,9 +42,10 @@ domain_terms = txtToSet('domain_terms.txt')
 
 
 # uncomment these lines to use the output from the parser
-identifiers = txtToSet('submission.txt')
-# identifiers = jsonToSet('./parsers/output/java.json')
+# identifiers = txtToSet('submission.txt')
+identifiers = jsonToSet('./parsers/output/java.json')
 
+print(identifiers)
 
 count = 0
 numDomainTerms = len(domain_terms)
