@@ -3,9 +3,10 @@ from porter2stemmer import Porter2Stemmer
 stemmer = Porter2Stemmer()
 
 # Read in input file
+# Strip terms of whitespace and convert to lowercase
+# Also ignore empty lines
 with open('input.txt', 'r') as input_file:
-    input_terms = set(line.strip() for line in input_file if line.strip())
-
+    input_terms = set(line.strip().lower() for line in input_file if line.strip())
 
 # Stem input terms
 stemmed_terms = set(stemmer.stem(term) for term in input_terms)
