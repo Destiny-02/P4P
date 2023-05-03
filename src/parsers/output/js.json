@@ -1,0 +1,20 @@
+{
+  "comments": [
+    "*\r\n * comments yay\r\n * @param {number} a\r\n * @param {number} b\r\n ",
+    " an inline comment"
+  ],
+  "identifiers": [
+    {
+      "type": "FunctionDeclaration.argument",
+      "name": "a"
+    },
+    {
+      "type": "FunctionDeclaration.argument",
+      "name": "b"
+    },
+    {
+      "type": "FunctionDeclaration.ownId",
+      "name": "add"
+    }
+  ]
+}
