@@ -1,6 +1,7 @@
 import json
 from porter2stemmer import Porter2Stemmer
-import splitIdentifier as s
+from splitting import splitIdentifier as s
+import os
 
 stemmer = Porter2Stemmer()
 
@@ -96,20 +97,38 @@ def setToStemmedSet(data: set) -> set:
 """
 Main
 """
+# TODO: get this from the command line
+pathToData = '../data/ugrad-009-01/'
 
-domainTerms, equivalents = txtToSetWithEquivalents('domain_terms.txt')
+domainTerms, equivalents = txtToSetWithEquivalents(pathToData + 'domain_terms.txt')
 
-# Uncomment these lines to use the output from the parser
-identifiers = txtToSet('submission.txt')
-# identifiers = jsonToSet('./parsers/output/java.json')
+# Loop through all the codebases
+for folderName in os.listdir(pathToData):
+    if os.path.isdir(os.path.join(pathToData, folderName)):
+      repoPath = os.path.join(pathToData, folderName)
+      print("Processing " + repoPath)
+      
+      # TODO: parse the codebase in this folder
+      # TODO: use the parser output to get the identifiers
+      identifiers = jsonToSet('../out/java.json')
 
-identifiers = setToStemmedSet(identifiers)
-identifiers = removeEquivalents(identifiers, equivalents)
+      identifiers = setToStemmedSet(identifiers)
+      identifiers = removeEquivalents(identifiers, equivalents)
 
-# print("Terms in identifiers but not in domainTerms:")
-# print(identifiers - domainTerms) 
-# print("Terms in domainTerms but not in identifiers:")
-# print(domainTerms - identifiers)
+      # print("Terms in identifiers but not in domainTerms:")
+      # print(identifiers - domainTerms) 
+      # print("Terms in domainTerms but not in identifiers:")
+      # print(domainTerms - identifiers)
+      
+      print("1: {:.2%}".format(findPercentDTInIdentifiers(domainTerms, identifiers)))
+      # TODO: answer 2: 
 
-print("Percentage of domain terms in identifiers: {:.2%}".format(findPercentDTInIdentifiers(domainTerms, identifiers)))
+# TODO: answer 3:
 
+# Clean up the out folder
+outPath = '../out/'
+outFiles = os.listdir(outPath)
+for filename in outFiles:
+    filePath = os.path.join(outPath, filename)
+    if os.path.isfile(filePath):
+        os.remove(filePath)
