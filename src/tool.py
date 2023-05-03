@@ -109,7 +109,8 @@ for folderName in os.listdir(pathToData):
       print("Processing " + repoPath)
       
       # TODO: parse the codebase in this folder
-      # TODO: use the parser output to get the identifiers
+      # TODO: get a set of the identifiers
+      # TODO: get a set of the comments
       identifiers = jsonToSet('../out/java.json')
 
       identifiers = setToStemmedSet(identifiers)
