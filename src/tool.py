@@ -14,9 +14,6 @@ def main(pathToData):
 
     for repoPath in findRepoPaths(pathToData):
         print("Processing " + repoPath)
-
-        identifiers = set()
-        comments = set()
         
         for filePath in findJavaFiles(repoPath):
             print(filePath)
