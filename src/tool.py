@@ -8,14 +8,42 @@ stemmer = Porter2Stemmer()
 """
 Stats functions
 """
-def findPercentDTInIdentifiers(domainTerms: set, identifiers: set) -> float:
-  count = 0
-  numDomainTerms = len(domainTerms)
+def getDVInSet(domainTerms: set, words: set) -> set:
+  dv = set()
   for term in domainTerms:
-    if term in identifiers:
-      count += 1
-  return count/numDomainTerms
+    if term in words:
+      dv.add(term)
+  return dv
 
+def findLA(domainVocabs):
+    n = len(domainVocabs)
+
+    # 1. Find the average number of terms shared between 2 DV pairs
+    totalSharedTerms = 0 # the total number of shared terms between all pairs of domain vocabs
+    for i in range(n):
+      for j in range(n):
+        if i < j:
+          sharedTerms = len(domainVocabs[i].intersection(domainVocabs[j]))
+          totalSharedTerms += sharedTerms
+
+    # 2!(n-2)!/n! = 2/(n(n-1)) 
+    # This is the probability of choosing 2 items from a group of n items, regardless of order
+    # AKA n(n-1)/2 possible unique pairs
+    p = 2/(n*(n-1))
+
+    averageSharedTerms = totalSharedTerms * p
+    
+    # 2. Find the average number of terms in a DV
+    totalNumTerms = 0 # the total number of terms in all domain vocabs
+    for i in range(n):
+      totalNumTerms += len(domainVocabs[i])
+    averageNumTerms = totalNumTerms / n
+    
+    # Calculate the level of lexical agreement (LA)
+    if totalNumTerms == 0:
+      return 0
+    else:
+      return averageSharedTerms / averageNumTerms
 
 """
 Conversion functions
@@ -112,19 +140,34 @@ for folderName in os.listdir(pathToData):
       # TODO: get a set of the identifiers
       # TODO: get a set of the comments
       identifiers = jsonToSet('../out/java.json')
+      comments = {"the", "payroll", "system", "will", "process", "each", "salaried", "employee's", "payroll"}
 
       identifiers = setToStemmedSet(identifiers)
+      comments = setToStemmedSet(comments)
+
       identifiers = removeEquivalents(identifiers, equivalents)
+      comments = removeEquivalents(comments, equivalents)
+
+      dvIdentifiers = getDVInSet(domainTerms, identifiers)
+      dvComments = getDVInSet(domainTerms, comments)
+      dv = dvIdentifiers.union(dvComments)
+      numDT = len(domainTerms)
 
       # print("Terms in identifiers but not in domainTerms:")
       # print(identifiers - domainTerms) 
       # print("Terms in domainTerms but not in identifiers:")
       # print(domainTerms - identifiers)
       
-      print("1: {:.2%}".format(findPercentDTInIdentifiers(domainTerms, identifiers)))
-      # TODO: answer 2: 
+      # % domain terms in source code
+      print("1: {:.2%}".format(len(dv)/numDT))
 
-# TODO: answer 3:
+      # % domain terms in identifiers
+      print("2.1: {:.2%}".format(len(dvIdentifiers.difference(dvComments))/numDT))
+      # % domain terms in comments
+      print("2.2: {:.2%}".format(len(dvComments.difference(dvIdentifiers))/numDT))
+
+# LA between any 2 pairs of domain vocabs
+print("3: {:.2%}".format(findLA(domainTerms)))
 
 # Clean up the out folder
 outPath = '../out/'
