@@ -5,7 +5,7 @@ import sys
 project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_dir)
 
-from splitting import splitIdentifier as s
+from src.tool_helper.splitting import splitIdentifier
 import json
 from porter2stemmer import Porter2Stemmer
 
@@ -33,7 +33,7 @@ def jsonToSet(filename: str) -> set:
     parserOutputJson = json.load(jsonFile)
 
     for item in parserOutputJson['identifiers']:
-      words: list[str] = s.splitIdentifier(item['name'])
+      words: list[str] = splitIdentifier(item['name'])
       for word in words:
         data.add(word)
 
