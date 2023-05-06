@@ -1,3 +1,10 @@
+import os
+import sys
+
+# To fix import errors
+project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, project_dir)
+
 from splitting import splitIdentifier as s
 import json
 from porter2stemmer import Porter2Stemmer
@@ -19,7 +26,7 @@ def txtToSet(filename):
             data.add(word)
     return data
 
-# Converts a json file of the parser output to a set of terms
+# Converts a json file of the parser output to a set of terms found in identifiers
 def jsonToSet(filename: str) -> set:
   data = set()
   with open(filename, encoding="utf-8") as jsonFile:

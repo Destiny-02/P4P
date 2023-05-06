@@ -7,33 +7,33 @@ sys.path.insert(0, project_dir)
 
 from src.tool_helper.stats import findLA, getDVInSet
 
-# Tests for getDVInSet
-def test_no_matching_terms():
+def test_getDVInSet():
+    # Test with no matching terms
     domain_terms = {"apple", "banana", "cherry"}
     words = {"hello", "world", "foo", "bar"}
     assert getDVInSet(domain_terms, words) == set()
-
-def test_some_matching_terms():
+    
+    # Test with some matching terms
     domain_terms = {"apple", "banana", "cherry"}
     words = {"hello", "apple", "world", "foo", "bar", "banana"}
     assert getDVInSet(domain_terms, words) == {"apple", "banana"}
 
-# Tests for findLA
-def test_findLA_twoIdenticalDVs():
+def test_findLA():
+    # Test with two identical domain vectors
     dv = set(["apple", "banana", "cherry"])
     assert findLA([dv, dv]) == 1.0
-
-def test_findLA_twoDifferentDVs():
+    
+    # Test with two different domain vectors
     dv1 = set(["apple", "banana", "cherry"])
     dv2 = set(["orange", "pear", "grape"])
     assert findLA([dv1, dv2]) == 0.0
-
-def test_findLA_twoOverlappingDVs():
+    
+    # Test with two overlapping domain vectors
     dv1 = set(["apple", "banana", "cherry"])
     dv2 = set(["banana", "cherry", "durian"])
     assert round(findLA([dv1, dv2]), 2) == 0.67
-
-def test_findLA_threeDVs():
+    
+    # Test with three domain vectors
     dv1 = set(["apple", "banana", "cherry"])
     dv2 = set(["banana", "cherry", "durian"])
     dv3 = set(["cherry", "durian", "elderberry"])

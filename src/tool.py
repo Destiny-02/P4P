@@ -1,5 +1,5 @@
 import os
-from tool_helper.conversion import txtToSet, jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet
+from tool_helper.conversion import jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet
 from tool_helper.stats import findLA, getDVInSet
 
 # TODO: get this from the command line
