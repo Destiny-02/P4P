@@ -8,3 +8,8 @@
 # Run Python Scripts
 
 `python <filename.py>`
+
+# Run Tests
+
+`pip install pytest` # if not already installed
+`pytest`
