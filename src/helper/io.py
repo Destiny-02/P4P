@@ -33,3 +33,14 @@ def findRepoPaths(pathToData):
     if os.path.isdir(os.path.join(pathToData, folderName)):
       repoPaths.append(os.path.join(pathToData, folderName))
   return repoPaths
+
+def findJavaFiles(folderPath):
+  """
+  Finds all the java files in the folder and its subfolders
+  """
+  javaFiles = set()
+  for dirpath, _, filenames in os.walk(folderPath):
+    for filename in filenames:
+      if filename.endswith('.java'):
+        javaFiles.add(os.path.join(dirpath, filename))
+  return javaFiles

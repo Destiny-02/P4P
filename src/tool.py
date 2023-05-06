@@ -1,6 +1,6 @@
 from helper.conversion import txtToSetWithEquivalents, convertEquivalents, setToStemmedSet
 from helper.stats import findLA, getDVInSet
-from helper.io import printStats, cleanOutFolder, findRepoPaths
+from helper.io import printStats, cleanOutFolder, findRepoPaths, findJavaFiles
 
 def main(pathToData):
     domainTerms, equivalents = txtToSetWithEquivalents(pathToData + 'domain_terms.txt')
@@ -13,10 +13,15 @@ def main(pathToData):
 
     for repoPath in findRepoPaths(pathToData):
         print("Processing " + repoPath)
+
+        identifiers = set()
+        comments = set()
         
-        # TODO: parse the codebase in this folder
-        # TODO: get a set of the identifiers
-        # TODO: get a set of the comments
+        for filePath in findJavaFiles(repoPath):
+            print(filePath)
+            # TODO: parse the codebase in this file
+            # TODO: add to the identifiers
+            # TODO: add to the set of the comments
         identifiers = {"i", "current", "money", "payslip", "pay", "employee"}
         comments = {"the", "payroll", "system", "will", "process", "each", "salaried", "employees", "payroll"}
 
