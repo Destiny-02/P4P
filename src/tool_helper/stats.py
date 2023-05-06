@@ -9,6 +9,8 @@ def getDVInSet(domainTerms: set, words: set) -> set:
 # Finds the lexical agreement (LA) between a list of domain vocabularies
 def findLA(domainVocabs):
     n = len(domainVocabs)
+    if n <=1:
+      return 0
 
     # 1. Find the average number of terms shared between 2 DV pairs
     totalSharedTerms = 0 # the total number of shared terms between all pairs of domain vocabs
@@ -33,7 +35,7 @@ def findLA(domainVocabs):
     averageNumTerms = totalNumTerms / n
     
     # Calculate the level of lexical agreement (LA)
-    if totalNumTerms == 0:
+    if averageNumTerms == 0:
       return 0
     else:
       return averageSharedTerms / averageNumTerms
