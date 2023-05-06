@@ -23,8 +23,8 @@ def main(pathToData):
             # TODO: parse the codebase in this file
             # TODO: add to the identifiers
             # TODO: add to the set of the comments
-        identifiers = {"i", "current", "money", "payslip", "pay", "employee"}
-        comments = {"the", "payroll", "system", "will", "process", "each", "salaried", "employees", "payroll"}
+        identifiers = {"i", "current", "money", "payslip", "employeePay"}
+        comments = {"the payroll system will", "process", "each", "salaried", "employees", "payroll"}
 
         # Split identifiers and comments into words
         identifiers = splitIdentifiers(identifiers)
