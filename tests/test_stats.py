@@ -5,7 +5,7 @@ import sys
 project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_dir)
 
-from src.tool_helper.stats import findLA, getDVInSet
+from src.helper.stats import findLA, getDVInSet
 
 def test_getDVInSet():
     # Test with no matching terms

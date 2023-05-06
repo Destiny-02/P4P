@@ -5,7 +5,7 @@ import sys
 project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_dir)
 
-from src.tool_helper.stem import stem_file, stem_set
+from src.helper.stem import stem_file, stem_set
 
 def test_stem_set():
     # Test set with single word items

@@ -1,6 +1,6 @@
 import os
-from tool_helper.conversion import jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet
-from tool_helper.stats import findLA, getDVInSet
+from helper.conversion import jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet
+from helper.stats import findLA, getDVInSet
 
 # TODO: get this from the command line
 pathToData = '../data/ugrad-009-01/'
