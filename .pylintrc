@@ -1,6 +1,6 @@
 [MAIN]
 
-indent-string="  " # this means 2 spaces
+indent-string="    " # this means 4 spaces
 
 disable=
   missing-module-docstring,
