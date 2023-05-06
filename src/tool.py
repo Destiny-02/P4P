@@ -1,55 +1,50 @@
-import os
-from helper.conversion import jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet
+from helper.conversion import txtToSetWithEquivalents, convertEquivalents, setToStemmedSet
 from helper.stats import findLA, getDVInSet
+from helper.io import printStats, cleanOutFolder, findRepoPaths
 
-# TODO: get this from the command line
-pathToData = '../data/ugrad-009-01/'
+def main(pathToData):
+    domainTerms, equivalents = txtToSetWithEquivalents(pathToData + 'domain_terms.txt')
 
-domainTerms, equivalents = txtToSetWithEquivalents(pathToData + 'domain_terms.txt')
+    # To be used for averages
+    inEither = set()
+    inOnlyIdentifiers = set() 
+    inOnlyComments = set() 
+    vocabs = list()
 
-# Loop through all the codebases
-for folderName in os.listdir(pathToData):
-    if os.path.isdir(os.path.join(pathToData, folderName)):
-      repoPath = os.path.join(pathToData, folderName)
-      print("Processing " + repoPath)
-      
-      # TODO: parse the codebase in this folder
-      # TODO: get a set of the identifiers
-      # TODO: get a set of the comments
-      identifiers = jsonToSet('../out/java.json')
-      comments = {"the", "payroll", "system", "will", "process", "each", "salaried", "employee's", "payroll"}
+    for repoPath in findRepoPaths(pathToData):
+        print("Processing " + repoPath)
+        
+        # TODO: parse the codebase in this folder
+        # TODO: get a set of the identifiers
+        # TODO: get a set of the comments
+        identifiers = {"i", "current", "money", "payslip", "pay", "employee"}
+        comments = {"the", "payroll", "system", "will", "process", "each", "salaried", "employees", "payroll"}
 
-      identifiers = setToStemmedSet(identifiers)
-      comments = setToStemmedSet(comments)
+        # Stem identifiers and comments
+        identifiers = setToStemmedSet(identifiers)
+        comments = setToStemmedSet(comments)
 
-      identifiers = convertEquivalents(identifiers, equivalents)
-      comments = convertEquivalents(comments, equivalents)
+        # Convert equivalents
+        identifiers = convertEquivalents(identifiers, equivalents)
+        comments = convertEquivalents(comments, equivalents)
 
-      dvIdentifiers = getDVInSet(domainTerms, identifiers)
-      dvComments = getDVInSet(domainTerms, comments)
-      dv = dvIdentifiers.union(dvComments)
-      numDT = len(domainTerms)
+        # Count the number of domain terms in the identifiers and comments
+        dvIdentifiers = getDVInSet(domainTerms, identifiers)
+        dvComments = getDVInSet(domainTerms, comments)
+        dv = dvIdentifiers.union(dvComments)
+        numDT = len(domainTerms)
 
-      # print("Terms in identifiers but not in domainTerms:")
-      # print(identifiers - domainTerms) 
-      # print("Terms in domainTerms but not in identifiers:")
-      # print(domainTerms - identifiers)
-      
-      # % domain terms in source code
-      print("1: {:.2%}".format(len(dv)/numDT))
+        # Add to the sets for average stats later
+        inEither.add(len(dv)/numDT)
+        inOnlyIdentifiers.add(len(dvIdentifiers.difference(dvComments))/numDT)
+        inOnlyComments.add(len(dvComments.difference(dvIdentifiers))/numDT)
+        vocabs.append(dv)
 
-      # % domain terms in identifiers
-      print("2.1: {:.2%}".format(len(dvIdentifiers.difference(dvComments))/numDT))
-      # % domain terms in comments
-      print("2.2: {:.2%}".format(len(dvComments.difference(dvIdentifiers))/numDT))
+    printStats(inEither, inOnlyIdentifiers, inOnlyComments, findLA(vocabs))
 
-# LA between any 2 pairs of domain vocabs
-print("3: {:.2%}".format(findLA(domainTerms)))
+if __name__ == '__main__':
+    # TODO: get this from the command line
+    main('../data/ugrad-009-01/')
 
-# Clean up the out folder
-outPath = '../out/'
-outFiles = os.listdir(outPath)
-for filename in outFiles:
-    filePath = os.path.join(outPath, filename)
-    if os.path.isfile(filePath):
-        os.remove(filePath)
+    # Use this if we are writing results to the out folder
+    # cleanOutFolder('../out/')

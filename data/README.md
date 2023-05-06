@@ -1,6 +1,6 @@
 # The data folder
 
-The data folder will contain all the data files that are used by `basic.py`. If this repo gets to large, we can update the `.gitignore`.
+The data folder will contain all the data files that is used by `tool.py`. If this repo gets to large, we can update the `.gitignore`.
 
 # Folder structure
 

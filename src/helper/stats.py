@@ -43,3 +43,12 @@ def findLA(domainVocabs):
       return 0
     else:
       return averageSharedTerms / averageNumTerms
+    
+def average(s: set) -> float:
+  """
+  Finds the average of a set of numbers
+  """
+  if len(s) == 0:
+    return 0
+  else:
+    return sum(s)/len(s)
