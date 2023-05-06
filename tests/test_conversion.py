@@ -8,35 +8,35 @@ sys.path.insert(0, project_dir)
 from src.helper.conversion import txtToSet, jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet
 
 def test_txtToSet():
-    # Test with a file containing three terms
-    filename = "test_terms.txt"
-    with open(filename, "w") as f:
-        f.write("apple\nbanana\ncherry\n")
-    assert txtToSet(filename) == set(["apple", "banana", "cherry"])
-    
-    # Test with a file containing multiple occurrences of the same term
-    filename = "test_repeated_terms.txt"
-    with open(filename, "w") as f:
-        f.write("apple\nbanana\ncherry\napple\n")
-    assert txtToSet(filename) == set(["apple", "banana", "cherry"])
-    
-    # Test with a file containing no terms
-    filename = "test_empty_file.txt"
-    with open(filename, "w") as f:
-        pass
-    assert txtToSet(filename) == set()
-    
-    # Test with a file containing terms with different cases and leading/trailing spaces
-    filename = "test_case_space_terms.txt"
-    with open(filename, "w") as f:
-        f.write("  Apple  \n  Banana  \n cherry  \n")
-    assert txtToSet(filename) == set(["apple", "banana", "cherry"])
-    
-    # Clean up the test files
-    os.remove("test_terms.txt")
-    os.remove("test_repeated_terms.txt")
-    os.remove("test_empty_file.txt")
-    os.remove("test_case_space_terms.txt")
+  # Test with a file containing three terms
+  filename = "test_terms.txt"
+  with open(filename, "w") as f:
+    f.write("apple\nbanana\ncherry\n")
+  assert txtToSet(filename) == set(["apple", "banana", "cherry"])
+  
+  # Test with a file containing multiple occurrences of the same term
+  filename = "test_repeated_terms.txt"
+  with open(filename, "w") as f:
+    f.write("apple\nbanana\ncherry\napple\n")
+  assert txtToSet(filename) == set(["apple", "banana", "cherry"])
+  
+  # Test with a file containing no terms
+  filename = "test_empty_file.txt"
+  with open(filename, "w") as f:
+    pass
+  assert txtToSet(filename) == set()
+  
+  # Test with a file containing terms with different cases and leading/trailing spaces
+  filename = "test_case_space_terms.txt"
+  with open(filename, "w") as f:
+    f.write("  Apple  \n  Banana  \n cherry  \n")
+  assert txtToSet(filename) == set(["apple", "banana", "cherry"])
+  
+  # Clean up the test files
+  os.remove("test_terms.txt")
+  os.remove("test_repeated_terms.txt")
+  os.remove("test_empty_file.txt")
+  os.remove("test_case_space_terms.txt")
 
 def test_jsonToSet():
   # Test with a file containing one identifier with one term
@@ -92,36 +92,36 @@ def test_txtToSetWithEquivalents():
   os.remove("test_empty_file.txt")
 
 def test_convertEquivalents():
-    # Test with a set of terms and equivalents
-    data = set(["app", "ft", "pear"])
-    equivalents = {"app": "apple", "ft": "fruit"}
-    expected_output = set(["apple", "fruit", "pear"])
-    assert convertEquivalents(data, equivalents) == expected_output
-    
-    # Test with a set of terms and empty equivalents
-    data = set(["apple", "fruit", "pear"])
-    equivalents = {}
-    expected_output = set(["apple", "fruit", "pear"])
-    assert convertEquivalents(data, equivalents) == expected_output
-    
-    # Test with a set of terms that have no equivalents
-    data = set(["apple", "fruit", "pear"])
-    equivalents = {"mandarin": "orange"}
-    expected_output = set(["apple", "fruit", "pear"])
-    assert convertEquivalents(data, equivalents) == expected_output
+  # Test with a set of terms and equivalents
+  data = set(["app", "ft", "pear"])
+  equivalents = {"app": "apple", "ft": "fruit"}
+  expected_output = set(["apple", "fruit", "pear"])
+  assert convertEquivalents(data, equivalents) == expected_output
+  
+  # Test with a set of terms and empty equivalents
+  data = set(["apple", "fruit", "pear"])
+  equivalents = {}
+  expected_output = set(["apple", "fruit", "pear"])
+  assert convertEquivalents(data, equivalents) == expected_output
+  
+  # Test with a set of terms that have no equivalents
+  data = set(["apple", "fruit", "pear"])
+  equivalents = {"mandarin": "orange"}
+  expected_output = set(["apple", "fruit", "pear"])
+  assert convertEquivalents(data, equivalents) == expected_output
 
 def test_setToStemmedSet():
-    # Test with a set of terms that are not stemmed
-    data = set(["apple", "banana", "cherry"])
-    expected_output = set(["appl", "banana", "cherri"])
-    assert setToStemmedSet(data) == expected_output
-    
-    # Test with a set of terms that are already stemmed
-    data = set(["appl", "banana", "cherri"])
-    expected_output = set(["appl", "banana", "cherri"])
-    assert setToStemmedSet(data) == expected_output
-    
-    # Test with an empty set
-    data = set()
-    expected_output = set()
-    assert setToStemmedSet(data) == expected_output
+  # Test with a set of terms that are not stemmed
+  data = set(["apple", "banana", "cherry"])
+  expected_output = set(["appl", "banana", "cherri"])
+  assert setToStemmedSet(data) == expected_output
+  
+  # Test with a set of terms that are already stemmed
+  data = set(["appl", "banana", "cherri"])
+  expected_output = set(["appl", "banana", "cherri"])
+  assert setToStemmedSet(data) == expected_output
+  
+  # Test with an empty set
+  data = set()
+  expected_output = set()
+  assert setToStemmedSet(data) == expected_output

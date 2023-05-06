@@ -9,25 +9,29 @@ from src.helper.splitting import splitIdentifier
 import json
 from porter2stemmer import Porter2Stemmer
 
-# Converts a text file with one term per line to a set
 def txtToSet(filename):
-    data = set()
-    isFirst = True
+  """
+  Converts a text file with one term per line to a set
+  """
+  data = set()
+  isFirst = True
 
-    with open(filename, 'r', newline='') as txtfile:
-      for line in txtfile:
-        # Remove the BOM from the first term
-        if isFirst:
-            line = line.strip('ï»¿')
-            isFirst = False
+  with open(filename, 'r', newline='') as txtfile:
+    for line in txtfile:
+      # Remove the BOM from the first term
+      if isFirst:
+        line = line.strip('ï»¿')
+        isFirst = False
 
-        words = line.lower().split()
-        for word in words:
-            data.add(word)
-    return data
+      words = line.lower().split()
+      for word in words:
+        data.add(word)
+  return data
 
-# Converts a json file of the parser output to a set of terms found in identifiers
 def jsonToSet(filename: str) -> set:
+  """
+  Converts a json file of the parser output to a set of terms found in identifiers
+  """
   data = set()
   with open(filename, encoding="utf-8") as jsonFile:
     parserOutputJson = json.load(jsonFile)
@@ -39,11 +43,13 @@ def jsonToSet(filename: str) -> set:
 
   return data
 
-# Converts a txt file with one term per line to a set of terms and a dict of equivalents
-# Some lines will have two words, separated by a space
-# The first word is a variation of a domain term
-# The second word is the domain term that it should be converted to
 def txtToSetWithEquivalents(filename):
+  """
+  Converts a txt file with one term per line to a set of terms and a dict of equivalents
+  Some lines will have two words, separated by a space
+  The first word is a variation of a domain term
+  The second word is the domain term that it should be converted to
+  """
   data = set()
   equivalents = dict()
   isFirst = True
@@ -66,8 +72,10 @@ def txtToSetWithEquivalents(filename):
 
   return data, equivalents
 
-# Converts a set of terms to a set of terms with equivalents replaced with the equivalent original domain term
 def convertEquivalents(data: set, equivalents: dict) -> set:
+  """
+  Converts a set of terms to a set of terms with equivalents replaced with the equivalent original domain term
+  """
   newData = set()
   for word in data:
     if word in equivalents:
@@ -76,8 +84,10 @@ def convertEquivalents(data: set, equivalents: dict) -> set:
       newData.add(word)
   return newData
 
-# Converts a set of terms to a set of stemmed terms
 def setToStemmedSet(data: set) -> set:
+  """
+  Converts a set of terms to a set of stemmed terms
+  """
   stemmer = Porter2Stemmer()
   stemmedData = set()
   for word in data:

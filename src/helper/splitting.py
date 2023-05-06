@@ -1,11 +1,11 @@
 
-"""
-Splits an identifier into terms. Handles
-camelCase, PascalCase, kebab-case, snake_case, and SCREAMING_SNAKE_CASE,
-or a mix of styles
-but not all complex situations
-"""
 def splitIdentifier(_identifier: str) -> list[str]:
+  """
+  Splits an identifier into terms. Handles
+  camelCase, PascalCase, kebab-case, snake_case, and SCREAMING_SNAKE_CASE,
+  or a mix of styles
+  but not all complex situations
+  """
   # my first attempt was these regexes:
   #   PascalCase: /[A-Z][a-z]+/g
   #   camelCase: /(^[a-z]|[A-Z])[a-z]+/g

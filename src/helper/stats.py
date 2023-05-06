@@ -1,13 +1,17 @@
-# Finds the domain terms in a set of words
 def getDVInSet(domainTerms: set, words: set) -> set:
+  """
+  Finds the domain terms in a set of words
+  """
   dv = set()
   for term in domainTerms:
     if term in words:
       dv.add(term)
   return dv
 
-# Finds the lexical agreement (LA) between a list of domain vocabularies
 def findLA(domainVocabs):
+    """
+    Finds the lexical agreement (LA) between a list of domain vocabularies
+    """
     n = len(domainVocabs)
     if n <=1:
       return 0
