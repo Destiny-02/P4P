@@ -1,27 +1,31 @@
-from helper.conversion import txtToSetWithEquivalents, convertEquivalents, setToStemmedSet, extractWordsFromSet, cleanSetOfTerms
+from os import path
+from helper.invokeParser import invokeParser
+from helper.conversion import (
+    txtToSetWithEquivalents,
+    convertEquivalents,
+    setToStemmedSet,
+    extractWordsFromSet,
+    cleanSetOfTerms,
+)
 from helper.stats import findLA, getDVInSet
-from helper.io import printStats, cleanOutFolder, findRepoPaths, findJavaFiles
+from helper.io import printStats, saveJsonDebugFile, findRepoPaths, findJavaFiles
 from helper.splitting import splitIdentifiers
 
+
 def main(pathToData):
-    domainTerms, equivalents = txtToSetWithEquivalents(pathToData + 'domain_terms.txt')
+    domainTerms, equivalents = txtToSetWithEquivalents(pathToData + "domain_terms.txt")
 
     # To be used for averages
     inEither = set()
-    inOnlyIdentifiers = set() 
-    inOnlyComments = set() 
+    inOnlyIdentifiers = set()
+    inOnlyComments = set()
     vocabs = list()
+    debugData = {}
 
     for repoPath in findRepoPaths(pathToData):
         print("Processing " + repoPath)
-        
-        for filePath in findJavaFiles(repoPath):
-            print(filePath)
-            # TODO: parse the codebase in this file
-            # TODO: add to the identifiers
-            # TODO: add to the set of the comments
-        identifiers = {"i", "current", "money", "payslip", "employeePay"}
-        comments = {"the payroll system will", "process", "each", "salaried", "employees", "payroll"}
+
+        (identifiers, comments) = invokeParser(findJavaFiles(repoPath))
 
         # Split identifiers and comments into words
         identifiers = splitIdentifiers(identifiers)
@@ -52,11 +56,19 @@ def main(pathToData):
         inOnlyComments.add(len(dvComments.difference(dvIdentifiers))/numDT)
         vocabs.append(dv)
 
+        debugData[repoPath] = {}
+        debugData[repoPath]["processedIdentifiers"] = list(identifiers)
+        debugData[repoPath]["processedComments"] = list(comments)
+
     printStats(inEither, inOnlyIdentifiers, inOnlyComments, findLA(vocabs))
 
-if __name__ == '__main__':
+    saveJsonDebugFile(debugData)
+
+
+if __name__ == "__main__":
     # TODO: get this from the command line
-    main('../data/ugrad-009-01/')
+    folderToParse = path.join(path.dirname(__file__), "../data/ugrad-009-01/")
+    main(folderToParse)
 
     # Use this if we are writing results to the out folder
     # cleanOutFolder('../out/')

@@ -5,33 +5,41 @@ const javaParser = require("./java");
 const javascriptParser = require("./javascript");
 const pythonParser = require("./python");
 
-// helper
-function readSampleFile(fileName) {
-  return fs.readFile(join(__dirname, `../input/${fileName}`), "utf8");
-}
-
-// helper
-function save(language, result) {
-  return fs.writeFile(
-    join(__dirname, `../output/${language}.json`),
-    JSON.stringify(result, null, 2)
-  );
-}
-
 async function main() {
-  await fs.mkdir(join(__dirname, "../output"), { recursive: true });
+  const fileNames = process.argv[2].split("📚").map((file) => file.trim());
 
-  await save(
-    "java",
-    await javaParser.parse(await readSampleFile("Sample.java"))
-  );
+  if (!fileNames?.length) {
+    console.error(
+      "You need to run this script as `node parsers/language 'file1.java, file2.py, ...'`"
+    );
+    return;
+  }
 
-  await save(
-    "js",
-    await javascriptParser.parse(await readSampleFile("sample.js"))
-  );
+  console.log(`\t Parsing ${fileNames.length} files...`);
 
-  await save("py", await pythonParser.parse(await readSampleFile("sample.py")));
+  /** @type {Record<string, import("./Parser").Parser.Result>} */
+  const output = {};
+  for (const fileName of fileNames) {
+    const parser = fileName.endsWith(".java")
+      ? javaParser
+      : fileName.endsWith(".js")
+      ? javascriptParser
+      : fileName.endsWith(".py")
+      ? pythonParser
+      : undefined;
+
+    if (!parser) {
+      console.log(`Skipping unintelligible file: ${fileName}`);
+      continue;
+    }
+
+    const fileContents = await fs.readFile(fileName, "utf8");
+    output[fileName] = await javaParser.parse(fileContents);
+  }
+
+  const outputPath = join(process.cwd(), "parser-output.json");
+  await fs.writeFile(outputPath, JSON.stringify(output, null, 2));
+  // console.log("Saved to", outputPath);
 }
 
 main();

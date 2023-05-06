@@ -2,3 +2,7 @@ node_modules
 parsers/output
 out
 __pycache__
+
+# temp
+parser-output.json
+debug-output.json

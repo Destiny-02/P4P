@@ -1,5 +1,6 @@
 from .stats import average
 import os
+import json
 
 def printStats(isEitherSet, isOnlyIdentifiersSet, isOnlyCommentsSet, la):
     """
@@ -23,6 +24,12 @@ def cleanOutFolder(outPath):
       filePath = os.path.join(outPath, filename)
       if os.path.isfile(filePath):
           os.remove(filePath)
+
+def saveJsonDebugFile(jsonObj: object):
+    outputFilePath = os.path.join(os.path.dirname(__file__), "../../debug-output.json")
+    with open(outputFilePath, 'w', encoding="utf-8") as file:
+        file.write(json.dumps(jsonObj, indent=4))
+
 
 def findRepoPaths(pathToData):
   """
