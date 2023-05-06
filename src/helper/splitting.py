@@ -34,6 +34,15 @@ def splitIdentifier(_identifier: str) -> list[str]:
 
   return identifier.replace('-', '_').split("_")
 
+def splitIdentifiers(identifiers: set[str]) -> set[str]:
+  """
+  Splits a set of identifiers into terms
+  """
+  terms = set()
+  for identifier in identifiers:
+    terms.update(splitIdentifier(identifier))
+  return terms
+
 # utils go at the bottom of the file in python ? seems kinda weird
 # python doesn't care about no-use-before-define
 

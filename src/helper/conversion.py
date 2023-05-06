@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 
 # To fix import errors
 project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -93,3 +94,35 @@ def setToStemmedSet(data: set) -> set:
   for word in data:
     stemmedData.add(stemmer.stem(word))
   return stemmedData
+
+def extractWords(data: str):
+  """
+  Converts a string to a list of words
+  """
+  # Replace all non-letter characters with spaces
+  clean_text = re.sub(r'[^a-zA-ZÀ-ÖØ-öø-ÿ\s]', ' ', data)
+  
+  # Split the cleaned text into a list of words
+  words = clean_text.split()
+  
+  return words
+
+def extractWordsFromSet(data: set):
+  """
+  Converts a set of strings to a list of words
+  """
+  words = set()
+  for word in data:
+    words.update(extractWords(word))
+  return words
+
+def cleanSetOfTerms(data: set) -> set:
+  """
+  Converts a set of terms to a set of lowercase, stripped terms and non-empty terms
+  """
+  newData = set()
+  for term in data:
+    cleanedTerm = term.lower().strip()
+    if cleanedTerm != "":
+      newData.add(cleanedTerm)
+  return newData

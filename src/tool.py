@@ -1,6 +1,7 @@
-from helper.conversion import txtToSetWithEquivalents, convertEquivalents, setToStemmedSet
+from helper.conversion import txtToSetWithEquivalents, convertEquivalents, setToStemmedSet, extractWordsFromSet, cleanSetOfTerms
 from helper.stats import findLA, getDVInSet
 from helper.io import printStats, cleanOutFolder, findRepoPaths, findJavaFiles
+from helper.splitting import splitIdentifiers
 
 def main(pathToData):
     domainTerms, equivalents = txtToSetWithEquivalents(pathToData + 'domain_terms.txt')
@@ -24,6 +25,15 @@ def main(pathToData):
             # TODO: add to the set of the comments
         identifiers = {"i", "current", "money", "payslip", "pay", "employee"}
         comments = {"the", "payroll", "system", "will", "process", "each", "salaried", "employees", "payroll"}
+
+        # Split identifiers and comments into words
+        identifiers = splitIdentifiers(identifiers)
+        comments = extractWordsFromSet(comments)
+
+        # "Clean" the identifiers and comments
+        identifiers = cleanSetOfTerms(identifiers)
+        comments = cleanSetOfTerms(comments)
+        # Note: all comments and terms should be single, lowercase, stripped, non-empty words at this point
 
         # Stem identifiers and comments
         identifiers = setToStemmedSet(identifiers)

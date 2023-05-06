@@ -5,7 +5,7 @@ import sys
 project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_dir)
 
-from src.helper.conversion import txtToSet, jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet
+from src.helper.conversion import txtToSet, jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet, extractWords, extractWordsFromSet, cleanSetOfTerms
 
 def test_txtToSet():
   # Test with a file containing three terms
@@ -125,3 +125,46 @@ def test_setToStemmedSet():
   data = set()
   expected_output = set()
   assert setToStemmedSet(data) == expected_output
+
+def test_extractWords():
+  assert extractWords("Hello, World!") == ["Hello", "World"]
+  assert extractWords("This is a sentence.") == ["This", "is", "a", "sentence"]
+  assert extractWords("    Extra spaces     ") == ["Extra", "spaces"]
+  assert extractWords("Ça va bien?") == ["Ça", "va", "bien"]
+  assert extractWords("La vie est belle.") == ["La", "vie", "est", "belle"]
+  assert extractWords("C'est l'été.") == ["C", "est", "l", "été"]
+  assert extractWords("¿Qué tal?") == ["Qué", "tal"]
+  assert extractWords("Le café coûte 2,50€.") == ["Le", "café", "coûte"]
+
+def test_extractWordsFromSet():
+  # Test with empty set
+  assert extractWordsFromSet(set()) == set()
+
+  # Test with single-word strings
+  assert extractWordsFromSet({"hello", "world"}) == {"hello", "world"}
+  assert extractWordsFromSet({"foo", "bar", "baz"}) == {"foo", "bar", "baz"}
+
+  # Test with multi-word strings
+  assert extractWordsFromSet({"hello, world", "foo bar baz"}) == {"hello", "world", "foo", "bar", "baz"}
+  assert extractWordsFromSet({"This is a sentence.", "La vie est belle."}) == {"This", "is", "a", "sentence", "La", "vie", "est", "belle"}
+
+  # Test with strings containing numbers and special characters
+  assert extractWordsFromSet({"abc123", "foo.bar.baz"}) == {"abc", "foo", "bar", "baz"}
+  assert extractWordsFromSet({"extra!@#spaces$%^&*"}) == {"extra", "spaces"}
+
+def test_cleanSetOfTerms():
+  data = set(['apple', 'banana', 'Cherry', 'DURIAN', ''])
+  expected = set(['apple', 'banana', 'cherry', 'durian'])
+  assert cleanSetOfTerms(data) == expected
+
+  data = set(['Spam', 'spam', 'SPAM', '   Eggs   ', '  ', 'BACON'])
+  expected = set(['spam', 'eggs', 'bacon'])
+  assert cleanSetOfTerms(data) == expected
+
+  data = set(['flower', 'FLOWER', '   ', 'Leaf', 'lEAF'])
+  expected = set(['flower', 'leaf'])
+  assert cleanSetOfTerms(data) == expected
+
+  data = set(['Hello', 'there', 'MY', 'name', 'is', 'Iñtërnâtiônàlizætiøn'])
+  expected = set(['hello', 'there', 'my', 'name', 'is', 'iñtërnâtiônàlizætiøn'])
+  assert cleanSetOfTerms(data) == expected
