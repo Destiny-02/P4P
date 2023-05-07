@@ -1,10 +1,4 @@
-import os
-import sys
 import re
-
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, project_dir)
 
 from .splitting import splitIdentifier
 import json
