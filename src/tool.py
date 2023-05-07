@@ -10,6 +10,7 @@ from helper.conversion import (
 from helper.stats import findLA, getDVInSet
 from helper.io import printStats, saveJsonDebugFile, findRepoPaths, findJavaFiles
 from helper.splitting import splitIdentifiers
+import time
 
 
 def main(pathToData):
@@ -68,7 +69,15 @@ def main(pathToData):
 if __name__ == "__main__":
     # TODO: get this from the command line
     folderToParse = path.join(path.dirname(__file__), "../data/ugrad-009-01/")
+
+    startTime = time.time()
+
     main(folderToParse)
+
+    endTime = time.time()
+
+    timeTaken = round(endTime - startTime)
+    print("Time taken: " + str(timeTaken) + " seconds")
 
     # Use this if we are writing results to the out folder
     # cleanOutFolder('../out/')
