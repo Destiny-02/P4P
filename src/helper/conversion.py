@@ -23,6 +23,14 @@ def txtToSet(filename):
         data.add(word)
   return data
 
+def setToTxt(data, filename):
+  """
+  Appends the terms in a set to a text file, one term per line
+  """
+  with open(filename, 'a') as txtfile:
+    for word in data:
+      txtfile.write(word + "\n")
+
 def jsonToSet(filename: str) -> set:
   """
   Converts a json file of the parser output to a set of terms found in identifiers
