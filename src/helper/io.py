@@ -2,7 +2,7 @@ from .stats import average
 import os.path as path
 import os
 import json
-from openpyxl import Workbook
+import csv
 
 def printStats(isEitherSet, isOnlyIdentifiersSet, isOnlyCommentsSet, la):
     """
@@ -56,15 +56,11 @@ def findJavaFiles(folderPath):
 
 def setToSheet(data, sheetName):
   deleteFileIfExists(sheetName)
-  workbook = Workbook()
-  worksheet = workbook.active
 
-  rowNum = 1
-  for item in data:
-    worksheet.cell(row=rowNum, column=1, value=item)
-    rowNum += 1
-
-  workbook.save(sheetName)
+  with open(sheetName, 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    for item in data:
+        writer.writerow([item])
 
 def deleteFileIfExists(filePath):
   if path.exists(filePath):

@@ -32,11 +32,11 @@ def saveTermsToBeCategorised(pathToData, domainFolderName):
 	newTerms = removeSeenStemmed(terms, combinedTerms)
 
 	# Write the terms to be categorised to a spreadsheet
-	setToSheet(newTerms, "toCategorise.xlsx")
+	setToSheet(newTerms, "toCategorise.csv")
 
 def saveSheetToTxt():
 	"""
-	Saves the toCategorise.xlsx spreadsheet containing terms that have been categorised as 
+	Saves the toCategorise.csv spreadsheet containing terms that have been categorised as 
 	context (c), design (d) or neither (n) to the context.txt, design.txt and neither.txt text files
 	"""
 	return
