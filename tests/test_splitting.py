@@ -28,3 +28,7 @@ def test_splitIdentifier():
     assert splitIdentifier("UNSAFE_componentWillReceiveProps") == ['UNSAFE', 'component', 'will', 'receive', 'props']
     assert splitIdentifier("MIX_OfStyles-isWeird") == ["MIX", "Of", "styles", "is", "weird"]
     assert splitIdentifier("macronsÄndÜmlautsĀreŌkay") == ["macrons", "änd", "ümlauts", "āre", "ōkay"]
+    # assert splitIdentifier("getPAYE") == ["get", "PAYE"]
+    # assert splitIdentifier("when2meet") == ["when", "2", "meet"]
+    # assert splitIdentifier("person2") == ["person", "2"]
+    
