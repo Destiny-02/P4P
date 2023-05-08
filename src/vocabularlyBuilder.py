@@ -70,5 +70,18 @@ def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
 
 if __name__ == "__main__":
+	"""
+	Instructions: 
+	1. Pick a folder in the data folder that you want to categorise the identifiers for
+	2. Change the path in the call to saveTermsToBeCategorised to the path of the folder you picked
+	3. Run this file
+	4. Open the toCategorise.csv spreadsheet
+	5. For each term, decide whether it is a context term, a design term or neither
+	6. Enter the letter c, d or n in the second column of the spreadsheet
+	7. Save the spreadsheet
+	8. Comment out the call to saveTermsToBeCategorised and uncomment the call to saveCategoriseSheetToTxt
+	9. Run this file
+	10. context.txt, design.txt and neither.txt will be updated with the terms you categorised
+	"""
 	# saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1000"), "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")
