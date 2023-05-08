@@ -3,7 +3,7 @@ from helper.conversion import (
 	txtToSet,
 	cleanSetOfTerms, removeSeenStemmed, setToTxt
 )
-from helper.io import findJavaFiles, setToSheet, deleteFileIfExists
+from helper.io import findJavaFiles, setToSheet
 from helper.splitting import splitIdentifiers
 from os import path
 import csv
@@ -21,7 +21,6 @@ def saveTermsToBeCategorised(pathToData, domainFolderName):
 
 	# Parse the identifiers
 	(identifiers, comments) = invokeParser(findJavaFiles(pathToData))
-	print(identifiers)
 
 	# Split identifiers
 	terms = splitIdentifiers(identifiers)
