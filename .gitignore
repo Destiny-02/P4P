@@ -2,6 +2,7 @@ node_modules
 parsers/output
 out
 __pycache__
+*toCategorise.xlsx
 
 # temp
 parser-output.json

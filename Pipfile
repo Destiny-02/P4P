@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 porter2stemmer = "*"
 pytest = "*"
+openpyxl = "*"
 
 [dev-packages]
 

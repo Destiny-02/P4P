@@ -1,6 +1,8 @@
 from .stats import average
+import os.path as path
 import os
 import json
+from openpyxl import Workbook
 
 def printStats(isEitherSet, isOnlyIdentifiersSet, isOnlyCommentsSet, la):
     """
@@ -21,12 +23,12 @@ def printStats(isEitherSet, isOnlyIdentifiersSet, isOnlyCommentsSet, la):
 def cleanOutFolder(outPath):
   outFiles = os.listdir(outPath)
   for filename in outFiles:
-      filePath = os.path.join(outPath, filename)
-      if os.path.isfile(filePath):
+      filePath = path.join(outPath, filename)
+      if path.isfile(filePath):
           os.remove(filePath)
 
 def saveJsonDebugFile(jsonObj: object):
-    outputFilePath = os.path.join(os.path.dirname(__file__), "../../debug-output.json")
+    outputFilePath = path.join(path.dirname(__file__), "../../debug-output.json")
     with open(outputFilePath, 'w', encoding="utf-8") as file:
         file.write(json.dumps(jsonObj, indent=4))
 
@@ -37,8 +39,8 @@ def findRepoPaths(pathToData):
   """
   repoPaths = []
   for folderName in os.listdir(pathToData):
-    if os.path.isdir(os.path.join(pathToData, folderName)):
-      repoPaths.append(os.path.join(pathToData, folderName))
+    if path.isdir(path.join(pathToData, folderName)):
+      repoPaths.append(path.join(pathToData, folderName))
   return repoPaths
 
 def findJavaFiles(folderPath):
@@ -49,5 +51,21 @@ def findJavaFiles(folderPath):
   for dirpath, _, filenames in os.walk(folderPath):
     for filename in filenames:
       if filename.endswith('.java'):
-        javaFiles.add(os.path.join(dirpath, filename))
+        javaFiles.add(path.join(dirpath, filename))
   return javaFiles
+
+def setToSheet(data, sheetName):
+  deleteFileIfExists(sheetName)
+  workbook = Workbook()
+  worksheet = workbook.active
+
+  rowNum = 1
+  for item in data:
+    worksheet.cell(row=rowNum, column=1, value=item)
+    rowNum += 1
+
+  workbook.save(sheetName)
+
+def deleteFileIfExists(filePath):
+  if path.exists(filePath):
+    os.remove(filePath)

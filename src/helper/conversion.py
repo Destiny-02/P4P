@@ -89,6 +89,13 @@ def setToStemmedSet(data: set) -> set:
     stemmedData.add(stemmer.stem(word))
   return stemmedData
 
+def stemTerm(term: str) -> str:
+  """
+  Converts a term to its stemmed version
+  """
+  stemmer = Porter2Stemmer()
+  return stemmer.stem(term)
+
 def extractWords(data: str):
   """
   Converts a string to a list of words
@@ -119,4 +126,14 @@ def cleanSetOfTerms(data: set) -> set:
     cleanedTerm = term.lower().strip()
     if cleanedTerm != "":
       newData.add(cleanedTerm)
+  return newData
+
+def removeSeenStemmed(data: set, seen: set) -> set:
+  """
+  Removes all terms from data that have a stemmed version in seen
+  """
+  newData = set()
+  for term in data:
+    if stemTerm(term) not in seen:
+      newData.add(term)
   return newData

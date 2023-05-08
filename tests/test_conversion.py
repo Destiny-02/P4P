@@ -5,7 +5,7 @@ import sys
 project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_dir)
 
-from src.helper.conversion import txtToSet, jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet, extractWords, extractWordsFromSet, cleanSetOfTerms
+from src.helper.conversion import txtToSet, jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet, extractWords, extractWordsFromSet, cleanSetOfTerms, stemTerm
 
 def test_txtToSet():
   # Test with a file containing three terms
@@ -125,6 +125,16 @@ def test_setToStemmedSet():
   data = set()
   expected_output = set()
   assert setToStemmedSet(data) == expected_output
+
+def test_stemTerm():
+  # Test with a term that is not stemmed
+  assert stemTerm("apple") == "appl"
+  
+  # Test with a term that is already stemmed
+  assert stemTerm("appl") == "appl"
+  
+  # Test with a term that is not in the dictionary
+  assert stemTerm("applez") == "applez"
 
 def test_extractWords():
   assert extractWords("Hello, World!") == ["Hello", "World"]
