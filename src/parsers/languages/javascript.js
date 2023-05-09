@@ -1,3 +1,4 @@
+const { promises: fs } = require("node:fs");
 const parser = require("@babel/eslint-parser");
 
 /**
@@ -55,7 +56,8 @@ function walkTree(node, output, parent) {
 /** @type {import("./Parser").Parser} */
 const javascriptParser = {
   language: "javascript",
-  async parse(fileInput) {
+  async parse(fileName) {
+    const fileInput = await fs.readFile(fileName, "utf8");
     const AST = parser.parse(fileInput, {
       sourceType: "module",
       requireConfigFile: false,

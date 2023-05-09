@@ -11,7 +11,7 @@ def invokeParser(absoluteFileNames: set[str]) -> tuple[set, set]:
     returns `(identifiers: set, comments: set)`
     """
 
-    scriptPath = path.join(path.dirname(__file__), "../parsers/languages")
+    scriptPath = path.join(path.dirname(__file__), "../parsers/main")
 
     cleanedPaths = [path.normpath(p).replace("/", "\\") for p in absoluteFileNames]
 

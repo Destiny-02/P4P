@@ -1,10 +1,11 @@
+const { promises: fs } = require("node:fs");
 const parser = require("java-parser");
 
 /**
  * @param {import("java-parser").CstNode} node
  * @param {string} fallbackType
  * @param {import("./Parser").Parser.Results} output
- * @param {string[] | undefined} parent
+ * @param {string[] | undefined} parents
  */
 function walkTree(node, fallbackType, output, parents = []) {
   const type = node.name || fallbackType;
@@ -45,7 +46,8 @@ function walkTree(node, fallbackType, output, parents = []) {
 /** @type {import("./Parser").Parser} */
 const javaParser = {
   language: "java",
-  async parse(fileInput) {
+  async parse(fileName) {
+    const fileInput = await fs.readFile(fileName, "utf8");
     const AST = parser.parse(fileInput);
 
     const output = {

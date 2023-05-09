@@ -1,3 +1,4 @@
+const { promises: fs } = require("node:fs");
 const { execSync } = require("node:child_process");
 const filbert = require("filbert");
 
@@ -56,7 +57,8 @@ function walkTree(node, output, parent) {
 /** @type {import("./Parser").Parser} */
 const pythonParser = {
   language: "python",
-  async parse(fileInput) {
+  async parse(fileName) {
+    const fileInput = await fs.readFile(fileName, "utf8");
     const AST = filbert.parse(fileInput, {
       locations: true,
       ranges: true,
@@ -71,7 +73,7 @@ const pythonParser = {
 
     // now we need to invoke some python code to parse the inline comments
     const inlineComments = execSync(
-      "python languages/pythonComments.py ./input/sample.py"
+      `python languages/pythonComments.py "${fileName}"`
     )
       .toString()
       .replace(/\r\n/g, "\n") // CRLF to LF

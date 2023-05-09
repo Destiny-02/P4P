@@ -1,4 +1,4 @@
-package parsers.input;
+package parsers.languages.__tests__.input;
 
 public class Sample {
   /**

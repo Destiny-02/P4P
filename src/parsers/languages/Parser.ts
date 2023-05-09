@@ -10,5 +10,5 @@ export namespace Parser {
 
 export interface Parser {
   language: string;
-  parse(inputFile: string): Promise<Parser.Results>;
+  parse(fileName: string): Promise<Parser.Results>;
 }

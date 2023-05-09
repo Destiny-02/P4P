@@ -1,9 +1,7 @@
+// @ts-check
 const { promises: fs } = require("node:fs");
 const { join } = require("node:path");
-
-const javaParser = require("./java");
-const javascriptParser = require("./javascript");
-const pythonParser = require("./python");
+const { getParserForLanguage } = require("./getParserForLanguage");
 
 async function main() {
   const fileNames = process.argv[2].split("📚").map((file) => file.trim());
@@ -17,24 +15,16 @@ async function main() {
 
   console.log(`\t Parsing ${fileNames.length} files...`);
 
-  /** @type {Record<string, import("./Parser").Parser.Result>} */
+  /** @type {Record<string, import("./languages/Parser").Parser.Result>} */
   const output = {};
   for (const fileName of fileNames) {
-    const parser = fileName.endsWith(".java")
-      ? javaParser
-      : fileName.endsWith(".js")
-      ? javascriptParser
-      : fileName.endsWith(".py")
-      ? pythonParser
-      : undefined;
-
+    const parser = getParserForLanguage(fileName);
     if (!parser) {
       console.log(`Skipping unintelligible file: ${fileName}`);
       continue;
     }
 
-    const fileContents = await fs.readFile(fileName, "utf8");
-    output[fileName] = await javaParser.parse(fileContents);
+    output[fileName] = await parser.parse(fileName);
   }
 
   const outputPath = join(process.cwd(), "parser-output.json");
