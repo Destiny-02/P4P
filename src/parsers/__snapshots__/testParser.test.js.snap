@@ -65,6 +65,32 @@ exports[`test case files parses Sample.java (java) 1`] = `
 }
 `;
 
+exports[`test case files parses complex.py (python) 1`] = `
+{
+  "comments": [
+    "
+This is a block comment in the middle of nowhere
+
+it has a fake # inline comment within the block
+
+",
+    "block comment above func - this is not valid",
+    "block comment within func",
+    "# comment on the same line as the block end",
+  ],
+  "identifiers": [
+    {
+      "name": "identifier1",
+      "type": "FunctionDeclaration.ownId",
+    },
+    {
+      "name": "identifier3",
+      "type": "FunctionDeclaration.ownId",
+    },
+  ],
+}
+`;
+
 exports[`test case files parses sample.js (javascript) 1`] = `
 {
   "comments": [
