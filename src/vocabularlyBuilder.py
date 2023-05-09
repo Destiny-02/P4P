@@ -103,6 +103,22 @@ def saveCategoriseSheetToTxt(domainFolderName):
 		print("The following terms have not been categorised:")
 		print(undefinedSet)
 
+def saveDomainSheetToTxt(domainFolderName):
+	"""
+	Saves the to-determine.csv spreadsheet containing terms that have been categorised as 
+	domain terms (d) to the context.txt text file
+	"""
+	dSet = set()
+
+	with open('to-determine.csv', 'r') as file:
+		reader = csv.reader(file)
+		for row in reader:
+			word, letter = row
+			if letter == 'd':
+				dSet.add(word)
+
+	setToTxt(dSet, getPath("vocabularies/" + domainFolderName + "/context.txt"))
+
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
 
@@ -128,7 +144,7 @@ if __name__ == "__main__":
 	9. Run this file with only the call to saveCategoriseSheetToTxt uncommented
 	10. context.txt, design.txt and neither.txt will be updated with the terms you categorised
 	"""
-	saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"))
-	# saveDomainSheetToTxt("ugrad-009-01")
+	# saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"))
+	saveDomainSheetToTxt("ugrad-009-01")
 	# saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1000"), "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")
