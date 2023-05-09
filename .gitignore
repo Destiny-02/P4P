@@ -2,7 +2,8 @@ node_modules
 parsers/output
 out
 __pycache__
-*toCategorise.csv
+*to-categorise.csv
+*-stats.csv
 
 # temp
 parser-output.json
