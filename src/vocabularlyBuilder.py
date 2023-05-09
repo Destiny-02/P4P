@@ -1,7 +1,7 @@
 from helper.invokeParser import invokeParser
 from helper.conversion import (
 	txtToSet,
-	cleanSetOfTerms, removeSeenStemmed, setToTxt, stemTerm
+	cleanSetOfTerms, removeSeenStemmed, setToTxt, stemTerm, setToTxtNoDuplicates
 )
 from helper.io import findJavaFiles, setToSheet
 from helper.splitting import splitIdentifiers
@@ -117,13 +117,16 @@ def saveDomainSheetToTxt(domainFolderName):
 			if letter == 'd':
 				dSet.add(word)
 
-	setToTxt(dSet, getPath("vocabularies/" + domainFolderName + "/context.txt"))
+	setToTxtNoDuplicates(dSet, getPath("vocabularies/" + domainFolderName + "/context.txt"))
 
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
 
 if __name__ == "__main__":
 	"""
+	Note: recommend extracting domain terms from the domain description first, 
+	then categorising the terms from the identifiers in the data folder.
+
 	Instructions for extracting domain terms fron a piece of text: 
 	1. Run this file with only the call to saveTermsToBeDetermined uncommented
 	2. Open the to-determine.csv spreadsheet
@@ -145,6 +148,6 @@ if __name__ == "__main__":
 	10. context.txt, design.txt and neither.txt will be updated with the terms you categorised
 	"""
 	# saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"))
-	saveDomainSheetToTxt("ugrad-009-01")
+	# saveDomainSheetToTxt("ugrad-009-01")
 	# saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1000"), "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")

@@ -25,9 +25,22 @@ def txtToSet(filename):
 
 def setToTxt(data, filename):
   """
-  Appends the terms in a set to a text file, one term per line
+  Appends the terms in a set to a text file, one term per line. 
+  Note that this will not overwrite the file, but will append to it so new words may be duplicated. 
   """
   with open(filename, 'a') as txtfile:
+    for word in data:
+      txtfile.write(word + "\n")
+
+def setToTxtNoDuplicates(data, filename):
+  """
+  Writes the terms in a set to a text file, one term per line. 
+  Unlike setToTxt, this will read the file first and remove any duplicates before writing to the file.
+  """
+  terms = txtToSet(filename)
+  terms.update(data)
+
+  with open(filename, 'w') as txtfile:
     for word in data:
       txtfile.write(word + "\n")
 
