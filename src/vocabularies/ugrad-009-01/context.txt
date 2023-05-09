@@ -1,8 +1,0 @@
-gross
-salaried
-computepaye
-person
-ytd
-rate
-taxidcompare
-taxid

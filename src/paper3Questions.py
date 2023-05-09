@@ -14,7 +14,7 @@ import time
 
 
 def main(pathToData):
-    domainTerms, equivalents = txtToSetWithEquivalents(pathToData + "domain_terms.txt")
+    domainTerms, equivalents = txtToSetWithEquivalents(pathToData + "domain-terms.txt")
 
     # To be used for averages
     inEither = set()
