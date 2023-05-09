@@ -1,53 +1,23 @@
-
-def splitIdentifier(_identifier: str) -> list[str]:
-  """
-  Splits an identifier into terms. Handles
-  camelCase, PascalCase, kebab-case, snake_case, and SCREAMING_SNAKE_CASE,
-  or a mix of styles
-  but not all complex situations
-  """
-  # my first attempt was these regexes:
-  #   PascalCase: /[A-Z][a-z]+/g
-  #   camelCase: /(^[a-z]|[A-Z])[a-z]+/g
-  # which works for simple examples, but it's probably easier to
-  # do this in python, not regexes.
-  identifier = _identifier
+from spiral import ronin
+from unidecode import unidecode
 
 
-  # start by adding underscores before isolated capital letters,
-  # and then lowercasing those letters
-  # e.g. partFour -> part_Four -> part_four
-  i = 0
-  while i < len(identifier):
-    char = identifier[i]
-    prevIsLowerCase = i > 0 and isLowerCase(identifier[i-1])
-    nextIsLowerCase = i + 1 < len(identifier) and isLowerCase(identifier[i+1])
-    thisIsUpperCase = isUpperCase(char)
+def splitIdentifier(_identifier: str, stripDiacritics=True) -> list[str]:
+    """
+    Splits an identifier into terms. Handles
+    camelCase, PascalCase, kebab-case, snake_case, and SCREAMING_SNAKE_CASE,
+    or a mix of styles
+    but not all complex situations
+    """
+    identifier = unidecode(_identifier) if stripDiacritics else _identifier
+    return ronin.split(identifier)
 
-    if thisIsUpperCase and prevIsLowerCase and nextIsLowerCase:
-      before = identifier[:i]
-      after = identifier[i+1:]
-      identifier = before + "_" + char.lower() + after
-      # i = 0 # start again from the beginning
-
-    i = i + 1
-
-  return identifier.replace('-', '_').split("_")
 
 def splitIdentifiers(identifiers: set[str]) -> set[str]:
-  """
-  Splits a set of identifiers into terms
-  """
-  terms = set()
-  for identifier in identifiers:
-    terms.update(splitIdentifier(identifier))
-  return terms
-
-# utils go at the bottom of the file in python ? seems kinda weird
-# python doesn't care about no-use-before-define
-
-def isLowerCase(char: str) -> bool:
-  return char == char.lower() and char != char.upper()
-
-def isUpperCase(char: str) -> bool:
-  return char == char.upper() and char != char.lower()
+    """
+    Splits a set of identifiers into terms
+    """
+    terms = set()
+    for identifier in identifiers:
+        terms.update(splitIdentifier(identifier))
+    return terms
