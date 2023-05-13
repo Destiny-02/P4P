@@ -156,5 +156,5 @@ if __name__ == "__main__":
 	"""
 	# saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"))
 	# saveDomainSheetToTxt("ugrad-009-01")
-	# saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1001"), "ugrad-009-01")
+	# saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1002"), "ugrad-009-01")
 	saveCategoriseSheetToTxt("ugrad-009-01")

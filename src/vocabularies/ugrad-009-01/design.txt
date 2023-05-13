@@ -55,3 +55,16 @@ data
 calcul
 lower
 math
+part
+info
+scanner
+find
+smallest
+char
+charact
+next
+previous
+close
+digit
+display
+databas

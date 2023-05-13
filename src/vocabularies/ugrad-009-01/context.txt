@@ -64,3 +64,5 @@ calendar
 user
 dollar
 today
+type
+period
