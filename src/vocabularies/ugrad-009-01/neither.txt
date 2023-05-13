@@ -5,3 +5,13 @@ br
 msg
 head
 df
+take
+scale
+bd
+plain
+big
+code
+put
+third
+fnfex
+comp

@@ -66,3 +66,7 @@ dollar
 today
 type
 period
+slip
+cash
+taxman
+percentag
