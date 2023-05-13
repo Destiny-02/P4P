@@ -159,9 +159,12 @@ def removeSeenStemmed(data: set, seen: set) -> set:
   seen is already stemmed
   """
   newData = set()
+  newDataStemmed = set() # Used to check if the stemmed version of a term is already in the return set
   for term in data:
-    if stemTerm(term) not in seen:
+    stemmedTerm = stemTerm(term)
+    if stemmedTerm not in seen and stemmedTerm not in newDataStemmed:
       newData.add(term)
+      newDataStemmed.add(stemTerm(term))
   return newData
 
 def stringsToProcessable(strings: set, excludeListStemmed: set) -> set:
