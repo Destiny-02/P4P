@@ -183,3 +183,5 @@ def stringsToProcessable(strings: set, excludeListStemmed: set) -> set:
 
   # Remove the terms we save seen i.e. the stemmed version is in the combined set
   terms = removeSeenStemmed(terms, excludeListStemmed)
+
+  return terms
