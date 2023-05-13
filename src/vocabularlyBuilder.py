@@ -31,6 +31,13 @@ def saveTermsToBeCategorised(pathToData, domainFolderName):
 	# Make sure terms are lowercase, stripped and non-empty
 	terms = cleanSetOfTerms(terms)
 
+	# Remove single-letter words
+	terms = {term for term in terms if len(term) > 1}
+
+	# Remove stop words
+	stopWords = set(nltk.corpus.stopwords.words('english'))
+	terms = [term for term in terms if term not in stopWords]
+
 	# Remove the terms whose stemmed version is in the combined set
 	newTerms = removeSeenStemmed(terms, combinedTerms)
 
@@ -149,5 +156,5 @@ if __name__ == "__main__":
 	"""
 	# saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"))
 	# saveDomainSheetToTxt("ugrad-009-01")
-	# saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1001"), "ugrad-009-01")
+	saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1000"), "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")
