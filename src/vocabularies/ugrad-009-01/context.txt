@@ -72,3 +72,5 @@ taxman
 percentag
 job
 peopl
+burd
+hrs

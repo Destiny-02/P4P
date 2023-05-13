@@ -125,3 +125,11 @@ field
 gener
 processor
 negat
+printer
+initialis
+initialis
+printer
+disp
+temp
+str
+remain
