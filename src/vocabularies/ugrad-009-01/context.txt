@@ -70,3 +70,5 @@ slip
 cash
 taxman
 percentag
+job
+peopl
