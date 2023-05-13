@@ -1,7 +1,0 @@
-amounts
-cent
-company
-amount
-annual
-burden
-computation
