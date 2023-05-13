@@ -68,3 +68,17 @@ paye
 taxable
 work
 computed
+compute
+wage
+stamp
+calendar
+first
+processing
+deduction
+given
+double
+person
+family
+salaried
+payroll
+employee
