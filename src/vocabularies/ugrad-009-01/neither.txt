@@ -39,11 +39,9 @@ determin
 normal
 emp
 fourth
-fr
 determin
 fr
 normal
-emp
 fourth
 creat
 item

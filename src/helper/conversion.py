@@ -1,8 +1,10 @@
 import re
 
-from .splitting import splitIdentifier
+from .splitting import splitIdentifier, splitIdentifiers
 import json
 from porter2stemmer import Porter2Stemmer
+import nltk
+nltk.download('stopwords')
 
 def txtToSet(filename):
   """
@@ -144,6 +146,7 @@ def cleanSetOfTerms(data: set) -> set:
   """
   newData = set()
   for term in data:
+    term = re.sub(r'[^a-zA-ZÀ-ÖØ-öø-ÿ\s]', '', term) # Remove all non-letter characters
     cleanedTerm = term.lower().strip()
     if cleanedTerm != "":
       newData.add(cleanedTerm)
@@ -152,9 +155,31 @@ def cleanSetOfTerms(data: set) -> set:
 def removeSeenStemmed(data: set, seen: set) -> set:
   """
   Removes all terms from data that have a stemmed version in seen
+  data is not already stemmed
+  seen is already stemmed
   """
   newData = set()
   for term in data:
     if stemTerm(term) not in seen:
       newData.add(term)
   return newData
+
+def stringsToProcessable(strings: set, excludeListStemmed: set) -> set:
+  """
+  Converts a set of strings to a set of standardised terms that is ready for a human to process manually. 
+  """
+  # Split each string by treating it as an identifier
+  terms = splitIdentifiers(strings)
+
+  # Make sure terms consist of lowercase letters are stripped and non-empty
+  terms = cleanSetOfTerms(terms)
+
+  # Remove single-letter words
+  terms = {term for term in terms if len(term) > 1}
+
+  # Remove stop words
+  stopWords = set(nltk.corpus.stopwords.words('english'))
+  terms = [term for term in terms if term not in stopWords]
+
+  # Remove the terms we save seen i.e. the stemmed version is in the combined set
+  terms = removeSeenStemmed(terms, excludeListStemmed)

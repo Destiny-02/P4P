@@ -1,83 +1,49 @@
 from helper.invokeParser import invokeParser
 from helper.conversion import (
-	txtToSet,
-	cleanSetOfTerms, removeSeenStemmed, setToTxt, stemTerm, setToTxtNoDuplicates
+	txtToSet, stemTerm, setToTxtNoDuplicates, stringsToProcessable
 )
 from helper.io import findJavaFiles, setToSheet
-from helper.splitting import splitIdentifiers
 from os import path
 import csv
-import re
-import nltk
-nltk.download('stopwords')
-
 
 def saveTermsToBeCategorised(pathToData, domainFolderName):
 	"""
-	Saves the terms to be categorised to a spreadsheet
+	Saves the terms to be categorised as context/design/neither from the source code to a spreadsheet
 	"""
 	# Get the terms we have already seen and categorised
-	contextTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/context.txt"))
-	designTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/design.txt"))
-	neitherTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/neither.txt"))
-	combinedTerms = contextTerms.union(designTerms).union(neitherTerms)
+	(contextTerms, designTerms, neitherTerms, combinedTerms) = getVocabularies(domainFolderName)
 
 	# Parse the identifiers
 	(identifiers, comments) = invokeParser(findJavaFiles(pathToData))
 
-	# Split identifiers
-	terms = splitIdentifiers(identifiers)
-
-	# Make sure terms are lowercase, stripped and non-empty
-	terms = cleanSetOfTerms(terms)
-
-	# Remove single-letter words
-	terms = {term for term in terms if len(term) > 1}
-
-	# Remove stop words
-	stopWords = set(nltk.corpus.stopwords.words('english'))
-	terms = [term for term in terms if term not in stopWords]
-
-	# Remove the terms whose stemmed version is in the combined set
-	newTerms = removeSeenStemmed(terms, combinedTerms)
+	# Split the identifiers into standardised terms suitable for a human to categorise manually
+	terms = stringsToProcessable(identifiers, combinedTerms)
 
 	# Write the terms to be categorised to a spreadsheet
-	setToSheet(newTerms, "to-categorise.csv")
+	setToSheet(terms, "to-categorise.csv")
 
-def saveTermsToBeDetermined(pathToDomainDescription):
+def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
 	"""
-	Saves the terms to be determined as from the domain or not to a spreadsheet
+	Saves the terms to be determined as from the domain or not from the descriptor to a spreadsheet
 	"""
+	# Get the terms we have already seen and categorised
+	(contextTerms, designTerms, neitherTerms, combinedTerms) = getVocabularies(domainFolderName)
+
 	# Get the terms in the domain description
 	with open(pathToDomainDescription, 'r') as file:
 		domainDescription = file.read()
+
+	# Split the domain description into terms by whitespace
 	terms = domainDescription.split()
-
-	# Remove all non-letter characters from the terms
-	for i, term in enumerate(terms):
-		terms[i] = re.sub(r'[^a-zA-ZÀ-ÖØ-öø-ÿ\s]', '', term)
-
-	# Make sure terms are lowercase, stripped and non-empty
-	terms = cleanSetOfTerms(set(terms))
-
-	# Remove single-letter words
-	terms = {term for term in terms if len(term) > 1}
-
-	# Remove stop words
-	stopWords = set(nltk.corpus.stopwords.words('english'))
-	terms = [term for term in terms if term not in stopWords]
-
-	# To reduce the number of terms to be determined, only add the ones whose stemmed version is not in the set
-	termsToClassify = set()
-	for term in terms:
-		if stemTerm(term) not in termsToClassify:
-			termsToClassify.add(term)
+	
+	# Split the identifiers into standardised terms suitable for a human to manually look through
+	terms = stringsToProcessable(terms, combinedTerms)
 
 	# Sort the terms alphabetically
-	termsToClassify = sorted(termsToClassify)
+	terms = sorted(terms)
 
 	# Write the terms to be determined to a spreadsheet
-	setToSheet(termsToClassify, "to-determine.csv")
+	setToSheet(terms, "to-determine.csv")
 
 def saveCategoriseSheetToTxt(domainFolderName):
 	"""
@@ -102,9 +68,9 @@ def saveCategoriseSheetToTxt(domainFolderName):
 			else:
 				undefinedSet.add(word)
 
-	setToTxt(dSet, getPath("vocabularies/" + domainFolderName + "/design.txt"))
-	setToTxt(cSet, getPath("vocabularies/" + domainFolderName + "/context.txt"))
-	setToTxt(nSet, getPath("vocabularies/" + domainFolderName + "/neither.txt"))
+	setToTxtNoDuplicates(dSet, getPath("vocabularies/" + domainFolderName + "/design.txt"))
+	setToTxtNoDuplicates(cSet, getPath("vocabularies/" + domainFolderName + "/context.txt"))
+	setToTxtNoDuplicates(nSet, getPath("vocabularies/" + domainFolderName + "/neither.txt"))
 
 	if (len(undefinedSet) > 0):
 		print("The following terms have not been categorised:")
@@ -125,6 +91,13 @@ def saveDomainSheetToTxt(domainFolderName):
 				dSet.add(stemTerm(word))
 
 	setToTxtNoDuplicates(dSet, getPath("vocabularies/" + domainFolderName + "/context.txt"))
+
+def getVocabularies(domainFolderName):
+	contextTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/context.txt"))
+	designTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/design.txt"))
+	neitherTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/neither.txt"))
+	combinedTerms = contextTerms.union(designTerms).union(neitherTerms)
+	return (contextTerms, designTerms, neitherTerms, combinedTerms)
 
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
@@ -154,7 +127,7 @@ if __name__ == "__main__":
 	9. Run this file with only the call to saveCategoriseSheetToTxt uncommented
 	10. context.txt, design.txt and neither.txt will be updated with the terms you categorised
 	"""
-	# saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"))
+	# saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"), "ugrad-009-01")
 	# saveDomainSheetToTxt("ugrad-009-01")
 	# saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1010"), "ugrad-009-01")
 	saveCategoriseSheetToTxt("ugrad-009-01")

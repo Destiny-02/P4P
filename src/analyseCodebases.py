@@ -1,12 +1,12 @@
 from helper.invokeParser import invokeParser
 from helper.conversion import (
-	txtToSet,
-	cleanSetOfTerms, removeSeenStemmed, setToTxt
+	txtToSet, stemTerm, cleanSetOfTerms
 )
-from helper.io import findJavaFiles, setToSheet, findRepoPaths, deleteFileIfExists
-from helper.splitting import splitIdentifiers
+from helper.io import findJavaFiles, findRepoPaths, deleteFileIfExists
+from helper.splitting import splitIdentifier
 from os import path
 import csv
+import re 
 
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
@@ -36,17 +36,35 @@ def main(pathToData, domainFolderName):
     (identifiers, comments) = invokeParser(findJavaFiles(repoPath))
           
     # Count the number of design, context and neither terms in the identifiers
+    # An identifier qualifies as design or context if it contains at least one design or context term 
     numDesignTerms = 0
     numContextTerms = 0
     numNeitherTerms = 0
 
     for identifier in identifiers:
-      if identifier in designTerms:
-        numDesignTerms += 1
-      elif identifier in contextTerms:
-        numContextTerms += 1
-      else:
-        numNeitherTerms += 1
+      terms = splitIdentifier(identifier)
+
+      # Make sure terms are lowercase, stripped and non-empty
+      terms = list(cleanSetOfTerms(terms))
+
+      for term in terms:
+
+        # Remove numbers if the term is not a number e.g. emp1 --> emp
+        if not term.isdigit():
+          term = re.sub(r'\d+', '', term)
+
+        # As our vocabularies are stemmed, we need to use the stemmed version of the term
+        stemmedTerm = stemTerm(term)
+      
+        if stemmedTerm in designTerms:
+          numDesignTerms += 1
+          break
+        elif stemmedTerm in contextTerms:
+          numContextTerms += 1
+          break
+        elif term == terms[-1]: # If we have reached the last term and it is not in either set
+          numNeitherTerms += 1
+          print(identifier)
 
     # Add this to the stats sets
     allNumDesignTerms.append(numDesignTerms)

@@ -127,7 +127,6 @@ processor
 negat
 printer
 initialis
-initialis
 printer
 disp
 temp
@@ -138,3 +137,5 @@ path
 rounder
 duplic
 build
+fract
+out

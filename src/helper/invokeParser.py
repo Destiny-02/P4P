@@ -31,10 +31,8 @@ def invokeParser(absoluteFileNames: set[str]) -> tuple[set, set]:
 
         for fileName in parserOutputJson:
             # read identifers for this file
-            for item in parserOutputJson[fileName]["identifiers"]:
-                words: list[str] = splitIdentifier(item["name"])
-                for word in words:
-                    identifiers.add(word)
+            for identifier in parserOutputJson[fileName]["identifiers"]:
+                identifiers.add(identifier["name"])
 
             # read comments for this file
             for comment in parserOutputJson[fileName]["comments"]:
