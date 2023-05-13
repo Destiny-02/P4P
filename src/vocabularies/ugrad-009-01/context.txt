@@ -55,3 +55,9 @@ report
 paid
 minut
 membership
+stamp
+given
+person
+first
+wage
+calendar
