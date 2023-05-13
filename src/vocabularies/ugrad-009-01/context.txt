@@ -61,3 +61,6 @@ person
 first
 wage
 calendar
+user
+dollar
+today
