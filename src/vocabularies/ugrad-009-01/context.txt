@@ -55,3 +55,9 @@ last
 per
 rate
 govern
+calendar
+stamp
+person
+given
+first
+wage

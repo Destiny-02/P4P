@@ -148,6 +148,6 @@ if __name__ == "__main__":
 	10. context.txt, design.txt and neither.txt will be updated with the terms you categorised
 	"""
 	# saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"))
-	saveDomainSheetToTxt("ugrad-009-01")
+	# saveDomainSheetToTxt("ugrad-009-01")
 	# saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1000"), "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")
