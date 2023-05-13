@@ -61,3 +61,7 @@ person
 given
 first
 wage
+user
+today
+data
+dollar
