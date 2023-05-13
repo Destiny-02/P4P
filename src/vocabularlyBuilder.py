@@ -106,7 +106,7 @@ def saveCategoriseSheetToTxt(domainFolderName):
 def saveDomainSheetToTxt(domainFolderName):
 	"""
 	Saves the to-determine.csv spreadsheet containing terms that have been categorised as 
-	domain terms (d) to the context.txt text file
+	domain terms / context schema (c) to the context.txt text file
 	"""
 	dSet = set()
 
@@ -114,7 +114,7 @@ def saveDomainSheetToTxt(domainFolderName):
 		reader = csv.reader(file)
 		for row in reader:
 			word, letter = row
-			if letter == 'd':
+			if letter == 'c':
 				dSet.add(word)
 
 	setToTxtNoDuplicates(dSet, getPath("vocabularies/" + domainFolderName + "/context.txt"))
