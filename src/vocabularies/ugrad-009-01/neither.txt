@@ -38,3 +38,5 @@ fourth
 creat
 item
 three
+ti
+dcompareto
