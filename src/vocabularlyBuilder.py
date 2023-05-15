@@ -39,9 +39,6 @@ def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
 	# Split the identifiers into standardised terms suitable for a human to manually look through
 	terms = stringsToProcessable(terms, combinedTerms)
 
-	# Sort the terms alphabetically
-	terms = sorted(terms)
-
 	# Write the terms to be determined to a spreadsheet
 	setToSheet(terms, "to-determine.csv")
 

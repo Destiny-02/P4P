@@ -57,6 +57,8 @@ def findJavaFiles(folderPath):
 def setToSheet(data, sheetName):
   deleteFileIfExists(sheetName)
 
+  data = sorted(data) # Not necessary, but makes it easier to view the diff
+
   with open(sheetName, 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     for item in data:
