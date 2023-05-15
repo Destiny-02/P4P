@@ -38,8 +38,3 @@ fourth
 creat
 item
 three
-ti
-dcompareto
-pe
-nfe
-act

@@ -74,5 +74,4 @@ job
 peopl
 burd
 hrs
-summari
 emp

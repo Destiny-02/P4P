@@ -132,10 +132,5 @@ disp
 temp
 str
 remain
-state
-path
-rounder
-duplic
-build
 fract
 out
