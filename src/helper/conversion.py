@@ -41,9 +41,10 @@ def setToTxtNoDuplicates(data, filename):
   """
   terms = txtToSet(filename)
   terms.update(data)
+  terms = sorted(terms) # Sort the terms alphabetically to make it easier to view the diff
 
   with open(filename, 'w') as txtfile:
-    for word in data:
+    for word in terms:
       txtfile.write(word + "\n")
 
 def jsonToSet(filename: str) -> set:
