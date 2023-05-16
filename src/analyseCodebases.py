@@ -19,6 +19,28 @@ def writeResultsToCsv(designCounts, contextCounts, neitherCounts, csvName):
     for i in range(len(designCounts)):
       writer.writerow([designCounts[i], contextCounts[i], neitherCounts[i]])
 
+def checkIdentifierWithVocabularies(identifier, vocab):
+  """
+  Checks if the identifier contains any terms from the vocabulary
+  """
+  terms = splitIdentifier(identifier)
+
+  # Make sure terms are lowercase, stripped and non-empty
+  terms = list(cleanSetOfTerms(terms))
+
+  for term in terms:
+    # Remove numbers if the term is not a number e.g. emp1 --> emp
+    if not term.isdigit():
+      term = re.sub(r'\d+', '', term)
+
+    # As our vocabularies are stemmed, we need to use the stemmed version of the term
+    stemmedTerm = stemTerm(term)
+
+    if stemmedTerm in vocab:
+      return True
+
+  return False
+
 def main(pathToData, pathToVocabularies):
   contextTerms = txtToSet(getPath(pathToVocabularies + "/context.txt"))
   designTerms = txtToSet(getPath(pathToVocabularies + "/design.txt"))
@@ -42,29 +64,14 @@ def main(pathToData, pathToVocabularies):
     numNeitherTerms = 0
 
     for identifier in identifiers:
-      terms = splitIdentifier(identifier)
-
-      # Make sure terms are lowercase, stripped and non-empty
-      terms = list(cleanSetOfTerms(terms))
-
-      for term in terms:
-
-        # Remove numbers if the term is not a number e.g. emp1 --> emp
-        if not term.isdigit():
-          term = re.sub(r'\d+', '', term)
-
-        # As our vocabularies are stemmed, we need to use the stemmed version of the term
-        stemmedTerm = stemTerm(term)
-      
-        if stemmedTerm in designTerms:
-          numDesignTerms += 1
-          break
-        elif stemmedTerm in contextTerms:
-          numContextTerms += 1
-          break
-        elif term == terms[-1]: # If we have reached the last term and it is not in either set
-          numNeitherTerms += 1
-          print(identifier)
+      # Check for context terms, then design terms. The rest are neither. 
+      if checkIdentifierWithVocabularies(identifier, contextTerms):
+        numContextTerms += 1
+      elif checkIdentifierWithVocabularies(identifier, designTerms):
+        numDesignTerms += 1
+      else:
+        numNeitherTerms += 1
+        print(identifier)
 
     # Add this to the stats sets
     allNumDesignTerms.append(numDesignTerms)
