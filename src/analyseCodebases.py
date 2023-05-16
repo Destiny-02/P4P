@@ -19,9 +19,9 @@ def writeResultsToCsv(designCounts, contextCounts, neitherCounts, csvName):
     for i in range(len(designCounts)):
       writer.writerow([designCounts[i], contextCounts[i], neitherCounts[i]])
 
-def main(pathToData, domainFolderName):
-  contextTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/context.txt"))
-  designTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/design.txt"))
+def main(pathToData, pathToVocabularies):
+  contextTerms = txtToSet(getPath(pathToVocabularies + "/context.txt"))
+  designTerms = txtToSet(getPath(pathToVocabularies + "/design.txt"))
 
   # To be used for stats
   allNumDesignTerms = []
@@ -78,5 +78,5 @@ if __name__ == "__main__":
   """
   Analyses all the repos for a domain and produces stats on the percentage of terms that are design, context or neither
   """
-  (designCounts, contextCounts, neitherCounts, totalCounts) = main(getPath("../data/ugrad-009-01/"), "ugrad-009-01")
+  (designCounts, contextCounts, neitherCounts, totalCounts) = main(getPath("../data/ugrad-009-01/"), getPath("vocabularies/ugrad-009-01/"))
   writeResultsToCsv(designCounts, contextCounts, neitherCounts, "ugrad-009-01-stats.csv")
