@@ -4,6 +4,7 @@ from helper.conversion import (
 )
 from helper.io import findJavaFiles, findRepoPaths, deleteFileIfExists
 from helper.splitting import splitIdentifier
+from helper.stats import findLA
 from os import path
 import csv
 import re 
@@ -29,15 +30,24 @@ def checkIdentifierWithVocabularies(identifier, vocab):
   terms = list(cleanSetOfTerms(terms))
 
   for term in terms:
-    # Remove numbers if the term is not a number e.g. emp1 --> emp
-    if not term.isdigit():
-      term = re.sub(r'\d+', '', term)
-
-    # As our vocabularies are stemmed, we need to use the stemmed version of the term
-    stemmedTerm = stemTerm(term)
-
-    if stemmedTerm in vocab:
+    if checkTermWithVocabularies(term, vocab):
       return True
+
+  return False
+
+def checkTermWithVocabularies(term, vocab):
+  """
+  Checks if the term is in the vocabulary
+  """
+  # Remove numbers if the term is not a number e.g. emp1 --> emp
+  if not term.isdigit():
+    term = re.sub(r'\d+', '', term)
+
+  # As our vocabularies are stemmed, we need to use the stemmed version of the term
+  stemmedTerm = stemTerm(term)
+
+  if stemmedTerm in vocab:
+    return True
 
   return False
 
@@ -81,9 +91,56 @@ def main(pathToData, pathToVocabularies):
 
   return (allNumDesignTerms, allNumContextTerms, allNumNeitherTerms, allTotalTerms)
 
+def findVocabsLA(pathToData, pathToVocabularies):
+  contextTerms = txtToSet(getPath(pathToVocabularies + "/context.txt"))
+  designTerms = txtToSet(getPath(pathToVocabularies + "/design.txt"))
+
+  # To be used for stats
+  designVocabs = []
+  contextVocabs = []
+  neitherVocabs = []
+
+  for repoPath in findRepoPaths(pathToData):
+    print(repoPath)
+          
+    # Parse the identifiers
+    (identifiers, comments) = invokeParser(findJavaFiles(repoPath))
+          
+    # Build up the context, design (and neither) vocabularies from the terms in the identifiers
+    design = set()
+    context = set()
+    neither = set()
+
+    for identifier in identifiers:
+      # Split the identifier into terms
+      # Make sure terms are lowercase, stripped and non-empty
+      terms = splitIdentifier(identifier)
+      terms = list(cleanSetOfTerms(terms))
+      
+      for term in terms:
+        if checkTermWithVocabularies(term, contextTerms):
+          context.add(term)
+        elif checkTermWithVocabularies(term, designTerms):
+          design.add(term)
+        else:
+          neither.add(term)
+
+    # Add this to the stats sets
+    designVocabs.append(design)
+    contextVocabs.append(context)
+    neitherVocabs.append(neither)
+  
+  return (designVocabs, contextVocabs, neitherVocabs)
+
 if __name__ == "__main__":
   """
   Analyses all the repos for a domain and produces stats on the percentage of terms that are design, context or neither
   """
   (designCounts, contextCounts, neitherCounts, totalCounts) = main(getPath("../data/ugrad-009-01/"), getPath("vocabularies/ugrad-009-01/"))
   writeResultsToCsv(designCounts, contextCounts, neitherCounts, "ugrad-009-01-stats.csv")
+
+  # Uncomment this to find the LA between the repos (it might take a while to run)
+  # (designVocabs, contextVocabs, neitherVocabs) = findVocabsLA(getPath("../data/ugrad-009-01/"), getPath("vocabularies/ugrad-009-01/"))
+  # print("Design LA: {:.0%}".format(findLA(designVocabs)))
+  # print("Context LA: {:.0%}".format(findLA(contextVocabs)))
+  # print("Neither LA: {:.0%}".format(findLA(neitherVocabs)))
