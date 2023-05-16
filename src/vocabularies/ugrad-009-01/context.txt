@@ -3,11 +3,13 @@ annual
 bracket
 burd
 burden
+cal
 calendar
 cash
 cent
 compani
 comput
+currenc
 current
 date
 day
@@ -36,6 +38,7 @@ last
 membership
 minut
 money
+month
 name
 nett
 overtim
@@ -57,6 +60,7 @@ second
 slip
 stamp
 start
+summari
 superannu
 system
 tax
