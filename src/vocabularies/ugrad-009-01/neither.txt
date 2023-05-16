@@ -28,7 +28,6 @@ plain
 put
 readi
 scale
-set
 take
 third
 three
