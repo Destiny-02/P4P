@@ -5,7 +5,18 @@ import sys
 project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_dir)
 
-from src.helper.conversion import txtToSet, jsonToSet, txtToSetWithEquivalents, convertEquivalents, setToStemmedSet, extractWords, extractWordsFromSet, cleanSetOfTerms, stemTerm
+from src.helper.conversion import (
+    txtToSet,
+    jsonToSet,
+    txtToSetWithEquivalents,
+    convertEquivalents,
+    setToStemmedSet,
+    extractWords,
+    extractWordsFromSet,
+    cleanSetOfTerms,
+    stemTerm,
+    dictToCsv,
+)
 
 def test_txtToSet():
   # Test with a file containing three terms
@@ -178,3 +189,7 @@ def test_cleanSetOfTerms():
   data = set(['Hello', 'there', 'MY', 'name', 'is', 'Iñtërnâtiônàlizætiøn'])
   expected = set(['hello', 'there', 'my', 'name', 'is', 'iñtërnâtiônàlizætiøn'])
   assert cleanSetOfTerms(data) == expected
+
+def test_dictToCsv():
+  myDict = { 'payroll': 12, 'payrollee': 41 }
+  assert dictToCsv(myDict) == 'payroll,12\npayrollee,41'

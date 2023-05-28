@@ -189,3 +189,7 @@ def stringsToProcessable(strings: set, excludeListStemmed: set) -> set:
   terms = removeSeenStemmed(terms, excludeListStemmed)
 
   return terms
+
+
+def dictToCsv(myDict: dict[any, any]) -> str:
+    return "\n".join([f"{k},{v}" for (k, v) in myDict.items()])
