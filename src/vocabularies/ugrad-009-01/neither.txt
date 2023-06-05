@@ -3,12 +3,17 @@ bd
 big
 br
 code
+comp
 current
 df
 doubl
+dp
 dps
 end
+enter
+ex
 first
+fnfex
 get
 given
 head
@@ -20,7 +25,9 @@ new
 part
 plain
 put
+result
 scale
+second
 sign
 simpl
 slip
@@ -28,3 +35,5 @@ stamp
 start
 take
 taxman
+third
+top
