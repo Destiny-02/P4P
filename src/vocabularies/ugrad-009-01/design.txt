@@ -27,6 +27,7 @@ error
 except
 exit
 failur
+field
 file
 filenam
 find
@@ -34,6 +35,7 @@ float
 format
 formatt
 found
+gener
 half
 hash
 index
@@ -58,6 +60,7 @@ main
 map
 match
 math
+negat
 next
 number
 object
@@ -71,11 +74,13 @@ print
 printf
 println
 process
+processor
 read
 reader
 reformat
 remov
 replac
+return
 round
 runtim
 scanner

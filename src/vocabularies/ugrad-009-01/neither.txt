@@ -1,3 +1,4 @@
+access
 add
 bd
 big
@@ -14,6 +15,7 @@ dp
 dps
 end
 enter
+entri
 ex
 first
 fnfex
@@ -24,6 +26,7 @@ head
 iie
 inc
 info
+inform
 ioe
 job
 last
