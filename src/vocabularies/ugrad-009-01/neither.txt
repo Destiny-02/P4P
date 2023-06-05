@@ -76,12 +76,15 @@ nfe
 normal
 npe
 num
+one
+option
 part
 pe
 per
 place
 plain
 posit
+prep
 proc
 put
 readi

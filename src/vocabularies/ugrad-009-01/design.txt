@@ -33,6 +33,7 @@ error
 except
 exist
 exit
+factori
 failur
 field
 file
@@ -71,11 +72,14 @@ main
 map
 match
 math
+method
+nearest
 negat
 next
 null
 number
 object
+old
 oper
 order
 output
@@ -125,6 +129,7 @@ substr
 sum
 summari
 suppress
+switch
 system
 temp
 test
