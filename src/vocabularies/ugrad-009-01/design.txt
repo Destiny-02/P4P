@@ -39,6 +39,7 @@ gener
 half
 hash
 index
+initialis
 input
 instanc
 int
@@ -71,6 +72,7 @@ pars
 percentag
 previous
 print
+printer
 printf
 println
 process

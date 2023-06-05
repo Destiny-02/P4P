@@ -10,6 +10,7 @@ day
 deduct
 dollar
 earn
+emp
 employ
 employe
 famili
@@ -42,5 +43,6 @@ today
 user
 wage
 week
+work
 year
 ytd
