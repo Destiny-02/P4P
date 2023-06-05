@@ -75,6 +75,7 @@ next
 null
 number
 object
+oper
 order
 output
 overrid
@@ -100,6 +101,7 @@ return
 round
 rounder
 runtim
+scan
 scanner
 set
 size
@@ -127,6 +129,7 @@ tree
 trim
 type
 uid
+uniqu
 unround
 updat
 util
