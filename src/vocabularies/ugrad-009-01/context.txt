@@ -1,6 +1,7 @@
 annual
 bracket
 burden
+calendar
 cent
 compani
 date
@@ -25,6 +26,7 @@ payment
 payrol
 payslip
 period
+person
 rate
 record
 report
@@ -32,6 +34,8 @@ salari
 tax
 taxabl
 tid
+time
+wage
 week
 year
 ytd

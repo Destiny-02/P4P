@@ -1,0 +1,12 @@
+add
+doubl
+dps
+end
+first
+get
+given
+last
+new
+simpl
+stamp
+start
