@@ -1,8 +1,10 @@
 access
+act
 add
 bd
 big
 br
+build
 burd
 categori
 check
@@ -28,6 +30,7 @@ fnfex
 fourth
 fr
 fs
+full
 get
 given
 head
@@ -46,9 +49,11 @@ msg
 natur
 net
 new
+nfe
 normal
 num
 part
+pe
 plain
 put
 readi
