@@ -1,5 +1,8 @@
 add
+bd
+big
 br
+code
 current
 df
 doubl
@@ -11,10 +14,17 @@ given
 head
 info
 last
+mode
 msg
 new
 part
+plain
+put
+scale
 sign
 simpl
+slip
 stamp
 start
+take
+taxman
