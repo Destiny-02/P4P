@@ -9,6 +9,7 @@ burd
 cal
 categori
 check
+clear
 code
 comp
 creat
@@ -35,6 +36,7 @@ eve
 ex
 exc
 fam
+fill
 first
 fnf
 fnfex
@@ -56,6 +58,7 @@ item
 job
 last
 link
+mainloop
 messag
 mode
 msg
@@ -79,11 +82,13 @@ result
 roun
 scale
 second
+separ
 serial
 sign
 simpl
 slip
 stamp
+standard
 start
 state
 take
