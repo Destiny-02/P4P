@@ -9,6 +9,7 @@ buffer
 calc
 calcul
 case
+caught
 char
 charact
 checker
@@ -84,6 +85,7 @@ pass
 path
 percentag
 pointer
+pos
 previous
 print
 printer
@@ -96,10 +98,14 @@ reader
 reformat
 remain
 remov
+repeat
 replac
+retriev
 return
+revers
 round
 rounder
+run
 runtim
 scan
 scanner
@@ -118,6 +124,7 @@ string
 substr
 sum
 summari
+suppress
 system
 temp
 test
@@ -136,3 +143,4 @@ util
 valu
 vector
 version
+warn

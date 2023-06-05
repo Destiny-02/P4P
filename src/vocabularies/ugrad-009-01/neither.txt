@@ -9,6 +9,7 @@ build
 burd
 cal
 categori
+cess
 check
 clear
 code
@@ -42,6 +43,7 @@ exc
 fam
 fill
 first
+flag
 fnf
 fnfex
 fourth
@@ -92,6 +94,7 @@ separ
 serial
 sign
 simpl
+singl
 slip
 stamp
 standard
