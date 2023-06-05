@@ -1,5 +1,6 @@
 access
 act
+ad
 add
 bd
 big
@@ -12,6 +13,7 @@ check
 clear
 code
 comp
+correct
 creat
 current
 dcompareto
@@ -28,6 +30,7 @@ dps
 ec
 ee
 end
+enough
 enter
 entri
 er
@@ -91,6 +94,9 @@ stamp
 standard
 start
 state
+statem
+still
+store
 take
 taxman
 third
