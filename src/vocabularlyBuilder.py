@@ -2,8 +2,8 @@ from helper.invokeParser import invokeParser
 from helper.conversion import (
 	txtToSet, stemTerm, setToTxtNoDuplicates, stringsToProcessable
 )
-from helper.io import findJavaFiles, setToSheet, deleteFileIfExists
-from os import path, listdir
+from helper.io import findJavaFiles, setToSheet, deleteFileIfExists, findRepoPaths
+from os import path
 import csv
 
 def saveTermsToBeCategorised(pathToDataList, domainFolderName):
@@ -105,17 +105,6 @@ def getVocabularies(domainFolderName):
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
 
-def getFolderPaths(rootFolderName):
-	"""
-	Returns the paths to the folders inside the given folder
-	"""
-	folderPaths = []
-	for folderName in listdir(rootFolderName):
-		folderPath = path.join(rootFolderName, folderName)
-		if path.isdir(folderPath):
-			folderPaths.append(folderPath)
-	return folderPaths
-
 if __name__ == "__main__":
 	"""
 	Note: recommend extracting domain terms from the domain description first, 
@@ -154,5 +143,5 @@ if __name__ == "__main__":
 	Instructions for categorising terms in multiple codebases at once:
 	1. Similar process to above, but use the path of the folder containing all the codebases
 	"""
-	# saveTermsToBeCategorised(getFolderPaths(getPath("../data/ugrad-009-01/")), "ugrad-009-01")
+	saveTermsToBeCategorised(findRepoPaths(getPath("../data/ugrad-009-01/")), "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")
