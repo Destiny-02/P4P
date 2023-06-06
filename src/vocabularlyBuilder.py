@@ -2,25 +2,31 @@ from helper.invokeParser import invokeParser
 from helper.conversion import (
 	txtToSet, stemTerm, setToTxtNoDuplicates, stringsToProcessable
 )
-from helper.io import findJavaFiles, setToSheet
-from os import path
+from helper.io import findJavaFiles, setToSheet, deleteFileIfExists
+from os import path, listdir
 import csv
 
-def saveTermsToBeCategorised(pathToData, domainFolderName):
+def saveTermsToBeCategorised(pathToDataList, domainFolderName):
 	"""
 	Saves the terms to be categorised as context/design/neither from the source code to a spreadsheet
 	"""
 	# Get the terms we have already seen and categorised
 	(contextTerms, designTerms, neitherTerms, combinedTerms) = getVocabularies(domainFolderName)
 
-	# Parse the identifiers
-	(identifiers, comments) = invokeParser(findJavaFiles(pathToData))
+	# Clear the to-categorise.csv spreadsheet if we are processing multiple codebases because we will be appending to it
+	multipleCodebases = len(pathToDataList) > 1
+	if multipleCodebases:
+		deleteFileIfExists("to-categorise.csv")
 
-	# Split the identifiers into standardised terms suitable for a human to categorise manually
-	terms = stringsToProcessable(identifiers, combinedTerms)
+	for pathToData in pathToDataList:
+		# Parse the identifiers
+		(identifiers, comments) = invokeParser(findJavaFiles(pathToData))
 
-	# Write the terms to be categorised to a spreadsheet
-	setToSheet(terms, "to-categorise.csv")
+		# Split the identifiers into standardised terms suitable for a human to categorise manually
+		terms = stringsToProcessable(identifiers, combinedTerms)
+
+		# Write the terms to be categorised to a spreadsheet
+		setToSheet(terms, "to-categorise.csv", append=multipleCodebases)
 
 def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
 	"""
@@ -99,12 +105,25 @@ def getVocabularies(domainFolderName):
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
 
+def getFolderPaths(rootFolderName):
+	"""
+	Returns the paths to the folders inside the given folder
+	"""
+	folderPaths = []
+	for folderName in listdir(rootFolderName):
+		folderPath = path.join(rootFolderName, folderName)
+		if path.isdir(folderPath):
+			folderPaths.append(folderPath)
+	return folderPaths
+
 if __name__ == "__main__":
 	"""
 	Note: recommend extracting domain terms from the domain description first, 
 	then categorising the terms from the identifiers in the data folder.
+	"""
 
-	Instructions for extracting domain terms fron a piece of text: 
+	"""
+	Instructions for extracting domain terms from a piece of text: 
 	1. Run this file with only the call to saveTermsToBeDetermined uncommented
 	2. Open the to-determine.csv spreadsheet
 	3. For each term, decide whether it is a domain term (from the context schema)
@@ -112,7 +131,11 @@ if __name__ == "__main__":
 	5. Save the spreadsheet
 	6. Run this file with only the call to saveDomainSheetToTxt uncommented
 	7. context.txt will be updated with the terms you classified as domain terms
+	"""
+	# saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"), "ugrad-009-01")
+	# saveDomainSheetToTxt("ugrad-009-01")
 
+	"""
 	Instructions for categorising terms: 
 	1. Pick a folder in the data folder that you want to categorise the identifiers for
 	2. Change the path in the call to saveTermsToBeCategorised to the path of the folder you picked
@@ -124,7 +147,12 @@ if __name__ == "__main__":
 	9. Run this file with only the call to saveCategoriseSheetToTxt uncommented
 	10. context.txt, design.txt and neither.txt will be updated with the terms you categorised
 	"""
-	# saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"), "ugrad-009-01")
-	# saveDomainSheetToTxt("ugrad-009-01")
 	# saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1009"), "ugrad-009-01")
-	saveCategoriseSheetToTxt("ugrad-009-01")
+	# saveCategoriseSheetToTxt("ugrad-009-01")
+
+	"""
+	Instructions for categorising terms in multiple codebases at once:
+	1. Similar process to above, but use the path of the folder containing all the codebases
+	"""
+	# saveTermsToBeCategorised(getFolderPaths(getPath("../data/ugrad-009-01/")), "ugrad-009-01")
+	# saveCategoriseSheetToTxt("ugrad-009-01")

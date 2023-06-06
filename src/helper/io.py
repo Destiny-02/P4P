@@ -54,7 +54,10 @@ def findJavaFiles(folderPath):
         javaFiles.add(path.join(dirpath, filename))
   return javaFiles
 
-def setToSheet(data, sheetName):
+def setToSheet(data, sheetName, append=False):
+  if append and os.path.exists(sheetName): 
+    data = data.union(readSheet(sheetName))
+
   deleteFileIfExists(sheetName)
 
   data = sorted(data) # Not necessary, but makes it easier to view the diff
@@ -67,3 +70,13 @@ def setToSheet(data, sheetName):
 def deleteFileIfExists(filePath):
   if path.exists(filePath):
     os.remove(filePath)
+
+# Read a sheet into a set
+# Assumes the sheet has only one column
+def readSheet(sheetName):
+  data = set()
+  with open(sheetName, 'r') as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+      data.add(row[0])
+  return data
