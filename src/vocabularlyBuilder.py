@@ -147,7 +147,7 @@ if __name__ == "__main__":
 	9. Run this file with only the call to saveCategoriseSheetToTxt uncommented
 	10. context.txt, design.txt and neither.txt will be updated with the terms you categorised
 	"""
-	# saveTermsToBeCategorised(getPath("../data/ugrad-009-01/design1009"), "ugrad-009-01")
+	# saveTermsToBeCategorised([getPath("../data/ugrad-009-01/design1009")], "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")
 
 	"""
