@@ -20,6 +20,31 @@ def writeResultsToCsv(designCounts, contextCounts, neitherCounts, csvName):
     for i in range(len(designCounts)):
       writer.writerow([designCounts[i], contextCounts[i], neitherCounts[i]])
 
+def splitRepoPathsByNumIdentifiers(repoPaths):
+  """
+  Returns a tuple of two lists, where the first list contains the repoPaths with less than the median number of identifiers
+  and the second list contains the repoPaths with more than the median number of identifiers
+  """
+  # Get the number of identifiers for each repo
+  numIdentifiers = []
+  for repoPath in repoPaths:
+    (identifiers, comments) = invokeParser(findJavaFiles(repoPath))
+    numIdentifiers.append(len(identifiers))
+
+  # Get the median number of identifiers
+  median = sorted(numIdentifiers)[len(numIdentifiers) // 2]
+
+  # Split the repoPaths based on the median number of identifiers
+  lessThanMedian = []
+  moreThanMedian = []
+  for i in range(len(repoPaths)):
+    if numIdentifiers[i] < median:
+      lessThanMedian.append(repoPaths[i])
+    else:
+      moreThanMedian.append(repoPaths[i])
+
+  return (lessThanMedian, moreThanMedian, median)
+
 def checkIdentifierWithVocabularies(identifier, vocab):
   """
   Checks if the identifier contains any terms from the vocabulary
@@ -91,7 +116,7 @@ def main(pathToData, pathToVocabularies):
 
   return (allNumDesignTerms, allNumContextTerms, allNumNeitherTerms, allTotalTerms)
 
-def findVocabsLA(pathToData, pathToVocabularies):
+def findVocabsLA(repoPaths, pathToVocabularies):
   contextTerms = txtToSet(getPath(pathToVocabularies + "/context.txt"))
   designTerms = txtToSet(getPath(pathToVocabularies + "/design.txt"))
 
@@ -100,7 +125,7 @@ def findVocabsLA(pathToData, pathToVocabularies):
   contextVocabs = []
   neitherVocabs = []
 
-  for repoPath in findRepoPaths(pathToData):
+  for repoPath in repoPaths:
     print(repoPath)
           
     # Parse the identifiers
@@ -134,13 +159,30 @@ def findVocabsLA(pathToData, pathToVocabularies):
 
 if __name__ == "__main__":
   """
-  Analyses all the repos for a domain and produces stats on the percentage of terms that are design, context or neither
+  Get stats for the percentage of terms that are design, context or neither
   """
-  (designCounts, contextCounts, neitherCounts, totalCounts) = main(getPath("../data/ugrad-009-01/"), getPath("vocabularies/ugrad-009-01/"))
-  writeResultsToCsv(designCounts, contextCounts, neitherCounts, "ugrad-009-01-stats.csv")
+  # (designCounts, contextCounts, neitherCounts, totalCounts) = main(getPath("../data/ugrad-009-01/"), getPath("vocabularies/ugrad-009-01/"))
+  # writeResultsToCsv(designCounts, contextCounts, neitherCounts, "ugrad-009-01-stats.csv")
 
-  # Uncomment this to find the LA between the repos (it might take a while to run)
-  # (designVocabs, contextVocabs, neitherVocabs) = findVocabsLA(getPath("../data/ugrad-009-01/"), getPath("vocabularies/ugrad-009-01/"))
+  """
+  Find the LA (takes a while to run)
+  """
+  # # LA for small and large codebases
+  # (smallRepoPaths, largeRepoPaths, threshold) = splitRepoPathsByNumIdentifiers(findRepoPaths(getPath("../data/ugrad-009-01/")))
+  # print("Median number of identifiers: {}".format(threshold))
+  # (smallDesignVocabs, smallContextVocabs, smallNeitherVocabs) = findVocabsLA(smallRepoPaths, getPath("vocabularies/ugrad-009-01/"))
+  # (largeDesignVocabs, largeContextVocabs, largeNeitherVocabs) = findVocabsLA(largeRepoPaths, getPath("vocabularies/ugrad-009-01/"))
+
+  # print("Small Design LA: {:.0%}".format(findLA(smallDesignVocabs)))
+  # print("Small Context LA: {:.0%}".format(findLA(smallContextVocabs)))
+  # print("Small Neither LA: {:.0%}".format(findLA(smallNeitherVocabs)))
+
+  # print("Large Design LA: {:.0%}".format(findLA(largeDesignVocabs)))
+  # print("Large Context LA: {:.0%}".format(findLA(largeContextVocabs)))
+  # print("Large Neither LA: {:.0%}".format(findLA(largeNeitherVocabs)))
+
+  # # LA for all codebases
+  # (designVocabs, contextVocabs, neitherVocabs) = findVocabsLA(findRepoPaths(getPath("../data/ugrad-009-01/")), getPath("vocabularies/ugrad-009-01/"))
   # print("Design LA: {:.0%}".format(findLA(designVocabs)))
   # print("Context LA: {:.0%}".format(findLA(contextVocabs)))
   # print("Neither LA: {:.0%}".format(findLA(neitherVocabs)))
