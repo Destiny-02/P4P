@@ -1,16 +1,14 @@
 // @ts-check
-const javaParser = require("./languages/java");
-const javascriptParser = require("./languages/javascript");
-const pythonParser = require("./languages/python");
 
-/** @param {string} fileName */
-const getParserForLanguage = (fileName) =>
+import { JavaParser } from "./languages/java";
+import { JsTsParser } from "./languages/javascript";
+import { PythonParser } from "./languages/python";
+
+export const getParserForLanguage = (fileName: string) =>
   fileName.endsWith(".java")
-    ? javaParser
-    : fileName.endsWith(".js")
-    ? javascriptParser
+    ? JavaParser
+    : fileName.match(/.(j|t)sx?$/)
+    ? JsTsParser
     : fileName.endsWith(".py")
-    ? pythonParser
+    ? PythonParser
     : undefined;
-
-module.exports = { getParserForLanguage };

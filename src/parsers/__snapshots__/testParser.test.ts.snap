@@ -1,0 +1,340 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test case files parses Sample.java (java) 1`] = `
+{
+  "comments": [
+    "/**
+   * Sample is a class
+   */",
+    "// this is a comment",
+  ],
+  "identifiers": [
+    {
+      "isLibraryName": false,
+      "name": "parsers",
+      "type": "packageDeclaration",
+    },
+    {
+      "isLibraryName": false,
+      "name": "languages",
+      "type": "packageDeclaration",
+    },
+    {
+      "isLibraryName": false,
+      "name": "__tests__",
+      "type": "packageDeclaration",
+    },
+    {
+      "isLibraryName": false,
+      "name": "input",
+      "type": "packageDeclaration",
+    },
+    {
+      "isLibraryName": false,
+      "name": "Sample",
+      "type": "typeIdentifier",
+    },
+    {
+      "isLibraryName": false,
+      "name": "get_annual_income_deduction",
+      "type": "methodDeclarator",
+    },
+    {
+      "isLibraryName": false,
+      "name": "a",
+      "type": "variableDeclaratorId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "b",
+      "type": "variableDeclaratorId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "List",
+      "type": "unannClassType",
+    },
+    {
+      "isLibraryName": false,
+      "name": "employees",
+      "type": "variableDeclaratorId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "ArrayList",
+      "type": "classOrInterfaceTypeToInstantiate",
+    },
+    {
+      "isLibraryName": false,
+      "name": "a",
+      "type": "fqnOrRefTypePartCommon",
+    },
+    {
+      "isLibraryName": false,
+      "name": "b",
+      "type": "fqnOrRefTypePartCommon",
+    },
+    {
+      "isLibraryName": false,
+      "name": "paye_tax_bracket",
+      "type": "variableDeclaratorId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "String",
+      "type": "unannClassType",
+    },
+    {
+      "isLibraryName": false,
+      "name": "get_payslip_for_paye",
+      "type": "methodDeclarator",
+    },
+  ],
+  "imports": {
+    "named": {
+      "ArrayList": {
+        "originalName": "ArrayList",
+        "source": "java.util",
+      },
+      "List": {
+        "originalName": "List",
+        "source": "java.util",
+      },
+    },
+    "wildcard": [
+      "java.beans",
+    ],
+  },
+}
+`;
+
+exports[`test case files parses complex.py (python) 1`] = `
+{
+  "comments": [
+    "
+This is a block comment in the middle of nowhere
+
+it has a fake # inline comment within the block
+
+",
+    "block comment above func - this is not valid",
+    "block comment within func",
+    "# comment on the same line as the block end",
+  ],
+  "identifiers": [
+    {
+      "isLibraryName": false,
+      "name": "identifier1",
+      "type": "FunctionDeclaration.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "identifier3",
+      "type": "FunctionDeclaration.ownId",
+    },
+  ],
+  "imports": {
+    "named": {},
+    "wildcard": [],
+  },
+}
+`;
+
+exports[`test case files parses sample.js (javascript) 1`] = `
+{
+  "comments": [
+    " eslint-disable ",
+    " @ts-nocheck -- this is a sample file, not part of the sourcecode",
+    "*
+ * comments yay
+ * @param {number} a
+ * @param {number} b
+ ",
+    " an inline comment",
+  ],
+  "identifiers": [
+    {
+      "isLibraryName": false,
+      "name": "a",
+      "type": "FunctionDeclaration.argument",
+    },
+    {
+      "isLibraryName": false,
+      "name": "b",
+      "type": "FunctionDeclaration.argument",
+    },
+    {
+      "isLibraryName": false,
+      "name": "add",
+      "type": "FunctionDeclaration.ownId",
+    },
+  ],
+  "imports": {
+    "named": {
+      "defaultImport": {
+        "originalName": "default",
+        "source": "./someFile.js",
+      },
+      "defaultImport2": {
+        "originalName": "default",
+        "source": "./someFile",
+      },
+      "json": {
+        "originalName": "default",
+        "source": "./foo.json",
+      },
+      "named1": {
+        "originalName": "named1",
+        "source": "./someFile",
+      },
+      "named2": {
+        "originalName": "named2",
+        "source": "./someFile",
+      },
+      "named3": {
+        "originalName": "named3",
+        "source": "./someFile.ts",
+      },
+      "named5": {
+        "originalName": "named5",
+        "source": "./someFile",
+      },
+      "renamed4": {
+        "originalName": "named4",
+        "source": "./someFile.ts",
+      },
+      "renamed5": {
+        "originalName": "named5",
+        "source": "./someFile",
+      },
+      "renamedDefault": {
+        "originalName": "default",
+        "source": "./someFile",
+      },
+      "renamedDefault2": {
+        "originalName": "default",
+        "source": "./someFile",
+      },
+    },
+    "wildcard": [],
+  },
+}
+`;
+
+exports[`test case files parses sample.py (python) 1`] = `
+{
+  "comments": [
+    "
+Hiii
+",
+    "# inline commenttt",
+  ],
+  "identifiers": [
+    {
+      "isLibraryName": false,
+      "name": "x",
+      "type": "FunctionDeclaration.argument",
+    },
+    {
+      "isLibraryName": false,
+      "name": "y",
+      "type": "FunctionDeclaration.argument",
+    },
+    {
+      "isLibraryName": false,
+      "name": "subtract",
+      "type": "FunctionDeclaration.ownId",
+    },
+  ],
+  "imports": {
+    "named": {},
+    "wildcard": [],
+  },
+}
+`;
+
+exports[`test case files parses sample.ts (javascript) 1`] = `
+{
+  "comments": [
+    " eslint-disable ",
+    " @ts-nocheck -- this is a sample file, not part of the sourcecode",
+    " extra: TS only",
+    "* a comment  ",
+    " another comment",
+  ],
+  "identifiers": [],
+  "imports": {
+    "named": {
+      "Type1": {
+        "originalName": "Type1",
+        "source": "./someFile",
+      },
+      "Type2": {
+        "originalName": "Type2",
+        "source": "./someFile",
+      },
+      "Type3": {
+        "originalName": "Type3",
+        "source": "./someFile",
+      },
+      "defaultImport": {
+        "originalName": "default",
+        "source": "./someFile.js",
+      },
+      "defaultImport2": {
+        "originalName": "default",
+        "source": "./someFile",
+      },
+      "defaultWithType": {
+        "originalName": "default",
+        "source": "./someFile",
+      },
+      "defaultWithType2": {
+        "originalName": "default",
+        "source": "./someFile",
+      },
+      "json": {
+        "originalName": "default",
+        "source": "./foo.json",
+      },
+      "named1": {
+        "originalName": "named1",
+        "source": "./someFile",
+      },
+      "named2": {
+        "originalName": "named2",
+        "source": "./someFile",
+      },
+      "named3": {
+        "originalName": "named3",
+        "source": "./someFile.ts",
+      },
+      "named5": {
+        "originalName": "named5",
+        "source": "./someFile",
+      },
+      "named6": {
+        "originalName": "named6",
+        "source": "./someFile",
+      },
+      "renamed4": {
+        "originalName": "named4",
+        "source": "./someFile.ts",
+      },
+      "renamed5": {
+        "originalName": "named5",
+        "source": "./someFile",
+      },
+      "renamedDefault": {
+        "originalName": "default",
+        "source": "./someFile",
+      },
+      "renamedDefault2": {
+        "originalName": "default",
+        "source": "./someFile",
+      },
+    },
+    "wildcard": [],
+  },
+}
+`;

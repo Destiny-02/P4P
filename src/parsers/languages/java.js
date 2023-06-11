@@ -1,19 +1,21 @@
-const { promises: fs } = require("node:fs");
-const parser = require("java-parser");
+import { promises as fs } from "node:fs";
+import { parse, CstNode, IToken } from "java-parser";
+import { Parser } from "../Parser";
 
-/**
- * @param {import("java-parser").CstNode} node
- * @param {string} fallbackType
- * @param {import("./Parser").Parser.Results} output
- * @param {string[] | undefined} parents
- */
-function walkTree(node, fallbackType, output, parents = []) {
+function walkTree(
+  node: CstNode,
+  fallbackType: string,
+  output: Parser.Results,
+  parents: string[] = []
+) {
   const type = node.name || fallbackType;
   // console.log("found", type);
 
   // if this is an import, record the variable name that was imported
   if (type === "importDeclaration") {
-    const importPath = node.children.packageOrTypeName[0].children.Identifier;
+    const importPath: IToken[] =
+      // @ts-expect-error -- temp
+      node.children.packageOrTypeName[0].children.Identifier;
 
     const isWildcardImport = node.children.Star?.[0];
 
@@ -25,7 +27,7 @@ function walkTree(node, fallbackType, output, parents = []) {
       output.imports.wildcard.push(importPathString);
     } else {
       // normal import
-      const variableName = importPath.at(-1).image;
+      const variableName = importPath.at(-1)!.image;
       const importPathString = importPath
         .slice(0, -1)
         .map((identifier) => identifier.image)
@@ -59,7 +61,7 @@ function walkTree(node, fallbackType, output, parents = []) {
     if (parentType && parentType !== "packageOrTypeName") {
       output.identifiers.push({
         type: parentType,
-        name: node.image,
+        name: (<IToken>(<unknown>node)).image,
       });
     }
   }
@@ -71,17 +73,19 @@ function walkTree(node, fallbackType, output, parents = []) {
     for (const child of children) {
       // walk thru this child, and keep track of how far down the tree
       // we are by appending to the parents[] array.
-      walkTree(child, childType, output, [...parents, childType]);
+      walkTree(child as CstNode, childType, output, [...parents, childType]);
     }
   }
 }
 
-/** @type {import("./Parser").Parser} */
-const javaParser = {
-  language: "java",
-  async parse(fileName) {
+export class JavaParser extends Parser {
+  constructor() {
+    super("java");
+  }
+
+  override async internalParse(fileName: string) {
     const fileInput = await fs.readFile(fileName, "utf8");
-    const AST = parser.parse(fileInput);
+    const AST = parse(fileInput);
 
     const output = {
       imports: { named: {}, wildcard: [] },
@@ -92,7 +96,5 @@ const javaParser = {
     walkTree(AST, "root", output);
 
     return output;
-  },
-};
-
-module.exports = javaParser;
+  }
+}

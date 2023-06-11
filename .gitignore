@@ -6,6 +6,9 @@ to-categorise.csv
 to-determine.csv
 tool-results*.csv
 
+# parsers
+src/parsers/dist
+
 # temp
 parser-output.json
 debug-output.json

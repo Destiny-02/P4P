@@ -1,6 +1,6 @@
-const { join } = require("node:path");
-const { readdirSync, promises: fs } = require("node:fs");
-const { getParserForLanguage } = require("./getParserForLanguage");
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
+import { getParserForLanguage } from "./getParserForLanguage";
 
 const testCaseFolderPath = join(__dirname, "tests");
 const testCaseFileNames = readdirSync(testCaseFolderPath);
@@ -10,9 +10,11 @@ const testCaseFileNames = readdirSync(testCaseFolderPath);
 
 describe("test case files", () => {
   for (const fileName of testCaseFileNames) {
-    const parser = getParserForLanguage(fileName);
-    if (parser) {
+    const Parser = getParserForLanguage(fileName);
+    if (Parser) {
       // generate a test case for each file
+
+      const parser = new Parser();
 
       it(`parses ${fileName} (${parser.language})`, async () => {
         const pathToFile = join(testCaseFolderPath, fileName);

@@ -1,4 +1,10 @@
 {
+  // hide temp folders
+  "files.exclude": {
+    ".pytest_cache": true
+  },
+
+  // set up python linters
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },

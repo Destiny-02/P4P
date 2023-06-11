@@ -1,13 +1,9 @@
-const { promises: fs } = require("node:fs");
-const { execSync } = require("node:child_process");
-const filbert = require("filbert");
+import { promises as fs } from "node:fs";
+import { execSync } from "node:child_process";
+import filbert from "filbert";
+import { Parser } from "../Parser";
 
-/**
- * @param {unknown} node
- * @param {import("./Parser").Parser.Results} output
- * @param {unknown | undefined} parent
- */
-function walkTree(node, output, parent) {
+function walkTree(node: any, output: Parser.Results, parent: any | undefined) {
   const type = node.type;
   // console.log("found", type);
 
@@ -20,7 +16,7 @@ function walkTree(node, output, parent) {
   // check if this node is an identifier, if so, record it
   if (type === "Identifier") {
     output.identifiers.push({
-      type: parent?.type + "." + node.subType,
+      type: `${parent?.type}.${node.subType}`,
       name: node.name,
     });
   }
@@ -37,9 +33,9 @@ function walkTree(node, output, parent) {
     const childNodes = Array.isArray(node.params) ? node.params : [node.params];
 
     // add all childNodes, and add a subType
-    for (const node of childNodes) {
-      node.subType = "argument";
-      children.push(node);
+    for (const child of childNodes) {
+      child.subType = "argument";
+      children.push(child);
     }
   }
 
@@ -54,22 +50,25 @@ function walkTree(node, output, parent) {
   }
 }
 
-/** @type {import("./Parser").Parser} */
-const pythonParser = {
-  language: "python",
-  async parse(fileName) {
+export class PythonParser extends Parser {
+  constructor() {
+    super("python");
+  }
+
+  override async internalParse(fileName: string) {
     const fileInput = await fs.readFile(fileName, "utf8");
     const AST = filbert.parse(fileInput, {
       locations: true,
       ranges: true,
     });
 
-    const output = {
+    const output: Parser.Results = {
+      imports: { named: {}, wildcard: [] },
       comments: [],
       identifiers: [],
     };
 
-    walkTree(AST, output);
+    walkTree(AST, output, undefined);
 
     // now we need to invoke some python code to parse the inline comments
     const inlineComments = execSync(
@@ -83,7 +82,5 @@ const pythonParser = {
     output.comments.push(...inlineComments);
 
     return output;
-  },
-};
-
-module.exports = pythonParser;
+  }
+}

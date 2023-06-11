@@ -8,14 +8,15 @@ def invokeParser(absoluteFileNames: set[str], outputFilePath: str = "parser-outp
 
     returns `(identifiers: set, comments: set)`
     """
-    scriptPath = path.join(path.dirname(__file__), "../parsers/main")
+
+    scriptPath = path.join(path.dirname(__file__), "../parsers")
 
     cleanedPaths = [path.normpath(p).replace("/", "\\") for p in absoluteFileNames]
 
     joinedFileNames = " 📚 ".join(cleanedPaths)
 
     # invoke the nodejs script
-    system(f'node {scriptPath} "{joinedFileNames}" "{outputFilePath}"')
+    system(f'cd {scriptPath} && npm start -- "{joinedFileNames}"')
 
     # read the output from the script
     identifiers = set()

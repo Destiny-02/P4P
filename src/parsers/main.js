@@ -1,7 +1,7 @@
-// @ts-check
-const { promises: fs } = require("node:fs");
-const { join } = require("node:path");
-const { getParserForLanguage } = require("./getParserForLanguage");
+import { promises as fs } from "node:fs";
+import { join } from "node:path";
+import { Parser } from "./Parser";
+import { getParserForLanguage } from "./getParserForLanguage";
 
 async function main() {
   const fileNames = process.argv[2].split("📚").map((file) => file.trim());
@@ -17,14 +17,17 @@ async function main() {
 
   console.log(`\t Parsing ${fileNames.length} files...`);
 
-  /** @type {Record<string, import("./languages/Parser").Parser.Result>} */
-  const output = {};
+  const output: {
+    [fileName: string]: Parser.PostProcessedResults;
+  } = {};
   for (const fileName of fileNames) {
-    const parser = getParserForLanguage(fileName);
-    if (!parser) {
+    const LangParser = getParserForLanguage(fileName);
+    if (!LangParser) {
       console.log(`Skipping unintelligible file: ${fileName}`);
       continue;
     }
+
+    const parser = new LangParser();
 
     output[fileName] = await parser.parse(fileName);
   }

@@ -2,12 +2,13 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": false,
-    "noEmit": true,
+    "outDir": "dist",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "strict": true,
     "lib": ["esnext"]
   },
-  "include": ["**/*"]
+  "include": ["**/*"],
+  "exclude": ["dist"]
 }
