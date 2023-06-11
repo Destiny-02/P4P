@@ -42,6 +42,18 @@ exports[`test case files parses Sample.java (java) 1`] = `
       "type": "variableDeclaratorId",
     },
     {
+      "name": "List",
+      "type": "unannClassType",
+    },
+    {
+      "name": "employees",
+      "type": "variableDeclaratorId",
+    },
+    {
+      "name": "ArrayList",
+      "type": "classOrInterfaceTypeToInstantiate",
+    },
+    {
       "name": "a",
       "type": "fqnOrRefTypePartCommon",
     },
@@ -62,6 +74,21 @@ exports[`test case files parses Sample.java (java) 1`] = `
       "type": "methodDeclarator",
     },
   ],
+  "imports": {
+    "named": {
+      "ArrayList": {
+        "originalName": "ArrayList",
+        "source": "java.util",
+      },
+      "List": {
+        "originalName": "List",
+        "source": "java.util",
+      },
+    },
+    "wildcard": [
+      "java.beans",
+    ],
+  },
 }
 `;
 

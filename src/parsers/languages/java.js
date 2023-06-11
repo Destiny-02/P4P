@@ -11,6 +11,33 @@ function walkTree(node, fallbackType, output, parents = []) {
   const type = node.name || fallbackType;
   // console.log("found", type);
 
+  // if this is an import, record the variable name that was imported
+  if (type === "importDeclaration") {
+    const importPath = node.children.packageOrTypeName[0].children.Identifier;
+
+    const isWildcardImport = node.children.Star?.[0];
+
+    if (isWildcardImport) {
+      const importPathString = importPath
+        .map((identifier) => identifier.image)
+        .join(".");
+
+      output.imports.wildcard.push(importPathString);
+    } else {
+      // normal import
+      const variableName = importPath.at(-1).image;
+      const importPathString = importPath
+        .slice(0, -1)
+        .map((identifier) => identifier.image)
+        .join(".");
+
+      output.imports.named[variableName] = {
+        originalName: variableName, // java doesn't allow renaming
+        source: importPathString,
+      };
+    }
+  }
+
   // if this node has leading comments, record them
   if (node.leadingComments) {
     const comments = node.leadingComments.map((token) => token.image);
@@ -25,10 +52,16 @@ function walkTree(node, fallbackType, output, parents = []) {
 
   // if this node has an identifier, then record it
   if (type === "Identifier") {
-    output.identifiers.push({
-      type: parents.at(-2), // use the second last AST node as its type
-      name: node.image,
-    });
+    const parentType = parents.at(-2); // use the second last AST node as its type
+
+    // skip import statements, they're handled separately and it would misleading
+    // to include terms like "java" or "util" that purely constitute the import path.
+    if (parentType && parentType !== "packageOrTypeName") {
+      output.identifiers.push({
+        type: parentType,
+        name: node.image,
+      });
+    }
   }
 
   // now explore all the children of this node
@@ -51,6 +84,7 @@ const javaParser = {
     const AST = parser.parse(fileInput);
 
     const output = {
+      imports: { named: {}, wildcard: [] },
       comments: [],
       identifiers: [],
     };
