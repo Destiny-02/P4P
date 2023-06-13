@@ -1,4 +1,7 @@
+bd
+big
 br
+code
 df
 dps
 first
@@ -6,9 +9,16 @@ given
 head
 info
 last
+mode
 msg
 part
+plain
+put
+scale
 sign
 simpl
+slip
 stamp
 start
+take
+taxman
