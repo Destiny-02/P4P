@@ -7,6 +7,7 @@ categori
 code
 comp
 creat
+dcompareto
 dd
 detail
 determin
@@ -51,8 +52,10 @@ simpl
 slip
 stamp
 start
+state
 take
 taxman
 third
+ti
 top
 up
