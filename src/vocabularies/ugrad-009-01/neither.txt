@@ -13,6 +13,7 @@ correct
 creat
 dcompareto
 dd
+dec
 ded
 detail
 determin
@@ -50,6 +51,7 @@ ipf
 item
 job
 last
+lenient
 link
 mainloop
 messag
