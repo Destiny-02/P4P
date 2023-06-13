@@ -13,16 +13,20 @@ def txtToSet(filename):
   data = set()
   isFirst = True
 
-  with open(filename, 'r', newline='') as txtfile:
-    for line in txtfile:
-      # Remove the BOM from the first term
-      if isFirst:
-        line = line.strip('ï»¿')
-        isFirst = False
+  try:
+    with open(filename, 'r', newline='') as txtfile:
+      for line in txtfile:
+        # Remove the BOM from the first term
+        if isFirst:
+          line = line.strip('ï»¿')
+          isFirst = False
 
-      words = line.lower().split()
-      for word in words:
-        data.add(word)
+        words = line.lower().split()
+        for word in words:
+          data.add(word)
+  except FileNotFoundError:
+    return set()
+
   return data
 
 def setToTxt(data, filename):
@@ -102,6 +106,23 @@ def convertEquivalents(data: set, equivalents: dict) -> set:
     else:
       newData.add(word)
   return newData
+
+def setIntersectionStemmed(firstSet: set, secondSetStemmed: set) -> set:
+  """
+  Returns a set of terms that are in both the first and second set
+  The first set is not stemmed (normal English words)
+  The second set is stemmed
+  e.g. {"cats"} - {"cat"} = {}
+  """
+  firstSetStemmed = setToStemmedSet(firstSet)
+  stemmedIntersection = firstSetStemmed.intersection(secondSetStemmed)
+
+  returnSet = set()
+  for word in firstSet:
+    if stemTerm(word) in stemmedIntersection:
+      returnSet.add(word)
+  
+  return returnSet
 
 def setToStemmedSet(data: set) -> set:
   """
