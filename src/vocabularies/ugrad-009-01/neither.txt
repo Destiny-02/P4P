@@ -2,9 +2,14 @@ bd
 big
 br
 code
+comp
 df
+dp
 dps
+enter
+ex
 first
+fnfex
 given
 head
 info
@@ -14,7 +19,9 @@ msg
 part
 plain
 put
+result
 scale
+second
 sign
 simpl
 slip
@@ -22,3 +29,5 @@ stamp
 start
 take
 taxman
+third
+top

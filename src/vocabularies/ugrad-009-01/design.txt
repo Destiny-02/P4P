@@ -4,12 +4,14 @@ argum
 array
 bound
 buffer
+calc
 calcul
 case
 char
 charact
 close
 collect
+comma
 compar
 comput
 contain
@@ -21,6 +23,7 @@ decim
 digit
 display
 doubl
+empti
 end
 equal
 except
@@ -50,6 +53,7 @@ list
 load
 loader
 lower
+lowest
 main
 map
 math
@@ -61,6 +65,7 @@ order
 output
 overrid
 pars
+percentag
 previous
 print
 printf
@@ -79,6 +84,7 @@ size
 smallest
 sort
 sourc
+space
 split
 stack
 stream
@@ -88,7 +94,10 @@ system
 text
 total
 trace
+trim
 type
+unround
+updat
 util
 valu
 vector
