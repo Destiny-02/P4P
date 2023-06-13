@@ -1,9 +1,13 @@
 br
+df
 dps
 first
 given
+head
+info
 last
 msg
+part
 sign
 simpl
 stamp
