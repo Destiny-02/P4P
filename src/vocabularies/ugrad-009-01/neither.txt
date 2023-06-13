@@ -1,4 +1,5 @@
 access
+act
 bd
 big
 br
@@ -23,6 +24,7 @@ fnfex
 fourth
 fr
 fs
+full
 given
 head
 iie
@@ -40,6 +42,7 @@ natur
 net
 normal
 part
+pe
 plain
 put
 readi
