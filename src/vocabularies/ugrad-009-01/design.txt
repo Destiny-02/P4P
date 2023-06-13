@@ -87,6 +87,7 @@ processor
 read
 reader
 reformat
+remain
 remov
 replac
 return
@@ -101,11 +102,13 @@ sourc
 space
 split
 stack
+str
 stream
 string
 substr
 sum
 system
+temp
 test
 text
 total
