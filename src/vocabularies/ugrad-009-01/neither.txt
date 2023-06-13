@@ -12,6 +12,7 @@ code
 comp
 correct
 creat
+cs
 dcompareto
 dd
 dec
@@ -71,6 +72,7 @@ plain
 posit
 prep
 proc
+ps
 put
 readi
 rec
@@ -97,6 +99,7 @@ third
 ti
 top
 two
+tz
 up
 without
 zone
