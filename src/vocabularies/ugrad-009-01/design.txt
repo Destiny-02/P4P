@@ -1,4 +1,6 @@
+abstract
 add
+amount
 arg
 argum
 array
@@ -30,6 +32,7 @@ duplic
 empti
 end
 equal
+err
 error
 except
 exit
@@ -46,7 +49,9 @@ gener
 get
 half
 hash
+ignor
 index
+indic
 initialis
 input
 instanc
@@ -79,6 +84,7 @@ order
 output
 overrid
 pars
+pass
 path
 percentag
 previous
@@ -120,8 +126,10 @@ total
 trace
 trim
 type
+uid
 unround
 updat
 util
 valu
 vector
+version
