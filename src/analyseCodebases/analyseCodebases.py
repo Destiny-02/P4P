@@ -86,9 +86,12 @@ def checkTermWithVocabularies(term, vocab):
 
   return False
 
-def main(domainFolderName):
-  contextTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
-  designTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/design.txt"))
+def main(domainFolderName, vocabPath = None):
+  if vocabPath == None:
+    vocabPath = VOCAB_FOLDER + domainFolderName
+    
+  contextTerms = txtToSet(getPath(vocabPath + "/context.txt"))
+  designTerms = txtToSet(getPath(vocabPath + "/design.txt"))
 
   # To be used for stats
   allNumDesignTerms = []

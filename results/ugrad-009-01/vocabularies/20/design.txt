@@ -1,4 +1,5 @@
 abstract
+add
 amount
 arg
 argum
@@ -6,13 +7,15 @@ array
 boolean
 bound
 buffer
+build
 calc
 calcul
 case
 caught
 char
 charact
-checker
+check
+clear
 close
 collect
 comma
@@ -22,14 +25,18 @@ comput
 contain
 copi
 count
+current
 data
 databas
 decim
 digit
 display
+doubl
 duplic
 empti
+end
 equal
+err
 error
 except
 exist
@@ -45,6 +52,7 @@ format
 formatt
 found
 gener
+get
 half
 hash
 ignor
@@ -76,8 +84,10 @@ math
 method
 nearest
 negat
+new
 next
 null
+num
 number
 object
 old
@@ -93,7 +103,6 @@ pointer
 pos
 previous
 print
-printer
 printf
 println
 process
@@ -119,7 +128,6 @@ set
 size
 smallest
 sort
-sorter
 sourc
 space
 split
@@ -139,7 +147,7 @@ text
 token
 total
 trace
-tree
+tre
 trim
 type
 uid

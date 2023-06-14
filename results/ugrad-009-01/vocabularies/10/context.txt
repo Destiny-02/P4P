@@ -30,6 +30,7 @@ payment
 payrol
 payslip
 peopl
+per
 period
 person
 rate
