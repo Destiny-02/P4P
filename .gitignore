@@ -4,7 +4,7 @@ out
 __pycache__
 to-categorise.csv
 to-determine.csv
-tool-results.csv
+tool-results*.csv
 
 # temp
 parser-output.json

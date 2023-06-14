@@ -51,6 +51,11 @@ def setToSheet(data, sheetPath, append=False):
     for item in data:
         writer.writerow([item])
 
+def csvToSheet(csv, sheetPath):
+  deleteFileIfExists(sheetPath)
+  with open(sheetPath, 'w', encoding="utf-8") as csvfile:
+    csvfile.write(csv)
+
 def deleteFileIfExists(filePath):
   if path.exists(filePath):
     os.remove(filePath)

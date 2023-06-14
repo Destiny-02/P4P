@@ -64,5 +64,8 @@ The steps for doing so are as follows:
   - Note down how many lines each of the 3 vocabularies increased with each codebase.
   - Replace the results in `results/x/x-vocab-n.csv`
   - Update the workbook version
-- TODO calcTermFrequency
+- Term frequency
+  - Rerun the `calcTermFrequency` tool.
+  - Replace the results in `results/x/x-term-freq-y-n.csv` with the 2 tool output csvs.
+  - Update the workbook versions
 - TODO percentageOfVocab

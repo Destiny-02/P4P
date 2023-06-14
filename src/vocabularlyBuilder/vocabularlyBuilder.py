@@ -12,8 +12,8 @@ from helper.conversion import (
 from helper.io import findJavaFiles, setToSheet, deleteFileIfExists
 from os import path
 import csv
+from pathConstants import VOCAB_FOLDER
 
-VOCAB_FOLDER = "../vocabularies/"
 TO_CATEGORISE_FILE = "to-categorise.csv"
 TO_DETERMINE_FILE = "to-determine.csv"
 

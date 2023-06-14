@@ -15,9 +15,7 @@ from helper.stats import findLA
 from os import path
 import csv
 import re 
-
-VOCAB_FOLDER = "../vocabularies/"
-DATA_FOLDER = "../../data/"
+from pathConstants import DATA_FOLDER, VOCAB_FOLDER
 
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
@@ -59,9 +57,9 @@ def checkIdentifierWithVocabularies(identifier, vocab):
   """
   Checks if the identifier contains any terms from the vocabulary
   """
-  terms = splitIdentifier(identifier)
-
+  # Split the identifier into terms
   # Make sure terms are lowercase, stripped and non-empty
+  terms = splitIdentifier(identifier)
   terms = list(cleanSetOfTerms(terms))
 
   for term in terms:
