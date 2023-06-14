@@ -11,8 +11,7 @@ from helper.conversion import (
     txtToSetWithEquivalents,
     convertEquivalents,
     setToStemmedSet,
-    extractWordsFromSet,
-    cleanSetOfTerms,
+    stringsToProcessable
 )
 from helper.stats import findLA, getDVInSet, average
 from helper.io import saveJsonDebugFile, findRepoPaths, findJavaFiles
@@ -34,18 +33,9 @@ def main(pathToData):
 
         (identifiers, comments) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))
 
-        # Split identifiers and comments into terms
-        identifierTerms = splitIdentifiers(identifiers)
-        commentTerms = extractWordsFromSet(comments)
-
-        # "Clean" the terms
-        identifierTerms = cleanSetOfTerms(identifierTerms)
-        commentTerms = cleanSetOfTerms(commentTerms)
-        # Note: all terms should be single, lowercase, stripped, non-empty words at this point
-
-        # Stem terms
-        identifierTerms = setToStemmedSet(identifierTerms)
-        commentTerms = setToStemmedSet(commentTerms)
+        # Split, clean and stem the identifiers and comments into terms
+        identifierTerms = setToStemmedSet(stringsToProcessable(identifiers, set()))
+        commentTerms = setToStemmedSet(stringsToProcessable(comments, set()))
 
         # Convert equivalents
         identifierTerms = convertEquivalents(identifierTerms, equivalents)

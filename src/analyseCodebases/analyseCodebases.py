@@ -7,14 +7,12 @@ sys.path.insert(0, project_dir)
 
 from helper.invokeParser import invokeParser
 from helper.conversion import (
-	txtToSet, stemTerm, cleanSetOfTerms
+	txtToSet, setToStemmedSet, stringsToProcessable
 )
 from helper.io import findJavaFiles, findRepoPaths, deleteFileIfExists
-from helper.splitting import splitIdentifier
 from helper.stats import findLA
 from os import path
 import csv
-import re 
 from pathConstants import DATA_FOLDER, VOCAB_FOLDER
 
 def getPath(relativePath):
@@ -57,31 +55,11 @@ def checkIdentifierWithVocabularies(identifier, vocab):
   """
   Checks if the identifier contains any terms from the vocabulary
   """
-  # Split the identifier into terms
-  # Make sure terms are lowercase, stripped and non-empty
-  terms = splitIdentifier(identifier)
-  terms = list(cleanSetOfTerms(terms))
+  terms = setToStemmedSet(stringsToProcessable([identifier], set()))
 
   for term in terms:
-    if checkTermWithVocabularies(term, vocab):
+    if term in vocab:
       return True
-
-  return False
-
-def checkTermWithVocabularies(term, vocab):
-  """
-  Checks if the term is in the vocabulary
-  """
-  # Remove numbers if the term is not a number e.g. emp1 --> emp
-  if not term.isdigit():
-    term = re.sub(r'\d+', '', term)
-
-  # As our vocabularies are stemmed, we need to use the stemmed version of the term
-  stemmedTerm = stemTerm(term)
-
-  if stemmedTerm in vocab:
-    return True
-
   return False
 
 def main(domainFolderName, vocabPath = None):
@@ -127,7 +105,7 @@ def main(domainFolderName, vocabPath = None):
 
   return (allNumDesignTerms, allNumContextTerms, allNumNeitherTerms, allTotalTerms)
 
-def findVocabsLA(repoPaths, domainFolderName):
+def findVocabsForLA(repoPaths, domainFolderName):
   contextTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
   designTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/design.txt"))
 
@@ -147,19 +125,15 @@ def findVocabsLA(repoPaths, domainFolderName):
     context = set()
     neither = set()
 
-    for identifier in identifiers:
-      # Split the identifier into terms
-      # Make sure terms are lowercase, stripped and non-empty
-      terms = splitIdentifier(identifier)
-      terms = list(cleanSetOfTerms(terms))
-      
-      for term in terms:
-        if checkTermWithVocabularies(term, contextTerms):
-          context.add(term)
-        elif checkTermWithVocabularies(term, designTerms):
-          design.add(term)
-        else:
-          neither.add(term)
+    terms = setToStemmedSet(stringsToProcessable(identifiers, set()))
+    
+    for term in terms:
+      if term in contextTerms:
+        context.add(term)
+      elif term in designTerms:
+        design.add(term)
+      else:
+        neither.add(term)
 
     # Add this to the stats sets
     designVocabs.append(design)
@@ -180,8 +154,8 @@ if __name__ == "__main__":
   """
   # LA for small and large codebases
   # (smallRepoPaths, largeRepoPaths, threshold) = splitRepoPathsByNumIdentifiers(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")))
-  # (smallDesignVocabs, smallContextVocabs, smallNeitherVocabs) = findVocabsLA(smallRepoPaths, "ugrad-009-01")
-  # (largeDesignVocabs, largeContextVocabs, largeNeitherVocabs) = findVocabsLA(largeRepoPaths, "ugrad-009-01")
+  # (smallDesignVocabs, smallContextVocabs, smallNeitherVocabs) = findVocabsForLA(smallRepoPaths, "ugrad-009-01")
+  # (largeDesignVocabs, largeContextVocabs, largeNeitherVocabs) = findVocabsForLA(largeRepoPaths, "ugrad-009-01")
 
   # print("Median number of identifiers: {}".format(threshold))
 
@@ -194,7 +168,7 @@ if __name__ == "__main__":
   # print("Large Neither LA: {:.0%}".format(findLA(largeNeitherVocabs)))
 
   # # LA for all codebases
-  # (designVocabs, contextVocabs, neitherVocabs) = findVocabsLA(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")), "ugrad-009-01")
+  # (designVocabs, contextVocabs, neitherVocabs) = findVocabsForLA(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")), "ugrad-009-01")
   # print("Design LA: {:.0%}".format(findLA(designVocabs)))
   # print("Context LA: {:.0%}".format(findLA(contextVocabs)))
   # print("Neither LA: {:.0%}".format(findLA(neitherVocabs)))
