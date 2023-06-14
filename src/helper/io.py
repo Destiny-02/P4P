@@ -17,7 +17,6 @@ def saveJsonDebugFile(jsonObj: object, outputFilePath: str = getPath("../../debu
   with open(outputFilePath, 'w', encoding="utf-8") as file:
     file.write(json.dumps(jsonObj, indent=4))
 
-
 def findRepoPaths(pathToData):
   """
   Finds the paths to all the repos in the data folder
