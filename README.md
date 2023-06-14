@@ -18,7 +18,7 @@ The tools are located in:
 - `/src/analyseCodebases/`
 - `/src/machineLearningExperiment/`
 - `src/calcTermFrequency/`
-- `src/percentageOfVocab/`
+- `src/percentOfVocab/`
 
 Instructions for running the tools are in the `README.md` of the respective folder.
 
@@ -68,4 +68,7 @@ The steps for doing so are as follows:
   - Rerun the `calcTermFrequency` tool.
   - Replace the results in `results/x/x-term-freq-y-n.csv` with the 2 tool output csvs.
   - Update the workbook versions
-- TODO percentageOfVocab
+- Percent of vocabulary used
+  - Rerun the `percentOfVocab` tool.
+  - Replace the results in `results/x/x-term-percentVocab-y-n.csv` with the tool output csv.
+  - Update the workbook version

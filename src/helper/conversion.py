@@ -212,4 +212,11 @@ def stringsToProcessable(strings: set, excludeListStemmed: set) -> set:
   return terms
 
 def dictToCsv(myDict: dict[any, any]) -> str:
-    return "\n".join([f"{k},{v}" for (k, v) in myDict.items()])
+  lines = []
+  for k, v in myDict.items():
+    if isinstance(v, list):
+      v = ",".join(map(str, v))
+    else:
+      v = str(v)
+    lines.append(f"{k},{v}")
+  return "\n".join(lines)
