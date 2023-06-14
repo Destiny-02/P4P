@@ -14,12 +14,12 @@ This folder contains the `analyseCodebases.py` script, which can be used to meas
 
 ```python
 (designCounts, contextCounts, neitherCounts, totalCounts) = main("ugrad-009-01")
-  writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("ugrad-009-01-stats.csv"))
+  writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
 ```
 
 - Replace the argument in the call to `main` with the name of the folder containing the codebases and text files i.e. `your-domain-name` (referenced above).
-- (Optional) replace the argument in the call to `writeResultsToCsv` with your desired output csv file name.
 - Run the script with `python analyseCodebases.py`.
+- The results will be written to `tool-results.csv`.
 
 ## Find the lexical agreement of the codebases
 

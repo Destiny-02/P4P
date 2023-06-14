@@ -46,4 +46,4 @@ if __name__ == "__main__":
   We will measure this as the percentage of terms that are correctly classified.
   """
   (designPercentagesCorrect, contextPercentagesCorrect, neitherPercentagesCorrect, totalPercentagesCorrect) = main("../../results/ugrad-009-01/vocabularies/10/", "../../results/ugrad-009-01/vocabularies/20/", "ugrad-009-01")
-  writeResultsToCsv(designPercentagesCorrect, contextPercentagesCorrect, neitherPercentagesCorrect, totalPercentagesCorrect, getPath("ugrad-009-01-stats.csv"))
+  writeResultsToCsv(designPercentagesCorrect, contextPercentagesCorrect, neitherPercentagesCorrect, totalPercentagesCorrect, getPath("tool-results.csv"))

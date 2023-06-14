@@ -13,6 +13,5 @@ This folder contains the `machineLearningExperiment.py` script, which can be use
 - Replace the first argument in the call to `main` with the path to the vocabularies text files that were created using the smaller subset of codebases.
 - Replace the second argument in the call to `main` with the path to the vocabularies text files that were created using all the codebases.
 - Replace the third argument in the call to `main` with the name of the folder containing the codebases i.e. `your-domain-name` (referenced above).
-- (Optional) replace the argument in the call to `writeResultsToCsv` with your desired output csv file name.
 - Run the script with `python machineLearningExperiment.py`.
-- The accuracy percentages will be found in csv file name specified in the call to `writeResultsToCsv`.
+- The accuracy percentages will be written to `tool-results.csv`.

@@ -1,3 +1,10 @@
-Design LA: 63%
+Median number of identifiers: 137
+Small Design LA: 67%
+Small Context LA: 67%
+Small Neither LA: 37%
+Large Design LA: 62%
+Large Context LA: 64%
+Large Neither LA: 34%
+Design LA: 64%
 Context LA: 65%
-Neither LA: 44%
+Neither LA: 36%

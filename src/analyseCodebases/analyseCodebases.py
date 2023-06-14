@@ -174,8 +174,8 @@ if __name__ == "__main__":
   """
   Find the percentage of terms that are design, context or neither
   """
-  # (designCounts, contextCounts, neitherCounts, totalCounts) = main("ugrad-009-01")
-  # writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("ugrad-009-01-stats.csv"))
+  (designCounts, contextCounts, neitherCounts, totalCounts) = main("ugrad-009-01")
+  writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
 
   """
   Find the LA (takes a while to run)
