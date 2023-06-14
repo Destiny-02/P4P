@@ -1,16 +1,13 @@
 import json
-from os import path, system, getcwd
-from .splitting import splitIdentifier
+from os import path, system
 
-
-def invokeParser(absoluteFileNames: set[str]) -> tuple[set, set]:
+def invokeParser(absoluteFileNames: set[str], outputFilePath: str = "parser-output.json") -> tuple[set, set]:
     """
     invokes the NodeJS script, parses its output, and returns
     the result of all files merged together
 
     returns `(identifiers: set, comments: set)`
     """
-
     scriptPath = path.join(path.dirname(__file__), "../parsers/main")
 
     cleanedPaths = [path.normpath(p).replace("/", "\\") for p in absoluteFileNames]
@@ -18,11 +15,9 @@ def invokeParser(absoluteFileNames: set[str]) -> tuple[set, set]:
     joinedFileNames = " 📚 ".join(cleanedPaths)
 
     # invoke the nodejs script
-    system(f'node {scriptPath} "{joinedFileNames}"')
+    system(f'node {scriptPath} "{joinedFileNames}" "{outputFilePath}"')
 
     # read the output from the script
-    outputFilePath = path.join(getcwd(), "parser-output.json")
-
     identifiers = set()
     comments = set()
 

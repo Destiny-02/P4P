@@ -1,3 +1,10 @@
+import os
+import sys
+
+# To fix import errors
+project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, project_dir)
+
 from helper.invokeParser import invokeParser
 from helper.conversion import (
 	txtToSet, stemTerm, cleanSetOfTerms
@@ -9,12 +16,15 @@ from os import path
 import csv
 import re 
 
+VOCAB_FOLDER = "../vocabularies/"
+DATA_FOLDER = "../../data/"
+
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
 
-def writeResultsToCsv(designCounts, contextCounts, neitherCounts, csvName):
-  deleteFileIfExists(csvName)
-  with open(csvName, 'w', newline='') as file:
+def writeResultsToCsv(designCounts, contextCounts, neitherCounts, csvPath):
+  deleteFileIfExists(csvPath)
+  with open(csvPath, 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["Design", "Context", "Neither"])
     for i in range(len(designCounts)):
@@ -28,7 +38,7 @@ def splitRepoPathsByNumIdentifiers(repoPaths):
   # Get the number of identifiers for each repo
   numIdentifiers = []
   for repoPath in repoPaths:
-    (identifiers, comments) = invokeParser(findJavaFiles(repoPath))
+    (identifiers, _) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))
     numIdentifiers.append(len(identifiers))
 
   # Get the median number of identifiers
@@ -76,9 +86,12 @@ def checkTermWithVocabularies(term, vocab):
 
   return False
 
-def main(pathToData, pathToVocabularies):
-  contextTerms = txtToSet(getPath(pathToVocabularies + "/context.txt"))
-  designTerms = txtToSet(getPath(pathToVocabularies + "/design.txt"))
+def main(domainFolderName, vocabPath = None):
+  if vocabPath == None:
+    vocabPath = VOCAB_FOLDER + domainFolderName
+    
+  contextTerms = txtToSet(getPath(vocabPath + "/context.txt"))
+  designTerms = txtToSet(getPath(vocabPath + "/design.txt"))
 
   # To be used for stats
   allNumDesignTerms = []
@@ -86,11 +99,11 @@ def main(pathToData, pathToVocabularies):
   allNumNeitherTerms = []
   allTotalTerms = []
 
-  for repoPath in findRepoPaths(pathToData):
+  for repoPath in findRepoPaths(getPath(DATA_FOLDER + domainFolderName)):
     print(repoPath)
           
     # Parse the identifiers
-    (identifiers, comments) = invokeParser(findJavaFiles(repoPath))
+    (identifiers, _) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))
           
     # Count the number of design, context and neither terms in the identifiers
     # An identifier qualifies as design or context if it contains at least one design or context term 
@@ -116,9 +129,9 @@ def main(pathToData, pathToVocabularies):
 
   return (allNumDesignTerms, allNumContextTerms, allNumNeitherTerms, allTotalTerms)
 
-def findVocabsLA(repoPaths, pathToVocabularies):
-  contextTerms = txtToSet(getPath(pathToVocabularies + "/context.txt"))
-  designTerms = txtToSet(getPath(pathToVocabularies + "/design.txt"))
+def findVocabsLA(repoPaths, domainFolderName):
+  contextTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
+  designTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/design.txt"))
 
   # To be used for stats
   designVocabs = []
@@ -129,7 +142,7 @@ def findVocabsLA(repoPaths, pathToVocabularies):
     print(repoPath)
           
     # Parse the identifiers
-    (identifiers, comments) = invokeParser(findJavaFiles(repoPath))
+    (identifiers, _) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))
           
     # Build up the context, design (and neither) vocabularies from the terms in the identifiers
     design = set()
@@ -159,19 +172,20 @@ def findVocabsLA(repoPaths, pathToVocabularies):
 
 if __name__ == "__main__":
   """
-  Get stats for the percentage of terms that are design, context or neither
+  Find the percentage of terms that are design, context or neither
   """
-  # (designCounts, contextCounts, neitherCounts, totalCounts) = main(getPath("../data/ugrad-009-01/"), getPath("vocabularies/ugrad-009-01/"))
-  # writeResultsToCsv(designCounts, contextCounts, neitherCounts, "ugrad-009-01-stats.csv")
+  (designCounts, contextCounts, neitherCounts, totalCounts) = main("ugrad-009-01")
+  writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
 
   """
   Find the LA (takes a while to run)
   """
-  # # LA for small and large codebases
-  # (smallRepoPaths, largeRepoPaths, threshold) = splitRepoPathsByNumIdentifiers(findRepoPaths(getPath("../data/ugrad-009-01/")))
+  # LA for small and large codebases
+  # (smallRepoPaths, largeRepoPaths, threshold) = splitRepoPathsByNumIdentifiers(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")))
+  # (smallDesignVocabs, smallContextVocabs, smallNeitherVocabs) = findVocabsLA(smallRepoPaths, "ugrad-009-01")
+  # (largeDesignVocabs, largeContextVocabs, largeNeitherVocabs) = findVocabsLA(largeRepoPaths, "ugrad-009-01")
+
   # print("Median number of identifiers: {}".format(threshold))
-  # (smallDesignVocabs, smallContextVocabs, smallNeitherVocabs) = findVocabsLA(smallRepoPaths, getPath("vocabularies/ugrad-009-01/"))
-  # (largeDesignVocabs, largeContextVocabs, largeNeitherVocabs) = findVocabsLA(largeRepoPaths, getPath("vocabularies/ugrad-009-01/"))
 
   # print("Small Design LA: {:.0%}".format(findLA(smallDesignVocabs)))
   # print("Small Context LA: {:.0%}".format(findLA(smallContextVocabs)))
@@ -182,7 +196,7 @@ if __name__ == "__main__":
   # print("Large Neither LA: {:.0%}".format(findLA(largeNeitherVocabs)))
 
   # # LA for all codebases
-  # (designVocabs, contextVocabs, neitherVocabs) = findVocabsLA(findRepoPaths(getPath("../data/ugrad-009-01/")), getPath("vocabularies/ugrad-009-01/"))
+  # (designVocabs, contextVocabs, neitherVocabs) = findVocabsLA(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")), "ugrad-009-01")
   # print("Design LA: {:.0%}".format(findLA(designVocabs)))
   # print("Context LA: {:.0%}".format(findLA(contextVocabs)))
   # print("Neither LA: {:.0%}".format(findLA(neitherVocabs)))

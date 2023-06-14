@@ -1,3 +1,4 @@
+add
 arg
 argum
 array
@@ -8,6 +9,7 @@ calcul
 case
 char
 charact
+check
 close
 collect
 comma
@@ -16,12 +18,15 @@ comput
 contain
 copi
 count
+current
 data
 databas
 decim
 digit
 display
+doubl
 empti
+end
 equal
 error
 except
@@ -36,6 +41,7 @@ format
 formatt
 found
 gener
+get
 half
 hash
 index
@@ -62,7 +68,9 @@ map
 match
 math
 negat
+new
 next
+num
 number
 object
 order
@@ -72,7 +80,6 @@ pars
 percentag
 previous
 print
-printer
 printf
 println
 process
@@ -106,7 +113,6 @@ test
 text
 total
 trace
-tree
 trim
 type
 unround

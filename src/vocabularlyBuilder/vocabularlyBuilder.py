@@ -1,3 +1,10 @@
+import os
+import sys
+
+# To fix import errors
+project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, project_dir)
+
 from helper.invokeParser import invokeParser
 from helper.conversion import (
 	txtToSet, stemTerm, setToTxtNoDuplicates, stringsToProcessable, setIntersectionStemmed, setToStemmedSet
@@ -5,6 +12,10 @@ from helper.conversion import (
 from helper.io import findJavaFiles, setToSheet, deleteFileIfExists
 from os import path
 import csv
+
+VOCAB_FOLDER = "../vocabularies/"
+TO_CATEGORISE_FILE = "to-categorise.csv"
+TO_DETERMINE_FILE = "to-determine.csv"
 
 def saveTermsToBeCategorised(pathToDataList, domainFolderName):
 	"""
@@ -16,11 +27,11 @@ def saveTermsToBeCategorised(pathToDataList, domainFolderName):
 	# Clear the to-categorise.csv spreadsheet if we are processing multiple codebases because we will be appending to it
 	multipleCodebases = len(pathToDataList) > 1
 	if multipleCodebases:
-		deleteFileIfExists("to-categorise.csv")
+		deleteFileIfExists(getPath(TO_CATEGORISE_FILE))
 
 	for pathToData in pathToDataList:
 		# Parse the identifiers
-		(identifiers, _) = invokeParser(findJavaFiles(pathToData))
+		(identifiers, _) = invokeParser(findJavaFiles(pathToData), getPath("parser-output.json"))
 
 		# Split the identifiers into standardised terms suitable for a human to categorise manually
 		terms = stringsToProcessable(identifiers, combinedTerms)
@@ -33,12 +44,12 @@ def saveTermsToBeCategorised(pathToDataList, domainFolderName):
 		knownContextTerms = setIntersectionStemmed(terms, contextTermsAnswers)
 		knownDesignTerms = setIntersectionStemmed(terms, designTermsAnswers)
 		knownNeitherTerms = setIntersectionStemmed(terms, neitherTermsAnswers)
-		setToTxtNoDuplicates(setToStemmedSet(knownContextTerms), getPath("vocabularies/" + domainFolderName + "/context.txt"))
-		setToTxtNoDuplicates(setToStemmedSet(knownDesignTerms), getPath("vocabularies/" + domainFolderName + "/design.txt"))
-		setToTxtNoDuplicates(setToStemmedSet(knownNeitherTerms), getPath("vocabularies/" + domainFolderName + "/neither.txt"))
+		setToTxtNoDuplicates(setToStemmedSet(knownContextTerms), getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
+		setToTxtNoDuplicates(setToStemmedSet(knownDesignTerms), getPath(VOCAB_FOLDER + domainFolderName + "/design.txt"))
+		setToTxtNoDuplicates(setToStemmedSet(knownNeitherTerms), getPath(VOCAB_FOLDER + domainFolderName + "/neither.txt"))
 
 		# Write the terms to be categorised to a spreadsheet
-		setToSheet(termsAfterAnswers, "to-categorise.csv", append=multipleCodebases)
+		setToSheet(termsAfterAnswers, getPath(TO_CATEGORISE_FILE), append=multipleCodebases)
 		print(str(len(termsAfterAnswers)) + " terms to categorise in " + pathToData)
 
 def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
@@ -64,10 +75,10 @@ def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
 	# The terms we can automatically determine are the terms that are in context-answer.txt and in the domain description
 	# Write the terms to context.txt
 	knownTerms = setIntersectionStemmed(terms, contextTermsAnswers)
-	setToTxtNoDuplicates(setToStemmedSet(knownTerms), getPath("vocabularies/" + domainFolderName + "/context.txt"))
+	setToTxtNoDuplicates(setToStemmedSet(knownTerms), getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
 
 	# Write the terms to be determined to a spreadsheet
-	setToSheet(termsAfterAnswers, "to-determine.csv")
+	setToSheet(termsAfterAnswers, getPath(TO_DETERMINE_FILE))
 
 def saveCategoriseSheetToTxt(domainFolderName):
 	"""
@@ -79,7 +90,7 @@ def saveCategoriseSheetToTxt(domainFolderName):
 	nSet = set()
 	undefinedSet = set()
 
-	with open('to-categorise.csv', 'r') as file:
+	with open(getPath(TO_CATEGORISE_FILE), 'r') as file:
 		reader = csv.reader(file)
 		for row in reader:
 			word, letter = row
@@ -92,9 +103,9 @@ def saveCategoriseSheetToTxt(domainFolderName):
 			else:
 				undefinedSet.add(word)
 
-	setToTxtNoDuplicates(dSet, getPath("vocabularies/" + domainFolderName + "/design.txt"))
-	setToTxtNoDuplicates(cSet, getPath("vocabularies/" + domainFolderName + "/context.txt"))
-	setToTxtNoDuplicates(nSet, getPath("vocabularies/" + domainFolderName + "/neither.txt"))
+	setToTxtNoDuplicates(dSet, getPath(VOCAB_FOLDER + domainFolderName + "/design.txt"))
+	setToTxtNoDuplicates(cSet, getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
+	setToTxtNoDuplicates(nSet, getPath(VOCAB_FOLDER + domainFolderName + "/neither.txt"))
 
 	if (len(undefinedSet) > 0):
 		print("The following terms have not been categorised:")
@@ -107,27 +118,27 @@ def saveDomainSheetToTxt(domainFolderName):
 	"""
 	dSet = set()
 
-	with open('to-determine.csv', 'r') as file:
+	with open(getPath(TO_DETERMINE_FILE), 'r') as file:
 		reader = csv.reader(file)
 		for row in reader:
 			word, letter = row
 			if letter == 'c':
 				dSet.add(stemTerm(word))
 
-	setToTxtNoDuplicates(dSet, getPath("vocabularies/" + domainFolderName + "/context.txt"))
+	setToTxtNoDuplicates(dSet, getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
 
 def getVocabularies(domainFolderName, includeAnswers=False):
-	contextTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/context.txt"))
-	designTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/design.txt"))
-	neitherTerms = txtToSet(getPath("vocabularies/" + domainFolderName + "/neither.txt"))
+	contextTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
+	designTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/design.txt"))
+	neitherTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/neither.txt"))
 	combinedTerms = contextTerms.union(designTerms).union(neitherTerms)
 
 	if not includeAnswers:
 		return (contextTerms, designTerms, neitherTerms, combinedTerms)
 
-	contextTermsAnswers = txtToSet(getPath("vocabularies/" + domainFolderName + "/context-answers.txt"))
-	designTermsAnswers = txtToSet(getPath("vocabularies/" + domainFolderName + "/design-answers.txt"))
-	neitherTermsAnswers = txtToSet(getPath("vocabularies/" + domainFolderName + "/neither-answers.txt"))
+	contextTermsAnswers = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/context-answers.txt"))
+	designTermsAnswers = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/design-answers.txt"))
+	neitherTermsAnswers = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/neither-answers.txt"))
 	combinedTermsAnswers = contextTermsAnswers.union(designTermsAnswers).union(neitherTermsAnswers)
 	
 	return (contextTerms, designTerms, neitherTerms, combinedTerms, contextTermsAnswers, designTermsAnswers, neitherTermsAnswers, combinedTermsAnswers)
@@ -136,42 +147,14 @@ def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
 
 if __name__ == "__main__":
-	"""
-	Note: recommend extracting domain terms from the domain description first, 
-	then categorising the terms from the identifiers in the data folder.
-	"""
-
-	"""
-	Instructions for extracting domain terms from a piece of text: 
-	1. Run this file with only the call to saveTermsToBeDetermined uncommented
-	2. Open the to-determine.csv spreadsheet
-	3. For each term, decide whether it is a domain term (from the context schema)
-	4. Enter the letter d in the second column of the spreadsheet for these terms
-	5. Save the spreadsheet
-	6. Run this file with only the call to saveDomainSheetToTxt uncommented
-	7. context.txt will be updated with the terms you classified as domain terms
-	"""
-	# saveTermsToBeDetermined(getPath("../data/ugrad-009-01/domain-description.txt"), "ugrad-009-01")
+	# Build the context terms from a piece of descriptive text
+	saveTermsToBeDetermined(getPath("../../data/ugrad-009-01/domain-description.txt"), "ugrad-009-01")
 	# saveDomainSheetToTxt("ugrad-009-01")
 
-	"""
-	Instructions for categorising terms: 
-	1. Pick a folder in the data folder that you want to categorise the identifiers for
-	2. Change the path in the call to saveTermsToBeCategorised to the path of the folder you picked
-	3. Run this file with only the call to saveTermsToBeCategorised uncommented
-	4. Open the to-categorise.csv spreadsheet
-	5. For each term, decide whether it is a context term, a design term or neither
-	6. Enter the letter c, d or n in the second column of the spreadsheet
-	7. Save the spreadsheet
-	9. Run this file with only the call to saveCategoriseSheetToTxt uncommented
-	10. context.txt, design.txt and neither.txt will be updated with the terms you categorised
-	"""
-	# saveTermsToBeCategorised([getPath("../data/ugrad-009-01/design1000")], "ugrad-009-01")
+	# Categorising terms from identifiers in a codebase
+	# saveTermsToBeCategorised([getPath("../../data/ugrad-009-01/design1000")], "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")
 
-	"""
-	Instructions for categorising terms in multiple codebases at once:
-	1. Similar process to above, but use the path of the folder containing all the codebases
-	"""
+	# Categorising terms from identifiers in multiple codebases at once
 	# saveTermsToBeCategorised(findRepoPaths(getPath("../data/ugrad-009-01/")), "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")
