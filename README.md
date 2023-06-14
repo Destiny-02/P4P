@@ -9,7 +9,32 @@
 
 `python <filename.py>`
 
+# Run The Tools
+
+The tools are located in:
+
+- `/src/paper3Questions/`
+- `/src/vocabularyBuilder/`
+- `/src/analyseCodebases/`
+- `/src/machineLearningExperiment/`
+- `src/calcTermFrequency/`
+- `src/percentageOfVocab/`
+
+Instructions for running the tools are in the `README.md` of the respective folder.
+
 # Run Tests
 
 `pip install pytest` # if not already installed
 `pytest`
+
+# Other folders
+
+- `data/` contains the codebases
+- `results/` contains the (manually) saved results of the tools
+
+# Updating the tool
+
+When updating the tool, the vocabularies and results in the `results/` folder need to be updated.
+The steps for doing so are as follows:
+
+- TODO
