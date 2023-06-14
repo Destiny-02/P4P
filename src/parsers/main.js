@@ -5,6 +5,8 @@ const { getParserForLanguage } = require("./getParserForLanguage");
 
 async function main() {
   const fileNames = process.argv[2].split("📚").map((file) => file.trim());
+  let outputPath = join(process.cwd(), "parser-output.json");
+  if (process.argv.length >= 3) outputPath = process.argv[3];
 
   if (!fileNames?.length) {
     console.error(
@@ -27,7 +29,6 @@ async function main() {
     output[fileName] = await parser.parse(fileName);
   }
 
-  const outputPath = join(process.cwd(), "parser-output.json");
   await fs.writeFile(outputPath, JSON.stringify(output, null, 2));
   // console.log("Saved to", outputPath);
 }

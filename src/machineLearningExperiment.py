@@ -1,5 +1,5 @@
 from os import path
-from analyseCodebases import main as analyseCodebases
+from analyseCodebases.analyseCodebases import main as analyseCodebases
 from helper.io import deleteFileIfExists
 import csv
 
