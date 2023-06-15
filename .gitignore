@@ -9,6 +9,3 @@ tool-results*.csv
 # temp
 parser-output.json
 debug-output.json
-
-# Uncomment this when you want to commit more repos to GitHub but I think it's better to have these locally
-data
