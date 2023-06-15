@@ -5,6 +5,7 @@ calendar
 cash
 cent
 compani
+currenc
 date
 day
 deduct
