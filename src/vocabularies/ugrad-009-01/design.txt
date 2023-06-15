@@ -2,9 +2,13 @@ add
 arg
 array
 buffer
+calcul
+case
 collect
 compar
 comput
+contain
+data
 decim
 doubl
 end
@@ -13,6 +17,7 @@ except
 file
 filenam
 format
+formatt
 found
 get
 input
@@ -24,7 +29,9 @@ java
 length
 line
 list
+lower
 main
+math
 new
 number
 output
@@ -34,7 +41,13 @@ println
 process
 read
 reader
+reformat
+remov
+replac
+round
+runtim
 set
+size
 sort
 split
 stack
@@ -45,3 +58,4 @@ text
 total
 trace
 util
+valu
