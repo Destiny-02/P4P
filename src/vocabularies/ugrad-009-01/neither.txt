@@ -7,13 +7,12 @@ br
 burd
 cal
 categori
-cess
+ceas
 code
 comp
 correct
 creat
 cs
-dcompareto
 dd
 dec
 ded
@@ -46,7 +45,6 @@ full
 given
 head
 ide
-iie
 inc
 info
 inform
@@ -62,12 +60,14 @@ mode
 msg
 natur
 net
+nfe
 normal
 npe
 one
 option
 part
 pe
+place
 plain
 posit
 prep
@@ -96,6 +96,7 @@ store
 take
 taxman
 third
+three
 ti
 top
 two

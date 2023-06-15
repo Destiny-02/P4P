@@ -68,3 +68,4 @@ saveTermsToBeCategorised(findRepoPaths(getPath("../data/ugrad-009-01/")), "ugrad
 
 - Similar process to the above, except include the previous categorisations in `context-answers.txt`, `design-answers.txt` and `neither-answers.txt` in the `../vocabularies/your-domain-name"` directory.
 - The call to `saveTermsToBeCategorised` will automatically add the terms that are both in the codebase and in the answers to the vocabulary text files.
+- Check the last line of the console output to very whether you need to further categorise any terms.

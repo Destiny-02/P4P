@@ -15,6 +15,7 @@ caught
 char
 charact
 check
+checker
 clear
 close
 collect
@@ -66,6 +67,7 @@ int
 integ
 invalid
 io
+ioe
 iter
 java
 key
@@ -99,11 +101,10 @@ pars
 pass
 path
 percentag
-pointer
+point
 pos
-previous
 print
-printf
+printer
 println
 process
 processor
@@ -128,6 +129,7 @@ set
 size
 smallest
 sort
+sorter
 sourc
 space
 split
@@ -147,7 +149,7 @@ text
 token
 total
 trace
-tre
+tree
 trim
 type
 uid

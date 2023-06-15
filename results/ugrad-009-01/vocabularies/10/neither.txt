@@ -7,7 +7,6 @@ categori
 code
 comp
 creat
-dcompareto
 dd
 detail
 determin
@@ -25,7 +24,6 @@ fr
 fs
 given
 head
-iie
 inc
 info
 inform
@@ -38,7 +36,6 @@ mode
 msg
 natur
 net
-normal
 part
 plain
 put
@@ -56,6 +53,7 @@ state
 take
 taxman
 third
+three
 ti
 top
 up
