@@ -32,6 +32,7 @@ error
 except
 exit
 failur
+field
 file
 filenam
 find
@@ -39,6 +40,7 @@ float
 format
 formatt
 found
+gener
 get
 half
 hash
@@ -65,6 +67,7 @@ main
 map
 match
 math
+negat
 new
 next
 num
@@ -78,11 +81,13 @@ percentag
 print
 println
 process
+processor
 read
 reader
 reformat
 remov
 replac
+return
 round
 runtim
 scanner
