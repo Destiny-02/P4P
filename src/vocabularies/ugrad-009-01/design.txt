@@ -15,6 +15,7 @@ char
 charact
 check
 checker
+clear
 close
 collect
 comma
@@ -93,6 +94,7 @@ pars
 pass
 path
 percentag
+point
 print
 printer
 println
@@ -128,6 +130,7 @@ system
 temp
 test
 text
+token
 total
 trace
 tree
