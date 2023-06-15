@@ -1,6 +1,7 @@
 import re
 
 from .splitting import splitIdentifier, splitIdentifiers
+from .english import fixSpelling
 import json
 from porter2stemmer import Porter2Stemmer
 import nltk
@@ -168,11 +169,16 @@ def cleanSetOfTerms(data: set) -> set:
   """
   newData = set()
   for term in data:
-    term = re.sub(r'[^a-zA-ZÀ-ÖØ-öø-ÿ\s]', '', term) # Remove all non-letter characters
-    cleanedTerm = term.lower().strip()
+    cleanedTerm = convertToLowercase(term)
     if cleanedTerm != "":
       newData.add(cleanedTerm)
   return newData
+
+def convertToLowercase(term: str) -> str:
+  """
+  Converts a term to stripped lowercase
+  """
+  return re.sub(r'[^a-zA-ZÀ-ÖØ-öø-ÿ]', '', term).lower().strip()
 
 def removeSeenStemmed(data: set, seen: set) -> set:
   """
@@ -204,7 +210,10 @@ def stringsToProcessable(strings: set, excludeListStemmed: set) -> set:
 
   # Remove stop words
   stopWords = set(nltk.corpus.stopwords.words('english'))
-  terms = [term for term in terms if term not in stopWords]
+  terms = {term for term in terms if term not in stopWords}
+
+  # Fix spelling
+  terms = {fixSpelling(term) for term in terms}
 
   # Remove the terms we save seen i.e. the stemmed version is in the combined set
   terms = removeSeenStemmed(terms, excludeListStemmed)

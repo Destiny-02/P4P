@@ -13,6 +13,7 @@ unidecode = "*"
 jupyter = "*"
 pandas = "*"
 plotly = "*"
+pyenchant = "*"
 
 [dev-packages]
 
