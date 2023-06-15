@@ -62,11 +62,14 @@ net
 nfe
 normal
 npe
+one
+option
 part
 pe
 place
 plain
 posit
+prep
 proc
 put
 readi
