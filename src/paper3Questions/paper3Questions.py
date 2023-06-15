@@ -14,7 +14,7 @@ from helper.conversion import (
     stringsToProcessable
 )
 from helper.stats import findLA, getDVInSet, average
-from helper.io import saveJsonDebugFile, findRepoPaths, findJavaFiles
+from helper.io import saveJsonFile, findRepoPaths, findJavaFiles
 from helper.splitting import splitIdentifiers
 
 
@@ -59,7 +59,7 @@ def main(pathToData):
 
     printStats(inEither, inOnlyIdentifiers, inOnlyComments, findLA(vocabs))
 
-    saveJsonDebugFile(debugData, getPath("debug-output.json"))
+    saveJsonFile(debugData, getPath("debug-output.json"))
 
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)

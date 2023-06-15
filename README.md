@@ -72,3 +72,20 @@ The steps for doing so are as follows:
   - Rerun the `percentOfVocab` tool.
   - Replace the results in `results/x/x-term-percentVocab-y-n.csv` with the tool output csv.
   - Update the workbook version
+
+# Speeding up the tool
+
+If you find it is taking a long time to run, it is because it is parsing a lot of codebases, transforming a lot of strings and looking up words in large dictionaries.
+
+If you are running the tool multiple times, or are running multiple tools, you can speed up the tool by using the cached results.
+
+To do this:
+
+- Ensure that you have run the tool at least once and that the cached terms have been stored in a json file
+- Comment out the following line
+
+```python
+saveAllRepoTermsToCache(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")), CACHED_TERMS)
+```
+
+This currently works for `calcTermFrequency` and `percentOfVocab`.

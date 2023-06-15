@@ -6,19 +6,17 @@ project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_dir)
 
 from os import path
-from helper.conversion import dictToCsv, stringsToProcessable, setToStemmedSet, txtToSet
-from helper.io import findJavaFiles, csvToSheet, findRepoPaths
-from helper.invokeParser import invokeParser
-from pathConstants import DATA_FOLDER, VOCAB_FOLDER
+from helper.conversion import dictToCsv, txtToSet
+from helper.io import csvToSheet, saveAllRepoTermsToCache, getAllRepoTermsFromCache, findRepoPaths
 
-def main(repoPaths: str, vocabFile: str) -> dict[str, list]:
+from pathConstants import DATA_FOLDER, VOCAB_FOLDER, CACHED_TERMS
+
+def main(allTerms: dict[str, list[str]], vocabFile: str) -> dict[str, list]:
     output = {"codebase": [], "vocabType": [], "percent": []}
 
-    for repoPath in repoPaths:
-        (identifiers, _) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))
+    for repoPath in allTerms.keys():
         vocabTerms = txtToSet(getPath(VOCAB_FOLDER + vocabFile))
-        
-        terms: set[str] = setToStemmedSet(stringsToProcessable(identifiers, set()))
+        terms = allTerms[repoPath]
 
         countSeen = 0
         for v in vocabTerms:
@@ -40,8 +38,11 @@ def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
 
 if __name__ == "__main__":
-    percentDict = main(findRepoPaths((getPath(DATA_FOLDER + "ugrad-009-01"))), "ugrad-009-01/context.txt")
+    saveAllRepoTermsToCache(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")), CACHED_TERMS)
+    allTerms = getAllRepoTermsFromCache(CACHED_TERMS)
+    
+    percentDict = main(allTerms, "ugrad-009-01/context.txt")
     csvToSheet(dictToCsv(percentDict), getPath("tool-results.csv"))
 
-    # percentDict = main(findRepoPaths((getPath(DATA_FOLDER + "ugrad-009-01"))), "ugrad-009-01/design.txt")
-    # csvToSheet(dictToCsv(percentDict), getPath("tool-results-2.csv"))
+    percentDict = main(allTerms, "ugrad-009-01/design.txt")
+    csvToSheet(dictToCsv(percentDict), getPath("tool-results-2.csv"))

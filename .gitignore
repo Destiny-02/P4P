@@ -9,6 +9,8 @@ tool-results*.csv
 # temp
 parser-output.json
 debug-output.json
+cached-terms.json
 
-# my experimental scripts
+# my experimental files and folders
 donotcommit
+data2

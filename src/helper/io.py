@@ -2,6 +2,8 @@ import os.path as path
 import os
 import json
 import csv
+from helper.invokeParser import invokeParser
+from helper.conversion import setToStemmedSet, stringsToProcessable
 
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
@@ -13,7 +15,7 @@ def cleanOutFolder(outPath):
     if path.isfile(filePath):
       os.remove(filePath)
 
-def saveJsonDebugFile(jsonObj: object, outputFilePath: str = getPath("../../debug-output.json")):
+def saveJsonFile(jsonObj: object, outputFilePath: str):
   with open(outputFilePath, 'w', encoding="utf-8") as file:
     file.write(json.dumps(jsonObj, indent=4))
 
@@ -69,3 +71,21 @@ def readSheet(sheetName):
     for row in reader:
       data.add(row[0])
   return data
+
+def saveAllRepoTermsToCache(repoPaths: list[str], cachedFilename: str):
+  """
+  Saves all the terms in the repo to a json file
+  """
+  allTerms: dict[str, list[str]] = {}
+  for repoPath in repoPaths:
+    (identifiers, _) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))        
+    terms = setToStemmedSet(stringsToProcessable(identifiers, set()))
+    allTerms[repoPath] = list(terms)
+  saveJsonFile(allTerms, getPath(cachedFilename))
+
+def getAllRepoTermsFromCache(cachedFilename: str) -> dict[str, list[str]]:
+  """
+  Gets all the terms in the repo from a json file
+  """
+  with open(getPath(cachedFilename), 'r', encoding="utf-8") as jsonString:
+    return json.load(jsonString)

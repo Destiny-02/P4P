@@ -10,7 +10,7 @@ This folder contains the `calcTermFrequency.py` script, which can be used to cal
 
 # Usage
 
-- Replace the first argument in the call(s) to `main` with the path of the codebases
+- Replace the path in the call(s) to `saveAllRepoTermsToCache` with the path of the codebases
 - Replace the second argument in the call(s) to `main` with the path of the vocabulary file
 - Run the script with `python calcTermFrequency.py`.
 - The results will be written to a csv specified in the call(s) to `csvToSheet`.
