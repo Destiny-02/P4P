@@ -16,6 +16,7 @@ employe
 famili
 gross
 hour
+hrs
 id
 incom
 minut
