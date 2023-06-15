@@ -1,5 +1,6 @@
 access
 act
+ad
 bd
 big
 br
@@ -8,6 +9,7 @@ cal
 categori
 code
 comp
+correct
 creat
 dd
 ded
@@ -20,6 +22,7 @@ dp
 dps
 ec
 ee
+enough
 enter
 entri
 er
@@ -76,6 +79,9 @@ stamp
 standard
 start
 state
+statem
+still
+store
 take
 taxman
 third
