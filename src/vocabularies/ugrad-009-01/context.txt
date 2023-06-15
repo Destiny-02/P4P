@@ -1,6 +1,7 @@
 annual
 bracket
 burden
+calendar
 cent
 compani
 date
@@ -26,6 +27,7 @@ payrol
 payslip
 per
 period
+person
 rate
 record
 report
@@ -34,6 +36,7 @@ tax
 taxabl
 tid
 time
+wage
 week
 work
 year
