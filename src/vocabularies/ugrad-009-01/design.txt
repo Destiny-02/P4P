@@ -11,6 +11,7 @@ build
 calc
 calcul
 case
+caught
 char
 charact
 check
@@ -96,6 +97,7 @@ pass
 path
 percentag
 point
+pos
 print
 printer
 println
@@ -106,10 +108,14 @@ reader
 reformat
 remain
 remov
+repeat
 replac
+retriev
 return
+revers
 round
 rounder
+run
 runtim
 scan
 scanner
@@ -128,6 +134,7 @@ string
 substr
 sum
 summari
+suppress
 system
 temp
 test
@@ -146,3 +153,4 @@ util
 valu
 vector
 version
+warn

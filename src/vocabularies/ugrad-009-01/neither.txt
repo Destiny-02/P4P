@@ -7,6 +7,7 @@ br
 burd
 cal
 categori
+ceas
 code
 comp
 correct
@@ -33,6 +34,7 @@ exc
 fam
 fill
 first
+flag
 fnf
 fnfex
 fourth
@@ -58,6 +60,7 @@ msg
 natur
 net
 nfe
+normal
 npe
 part
 pe
@@ -76,6 +79,7 @@ separ
 serial
 sign
 simpl
+singl
 slip
 stamp
 standard
