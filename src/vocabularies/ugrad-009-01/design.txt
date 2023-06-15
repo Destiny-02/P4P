@@ -4,6 +4,7 @@ argum
 array
 bound
 buffer
+build
 calc
 calcul
 case
@@ -25,6 +26,7 @@ decim
 digit
 display
 doubl
+duplic
 empti
 end
 equal
@@ -78,6 +80,7 @@ order
 output
 overrid
 pars
+path
 percentag
 print
 printer
@@ -92,6 +95,7 @@ remov
 replac
 return
 round
+rounder
 runtim
 scanner
 set
@@ -107,6 +111,7 @@ stream
 string
 substr
 sum
+summari
 system
 temp
 test

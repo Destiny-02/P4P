@@ -1,4 +1,5 @@
 access
+act
 bd
 big
 br
@@ -22,6 +23,7 @@ fnfex
 fourth
 fr
 fs
+full
 given
 head
 inc
@@ -36,7 +38,9 @@ mode
 msg
 natur
 net
+nfe
 part
+pe
 plain
 put
 readi
