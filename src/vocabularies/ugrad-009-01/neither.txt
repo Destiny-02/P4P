@@ -12,6 +12,7 @@ code
 comp
 correct
 creat
+cs
 dd
 dec
 ded
@@ -71,6 +72,7 @@ plain
 posit
 prep
 proc
+ps
 put
 readi
 rec
@@ -98,6 +100,7 @@ three
 ti
 top
 two
+tz
 up
 without
 zone

@@ -21,6 +21,7 @@ close
 collect
 comma
 compar
+comparison
 comput
 contain
 copi
@@ -123,6 +124,7 @@ run
 runtim
 scan
 scanner
+sequenc
 set
 size
 smallest
