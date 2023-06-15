@@ -10,6 +10,7 @@ day
 deduct
 dollar
 earn
+emp
 employ
 employe
 famili
