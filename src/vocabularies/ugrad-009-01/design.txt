@@ -9,6 +9,7 @@ calcul
 case
 char
 charact
+check
 close
 collect
 comma
@@ -16,6 +17,7 @@ compar
 comput
 contain
 copi
+count
 current
 data
 databas
@@ -26,11 +28,14 @@ doubl
 empti
 end
 equal
+error
 except
+exit
 failur
 file
 filenam
 find
+float
 format
 formatt
 found
@@ -42,7 +47,9 @@ input
 instanc
 int
 integ
+invalid
 io
+ioe
 iter
 java
 key
@@ -56,9 +63,11 @@ lower
 lowest
 main
 map
+match
 math
 new
 next
+num
 number
 object
 order
@@ -88,7 +97,9 @@ stack
 stream
 string
 substr
+sum
 system
+test
 text
 total
 trace
