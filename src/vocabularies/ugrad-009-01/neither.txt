@@ -19,12 +19,16 @@ dol
 dp
 dps
 ec
+ee
 enter
 entri
+er
 eve
 ex
+exc
 fam
 first
+fnf
 fnfex
 fourth
 fr
@@ -32,9 +36,11 @@ fs
 full
 given
 head
+ide
 inc
 info
 inform
+ipf
 item
 job
 last
@@ -45,8 +51,10 @@ msg
 natur
 net
 nfe
+npe
 part
 pe
+place
 plain
 posit
 proc
@@ -70,4 +78,6 @@ third
 three
 ti
 top
+two
 up
+without

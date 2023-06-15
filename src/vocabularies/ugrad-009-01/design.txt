@@ -4,6 +4,7 @@ amount
 arg
 argum
 array
+boolean
 bound
 buffer
 build
@@ -13,6 +14,7 @@ case
 char
 charact
 check
+checker
 close
 collect
 comma
@@ -35,6 +37,7 @@ equal
 err
 error
 except
+exist
 exit
 failur
 field
@@ -52,6 +55,7 @@ hash
 ignor
 index
 indic
+initi
 initialis
 input
 instanc
@@ -78,6 +82,7 @@ math
 negat
 new
 next
+null
 num
 number
 object
@@ -108,6 +113,7 @@ set
 size
 smallest
 sort
+sorter
 sourc
 space
 split
