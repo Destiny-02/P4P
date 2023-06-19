@@ -1,32 +1,30 @@
-import enchant
+import json
 import re
+from os import path
 
-def fixSpelling(word):
+def fixUSSpelling(word):
     """
-    If the word is less than five characters, it returns itself.
-    If the word is a valid word in UK English, it returns itself.
-	If the word is a valid word in US English, it returns the UK English spelling of the word.
-	If the word is misspelled and has a suggestion in the UK English dictionary, it returns the suggested word.
+	If the word is a word in US English, it returns the UK English spelling of the word.
 	Otherwise, it returns itself.
     """
-    # If it is less than five characters and not a word, it is likely an abbreviation
+    # If it is less than five characters and not a word, it is more likely that it is a abbreviation or acronym so we won't touch it
     if len(word) < 5:
         return word
 
-    ukDict = enchant.Dict("en_GB")
-
-    if ukDict.check(word):
+    with open(getPath('american-british-english-translator.json')) as f:
+        spellings = json.load(f)
+    
+    britishSpelling = spellings.get(word)
+    if britishSpelling:
+        return cleanString(britishSpelling)
+    else:
         return word
-    
-    suggestions = ukDict.suggest(word)
-    if suggestions and suggestions[0] == convertToLowercase(suggestions[0]):
-        print("Fixed spelling of " + word + " to " + suggestions[0])
-        return suggestions[0]
-    
-    return word
 
-def convertToLowercase(term: str) -> str:
+def cleanString(term: str) -> str:
   """
-  Converts a term to stripped lowercase
+  Converts a term to stripped lowercase English letters
   """
   return re.sub(r'[^a-zA-ZÀ-ÖØ-öø-ÿ]', '', term).lower().strip()
+
+def getPath(relativePath):
+  return path.join(path.dirname(__file__), relativePath)

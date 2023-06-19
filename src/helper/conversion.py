@@ -1,7 +1,7 @@
 import re
 
 from .splitting import splitIdentifier, splitIdentifiers
-from .english import fixSpelling
+from .english import fixUSSpelling
 import json
 from porter2stemmer import Porter2Stemmer
 import nltk
@@ -213,7 +213,7 @@ def stringsToProcessable(strings: set, excludeListStemmed: set) -> set:
   terms = {term for term in terms if term not in stopWords}
 
   # Fix spelling
-  terms = {fixSpelling(term) for term in terms}
+  terms = {fixUSSpelling(term) for term in terms}
 
   # Remove the terms we save seen i.e. the stemmed version is in the combined set
   terms = removeSeenStemmed(terms, excludeListStemmed)

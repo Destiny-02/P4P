@@ -15,7 +15,6 @@ from helper.conversion import (
 )
 from helper.stats import findLA, getDVInSet, average
 from helper.io import saveJsonFile, findRepoPaths, findJavaFiles
-from helper.splitting import splitIdentifiers
 
 
 def main(pathToData):

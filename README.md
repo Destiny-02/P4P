@@ -89,3 +89,7 @@ saveAllRepoTermsToCache(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")), CA
 ```
 
 This currently works for `calcTermFrequency` and `percentOfVocab`.
+
+# References
+
+[American to British English Dictionary](https://raw.githubusercontent.com/hyperreality/American-British-English-Translator/master/data/american_spellings.json)
