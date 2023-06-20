@@ -19,3 +19,20 @@ import { default as defaultWithType2, type Type3, named6 } from "./someFile";
 export function add(a: number, b: number) {
   // another comment
 }
+
+const x = 1;
+let y = 2;
+var z = 3;
+
+window.myCustomAttribute = "";
+
+class SomeClass {}
+
+interface MyIFace {}
+
+type MyType = {};
+
+enum MyEnum {
+  ENUM_MEMBER_1,
+  ENUM_MEMBER_2,
+}

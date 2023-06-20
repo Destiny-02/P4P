@@ -6,6 +6,14 @@ import { Parser } from "../Parser";
 const isLibrary = (importPath: string) =>
   importPath.startsWith("java.") || importPath.startsWith("com.sun.");
 
+const AST_TYPES_TO_KEEP = new Set([
+  "typeIdentifier", // class definition
+  "methodDeclarator", // method definition
+  "variableDeclaratorId", // variable definition
+  "fqnOrRefTypePartCommon", // argument defintion
+  "enumConstant", // enum member definition
+]);
+
 function walkTree(
   node: CstNode,
   fallbackType: string,
@@ -66,7 +74,11 @@ function walkTree(
 
     // skip import statements, they're handled separately and it would misleading
     // to include terms like "java" or "util" that purely constitute the import path.
-    if (parentType && parentType !== "packageOrTypeName") {
+    if (
+      parentType &&
+      parentType !== "packageOrTypeName" &&
+      AST_TYPES_TO_KEEP.has(parentType)
+    ) {
       output.identifiers.push({
         type: parentType,
         name: (<IToken>(<unknown>node)).image,
@@ -81,7 +93,7 @@ function walkTree(
     for (const child of children) {
       // walk thru this child, and keep track of how far down the tree
       // we are by appending to the parents[] array.
-      walkTree(child as CstNode, childType, output, [...parents, childType]);
+      walkTree(<CstNode>child, childType, output, [...parents, childType]);
     }
   }
 }

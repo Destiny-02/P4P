@@ -31,4 +31,13 @@ public class Sample {
   protected String get_payslip_for_paye() {
     return "";
   }
+
+  enum MyEnum {
+    ENUM_MEMBER_1,
+    ENUM_MEMBER_2,
+  }
+
+  interface MyIFace {
+    int myInterfaceProperty;
+  }
 }

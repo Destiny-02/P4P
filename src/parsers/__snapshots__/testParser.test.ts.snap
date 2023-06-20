@@ -13,26 +13,6 @@ exports[`test case files parses Sample.java (java) 1`] = `
   "identifiers": [
     {
       "isLibraryName": false,
-      "name": "parsers",
-      "type": "packageDeclaration",
-    },
-    {
-      "isLibraryName": false,
-      "name": "languages",
-      "type": "packageDeclaration",
-    },
-    {
-      "isLibraryName": false,
-      "name": "__tests__",
-      "type": "packageDeclaration",
-    },
-    {
-      "isLibraryName": false,
-      "name": "input",
-      "type": "packageDeclaration",
-    },
-    {
-      "isLibraryName": false,
       "name": "Sample",
       "type": "typeIdentifier",
     },
@@ -52,19 +32,9 @@ exports[`test case files parses Sample.java (java) 1`] = `
       "type": "variableDeclaratorId",
     },
     {
-      "isLibraryName": true,
-      "name": "List",
-      "type": "unannClassType",
-    },
-    {
       "isLibraryName": false,
       "name": "employees",
       "type": "variableDeclaratorId",
-    },
-    {
-      "isLibraryName": true,
-      "name": "ArrayList",
-      "type": "classOrInterfaceTypeToInstantiate",
     },
     {
       "isLibraryName": false,
@@ -83,13 +53,33 @@ exports[`test case files parses Sample.java (java) 1`] = `
     },
     {
       "isLibraryName": false,
-      "name": "String",
-      "type": "unannClassType",
+      "name": "get_payslip_for_paye",
+      "type": "methodDeclarator",
     },
     {
       "isLibraryName": false,
-      "name": "get_payslip_for_paye",
-      "type": "methodDeclarator",
+      "name": "MyEnum",
+      "type": "typeIdentifier",
+    },
+    {
+      "isLibraryName": false,
+      "name": "ENUM_MEMBER_1",
+      "type": "enumConstant",
+    },
+    {
+      "isLibraryName": false,
+      "name": "ENUM_MEMBER_2",
+      "type": "enumConstant",
+    },
+    {
+      "isLibraryName": false,
+      "name": "MyIFace",
+      "type": "typeIdentifier",
+    },
+    {
+      "isLibraryName": false,
+      "name": "myInterfaceProperty",
+      "type": "variableDeclaratorId",
     },
   ],
   "imports": {
@@ -154,8 +144,18 @@ it has a fake # inline comment within the block
     },
     {
       "isLibraryName": false,
+      "name": "identifier2",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
       "name": "identifier3",
       "type": "FunctionDeclaration.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "tripleQuotedString",
+      "type": "VariableDeclarator.ownId",
     },
   ],
   "imports": {
@@ -192,6 +192,31 @@ exports[`test case files parses sample.js (javascript) 1`] = `
       "isLibraryName": false,
       "name": "add",
       "type": "FunctionDeclaration.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "x",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "y",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "z",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "myCustomAttribute",
+      "type": "MemberExpression.property",
+    },
+    {
+      "isLibraryName": false,
+      "name": "SomeClass",
+      "type": "ClassDeclaration.ownId",
     },
   ],
   "imports": {
@@ -263,6 +288,10 @@ exports[`test case files parses sample.py (python) 1`] = `
     "
 Hiii
 ",
+    "
+    does nothing
+    ",
+    undefined,
     "# inline commenttt",
   ],
   "identifiers": [
@@ -281,6 +310,21 @@ Hiii
       "name": "subtract",
       "type": "FunctionDeclaration.ownId",
     },
+    {
+      "isLibraryName": false,
+      "name": "a",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "OOP",
+      "type": "FunctionDeclaration.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "doSomething",
+      "type": "MemberExpression.property",
+    },
   ],
   "imports": {
     "named": {},
@@ -298,7 +342,58 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
     "* a comment  ",
     " another comment",
   ],
-  "identifiers": [],
+  "identifiers": [
+    {
+      "isLibraryName": false,
+      "name": "x",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "y",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "z",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "myCustomAttribute",
+      "type": "MemberExpression.property",
+    },
+    {
+      "isLibraryName": false,
+      "name": "SomeClass",
+      "type": "ClassDeclaration.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "MyIFace",
+      "type": "TSInterfaceDeclaration.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "MyType",
+      "type": "TSTypeAliasDeclaration.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "ENUM_MEMBER_1",
+      "type": "TSEnumMember.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "ENUM_MEMBER_2",
+      "type": "TSEnumMember.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "MyEnum",
+      "type": "TSEnumDeclaration.ownId",
+    },
+  ],
   "imports": {
     "named": {
       "Type1": {

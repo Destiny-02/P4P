@@ -20,3 +20,11 @@ function add(a, b) {
 
   return a + b;
 }
+
+const x = 1;
+let y = 2;
+var z = 3;
+
+window.myCustomAttribute = "";
+
+class SomeClass {}

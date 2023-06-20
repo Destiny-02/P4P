@@ -5,11 +5,30 @@ import { Parser } from "../Parser";
 
 type ASTRootNode = ReturnType<typeof parse>;
 
-type Context = "ownId" | "argument" | undefined;
+type Context =
+  | "ownId"
+  | "argument"
+  | "property"
+  | "enumProperty"
+  | "left"
+  | "right"
+  | undefined;
+
 type NodeWithContext = {
   context: Context;
   node: TSESTree.Node;
 };
+
+const AST_TYPES_TO_KEEP = new Set<AST_NODE_TYPES>([
+  AST_NODE_TYPES.VariableDeclarator, // variable defintion
+  AST_NODE_TYPES.MemberExpression, // object property assignment
+  AST_NODE_TYPES.FunctionDeclaration, // function defintion
+  AST_NODE_TYPES.ClassDeclaration, // class definition
+  AST_NODE_TYPES.TSEnumDeclaration, // enum definition
+  AST_NODE_TYPES.TSEnumMember, // enum property definition
+  AST_NODE_TYPES.TSTypeAliasDeclaration, // type definition
+  AST_NODE_TYPES.TSInterfaceDeclaration, // interface definition
+]);
 
 function walkTree(
   node: TSESTree.Node,
@@ -44,11 +63,15 @@ function walkTree(
   }
 
   // check if this node is an identifier, if so, record it
-  if (type === "Identifier") {
-    output.identifiers.push({
-      type: `${parent?.type}.${context}`,
-      name: node.name,
-    });
+  if (type === AST_NODE_TYPES.Identifier) {
+    if (parent && AST_TYPES_TO_KEEP.has(parent.type)) {
+      output.identifiers.push({
+        type: `${parent?.type}.${context}`,
+        name: node.name,
+      });
+    } else {
+      console.warn("Skipping", parent?.type);
+    }
   }
 
   // now explore all the children of this node
