@@ -55,7 +55,7 @@ def checkIdentifierWithVocabularies(identifier, vocab):
   """
   Checks if the identifier contains any terms from the vocabulary
   """
-  terms = setToStemmedSet(stringsToProcessable([identifier], set()))
+  terms = setToStemmedSet(stringsToProcessable(set([identifier])))
 
   for term in terms:
     if term in vocab:
@@ -125,7 +125,7 @@ def findVocabsForLA(repoPaths, domainFolderName):
     context = set()
     neither = set()
 
-    terms = setToStemmedSet(stringsToProcessable(identifiers, set()))
+    terms = setToStemmedSet(stringsToProcessable(identifiers))
     
     for term in terms:
       if term in contextTerms:
@@ -146,8 +146,8 @@ if __name__ == "__main__":
   """
   Find the percentage of terms that are design, context or neither
   """
-  # (designCounts, contextCounts, neitherCounts, totalCounts) = main("ugrad-009-01")
-  # writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
+  (designCounts, contextCounts, neitherCounts, totalCounts) = main("ugrad-009-01")
+  writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
 
   """
   Find the LA (takes a while to run)
@@ -168,7 +168,7 @@ if __name__ == "__main__":
   # print("Large Neither LA: {:.0%}".format(findLA(largeNeitherVocabs)))
 
   # # LA for all codebases
-  (designVocabs, contextVocabs, neitherVocabs) = findVocabsForLA(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")), "ugrad-009-01")
-  print("Design LA: {:.0%}".format(findLA(designVocabs)))
-  print("Context LA: {:.0%}".format(findLA(contextVocabs)))
-  print("Neither LA: {:.0%}".format(findLA(neitherVocabs)))
+  # (designVocabs, contextVocabs, neitherVocabs) = findVocabsForLA(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")), "ugrad-009-01")
+  # print("Design LA: {:.0%}".format(findLA(designVocabs)))
+  # print("Context LA: {:.0%}".format(findLA(contextVocabs)))
+  # print("Neither LA: {:.0%}".format(findLA(neitherVocabs)))

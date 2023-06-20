@@ -33,8 +33,8 @@ def main(pathToData):
         (identifiers, comments) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))
 
         # Split, clean and stem the identifiers and comments into terms
-        identifierTerms = setToStemmedSet(stringsToProcessable(identifiers, set()))
-        commentTerms = setToStemmedSet(stringsToProcessable(comments, set()))
+        identifierTerms = setToStemmedSet(stringsToProcessable(identifiers))
+        commentTerms = setToStemmedSet(stringsToProcessable(comments))
 
         # Convert equivalents
         identifierTerms = convertEquivalents(identifierTerms, equivalents)
