@@ -5,7 +5,6 @@ from os import path, system
 
 def invokeParser(
     absoluteFileNames: set[str],
-    outputFilePath: str = "parser-output.json",
     # by default, don't use the cache unless the CLI
     # flag --cache is used or if this argument is set to true
     useCache: bool = "--cache" in sys.argv,
@@ -32,6 +31,9 @@ def invokeParser(
     # read the output from the script
     identifiers: set[str] = set()
     comments: set[str] = set()
+
+    # must be same as the output path in parsers/main.ts
+    outputFilePath = path.join(path.dirname(__file__), "../../parser-output.json")
 
     with open(outputFilePath, encoding="utf-8") as jsonFile:
         parserOutputJson = json.load(jsonFile)

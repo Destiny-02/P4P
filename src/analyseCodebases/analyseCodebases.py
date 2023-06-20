@@ -34,7 +34,7 @@ def splitRepoPathsByNumIdentifiers(repoPaths):
   # Get the number of identifiers for each repo
   numIdentifiers = []
   for repoPath in repoPaths:
-    (identifiers, _) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))
+    (identifiers, _) = invokeParser(findJavaFiles(repoPath))
     numIdentifiers.append(len(identifiers))
 
   # Get the median number of identifiers
@@ -79,7 +79,7 @@ def main(domainFolderName, vocabPath = None):
     print(repoPath)
           
     # Parse the identifiers
-    (identifiers, _) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))
+    (identifiers, _) = invokeParser(findJavaFiles(repoPath))
           
     # Count the number of design, context and neither terms in the identifiers
     # An identifier qualifies as design or context if it contains at least one design or context term 
@@ -118,7 +118,7 @@ def findVocabsForLA(repoPaths, domainFolderName):
     print(repoPath)
           
     # Parse the identifiers
-    (identifiers, _) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))
+    (identifiers, _) = invokeParser(findJavaFiles(repoPath))
           
     # Build up the context, design (and neither) vocabularies from the terms in the identifiers
     design = set()

@@ -30,7 +30,7 @@ def main(pathToData):
     for repoPath in findRepoPaths(getPath(pathToData)):
         print("Processing " + repoPath)
 
-        (identifiers, comments) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))
+        (identifiers, comments) = invokeParser(findJavaFiles(repoPath))
 
         # Split, clean and stem the identifiers and comments into terms
         identifierTerms = setToStemmedSet(stringsToProcessable(identifiers))

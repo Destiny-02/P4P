@@ -31,7 +31,7 @@ def saveTermsToBeCategorised(pathToDataList, domainFolderName):
 
 	for pathToData in pathToDataList:
 		# Parse the identifiers
-		(identifiers, _) = invokeParser(findJavaFiles(pathToData), getPath("parser-output.json"))
+		(identifiers, _) = invokeParser(findJavaFiles(pathToData))
 
 		# Split the identifiers into standardised terms suitable for a human to categorise manually
 		terms = stringsToProcessable(identifiers, combinedTerms)
@@ -67,7 +67,7 @@ def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
 	(_, _, _, combinedTerms, contextTermsAnswers, _, _, combinedTermsAnswers) = getVocabularies(domainFolderName, includeAnswers=True)
 	
 	# Split the words into standardised terms suitable for a human to manually look through
-	terms = stringsToProcessable(terms, combinedTerms)
+	terms = stringsToProcessable(set(terms), combinedTerms)
 	
 	# Do the same but as if the seen terms included the answers
 	termsAfterAnswers = stringsToProcessable(terms, combinedTermsAnswers.union(combinedTerms))
@@ -134,7 +134,7 @@ def getVocabularies(domainFolderName, includeAnswers=False):
 	combinedTerms = contextTerms.union(designTerms).union(neitherTerms)
 
 	if not includeAnswers:
-		return (contextTerms, designTerms, neitherTerms, combinedTerms)
+		return (contextTerms, designTerms, neitherTerms, combinedTerms, set(), set(), set(), set())
 
 	contextTermsAnswers = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/context-answers.txt"))
 	designTermsAnswers = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/design-answers.txt"))

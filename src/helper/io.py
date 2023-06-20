@@ -79,7 +79,7 @@ def saveAllRepoTermsToCache(repoPaths: list[str], cachedFilename: str):
   """
   allTerms: dict[str, list[str]] = {}
   for repoPath in repoPaths:
-    (identifiers, _) = invokeParser(findJavaFiles(repoPath), getPath("parser-output.json"))        
+    (identifiers, _) = invokeParser(findJavaFiles(repoPath))        
     terms = setToStemmedSet(stringsToProcessable(identifiers))
     allTerms[repoPath] = list(terms)
   saveJsonFile(allTerms, getPath(cachedFilename))
