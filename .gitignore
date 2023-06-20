@@ -9,6 +9,8 @@ tool-results*.csv
 # parsers
 dist
 
+data/downloaded
+
 # temp
 parser-output.json
 debug-output.json
