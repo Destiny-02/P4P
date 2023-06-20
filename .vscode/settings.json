@@ -8,6 +8,7 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
+  "editor.tabSize": 4,
   "editor.indentSize": 4,
   "python.formatting.provider": "black",
   "python.linting.flake8Enabled": false,

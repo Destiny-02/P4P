@@ -1,7 +1,10 @@
 import json
 from os import path, system
 
-def invokeParser(absoluteFileNames: set[str], outputFilePath: str = "parser-output.json") -> tuple[set, set]:
+
+def invokeParser(
+    absoluteFileNames: set[str], outputFilePath: str = "parser-output.json"
+) -> tuple[set, set]:
     """
     invokes the NodeJS script, parses its output, and returns
     the result of all files merged together

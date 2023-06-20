@@ -5,4 +5,5 @@ indent-string="    " # this means 4 spaces
 disable=
   missing-module-docstring,
   missing-function-docstring,
+  wrong-import-position, # because the import hack thing needs to go first
   invalid-name # this rule enforces snake_case
