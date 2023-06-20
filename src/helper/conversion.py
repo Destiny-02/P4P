@@ -195,7 +195,7 @@ def removeSeenStemmed(data: set, seen: set) -> set:
       newDataStemmed.add(stemTerm(term))
   return newData
 
-def stringsToProcessable(strings: set, excludeListStemmed: set) -> set:
+def stringsToProcessable(strings: set[str], excludeListStemmed: set[str] | None = None) -> set[str]:
   """
   Converts a set of strings to a set of standardised terms that is ready for a human to process manually. 
   """
@@ -216,7 +216,8 @@ def stringsToProcessable(strings: set, excludeListStemmed: set) -> set:
   terms = {fixUSSpelling(term) for term in terms}
 
   # Remove the terms we save seen i.e. the stemmed version is in the combined set
-  terms = removeSeenStemmed(terms, excludeListStemmed)
+  if excludeListStemmed:
+    terms = removeSeenStemmed(terms, excludeListStemmed)
 
   return terms
 

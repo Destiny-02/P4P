@@ -1,10 +1,15 @@
+import sys
 import json
 from os import path, system
 
 
 def invokeParser(
-    absoluteFileNames: set[str], outputFilePath: str = "parser-output.json"
-) -> tuple[set, set]:
+    absoluteFileNames: set[str],
+    outputFilePath: str = "parser-output.json",
+    # by default, don't use the cache unless the CLI
+    # flag --cache is used or if this argument is set to true
+    useCache: bool = "--cache" in sys.argv,
+) -> tuple[set[str], set[str]]:
     """
     invokes the NodeJS script, parses its output, and returns
     the result of all files merged together
@@ -19,11 +24,14 @@ def invokeParser(
     joinedFileNames = " 📚 ".join(cleanedPaths)
 
     # invoke the nodejs script
-    system(f'cd {scriptPath} && npm run parse -- "{joinedFileNames}"')
+    if useCache:
+        print("Using cached parser results")
+    else:
+        system(f'cd {scriptPath} && npm run parse -- "{joinedFileNames}"')
 
     # read the output from the script
-    identifiers = set()
-    comments = set()
+    identifiers: set[str] = set()
+    comments: set[str] = set()
 
     with open(outputFilePath, encoding="utf-8") as jsonFile:
         parserOutputJson = json.load(jsonFile)

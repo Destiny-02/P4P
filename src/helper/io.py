@@ -17,7 +17,7 @@ def cleanOutFolder(outPath):
 
 def saveJsonFile(jsonObj: object, outputFilePath: str):
   with open(outputFilePath, 'w', encoding="utf-8") as file:
-    file.write(json.dumps(jsonObj, indent=4))
+    file.write(json.dumps(jsonObj, indent=4, ensure_ascii=False))
 
 def findRepoPaths(pathToData):
   """
@@ -29,15 +29,16 @@ def findRepoPaths(pathToData):
       repoPaths.append(path.join(pathToData, folderName))
   return repoPaths
 
-def findJavaFiles(folderPath):
+def findJavaFiles(folderPath: str):
   """
   Finds all the java files in the folder and its subfolders
   """
-  javaFiles = set()
+  javaFiles: set[str] = set()
   for dirpath, _, filenames in os.walk(folderPath):
     for filename in filenames:
-      if filename.endswith('.java'):
-        javaFiles.add(path.join(dirpath, filename))
+      # add all files, the parser will discard what it can't process
+      # (see getParserForLanguage.ts)
+      javaFiles.add(path.join(dirpath, filename))
   return javaFiles
 
 def setToSheet(data, sheetPath, append=False):
@@ -64,8 +65,8 @@ def deleteFileIfExists(filePath):
 
 # Read a sheet into a set
 # Assumes the sheet has only one column
-def readSheet(sheetName):
-  data = set()
+def readSheet(sheetName: str):
+  data: set[str] = set()
   with open(sheetName, 'r') as csvfile:
     reader = csv.reader(csvfile)
     for row in reader:
