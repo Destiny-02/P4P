@@ -8,11 +8,13 @@ porter2stemmer = "*"
 pytest = "*"
 openpyxl = "*"
 # we're using a fork of spiral because the original is broken - see https://github.com/casics/spiral/pull/5
-spiral = {git = "https://github.com/cnewman/spiral"}
+spiral = {editable = true, ref = "master", git = "https://github.com/cnewman/spiral"}
 unidecode = "*"
 jupyter = "*"
 pandas = "*"
 plotly = "*"
+pylint = "*"
+pylint-actions = "*"
 
 [dev-packages]
 

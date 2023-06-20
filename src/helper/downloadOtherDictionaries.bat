@@ -1,5 +1,3 @@
-@REM downloads some other files that we use
-
 cd ../../data
 mkdir downloaded
 cd downloaded

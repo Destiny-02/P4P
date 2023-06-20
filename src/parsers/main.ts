@@ -4,13 +4,17 @@ import { Parser } from "./Parser";
 import { getParserForLanguage } from "./getParserForLanguage";
 
 async function main() {
-  const fileNames = process.argv[2].split("📚").map((file) => file.replaceAll("^", "").trim());
+  const fileNames = process.argv[2]
+    .split("📚")
+    .map((file) => file.replaceAll("^", "").trim());
 
   // always save to repo root, no matter where this script is executed from
   const outputPath = join(__dirname, "../../parser-output.json");
 
   if (!fileNames?.length) {
-    console.error("You need to run this script as `node parsers/language 'file1.java, file2.py, ...'`");
+    console.error(
+      "You need to run this script as `node parsers/language 'file1.java, file2.py, ...'`"
+    );
     return;
   }
 

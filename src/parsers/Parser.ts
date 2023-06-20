@@ -57,6 +57,12 @@ export abstract class Parser {
         importMetadata.isLibraryFile &&
         importMetadata.originalName === identifier.name;
     }
+
+    // remove windows line-endings
+    output.comments = output.comments
+      .filter(Boolean)
+      .map((comment) => comment.replaceAll("\r\n", "\n"));
+
     return results;
   }
 

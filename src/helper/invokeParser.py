@@ -1,13 +1,17 @@
 import sys
 import json
-from os import path, system
+from os import path, system, name
+
+# by default, don't use the cache unless the CLI
+# flag --cache is used or if this argument is set to true
+DEFAULT_USE_CACHE = "--cache" in sys.argv
+
+PATH_SEPARATOR = "\\" if name == "nt" else "/"
 
 
 def invokeParser(
     absoluteFileNames: set[str],
-    # by default, don't use the cache unless the CLI
-    # flag --cache is used or if this argument is set to true
-    useCache: bool = "--cache" in sys.argv,
+    useCache: bool = DEFAULT_USE_CACHE,
 ) -> tuple[set[str], set[str]]:
     """
     invokes the NodeJS script, parses its output, and returns
@@ -18,7 +22,9 @@ def invokeParser(
 
     scriptPath = path.join(path.dirname(__file__), "..")
 
-    cleanedPaths = [path.normpath(p).replace("/", "\\") for p in absoluteFileNames]
+    cleanedPaths = [
+        path.normpath(p).replace("/", PATH_SEPARATOR) for p in absoluteFileNames
+    ]
 
     joinedFileNames = " 📚 ".join(cleanedPaths)
 
