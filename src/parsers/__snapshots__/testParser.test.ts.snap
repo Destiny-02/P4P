@@ -14,71 +14,127 @@ exports[`test case files parses Sample.java (java) 1`] = `
     {
       "isLibraryName": false,
       "name": "Sample",
+      "sourceLocation": [
+        367,
+        372,
+      ],
       "type": "typeIdentifier",
     },
     {
       "isLibraryName": false,
       "name": "get_annual_income_deduction",
+      "sourceLocation": [
+        424,
+        450,
+      ],
       "type": "methodDeclarator",
     },
     {
       "isLibraryName": false,
       "name": "a",
+      "sourceLocation": [
+        464,
+        464,
+      ],
       "type": "variableDeclaratorId",
     },
     {
       "isLibraryName": false,
       "name": "b",
+      "sourceLocation": [
+        479,
+        479,
+      ],
       "type": "variableDeclaratorId",
     },
     {
       "isLibraryName": false,
       "name": "employees",
+      "sourceLocation": [
+        496,
+        504,
+      ],
       "type": "variableDeclaratorId",
     },
     {
       "isLibraryName": false,
       "name": "a",
+      "sourceLocation": [
+        564,
+        564,
+      ],
       "type": "fqnOrRefTypePartCommon",
     },
     {
       "isLibraryName": false,
       "name": "b",
+      "sourceLocation": [
+        568,
+        568,
+      ],
       "type": "fqnOrRefTypePartCommon",
     },
     {
       "isLibraryName": false,
       "name": "paye_tax_bracket",
+      "sourceLocation": [
+        606,
+        621,
+      ],
       "type": "variableDeclaratorId",
     },
     {
       "isLibraryName": false,
       "name": "get_payslip_for_paye",
+      "sourceLocation": [
+        651,
+        670,
+      ],
       "type": "methodDeclarator",
     },
     {
       "isLibraryName": false,
       "name": "MyEnum",
+      "sourceLocation": [
+        703,
+        708,
+      ],
       "type": "typeIdentifier",
     },
     {
       "isLibraryName": false,
       "name": "ENUM_MEMBER_1",
+      "sourceLocation": [
+        716,
+        728,
+      ],
       "type": "enumConstant",
     },
     {
       "isLibraryName": false,
       "name": "ENUM_MEMBER_2",
+      "sourceLocation": [
+        735,
+        747,
+      ],
       "type": "enumConstant",
     },
     {
       "isLibraryName": false,
       "name": "MyIFace",
+      "sourceLocation": [
+        767,
+        773,
+      ],
       "type": "typeIdentifier",
     },
     {
       "isLibraryName": false,
       "name": "myInterfaceProperty",
+      "sourceLocation": [
+        785,
+        803,
+      ],
       "type": "variableDeclaratorId",
     },
   ],
@@ -140,21 +196,37 @@ it has a fake # inline comment within the block
     {
       "isLibraryName": false,
       "name": "identifier1",
+      "sourceLocation": [
+        211,
+        222,
+      ],
       "type": "FunctionDeclaration.ownId",
     },
     {
       "isLibraryName": false,
       "name": "identifier2",
+      "sourceLocation": [
+        264,
+        275,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "identifier3",
+      "sourceLocation": [
+        292,
+        303,
+      ],
       "type": "FunctionDeclaration.ownId",
     },
     {
       "isLibraryName": false,
       "name": "tripleQuotedString",
+      "sourceLocation": [
+        318,
+        336,
+      ],
       "type": "VariableDeclarator.ownId",
     },
   ],
@@ -176,41 +248,73 @@ exports[`test case files parses sample.as (javascript) 1`] = `
     {
       "isLibraryName": false,
       "name": "a",
+      "sourceLocation": [
+        103,
+        104,
+      ],
       "type": "FunctionDeclaration.argument",
     },
     {
       "isLibraryName": false,
       "name": "b",
+      "sourceLocation": [
+        106,
+        107,
+      ],
       "type": "FunctionDeclaration.argument",
     },
     {
       "isLibraryName": false,
       "name": "add",
+      "sourceLocation": [
+        99,
+        102,
+      ],
       "type": "FunctionDeclaration.ownId",
     },
     {
       "isLibraryName": false,
       "name": "x",
+      "sourceLocation": [
+        160,
+        161,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "y",
+      "sourceLocation": [
+        171,
+        172,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "z",
+      "sourceLocation": [
+        182,
+        183,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "myCustomAttribute",
+      "sourceLocation": [
+        197,
+        214,
+      ],
       "type": "MemberExpression.property",
     },
     {
       "isLibraryName": false,
       "name": "SomeClass",
+      "sourceLocation": [
+        228,
+        237,
+      ],
       "type": "ClassDeclaration.ownId",
     },
   ],
@@ -237,41 +341,73 @@ exports[`test case files parses sample.js (javascript) 1`] = `
     {
       "isLibraryName": false,
       "name": "a",
+      "sourceLocation": [
+        560,
+        561,
+      ],
       "type": "FunctionDeclaration.argument",
     },
     {
       "isLibraryName": false,
       "name": "b",
+      "sourceLocation": [
+        563,
+        564,
+      ],
       "type": "FunctionDeclaration.argument",
     },
     {
       "isLibraryName": false,
       "name": "add",
+      "sourceLocation": [
+        556,
+        559,
+      ],
       "type": "FunctionDeclaration.ownId",
     },
     {
       "isLibraryName": false,
       "name": "x",
+      "sourceLocation": [
+        617,
+        618,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "y",
+      "sourceLocation": [
+        628,
+        629,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "z",
+      "sourceLocation": [
+        639,
+        640,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "myCustomAttribute",
+      "sourceLocation": [
+        654,
+        671,
+      ],
       "type": "MemberExpression.property",
     },
     {
       "isLibraryName": false,
       "name": "SomeClass",
+      "sourceLocation": [
+        685,
+        694,
+      ],
       "type": "ClassDeclaration.ownId",
     },
   ],
@@ -353,31 +489,55 @@ Hiii
     {
       "isLibraryName": false,
       "name": "x",
+      "sourceLocation": [
+        28,
+        29,
+      ],
       "type": "FunctionDeclaration.argument",
     },
     {
       "isLibraryName": false,
       "name": "y",
+      "sourceLocation": [
+        31,
+        32,
+      ],
       "type": "FunctionDeclaration.argument",
     },
     {
       "isLibraryName": false,
       "name": "subtract",
+      "sourceLocation": [
+        19,
+        27,
+      ],
       "type": "FunctionDeclaration.ownId",
     },
     {
       "isLibraryName": false,
       "name": "a",
+      "sourceLocation": [
+        74,
+        75,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "OOP",
+      "sourceLocation": [
+        88,
+        91,
+      ],
       "type": "FunctionDeclaration.ownId",
     },
     {
       "isLibraryName": false,
       "name": "doSomething",
+      "sourceLocation": [
+        135,
+        146,
+      ],
       "type": "MemberExpression.property",
     },
   ],
@@ -401,51 +561,91 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
     {
       "isLibraryName": false,
       "name": "x",
+      "sourceLocation": [
+        769,
+        770,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "y",
+      "sourceLocation": [
+        780,
+        781,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "z",
+      "sourceLocation": [
+        791,
+        792,
+      ],
       "type": "VariableDeclarator.ownId",
     },
     {
       "isLibraryName": false,
       "name": "myCustomAttribute",
+      "sourceLocation": [
+        806,
+        823,
+      ],
       "type": "MemberExpression.property",
     },
     {
       "isLibraryName": false,
       "name": "SomeClass",
+      "sourceLocation": [
+        837,
+        846,
+      ],
       "type": "ClassDeclaration.ownId",
     },
     {
       "isLibraryName": false,
       "name": "MyIFace",
+      "sourceLocation": [
+        861,
+        868,
+      ],
       "type": "TSInterfaceDeclaration.ownId",
     },
     {
       "isLibraryName": false,
       "name": "MyType",
+      "sourceLocation": [
+        878,
+        884,
+      ],
       "type": "TSTypeAliasDeclaration.ownId",
     },
     {
       "isLibraryName": false,
       "name": "ENUM_MEMBER_1",
+      "sourceLocation": [
+        908,
+        921,
+      ],
       "type": "TSEnumMember.ownId",
     },
     {
       "isLibraryName": false,
       "name": "ENUM_MEMBER_2",
+      "sourceLocation": [
+        925,
+        938,
+      ],
       "type": "TSEnumMember.ownId",
     },
     {
       "isLibraryName": false,
       "name": "MyEnum",
+      "sourceLocation": [
+        897,
+        903,
+      ],
       "type": "TSEnumDeclaration.ownId",
     },
   ],

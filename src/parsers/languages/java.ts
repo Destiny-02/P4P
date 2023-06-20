@@ -79,9 +79,11 @@ function walkTree(
       parentType !== "packageOrTypeName" &&
       AST_TYPES_TO_KEEP.has(parentType)
     ) {
+      const token = <IToken>(<unknown>node);
       output.identifiers.push({
         type: parentType,
-        name: (<IToken>(<unknown>node)).image,
+        name: token.image,
+        sourceLocation: [token.startOffset, token.endOffset],
       });
     }
   }

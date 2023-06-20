@@ -1,3 +1,5 @@
+import type { Range } from "@typescript-eslint/types/dist/generated/ast-spec";
+
 export namespace Parser {
   export interface ImportSource {
     /** in most languages this is the name of the file or library where the import is from */
@@ -21,6 +23,7 @@ export namespace Parser {
     identifiers: {
       type: string;
       name: string;
+      sourceLocation: Range;
     }[];
   }
 

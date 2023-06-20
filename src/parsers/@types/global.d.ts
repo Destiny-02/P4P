@@ -9,6 +9,8 @@ declare module "filbert" {
   export interface ASTNode {
     type: string;
     name: string;
+    range: [start: number, end: number];
+
     id?: ASTNode;
     body?: ASTNode | ASTNode[];
     expression?: ASTNode;

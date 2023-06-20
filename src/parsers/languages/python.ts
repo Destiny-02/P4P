@@ -42,6 +42,7 @@ function walkTree(
       output.identifiers.push({
         type: `${parent?.type}.${subType}`,
         name: node.name,
+        sourceLocation: node.range,
       });
     } else {
       console.log("Skipping", parent?.type);
