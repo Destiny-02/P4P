@@ -2,8 +2,8 @@ import os.path as path
 import os
 import json
 import csv
-from helper.invokeParser import invokeParser
-from helper.conversion import setToStemmedSet, stringsToProcessable
+from .invokeParser import invokeParser
+from .conversion import setToStemmedSet, stringsToProcessable
 
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
