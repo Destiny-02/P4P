@@ -1,7 +1,14 @@
 {
   // hide temp folders
   "files.exclude": {
-    ".pytest_cache": true
+    "**/dist": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true
+  },
+
+  // enable syntax highlighting for our TSV-esque files which are saved with a .txt extension
+  "files.associations": {
+    "*.txt": "tsv"
   },
 
   // set up python linters
@@ -11,6 +18,9 @@
   "editor.tabSize": 4,
   "editor.indentSize": 4,
   "python.formatting.provider": "black",
+
+  "python.analysis.typeCheckingMode": "basic",
+
   "python.linting.flake8Enabled": false,
   "python.linting.pylintEnabled": true
 }

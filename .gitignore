@@ -9,7 +9,9 @@ tool-results*.csv
 # parsers
 dist
 
+# generated files
 data/downloaded
+results/*/*.json
 
 # temp
 parser-output.json

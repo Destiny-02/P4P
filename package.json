@@ -2,6 +2,8 @@
   "scripts": {
     "parse": "tsc && node dist/parsers/main",
     "downloadAbbrs": "ts-node src/helper/downloadAbbreviationDictionary",
+    "downloadOtherDictionaries": "cd src/helper && downloadOtherDictionaries.bat",
+    "downloadDictionaries": "npm run downloadAbbrs && npm run downloadOtherDictionaries",
     "lint": "eslint --ext .js,.jsx,ts,.tsx .",
     "test": "jest"
   },
