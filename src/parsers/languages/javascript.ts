@@ -22,6 +22,7 @@ type NodeWithContext = {
 const AST_TYPES_TO_KEEP = new Set<AST_NODE_TYPES>([
   AST_NODE_TYPES.VariableDeclarator, // variable defintion
   AST_NODE_TYPES.MemberExpression, // object property assignment
+  AST_NODE_TYPES.AssignmentExpression, // object property assignment
   AST_NODE_TYPES.FunctionDeclaration, // function defintion
   AST_NODE_TYPES.ClassDeclaration, // class definition
   AST_NODE_TYPES.TSEnumDeclaration, // enum definition

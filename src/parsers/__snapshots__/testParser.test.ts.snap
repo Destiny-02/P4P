@@ -165,6 +165,62 @@ it has a fake # inline comment within the block
 }
 `;
 
+exports[`test case files parses sample.as (javascript) 1`] = `
+{
+  "comments": [
+    " eslint-disable ",
+    " @ts-nocheck -- this is a sample file, not part of the sourcecode",
+    " an inline comment",
+  ],
+  "identifiers": [
+    {
+      "isLibraryName": false,
+      "name": "a",
+      "type": "FunctionDeclaration.argument",
+    },
+    {
+      "isLibraryName": false,
+      "name": "b",
+      "type": "FunctionDeclaration.argument",
+    },
+    {
+      "isLibraryName": false,
+      "name": "add",
+      "type": "FunctionDeclaration.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "x",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "y",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "z",
+      "type": "VariableDeclarator.ownId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "myCustomAttribute",
+      "type": "MemberExpression.property",
+    },
+    {
+      "isLibraryName": false,
+      "name": "SomeClass",
+      "type": "ClassDeclaration.ownId",
+    },
+  ],
+  "imports": {
+    "named": {},
+    "wildcard": [],
+  },
+}
+`;
+
 exports[`test case files parses sample.js (javascript) 1`] = `
 {
   "comments": [
