@@ -1,21 +1,10 @@
 import json
-import sys
 from os import path
-
-
-# for some ridiculous reason you can't have double nested folders
-if "pytest" in sys.modules:
-    from categoriseIdentifiers.typeDefs import (
-        Diagonstics,
-        AbbreviationsDictionary,
-        Severity,
-    )
-else:
-    from typeDefs import (
-        Diagonstics,
-        AbbreviationsDictionary,
-        Severity,
-    )
+from typeDefs import (
+    Diagonstics,
+    AbbreviationsDictionary,
+    Severity,
+)
 
 
 dictionary: AbbreviationsDictionary = json.load(

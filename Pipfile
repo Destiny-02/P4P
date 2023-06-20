@@ -15,6 +15,7 @@ pandas = "*"
 plotly = "*"
 pylint = "*"
 pylint-actions = "*"
+nltk = "*"
 
 [dev-packages]
 

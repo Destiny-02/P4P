@@ -23,6 +23,27 @@ class Diagonstics(TypedDict):
     suggestion: str
 
 
+class LexiconContext(TypedDict):
+    """
+    lexicographical context about a given word
+    """
+
+    # every possible part-of-speech that the word could belong to
+    posTypes: set[str]
+    # every wordnet ID for that exact word
+    wordnetIds: set[str]
+    # every QID for that exact word
+    qIds: set[str]
+
+
+class Similarity(TypedDict):
+    """similarity scores from various algorithms"""
+
+    path: tuple[float, str] | None
+    lch: tuple[float, str] | None
+    wup: tuple[float, str] | None
+
+
 class CategorisedWord(TypedDict):
     """an interface"""
 
@@ -31,6 +52,11 @@ class CategorisedWord(TypedDict):
 
     # design | context | neither
     category: str
+
+    # the remaining properties are only included for neither-terms
+    metadata: NotRequired[LexiconContext]
+    relevanceToDesign: NotRequired[Similarity]
+    relevanceToContext: NotRequired[Similarity]
 
     diagnostics: NotRequired[list[Diagonstics]]
 

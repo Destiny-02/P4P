@@ -5,15 +5,10 @@ from porter2stemmer import Porter2Stemmer
 # To fix import errors
 sys.path.insert(0, path.abspath(path.join(path.dirname(__file__), "..")))
 
-# for some ridiculous reason you can't have double nested folders
-if "pytest" in sys.modules:
-    # pylint: disable=no-name-in-module
-    from categoriseIdentifiers.typeDefs import CategorisedIdentifier, CategorisedWord
-    from categoriseIdentifiers.validators.index import validators
-else:
-    from typeDefs import CategorisedIdentifier, CategorisedWord
-    from validators.index import validators
-
+from typeDefs import CategorisedIdentifier, CategorisedWord
+from validators.index import validators
+from lexicon.addLexiconContext import addLexiconContext
+from lexicon.determineRelevanceToSchema import createDetermineRelevanceToSchema
 from helper.invokeParser import invokeParserWithMetadata, IdentifersWithContext
 from helper.io import findJavaFiles, readSheet, saveJsonFile
 from helper.conversion import preprocessIdentifier
@@ -38,6 +33,11 @@ def categoriseIdentifiers(
 
     stemmer = Porter2Stemmer()
 
+    # TODO: this doesn't work well because designWords is already stemmed, and
+    # stemming is a lossy operation that we can't easily revert
+    determineRelevanceToDesignSchema = createDetermineRelevanceToSchema(designWords)
+    determineRelevanceToContextSchema = createDetermineRelevanceToSchema(contextWords)
+
     output: list[CategorisedIdentifier] = []
 
     for [identifier, sourceLocations] in identifiers.items():
@@ -50,7 +50,7 @@ def categoriseIdentifiers(
         components: list[CategorisedWord] = []
 
         for word in words:
-            stemmedWord = stemmer.stem(word)
+            stemmedWord = stemmer.stem(word)  # type: ignore
             if stemmedWord in designWords:
                 components.append({"word": word, "category": "design"})
             elif stemmedWord in contextWords:
@@ -66,8 +66,20 @@ def categoriseIdentifiers(
                 # filter out all checks that passed
                 issues = [issue for issue in validatorResults if issue]
 
+                metadata = addLexiconContext(word)
+
+                relevanceToDesign = determineRelevanceToDesignSchema(word, metadata)
+                relevanceToContext = determineRelevanceToContextSchema(word, metadata)
+
                 components.append(
-                    {"word": word, "category": "neither", "diagnostics": issues}
+                    {
+                        "word": word,
+                        "category": "neither",
+                        "metadata": metadata,
+                        "relevanceToDesign": relevanceToDesign,
+                        "relevanceToContext": relevanceToContext,
+                        "diagnostics": issues,
+                    }
                 )
 
         output.append(

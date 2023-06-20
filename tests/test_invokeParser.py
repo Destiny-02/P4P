@@ -9,11 +9,6 @@ sys.path.insert(0, project_dir)
 from src.helper.invokeParser import invokeParserWithMetadata
 
 
-# flattens a double array
-def flat(array: list[list[str]]) -> list[str]:
-    return [item for sublist in array for item in sublist]
-
-
 def conditionalDecorator(decorator, condition: bool):
     """
     If `condition` is true, the decorator is applied.

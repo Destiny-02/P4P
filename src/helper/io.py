@@ -5,6 +5,7 @@ import json
 import csv
 from .invokeParser import invokeParser
 from .conversion import setToStemmedSet, stringsToProcessable
+from .jsonHelpers import jsonStringify
 
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
@@ -22,7 +23,7 @@ def saveJsonFile(jsonObj: object, outputFilePath: str):
 
     # save the file
     with open(outputFilePath, 'w', encoding="utf-8") as file:
-        file.write(json.dumps(jsonObj, indent=4, ensure_ascii=False))
+        file.write(jsonStringify(jsonObj))
 
 def findRepoPaths(pathToData):
   """
