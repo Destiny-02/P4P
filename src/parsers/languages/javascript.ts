@@ -35,6 +35,9 @@ function walkTree(
         output.imports.named[localVariableName] = {
           originalName: originalVariableName,
           source: node.source.value,
+
+          // if the import path does not start with . or @ or ~
+          isLibraryFile: /^[^.@~]/.test(node.source.value),
         };
       }
     }
@@ -54,6 +57,43 @@ function walkTree(
   if ("body" in node && node.body) {
     const body = Array.isArray(node.body) ? node.body : [node.body];
     children.push(...body.map((n) => ({ context: undefined, node: n })));
+  }
+
+  // variable declarators
+  if ("declarations" in node && node.declarations) {
+    children.push(
+      ...node.declarations.map((n) => ({ context: undefined, node: n }))
+    );
+  }
+
+  // expressions
+  if (node.type === AST_NODE_TYPES.ExpressionStatement) {
+    children.push({ context: undefined, node: node.expression });
+  }
+
+  // assignment - check LHS and RHS sides
+  if (node.type === AST_NODE_TYPES.AssignmentExpression) {
+    children.push(
+      { context: "left", node: node.left },
+      { context: "right", node: node.right }
+    );
+  }
+
+  // assignment - check LHS and RHS sides
+  if (node.type === AST_NODE_TYPES.TSEnumDeclaration) {
+    children.push(
+      ...node.members.map(
+        (m): NodeWithContext => ({ context: "enumProperty", node: m })
+      )
+    );
+  }
+
+  // accessing a property of an object - we only care if the parent node is an AssignmentExpression
+  if (
+    node.type === AST_NODE_TYPES.MemberExpression &&
+    parent?.type === AST_NODE_TYPES.AssignmentExpression
+  ) {
+    children.push({ context: "property", node: node.property });
   }
 
   // add the method's arguments

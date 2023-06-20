@@ -2,6 +2,10 @@ import { promises as fs } from "node:fs";
 import { parse, CstNode, IToken } from "java-parser";
 import { Parser } from "../Parser";
 
+// TODO: not sure if this is sufficient
+const isLibrary = (importPath: string) =>
+  importPath.startsWith("java.") || importPath.startsWith("com.sun.");
+
 function walkTree(
   node: CstNode,
   fallbackType: string,
@@ -24,7 +28,10 @@ function walkTree(
         .map((identifier) => identifier.image)
         .join(".");
 
-      output.imports.wildcard.push(importPathString);
+      output.imports.wildcard.push({
+        source: importPathString,
+        isLibraryFile: isLibrary(importPathString),
+      });
     } else {
       // normal import
       const variableName = importPath.at(-1)!.image;
@@ -36,6 +43,7 @@ function walkTree(
       output.imports.named[variableName] = {
         originalName: variableName, // java doesn't allow renaming
         source: importPathString,
+        isLibraryFile: isLibrary(importPathString),
       };
     }
   }

@@ -1,16 +1,21 @@
 export namespace Parser {
+  export interface ImportSource {
+    /** in most languages this is the name of the file or library where the import is from */
+    source: string;
+
+    /** true if this import is from the language's std lib (as opposed to a local file) */
+    isLibraryFile: boolean;
+  }
   export interface Results {
     imports: {
       named: {
-        [localVariableName: string]: {
-          /** in most languages this is the name of the file or library where the import is from */
-          source: string;
+        [localVariableName: string]: ImportSource & {
           /** some languages let you rename import in the declaration */
           originalName: string;
         };
       };
       /** list of sources where wildcard imports were used, if the language supports it */
-      wildcard: string[];
+      wildcard: ImportSource[];
     };
     comments: string[];
     identifiers: {
@@ -41,8 +46,16 @@ export abstract class Parser {
     results: Parser.Results
   ): Parser.PostProcessedResults {
     const output: Parser.PostProcessedResults = results;
+
+    // for each identier, check if it was imported from a builtin library
+    // without being renamed
     for (const identifier of output.identifiers) {
-      identifier.isLibraryName = false;
+      const importMetadata = output.imports.named[identifier.name];
+
+      identifier.isLibraryName =
+        !!importMetadata &&
+        importMetadata.isLibraryFile &&
+        importMetadata.originalName === identifier.name;
     }
     return results;
   }

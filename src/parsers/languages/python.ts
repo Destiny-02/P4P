@@ -75,7 +75,7 @@ export class PythonParser extends Parser {
       `python languages/pythonComments.py "${fileName}"`
     )
       .toString()
-      .replace(/\r\n/g, "\n") // CRLF to LF
+      .replaceAll("\r\n", "\n") // CRLF to LF
       .split("\n")
       .filter((line) => line !== ""); // remove blank lines
 

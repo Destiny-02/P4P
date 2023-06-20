@@ -3,6 +3,8 @@
 exports[`test case files parses Sample.java (java) 1`] = `
 {
   "comments": [
+    "// import from another package",
+    "// import from our own package",
     "/**
    * Sample is a class
    */",
@@ -50,7 +52,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       "type": "variableDeclaratorId",
     },
     {
-      "isLibraryName": false,
+      "isLibraryName": true,
       "name": "List",
       "type": "unannClassType",
     },
@@ -60,7 +62,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       "type": "variableDeclaratorId",
     },
     {
-      "isLibraryName": false,
+      "isLibraryName": true,
       "name": "ArrayList",
       "type": "classOrInterfaceTypeToInstantiate",
     },
@@ -93,16 +95,39 @@ exports[`test case files parses Sample.java (java) 1`] = `
   "imports": {
     "named": {
       "ArrayList": {
+        "isLibraryFile": true,
         "originalName": "ArrayList",
         "source": "java.util",
       },
       "List": {
+        "isLibraryFile": true,
         "originalName": "List",
         "source": "java.util",
       },
+      "SmartCardReader": {
+        "isLibraryFile": false,
+        "originalName": "SmartCardReader",
+        "source": "nz.school.app.cordovaSmartCardPlugin",
+      },
+      "Whatever": {
+        "isLibraryFile": false,
+        "originalName": "Whatever",
+        "source": "parsers.languages",
+      },
     },
     "wildcard": [
-      "java.beans",
+      {
+        "isLibraryFile": true,
+        "source": "java.beans",
+      },
+      {
+        "isLibraryFile": false,
+        "source": "nz.school.app.cordovaGeoLocationPlugin",
+      },
+      {
+        "isLibraryFile": false,
+        "source": "parsers.languages",
+      },
     ],
   },
 }
@@ -172,46 +197,57 @@ exports[`test case files parses sample.js (javascript) 1`] = `
   "imports": {
     "named": {
       "defaultImport": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./someFile.js",
       },
       "defaultImport2": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./someFile",
       },
       "json": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./foo.json",
       },
       "named1": {
+        "isLibraryFile": false,
         "originalName": "named1",
         "source": "./someFile",
       },
       "named2": {
+        "isLibraryFile": false,
         "originalName": "named2",
         "source": "./someFile",
       },
       "named3": {
+        "isLibraryFile": false,
         "originalName": "named3",
         "source": "./someFile.ts",
       },
       "named5": {
+        "isLibraryFile": false,
         "originalName": "named5",
         "source": "./someFile",
       },
       "renamed4": {
+        "isLibraryFile": false,
         "originalName": "named4",
         "source": "./someFile.ts",
       },
       "renamed5": {
+        "isLibraryFile": false,
         "originalName": "named5",
         "source": "./someFile",
       },
       "renamedDefault": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./someFile",
       },
       "renamedDefault2": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./someFile",
       },
@@ -266,70 +302,87 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
   "imports": {
     "named": {
       "Type1": {
+        "isLibraryFile": false,
         "originalName": "Type1",
         "source": "./someFile",
       },
       "Type2": {
+        "isLibraryFile": false,
         "originalName": "Type2",
         "source": "./someFile",
       },
       "Type3": {
+        "isLibraryFile": false,
         "originalName": "Type3",
         "source": "./someFile",
       },
       "defaultImport": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./someFile.js",
       },
       "defaultImport2": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./someFile",
       },
       "defaultWithType": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./someFile",
       },
       "defaultWithType2": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./someFile",
       },
       "json": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./foo.json",
       },
       "named1": {
+        "isLibraryFile": false,
         "originalName": "named1",
         "source": "./someFile",
       },
       "named2": {
+        "isLibraryFile": false,
         "originalName": "named2",
         "source": "./someFile",
       },
       "named3": {
+        "isLibraryFile": false,
         "originalName": "named3",
         "source": "./someFile.ts",
       },
       "named5": {
+        "isLibraryFile": false,
         "originalName": "named5",
         "source": "./someFile",
       },
       "named6": {
+        "isLibraryFile": false,
         "originalName": "named6",
         "source": "./someFile",
       },
       "renamed4": {
+        "isLibraryFile": false,
         "originalName": "named4",
         "source": "./someFile.ts",
       },
       "renamed5": {
+        "isLibraryFile": false,
         "originalName": "named5",
         "source": "./someFile",
       },
       "renamedDefault": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./someFile",
       },
       "renamedDefault2": {
+        "isLibraryFile": false,
         "originalName": "default",
         "source": "./someFile",
       },

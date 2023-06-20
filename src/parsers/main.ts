@@ -32,7 +32,7 @@ async function main() {
     output[fileName] = await parser.parse(fileName);
   }
 
-  await fs.writeFile(outputPath, JSON.stringify(output, null, 2));
+  await fs.writeFile(outputPath, JSON.stringify(output, undefined, 2));
   // console.log("Saved to", outputPath);
 }
 

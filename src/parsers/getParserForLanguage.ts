@@ -7,7 +7,7 @@ import { PythonParser } from "./languages/python";
 export const getParserForLanguage = (fileName: string) =>
   fileName.endsWith(".java")
     ? JavaParser
-    : fileName.match(/.(j|t)sx?$/)
+    : /.[ajt]sx?$/.test(fileName)
     ? JsTsParser
     : fileName.endsWith(".py")
     ? PythonParser
