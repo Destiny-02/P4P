@@ -5,6 +5,7 @@
     "downloadOtherDictionaries": "cd src/helper && downloadOtherDictionaries.bat",
     "downloadDictionaries": "npm run downloadAbbrs && npm run downloadOtherDictionaries",
     "lint": "eslint --ext .js,.jsx,ts,.tsx .",
+    "typecheck": "tsc",
     "test": "jest"
   },
   "dependencies": {
@@ -38,6 +39,9 @@
   },
   "jest": {
     "preset": "ts-jest",
+    "testPathIgnorePatterns": [
+      "dist"
+    ],
     "testEnvironment": "node"
   }
 }
