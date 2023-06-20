@@ -7,7 +7,7 @@ to-determine.csv
 tool-results*.csv
 
 # parsers
-src/parsers/dist
+dist
 
 # temp
 parser-output.json

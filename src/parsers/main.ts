@@ -5,8 +5,9 @@ import { getParserForLanguage } from "./getParserForLanguage";
 
 async function main() {
   const fileNames = process.argv[2].split("📚").map((file) => file.trim());
-  let outputPath = join(process.cwd(), "parser-output.json");
-  if (process.argv.length >= 3) outputPath = process.argv[3];
+
+  // always save to repo root, no matter where this script is executed from
+  const outputPath = join(__dirname, "../../parser-output.json");
 
   if (!fileNames?.length) {
     console.error(

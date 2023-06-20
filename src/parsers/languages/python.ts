@@ -123,7 +123,7 @@ export class PythonParser extends Parser {
 
     // now we need to invoke some python code to parse the inline comments
     const inlineComments = execSync(
-      `python languages/pythonComments.py "${fileName}"`
+      `python src/parsers/languages/pythonComments.py "${fileName}"`
     )
       .toString()
       .replaceAll("\r\n", "\n") // CRLF to LF

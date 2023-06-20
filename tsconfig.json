@@ -7,7 +7,8 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "strict": true,
-    "lib": ["esnext"]
+    "downlevelIteration": true,
+    "lib": ["esnext", "dom"] // dom is to hack around https://github.com/DefinitelyTyped/DefinitelyTyped/issues/60924
   },
   "include": ["**/*"],
   "exclude": ["dist"]
