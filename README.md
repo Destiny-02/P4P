@@ -1,6 +1,6 @@
 # Setup
 
-- Install python3 or later
+- Install python 3.10
 - Install NodeJS v18 or newer
 - run `python --version` to confirm that the python version in PATH is v3
 - run `python -m pip install --user pipenv` to install [the package manager](https://packaging.python.org/en/latest/tutorials/managing-dependencies/)
@@ -74,6 +74,8 @@ The steps for doing so are as follows:
   - Rerun the `percentOfVocab` tool.
   - Replace the results in `results/x/x-term-percentVocab-y-n.csv` with the tool output csv.
   - Update the workbook version
+- Identifier categorisation/validation
+  - No manual updates required, the whole pipeline is automated.
 
 # Speeding up the tool
 

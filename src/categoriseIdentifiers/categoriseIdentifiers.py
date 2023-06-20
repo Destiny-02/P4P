@@ -12,11 +12,6 @@ from helper.invokeParser import invokeParser
 from helper.io import findJavaFiles, readSheet, saveJsonFile
 from helper.conversion import stringsToProcessable
 
-#
-# run with:
-# python src/categoriseIdentifiers/categoriseIdentifiers.py --cache "ugrad-009-01/design1000"
-#
-
 ALL_DATA_FOLDER = path.join(path.dirname(__file__), "../../data")
 ALL_VOCAB_FOLDER = path.join(path.dirname(__file__), "../vocabularies")
 ALL_RESULTS_FOLDER = path.join(path.dirname(__file__), "../../results")
@@ -24,7 +19,8 @@ ALL_RESULTS_FOLDER = path.join(path.dirname(__file__), "../../results")
 
 def categoriseIdentifiers(repoName: str):
     """
-    FIXME: does stuff
+    This function processes each identifier, and runs various validators
+    on each suspicious word in the identifier.
     """
 
     repoFolder = path.join(ALL_DATA_FOLDER, repoName)
