@@ -1,6 +1,21 @@
 import json
+import sys
 from os import path
-from typeDefs import Diagonstics, AbbreviationsDictionary, Severity
+
+
+# for some ridiculous reason you can't have double nested folders
+if "pytest" in sys.modules:
+    from categoriseIdentifiers.typeDefs import (
+        Diagonstics,
+        AbbreviationsDictionary,
+        Severity,
+    )
+else:
+    from typeDefs import (
+        Diagonstics,
+        AbbreviationsDictionary,
+        Severity,
+    )
 
 
 dictionary: AbbreviationsDictionary = json.load(
@@ -34,7 +49,7 @@ def isAbbreviated(word: str, identifier: str) -> Diagonstics | None:
 
             return {
                 "issueType": "abbreviation",
-                "severity": Severity.INFO,
+                "severity": Severity.WARNING,
                 "suggestion": f"“{word}” is a vauge abbreviation. Consider using {suggestionsStr} instead.",
             }
 

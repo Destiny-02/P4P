@@ -87,6 +87,7 @@ If you are running the tool multiple times, or are running multiple tools, you c
 To do this:
 
 - Ensure that you have run the tool at least once and that the cached terms have been stored in a json file
+- Use `python --cache ...` instead of `python ...` (works in all scripts). Alternatively:
 - Comment out the following line
 
 ```python
