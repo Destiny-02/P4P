@@ -1,8 +1,8 @@
 {
   "scripts": {
     "parse": "tsc && node dist/parsers/main",
-    "downloadAbbrs": "ts-node src/helper/downloadAbbreviationDictionary",
-    "downloadOtherDictionaries": "cd src/helper && downloadOtherDictionaries.bat",
+    "downloadAbbrs": "ts-node src/helper/setup/downloadAbbreviationDictionary",
+    "downloadOtherDictionaries": "cd src/helper/setup && downloadOtherDictionaries.bat",
     "downloadDictionaries": "npm run downloadAbbrs && npm run downloadOtherDictionaries",
     "lint": "eslint --ext .js,.jsx,ts,.tsx .",
     "typecheck": "tsc",

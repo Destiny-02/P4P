@@ -1,0 +1,12 @@
+SELECT DISTINCT ?item ?wordnetId WHERE {
+  {
+    SELECT DISTINCT ?item WHERE {
+      ?item p:P8814 ?wordnetInternalRef.
+      ?wordnetInternalRef (ps:P8814) _:anyValueP8814.
+    }
+
+    # change to 30000 in production
+    LIMIT 50
+  }
+  ?item wdt:P8814 ?wordnetId
+}

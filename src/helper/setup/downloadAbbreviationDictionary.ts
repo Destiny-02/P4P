@@ -1,6 +1,7 @@
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
 import { format } from "prettier";
+import { downloadQIdMap } from "./downloadQIdMap";
 
 //
 // this file has to be JS/TS, because some of the source data is eval'ed from JS files on GitHub.
@@ -87,7 +88,9 @@ async function main() {
   const baseData = structuredClone(CUSTOM_OVERRIDES);
 
   // (!) these two functions mutate their argument
+  console.log("Downloading from unicorn…");
   await getUnicornData(baseData);
+  console.log("Downloading from abbrcode…");
   await downloadAbbrData(baseData);
 
   // remove duplicates and sort keys alphabetically
@@ -103,13 +106,16 @@ async function main() {
     delete baseData.abbreviations[abbrToSkip];
   }
 
-  const folder = join(__dirname, "../../data/downloaded");
+  const folder = join(__dirname, "../../../data/downloaded");
   await fs.mkdir(folder, { recursive: true });
 
   await fs.writeFile(
     join(folder, "abbreviations-dict.json"),
     format(JSON.stringify(baseData), { parser: "json" })
   );
+
+  console.log("Downloading wordnet-QIDs…");
+  await downloadQIdMap();
 }
 
 main();

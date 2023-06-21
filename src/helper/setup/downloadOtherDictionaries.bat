@@ -1,4 +1,4 @@
-cd ../../data
+cd ../../../data
 mkdir downloaded
 cd downloaded
 
