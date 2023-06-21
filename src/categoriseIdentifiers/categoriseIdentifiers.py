@@ -14,7 +14,10 @@ from helper.conversion import stringsToProcessable
 
 ALL_DATA_FOLDER = path.join(path.dirname(__file__), "../../data")
 ALL_VOCAB_FOLDER = path.join(path.dirname(__file__), "../vocabularies")
-ALL_RESULTS_FOLDER = path.join(path.dirname(__file__), "../../results")
+# save output to the categoriseIdentifiers folder
+# all the tools should write to their own folder
+# the results/ folder is for finalised and organised results so tools should not write to it
+TOOL_OUTPUT_FOLDER = path.join(path.dirname(__file__), "")
 
 
 def categoriseIdentifiers(repoName: str):
@@ -25,7 +28,7 @@ def categoriseIdentifiers(repoName: str):
 
     repoFolder = path.join(ALL_DATA_FOLDER, repoName)
     vocabFolder = path.join(ALL_VOCAB_FOLDER, repoName, "..")
-    outputFile = path.join(ALL_RESULTS_FOLDER, repoName) + ".json"
+    outputFile = path.join(path.dirname(__file__), repoName.split('/')[-1]) + ".json"
 
     (identifiers, _) = invokeParser(findJavaFiles(repoFolder))
     contextWords = readSheet(path.join(vocabFolder, "context.txt"))
