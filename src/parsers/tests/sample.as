@@ -14,3 +14,6 @@ var z = 3;
 window.myCustomAttribute = "";
 
 class SomeClass {}
+
+// these are all globals that should not be considered
+console.log(document.getElementById(navigator.userAgent));

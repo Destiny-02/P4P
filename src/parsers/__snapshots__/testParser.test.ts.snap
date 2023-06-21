@@ -9,6 +9,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
    * Sample is a class
    */",
     "// this is a comment",
+    "// these are all globals that should not be considered",
   ],
   "identifiers": [
     {
@@ -58,24 +59,6 @@ exports[`test case files parses Sample.java (java) 1`] = `
     },
     {
       "isLibraryName": false,
-      "name": "a",
-      "sourceLocation": [
-        564,
-        564,
-      ],
-      "type": "fqnOrRefTypePartCommon",
-    },
-    {
-      "isLibraryName": false,
-      "name": "b",
-      "sourceLocation": [
-        568,
-        568,
-      ],
-      "type": "fqnOrRefTypePartCommon",
-    },
-    {
-      "isLibraryName": false,
       "name": "paye_tax_bracket",
       "sourceLocation": [
         606,
@@ -94,10 +77,37 @@ exports[`test case files parses Sample.java (java) 1`] = `
     },
     {
       "isLibraryName": false,
+      "name": "arg1",
+      "sourceLocation": [
+        676,
+        679,
+      ],
+      "type": "variableDeclaratorId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "arg2",
+      "sourceLocation": [
+        689,
+        692,
+      ],
+      "type": "variableDeclaratorId",
+    },
+    {
+      "isLibraryName": false,
+      "name": "spreadArguments",
+      "sourceLocation": [
+        702,
+        716,
+      ],
+      "type": "variableArityParameter",
+    },
+    {
+      "isLibraryName": false,
       "name": "MyEnum",
       "sourceLocation": [
-        703,
-        708,
+        847,
+        852,
       ],
       "type": "typeIdentifier",
     },
@@ -105,8 +115,8 @@ exports[`test case files parses Sample.java (java) 1`] = `
       "isLibraryName": false,
       "name": "ENUM_MEMBER_1",
       "sourceLocation": [
-        716,
-        728,
+        860,
+        872,
       ],
       "type": "enumConstant",
     },
@@ -114,8 +124,8 @@ exports[`test case files parses Sample.java (java) 1`] = `
       "isLibraryName": false,
       "name": "ENUM_MEMBER_2",
       "sourceLocation": [
-        735,
-        747,
+        879,
+        891,
       ],
       "type": "enumConstant",
     },
@@ -123,8 +133,8 @@ exports[`test case files parses Sample.java (java) 1`] = `
       "isLibraryName": false,
       "name": "MyIFace",
       "sourceLocation": [
-        767,
-        773,
+        911,
+        917,
       ],
       "type": "typeIdentifier",
     },
@@ -132,8 +142,8 @@ exports[`test case files parses Sample.java (java) 1`] = `
       "isLibraryName": false,
       "name": "myInterfaceProperty",
       "sourceLocation": [
-        785,
-        803,
+        929,
+        947,
       ],
       "type": "variableDeclaratorId",
     },
@@ -243,6 +253,7 @@ exports[`test case files parses sample.as (javascript) 1`] = `
     " eslint-disable ",
     " @ts-nocheck -- this is a sample file, not part of the sourcecode",
     " an inline comment",
+    " these are all globals that should not be considered",
   ],
   "identifiers": [
     {
@@ -336,6 +347,7 @@ exports[`test case files parses sample.js (javascript) 1`] = `
  * @param {number} b
  ",
     " an inline comment",
+    " these are all globals that should not be considered",
   ],
   "identifiers": [
     {
@@ -484,6 +496,7 @@ Hiii
     does nothing
     ",
     "# inline commenttt",
+    "# these are all globals that should not be considered",
   ],
   "identifiers": [
     {
@@ -556,6 +569,7 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
     " extra: TS only",
     "* a comment  ",
     " another comment",
+    " these are all globals that should not be considered",
   ],
   "identifiers": [
     {

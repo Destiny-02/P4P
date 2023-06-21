@@ -17,3 +17,7 @@ class OOP:
 
     def doSomething(self):
         pass
+
+# these are all globals that should not be considered
+print()
+exit()

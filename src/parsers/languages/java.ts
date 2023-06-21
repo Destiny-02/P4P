@@ -10,7 +10,7 @@ const AST_TYPES_TO_KEEP = new Set([
   "typeIdentifier", // class definition
   "methodDeclarator", // method definition
   "variableDeclaratorId", // variable definition
-  "fqnOrRefTypePartCommon", // argument defintion
+  "variableArityParameter", // spread argument defintion
   "enumConstant", // enum member definition
 ]);
 

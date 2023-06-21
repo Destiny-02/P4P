@@ -36,3 +36,6 @@ enum MyEnum {
   ENUM_MEMBER_1,
   ENUM_MEMBER_2,
 }
+
+// these are all globals that should not be considered
+console.log(document.getElementById(navigator.userAgent));
