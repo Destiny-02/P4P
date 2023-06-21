@@ -63,6 +63,9 @@ def test_invokeParser():
             "employees",
             "get_payslip_for_paye",
             "get_annual_income_deduction",
+            "arg1",
+            "arg2",
+            "spreadArguments",
         ]
     )
     assert comments == set(
@@ -76,5 +79,7 @@ def test_invokeParser():
             "// import from another package",
             "// import from our own package",
             "// this is a comment",
+            "// these are all globals that should not be considered",
+            " these are all globals that should not be considered",
         ]
     )
