@@ -10,6 +10,7 @@ tool-results*.csv
 dist
 
 # generated files
+output
 data/downloaded
 # results/ is for finalised and organised results so tools should not write to it
 # we need to manually move over the tool output to the results/ folder and rename it appropriately after there have been significant changes to the tools' logic 

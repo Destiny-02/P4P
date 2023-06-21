@@ -7,6 +7,8 @@ from porter2stemmer import Porter2Stemmer
 import nltk
 nltk.download('stopwords')
 
+stopWords = set(nltk.corpus.stopwords.words('english'))
+
 def txtToSet(filename):
   """
   Converts a text file with one term per line to a set
@@ -220,6 +222,29 @@ def stringsToProcessable(strings: set[str], excludeListStemmed: set[str] | None 
     terms = removeSeenStemmed(terms, excludeListStemmed)
 
   return terms
+
+def preprocessIdentifier(identifier: str) -> list[str]:
+    """
+    almost identical to `stringsToProcessable`, but this function uses
+    a deterministic order and doesn't strip out some diacritics
+    TODO: deduplicate
+    """
+    # Split each string by treating it as an identifier
+    terms = splitIdentifier(identifier)
+
+    # To lowercase
+    terms = [term.lower() for term in terms]
+
+    # Remove single-letter words
+    terms = [term for term in terms if len(term) > 1]
+
+    # Remove stop words
+    terms = [term for term in terms if term not in stopWords]
+
+    # Fix spelling
+    terms = [fixUSSpelling(term) for term in terms]
+
+    return terms
 
 def dictToCsv(myDict: dict[any, any]) -> str:
   lines = []

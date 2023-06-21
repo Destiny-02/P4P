@@ -1,4 +1,5 @@
 import os.path as path
+from pathlib import Path
 import os
 import json
 import csv
@@ -16,8 +17,12 @@ def cleanOutFolder(outPath):
       os.remove(filePath)
 
 def saveJsonFile(jsonObj: object, outputFilePath: str):
-  with open(outputFilePath, 'w', encoding="utf-8") as file:
-    file.write(json.dumps(jsonObj, indent=4, ensure_ascii=False))
+    # create any missing folders in the output file path
+    Path(path.dirname(outputFilePath)).mkdir(parents=True, exist_ok=True)
+
+    # save the file
+    with open(outputFilePath, 'w', encoding="utf-8") as file:
+        file.write(json.dumps(jsonObj, indent=4, ensure_ascii=False))
 
 def findRepoPaths(pathToData):
   """

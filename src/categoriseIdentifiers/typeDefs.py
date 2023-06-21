@@ -1,6 +1,7 @@
 from enum import Enum
 from typing import TypedDict
 from typing_extensions import NotRequired
+from helper.parserTypes import ParsedEntityContext
 
 
 class Severity(str, Enum):
@@ -41,7 +42,7 @@ class CategorisedIdentifier(TypedDict):
     identifier: str
 
     # location in the source code
-    loc: str
+    sourceLocations: list[ParsedEntityContext]
 
     # an array of each word and it's category+diagnostics
     components: list[CategorisedWord]

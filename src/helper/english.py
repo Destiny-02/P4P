@@ -2,7 +2,7 @@ import json
 import re
 from os import path
 
-def fixUSSpelling(word):
+def fixUSSpelling(word: str) -> str:
     """
 	If the word is a word in US English, it returns the UK English spelling of the word.
 	Otherwise, it returns itself.

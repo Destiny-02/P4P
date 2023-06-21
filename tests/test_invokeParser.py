@@ -6,7 +6,7 @@ import pytest
 project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, project_dir)
 
-from src.helper.invokeParser import invokeParser
+from src.helper.invokeParser import invokeParserWithMetadata
 
 
 # flattens a double array
@@ -41,9 +41,9 @@ def test_invokeParser():
     ]
 
     print(sampleFiles)
-    (identifiers, comments) = invokeParser(set(sampleFilesWithAbsolutePath))
+    (identifiers, comments) = invokeParserWithMetadata(set(sampleFilesWithAbsolutePath))
 
-    assert identifiers == set(
+    assert set(identifiers.keys()) == set(
         [
             "ENUM_MEMBER_1",
             "ENUM_MEMBER_2",
