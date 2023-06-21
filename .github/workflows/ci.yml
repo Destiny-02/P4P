@@ -35,9 +35,10 @@ jobs:
           npm i
 
       - name: ⏬ Download Dictionaries
+        # need to convert the batch syntax to bash syntax
         run: |
           npm run downloadAbbrs
-          cd src/helper
+          cd src/helper/setup
           mv downloadOtherDictionaries.bat bashEquivilant.sh
           sed -i 's/mkdir d/mkdir -p d/g' bashEquivilant.sh
           . bashEquivilant.sh
