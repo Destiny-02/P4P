@@ -105,7 +105,7 @@ def readFilesAndCategoriseIdentifiers(repoName: str):
 
     (identifiers, _) = invokeParserWithMetadata(findJavaFiles(repoFolder))
     contextWords = readSheet(path.join(vocabFolder, "context.txt"))
-    designWords = readSheet(path.join(vocabFolder, "context.txt"))
+    designWords = readSheet(path.join(vocabFolder, "design.txt"))
 
     output = categoriseIdentifiers(identifiers, contextWords, designWords)
 
