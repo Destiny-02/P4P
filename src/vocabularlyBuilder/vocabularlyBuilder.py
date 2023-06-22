@@ -156,5 +156,5 @@ if __name__ == "__main__":
 	# saveCategoriseSheetToTxt("ugrad-009-01")
 
 	# Categorising terms from identifiers in multiple codebases at once
-	# saveTermsToBeCategorised(findRepoPaths(getPath("../data/ugrad-009-01/")), "ugrad-009-01")
+	# saveTermsToBeCategorised(findRepoPaths(getPath("../../data/ugrad-009-01/")), "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")
