@@ -1,5 +1,3 @@
-import re
-
 from .splitting import splitIdentifier, splitIdentifiers
 from .english import fixUSSpelling
 import json
@@ -149,7 +147,7 @@ def extractWords(data: str):
   Converts a string to a list of words
   """
   # Replace all non-letter characters with spaces
-  clean_text = re.sub(r'[^a-zA-ZÀ-ÖØ-öø-ÿ\s]', ' ', data)
+  clean_text = ''.join(char if char.isalpha() else ' ' for char in data)
   
   # Split the cleaned text into a list of words
   words = clean_text.split()
@@ -180,7 +178,7 @@ def convertToLowercase(term: str) -> str:
   """
   Converts a term to stripped lowercase
   """
-  return re.sub(r'[^a-zA-ZÀ-ÖØ-öø-ÿ]', '', term).lower().strip()
+  return ''.join(char for char in term if char.isalpha()).lower().strip()
 
 def removeSeenStemmed(data: set, seen: set) -> set:
   """
@@ -226,14 +224,14 @@ def stringsToProcessable(strings: set[str], excludeListStemmed: set[str] | None 
 def preprocessIdentifier(identifier: str) -> list[str]:
     """
     almost identical to `stringsToProcessable`, but this function uses
-    a deterministic order and doesn't strip out some diacritics
+    a deterministic order
     TODO: deduplicate
     """
     # Split each string by treating it as an identifier
     terms = splitIdentifier(identifier)
 
     # To lowercase
-    terms = [term.lower() for term in terms]
+    terms = [convertToLowercase(term) for term in terms if term != ""]
 
     # Remove single-letter words
     terms = [term for term in terms if len(term) > 1]
