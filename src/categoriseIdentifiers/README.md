@@ -8,7 +8,6 @@ The validators detect obvious issues and can suggest improvements.
 
 **Usage:**
 
-- Make sure that the `abbreviation-dict.json` file has been downloaded into the `data/downloaded/` folder <!-- TODO: instructions for downloading it? Or should it be committed to the repo so our tool works offline? -->
 - Run `python src/categoriseIdentifiers/categoriseIdentifiers.py --cache "ugrad-009-01/design1000"`, where `ugrad-009-01` is the domain name and `design1000` is the repo name.
 - Like all scripts, the `--cache` flag is optional and will bypass the slow parser
 

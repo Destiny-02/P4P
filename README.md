@@ -5,7 +5,7 @@
 - run `python --version` to confirm that the python version in PATH is v3
 - run `python -m pip install --user pipenv` to install [the package manager](https://packaging.python.org/en/latest/tutorials/managing-dependencies/)
 - run `pipenv install` to install [the dependencies listed in Pipfile](./Pipfile)
-- run `npm run downloadDictionaries` to download some required JSON files
+- run `npm run downloadDictionaries` and `npm run downloadAbbrs` to download some required JSON files
 
 # Run Python Scripts
 
