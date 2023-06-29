@@ -4,9 +4,8 @@ This folder contains the `saveTermsFromRepo.py` script, which can be used to ext
 
 # Usage
 
-- Replace the path in the call to `main` with the path of the repository
+- Replace the path in the call to `main` with the path containing the repositories you want to process.
 - Run the script with `python saveTermsFromRepo.py`.
-- Repeat for more repositories.
 - The results will be written to a json file called `design-terms.json`.
 
 ## Saving frequent terms

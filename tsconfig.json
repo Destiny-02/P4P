@@ -11,5 +11,5 @@
     "lib": ["esnext", "dom"] // dom is to hack around https://github.com/DefinitelyTyped/DefinitelyTyped/issues/60924
   },
   "include": ["**/*"],
-  "exclude": ["dist", "src/donotcommit", "data"]
+  "exclude": ["dist", "src/donotcommit", "data", "src/openSourceRepos"]
 }
