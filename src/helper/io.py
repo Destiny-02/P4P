@@ -44,7 +44,8 @@ def findJavaFiles(folderPath: str):
     for filename in filenames:
       # add all files, the parser will discard what it can't process
       # (see getParserForLanguage.ts)
-      javaFiles.add(path.join(dirpath, filename))
+      if os.path.splitext(filename)[1] == '.java':
+          javaFiles.add(path.join(dirpath, filename))
   return javaFiles
 
 def setToSheet(data, sheetPath, append=False):
