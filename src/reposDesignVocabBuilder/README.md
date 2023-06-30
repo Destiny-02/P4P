@@ -14,3 +14,9 @@ This folder contains the `saveTermsFromRepo.py` script, which can be used to ext
 - To do this, ensure that only the call to is uncommented `saveDesignTermsAsVocabFile` and replace the argument with the minimum number of repositories that a term must be used in to be saved.
 - Run the script with `python saveTermsFromRepo.py`.
 - The results will be written to a text file called `design-terms.txt`.
+
+## Repository cloner
+
+- For a more efficient way of querying for and batch downloading GitHub repositories.
+- Replace the `query` and `destinationFolder` variables with the query you want to use and the path to the folder you want to save the repositories to.
+- Run the script with `python saveTermsFromRepo.py`.

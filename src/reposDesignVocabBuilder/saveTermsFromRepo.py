@@ -70,5 +70,5 @@ def getPath(relativePath):
 
 
 if __name__ == "__main__":
-    main(findRepoPaths(getPath("../../src/openSourceRepos")))
+    main(findRepoPaths(getPath("repos")))
     # saveDesignTermsAsVocabFile(2)
