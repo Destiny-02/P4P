@@ -70,5 +70,5 @@ def getPath(relativePath):
 
 
 if __name__ == "__main__":
-    main(findRepoPaths(getPath("repos")))
-    # saveDesignTermsAsVocabFile(2)
+    # main(findRepoPaths(getPath("repos")))
+    saveDesignTermsAsVocabFile(5)
