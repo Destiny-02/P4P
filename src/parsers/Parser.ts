@@ -69,12 +69,20 @@ export abstract class Parser {
     return results;
   }
 
-  public async parse(fileName: string): Promise<Parser.PostProcessedResults> {
-    const unprocessedResults = await this.internalParse(fileName);
+  public async parse(
+    fileName: string
+  ): Promise<Parser.PostProcessedResults | undefined> {
+    try {
+      const unprocessedResults = await this.internalParse(fileName);
 
-    const postProcessedResults =
-      this.postProcessParserResults(unprocessedResults);
+      const postProcessedResults =
+        this.postProcessParserResults(unprocessedResults);
 
-    return postProcessedResults;
+      return postProcessedResults;
+    } catch (ex) {
+      console.error(`Failed to parse “${fileName}” using ${this.language}`);
+      console.error(ex);
+      return undefined;
+    }
   }
 }

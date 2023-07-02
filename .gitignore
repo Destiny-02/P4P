@@ -13,12 +13,13 @@ dist
 output
 data/downloaded
 # results/ is for finalised and organised results so tools should not write to it
-# we need to manually move over the tool output to the results/ folder and rename it appropriately after there have been significant changes to the tools' logic 
+# we need to manually move over the tool output to the results/ folder and rename it appropriately after there have been significant changes to the tools' logic
 # all the tools should write to their own folder
-# results/*/*.json 
+# results/*/*.json
 src/categoriseIdentifiers/*.json
 
 # temp
+parser-input.txt
 parser-output.json
 debug-output.json
 cached-terms.json

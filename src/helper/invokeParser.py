@@ -36,11 +36,16 @@ def invokeParserWithMetadata(
 
     joinedFileNames = " 📚 ".join(cleanedPaths)
 
+    # temp hack to bypass CLI command max length for huge repositories
+    inputFilePath = path.join(path.dirname(__file__), "../../parser-input.txt")
+    with open(inputFilePath, "w", encoding="utf8") as inputFile:
+        inputFile.write(joinedFileNames)
+
     # invoke the nodejs script
     if useCache:
         print("Using cached parser results")
     else:
-        system(f'cd {scriptPath} && npm run parse -- "{joinedFileNames}"')
+        system(f'cd {scriptPath} && npm run parse -- "USE_INPUT_FILE"')
 
     # read the output from the script
     identifiers: IdentifersWithContext = {}

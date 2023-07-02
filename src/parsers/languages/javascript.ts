@@ -163,7 +163,7 @@ export class JsTsParser extends Parser {
       comment: true,
 
       sourceType: "module",
-      ecmaFeatures: { jsx: true },
+      ecmaFeatures: { jsx: !fileName.endsWith(".ts") },
       ecmaVersion: "latest",
       lib: ["dom", "esnext"],
     });

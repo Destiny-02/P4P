@@ -4,7 +4,12 @@ import { Parser } from "./Parser";
 import { getParserForLanguage } from "./getParserForLanguage";
 
 async function main() {
-  const fileNames = process.argv[2]
+  const inputString =
+    process.argv[2] === "USE_INPUT_FILE"
+      ? await fs.readFile(join(__dirname, "../../parser-input.txt"), "utf8")
+      : process.argv[2];
+
+  const fileNames = inputString
     .split("📚")
     .map((file) => file.replaceAll("^", "").trim());
 
@@ -21,7 +26,7 @@ async function main() {
   console.log(`\t Parsing ${fileNames.length} files...`);
 
   const output: {
-    [fileName: string]: Parser.PostProcessedResults;
+    [fileName: string]: Parser.PostProcessedResults | undefined;
   } = {};
   for (const fileName of fileNames) {
     const LangParser = getParserForLanguage(fileName);
