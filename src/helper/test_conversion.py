@@ -1,11 +1,5 @@
 import os
-import sys
-
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, project_dir)
-
-from src.helper.conversion import (
+from .conversion import (
     txtToSet,
     jsonToSet,
     txtToSetWithEquivalents,

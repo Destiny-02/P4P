@@ -5,7 +5,7 @@ This folder contains the `saveTermsFromRepo.py` script, which can be used to ext
 # Usage
 
 - Replace the path in the call to `main` with the path containing the repositories you want to process.
-- Run the script with `python saveTermsFromRepo.py`.
+- From the repo root, run the script with `python -m src.saveTermsFromRepo`.
 - The results will be written to a json file called `design-terms.json`.
 
 ## Saving frequent terms
@@ -15,11 +15,11 @@ This folder contains the `saveTermsFromRepo.py` script, which can be used to ext
 - Replace the first argument with the minimum number of repositories that a term must be used in to be saved.
 - Replace the second argument with the minimum number of repositories a short term (1 or 2 characters) must be used in to be saved.
 - Make the arguments the same if you want to treat all terms the same.
-- Run the script with `python saveTermsFromRepo.py`.
+- From the repo root, run the script with `python -m src.saveTermsFromRepo`.
 - The results will be written to a text file called `design-terms.txt`.
 
 ## Repository cloner
 
 - For a more efficient way of querying for and batch downloading GitHub repositories.
 - Replace the `query` and `destinationFolder` variables with the query you want to use and the path to the folder you want to save the repositories to.
-- Run the script with `python saveTermsFromRepo.py`.
+- From the repo root, run the script with `python -m src.saveTermsFromRepo`.

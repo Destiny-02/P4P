@@ -1,10 +1,4 @@
-from os import path
-import sys
-
-# To fix import errors
-sys.path.insert(0, path.abspath(path.join(path.dirname(__file__), "..")))
-
-from src.categoriseIdentifiers.helpers.createSynonymMap import createSynonymMap
+from .createSynonymMap import createSynonymMap
 
 
 def test_createSynonymMap():

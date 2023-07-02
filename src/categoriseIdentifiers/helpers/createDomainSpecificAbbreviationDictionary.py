@@ -1,6 +1,6 @@
 import re
 from spiral import ronin
-from typeDefs import (
+from ..typeDefs import (
     AbbreviationsDictionary,
 )
 

@@ -1,15 +1,12 @@
-import os
-import sys
-
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, project_dir)
-
 from os import path
-from helper.conversion import dictToCsv, txtToSet
-from helper.io import csvToSheet, saveAllRepoTermsToCache, getAllRepoTermsFromCache, findRepoPaths
-
-from pathConstants import DATA_FOLDER, VOCAB_FOLDER, CACHED_TERMS
+from ..helper.conversion import dictToCsv, txtToSet
+from ..helper.io import (
+    csvToSheet,
+    saveAllRepoTermsToCache,
+    getAllRepoTermsFromCache,
+    findRepoPaths,
+)
+from ..pathConstants import DATA_FOLDER, VOCAB_FOLDER, CACHED_TERMS
 
 def main(allTerms: dict[str, list[str]], vocabFile: str) -> dict[str, list]:
     output = {"codebase": [], "vocabType": [], "percent": []}

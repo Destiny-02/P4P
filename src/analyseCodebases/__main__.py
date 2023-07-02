@@ -1,19 +1,9 @@
-import os
-import sys
-
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, project_dir)
-
-from helper.invokeParser import invokeParser
-from helper.conversion import (
-	txtToSet, setToStemmedSet, stringsToProcessable
-)
-from helper.io import findJavaFiles, findRepoPaths, deleteFileIfExists
-from helper.stats import findLA
 from os import path
 import csv
-from pathConstants import DATA_FOLDER, VOCAB_FOLDER
+from ..helper.invokeParser import invokeParser
+from ..helper.conversion import txtToSet, setToStemmedSet, stringsToProcessable
+from ..helper.io import findJavaFiles, findRepoPaths, deleteFileIfExists
+from ..pathConstants import DATA_FOLDER, VOCAB_FOLDER
 
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)

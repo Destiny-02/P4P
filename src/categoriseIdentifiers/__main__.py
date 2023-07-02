@@ -1,21 +1,17 @@
 from os import path
-import sys
 from porter2stemmer import Porter2Stemmer
 
-# To fix import errors
-sys.path.insert(0, path.abspath(path.join(path.dirname(__file__), "..")))
-
-from typeDefs import CategorisedIdentifier, CategorisedWord, GlobalValidatorContext
-from validators.index import validators
-from lexicon.addLexiconContext import addLexiconContext
-from lexicon.determineRelevanceToSchema import createDetermineRelevanceToSchema
-from helpers.createDomainSpecificAbbreviationDictionary import (
+from .typeDefs import CategorisedIdentifier, CategorisedWord, GlobalValidatorContext
+from .validators.index import validators
+from .lexicon.addLexiconContext import addLexiconContext
+from .lexicon.determineRelevanceToSchema import createDetermineRelevanceToSchema
+from .helpers.createDomainSpecificAbbreviationDictionary import (
     createDomainSpecificAbbreviationDictionary,
 )
-from helpers.createSynonymMap import createSynonymMap
-from helper.invokeParser import invokeParserWithMetadata, IdentifersWithContext
-from helper.io import findFiles, readSheet, saveJsonFile
-from helper.conversion import preprocessIdentifier
+from .helpers.createSynonymMap import createSynonymMap
+from ..helper.invokeParser import invokeParserWithMetadata, IdentifersWithContext
+from ..helper.io import findFiles, readSheet, saveJsonFile
+from ..helper.conversion import preprocessIdentifier
 
 ALL_DATA_FOLDER = path.join(path.dirname(__file__), "../../data")
 ALL_VOCAB_FOLDER = path.join(path.dirname(__file__), "../vocabularies")

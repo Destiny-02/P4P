@@ -1,4 +1,4 @@
-from lexicon.getSynonyms import getSynonyms
+from ..lexicon.getSynonyms import getSynonyms
 
 
 def createSynonymMap(schemaTerms: set[str]):

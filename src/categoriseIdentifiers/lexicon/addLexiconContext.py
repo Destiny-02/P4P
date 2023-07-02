@@ -2,7 +2,7 @@ from os import path
 import json
 import nltk
 from nltk.corpus import wordnet
-from typeDefs import LexiconContext
+from ..typeDefs import LexiconContext
 
 nltk.download("wordnet")
 

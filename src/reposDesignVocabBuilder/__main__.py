@@ -1,27 +1,18 @@
-import os
-import sys
-
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, project_dir)
-
 from os import path
 import json
-from helper.invokeParser import invokeParser
-from helper.conversion import (
-    setToStemmedSet,
-    stringsToProcessable
-)
-from helper.io import findJavaFiles, saveJsonFile, findRepoPaths
+from ..helper.invokeParser import invokeParser
+from ..helper.conversion import setToStemmedSet, stringsToProcessable
+from ..helper.io import findJavaFiles, saveJsonFile
 
 DESIGN_TERMS_FILE = "design-terms.json"
 MAX_FILES_PER_INVOCATION = 10
+
 
 def main(repoPaths: list[str]):
     # Get the existing terms and frequencies
     freqDict: dict[str, int] = {}
     if path.exists(getPath(DESIGN_TERMS_FILE)):
-        with open(getPath(DESIGN_TERMS_FILE), 'r', encoding="utf-8") as f:
+        with open(getPath(DESIGN_TERMS_FILE), "r", encoding="utf-8") as f:
             freqDict = json.load(f)
     else:
         print("No existing design terms file found. Using a new one.")
@@ -35,7 +26,7 @@ def main(repoPaths: list[str]):
         # Split the Java files into chunks of maximum size
         # This is to avoid running out of memory when parsing large repos
         for i in range(0, len(javaFiles), MAX_FILES_PER_INVOCATION):
-            chunk = javaFiles[i:i+MAX_FILES_PER_INVOCATION]
+            chunk = javaFiles[i : i + MAX_FILES_PER_INVOCATION]
             (chunkIdentifiers, _) = invokeParser(set(chunk), False)
             identifiers.update(chunkIdentifiers)
 
@@ -52,24 +43,25 @@ def main(repoPaths: list[str]):
     # Overwrite the file with the updated dictionary
     saveJsonFile(freqDict, getPath(DESIGN_TERMS_FILE))
 
+
 def saveDesignTermsAsVocabFile(minCount, minCountForShortTerms):
     """
     Saves design-terms.json as design-terms.txt, but only including terms that
     appear at least minCount times.
-    For short terms (length of <=2), only includes terms that appear at least 
+    For short terms (length of <=2), only includes terms that appear at least
     minCountForShortTerms times.
-    In reality, short terms are really terms of length 2 because terms of length 1 
+    In reality, short terms are really terms of length 2 because terms of length 1
     are not included in the design terms file.
     """
 
     # Read in the term and frequency dictionary
     designTerms: dict[str, int] = {}
-    with open(getPath(DESIGN_TERMS_FILE), 'r', encoding="utf-8") as f:
+    with open(getPath(DESIGN_TERMS_FILE), "r", encoding="utf-8") as f:
         designTerms = json.load(f)
 
-    # Save the terms that were frequent enough    
+    # Save the terms that were frequent enough
     finalTermsList = list()
-    with open(getPath("design-terms.txt"), 'w', encoding="utf-8") as f:
+    with open(getPath("design-terms.txt"), "w", encoding="utf-8") as f:
         for term in designTerms:
             count = designTerms[term]
             if len(term) <= 2 and count >= minCountForShortTerms:

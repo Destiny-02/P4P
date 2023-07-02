@@ -1,14 +1,12 @@
-import os
-import sys
-
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, project_dir)
-
 from os import path
-from helper.conversion import dictToCsv, txtToSet
-from helper.io import csvToSheet, saveAllRepoTermsToCache, getAllRepoTermsFromCache, findRepoPaths
-from pathConstants import DATA_FOLDER, VOCAB_FOLDER, CACHED_TERMS
+from ..helper.conversion import dictToCsv, txtToSet
+from ..helper.io import (
+    csvToSheet,
+    saveAllRepoTermsToCache,
+    getAllRepoTermsFromCache,
+    findRepoPaths,
+)
+from ..pathConstants import DATA_FOLDER, VOCAB_FOLDER, CACHED_TERMS
 
 # create a map of words and the number of codebases which use that word.
 # if a word appears multiple times in one codebase, it is only counted once,

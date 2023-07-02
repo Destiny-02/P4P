@@ -18,12 +18,12 @@ This folder contains the `analyseCodebases.py` script, which can be used to meas
 ```
 
 - Replace the argument in the call to `main` with the name of the folder containing the codebases and text files i.e. `your-domain-name` (referenced above).
-- Run the script with `python analyseCodebases.py`.
+- From the repo root, run the script with `python -m src.analyseCodebases`.
 - The results will be written to `tool-results.csv`.
 
 ## Find the lexical agreement of the codebases
 
 - Uncomment everything inside the `if __name__ == "__main__":` block except for the first 2 non-comment lines.
 - Replace all instances of `ugrad-009-01` with the name of the folder containing the codebases and text files i.e. `your-domain-name` (referenced above).
-- Run the script with `python analyseCodebases.py`.
+- From the repo root, run the script with `python -m src.analyseCodebases`.
 - The results will be printed to the console.

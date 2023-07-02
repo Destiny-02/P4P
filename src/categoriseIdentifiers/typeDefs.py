@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import TypedDict
 from typing_extensions import NotRequired
-from helper.parserTypes import ParsedEntityContext
+from ..helper.parserTypes import ParsedEntityContext
 
 
 class Severity(str, Enum):

@@ -1,12 +1,6 @@
 import os
-import sys
 import pytest
-
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, project_dir)
-
-from src.helper.english import fixUSSpelling, fixSpelling
+from .english import fixUSSpelling, fixSpelling
 
 def test_fixUSSpelling():
     assert fixUSSpelling("abc") == "abc" # Less than 5 characters

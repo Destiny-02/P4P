@@ -1,18 +1,16 @@
-import os
-import sys
-
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, project_dir)
-
-from helper.invokeParser import invokeParser
-from helper.conversion import (
-	txtToSet, stemTerm, setToTxtNoDuplicates, stringsToProcessable, setIntersectionStemmed, setToStemmedSet
-)
-from helper.io import findJavaFiles, setToSheet, deleteFileIfExists
 from os import path
 import csv
-from pathConstants import VOCAB_FOLDER
+from ..helper.invokeParser import invokeParser
+from ..helper.conversion import (
+    txtToSet,
+    stemTerm,
+    setToTxtNoDuplicates,
+    stringsToProcessable,
+    setIntersectionStemmed,
+    setToStemmedSet,
+)
+from ..helper.io import findJavaFiles, setToSheet, deleteFileIfExists
+from ..pathConstants import VOCAB_FOLDER
 
 TO_CATEGORISE_FILE = "to-categorise.csv"
 TO_DETERMINE_FILE = "to-determine.csv"

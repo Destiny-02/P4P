@@ -1,14 +1,7 @@
-import os
-import sys
-
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, project_dir)
-
 from os import path
-from analyseCodebases.analyseCodebases import main as analyseCodebases
-from helper.io import deleteFileIfExists
 import csv
+from ..analyseCodebases.__main__ import main as analyseCodebases
+from ..helper.io import deleteFileIfExists
 
 def main(pathToSmallVocabulary, pathToBigVocabulary, domainFolderName):
   (smallDesignCounts, smallContextCounts, smallNeitherCounts, smallTotalCounts) = analyseCodebases(domainFolderName, pathToSmallVocabulary)
@@ -41,8 +34,8 @@ def getPath(relativePath):
 
 if __name__ == "__main__":
   """
-  A basic "machine learning" experiment. 
-  The goal is to determine how accurate our classifications are for unclassified repos. 
+  A basic "machine learning" experiment.
+  The goal is to determine how accurate our classifications are for unclassified repos.
   We will measure this as the percentage of terms that are correctly classified.
   """
   (designPercentagesCorrect, contextPercentagesCorrect, neitherPercentagesCorrect, totalPercentagesCorrect) = main("../../results/ugrad-009-01/vocabularies/10/", "../../results/ugrad-009-01/vocabularies/20/", "ugrad-009-01")

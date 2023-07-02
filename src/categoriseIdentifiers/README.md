@@ -8,7 +8,7 @@ The validators detect obvious issues and can suggest improvements.
 
 **Usage:**
 
-- Run `python src/categoriseIdentifiers/categoriseIdentifiers.py --cache "ugrad-009-01/design1000"`, where `ugrad-009-01` is the domain name and `design1000` is the repo name.
+- Run `python -m src.categoriseIdentifiers --cache "ugrad-009-01/design1000"`, where `ugrad-009-01` is the domain name and `design1000` is the repo name.
 - Like all scripts, the `--cache` flag is optional and will bypass the slow parser
 
 Results are saved to `design1000.json` (depending on the chosen repo) in the folder where the script is run.

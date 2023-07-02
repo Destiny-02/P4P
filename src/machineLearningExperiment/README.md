@@ -13,5 +13,5 @@ This folder contains the `machineLearningExperiment.py` script, which can be use
 - Replace the first argument in the call to `main` with the path to the vocabularies text files that were created using the smaller subset of codebases.
 - Replace the second argument in the call to `main` with the path to the vocabularies text files that were created using all the codebases.
 - Replace the third argument in the call to `main` with the name of the folder containing the codebases i.e. `your-domain-name` (referenced above).
-- Run the script with `python machineLearningExperiment.py`.
+- From the repo root, run the script with `python -m src.machineLearningExperiment`.
 - The accuracy percentages will be written to `tool-results.csv`.

@@ -1,20 +1,14 @@
 import os
-import sys
-
-# To fix import errors
-project_dir = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../src/categoriseIdentifiers")
-)
-sys.path.insert(0, project_dir)
-
-import src.helper.invokeParser  # required because imports are broken
-from src.categoriseIdentifiers.helpers.createDomainSpecificAbbreviationDictionary import (
+from .createDomainSpecificAbbreviationDictionary import (
     createDomainSpecificAbbreviationDictionary,
 )
 
 
 def test_createDomainSpecificAbbreviationDictionary():
-    sampleFilePath = os.path.join(project_dir, "../parsers/tests/sample.md")
+    sampleFilePath = os.path.join(
+        os.path.dirname(__file__), "../../parsers/tests/sample.md"
+    )
+
     with open(sampleFilePath, "r", encoding="utf8") as file:
         assert createDomainSpecificAbbreviationDictionary(set([file.read()])) == {
             "abbreviations": {
