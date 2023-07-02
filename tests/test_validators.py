@@ -28,17 +28,21 @@ context2: ParsedEntityContext = {
     "startOffset": 456,
     "endOffset": 469,
 }
+allComments = set(
+    # the system should parse the abbreviation definition from this comment
+    ["This function parses GTFS (Google Transit Feed Specification) data"]
+)
 
 
 def test_validators():
     identifiers: IdentifersWithContext = {
-        "getModeOfTransport": [context1],
+        "getGtfsModeOfTransport": [context1],
         "currRouteConnexAct": [context1, context2],
     }
-    x = categoriseIdentifiers(identifiers, contextWords, designWords)
+    x = categoriseIdentifiers(identifiers, contextWords, designWords, allComments)
     assert x == [
         {
-            "identifier": "getModeOfTransport",
+            "identifier": "getGtfsModeOfTransport",
             "components": [
                 {
                     "category": "neither",
@@ -100,6 +104,43 @@ def test_validators():
                         "wup": (9.09, "tape_drive/tape_transport/transport"),
                     },
                 },
+                # TODO: this is not ideal, it parsed it as "GT" + "FS" instead of "GTFS"
+                {
+                    "category": "neither",
+                    "word": "gt",
+                    "diagnostics": [
+                        {
+                            "issueType": "abbreviation",
+                            "severity": Severity.INFO,
+                            "suggestion": "“gt” appears to be an abbreviation for “greater than”.",
+                        }
+                    ],
+                    "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
+                    "relevanceToContext": {"lch": None, "path": None, "wup": None},
+                    "relevanceToDesign": {"lch": None, "path": None, "wup": None},
+                },
+                {
+                    "category": "neither",
+                    "word": "fs",
+                    "diagnostics": [
+                        {
+                            "issueType": "abbreviation",
+                            "severity": Severity.INFO,
+                            "suggestion": "“fs” appears to be an abbreviation for “file system”.",
+                        }
+                    ],
+                    "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
+                    "relevanceToContext": {
+                        "lch": (74.72, "tripper/trip"),
+                        "path": (5.56, "tripper/trip"),
+                        "wup": (10.53, "tripper/trip"),
+                    },
+                    "relevanceToDesign": {
+                        "lch": (80.44, "tape_drive/tape_transport/transport"),
+                        "path": (5.88, "tape_drive/tape_transport/transport"),
+                        "wup": (11.11, "tape_drive/tape_transport/transport"),
+                    },
+                },
                 {
                     "category": "neither",
                     "word": "mode",
@@ -149,7 +190,7 @@ def test_validators():
                         {
                             "issueType": "abbreviation",
                             "severity": Severity.INFO,
-                            "suggestion": "“curr” appears to be an abbreviation. Consider using “current” instead.",
+                            "suggestion": "“curr” appears to be an abbreviation for “current”.",
                         }
                     ],
                 },

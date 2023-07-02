@@ -1,34 +1,57 @@
 import json
 from os import path
+from typing_extensions import Unpack
 from typeDefs import (
     Diagonstics,
     AbbreviationsDictionary,
     Severity,
+    ValidatorArguments,
 )
 
 
-dictionary: AbbreviationsDictionary = json.load(
+wellKnownDictionary: AbbreviationsDictionary = json.load(
     open(
         path.join(
             path.dirname(__file__), "../../../data/downloaded/abbreviations-dict.json"
-        )
+        ),
+        encoding="utf8",
     )
 )
 
 
-def isAbbreviated(word: str, identifier: str) -> Diagonstics | None:
+def isAbbreviated(
+    **options: Unpack[ValidatorArguments],
+) -> Diagonstics | None:
+    word = options["word"]
+    identifier = options["identifier"]
+    context = options["context"]
+
+    domainSpecificDictionary = context.get("domainSpecificAbbreviationDictionary")
+
     # check if this specific word should be skipped
-    if word in dictionary.get("skipWords"):
+    if (word in wellKnownDictionary.get("skipWords")) or (
+        word in domainSpecificDictionary.get("skipWords")
+    ):
         return None
 
     # check if this whole identifier should be skipped
-    if identifier in dictionary.get("skipIdentifiers"):
+    if (identifier in wellKnownDictionary.get("skipIdentifiers")) or (
+        identifier in domainSpecificDictionary.get("skipIdentifiers")
+    ):
         return None
 
-    # check if the word is a known abbreviation
-    if word in dictionary.get("abbreviations"):
-        suggestedReplacements = dictionary.get("abbreviations")[word]
+    suggestedWellKnownReplacement = wellKnownDictionary.get("abbreviations").get(word)
+    suggestedDomainSpecificReplacement = domainSpecificDictionary.get(
+        "abbreviations"
+    ).get(word)
 
+    # merge arrays in case there are suggestions from both dictionarys
+    suggestedReplacements = (suggestedWellKnownReplacement or []) + (
+        suggestedDomainSpecificReplacement or []
+    )
+
+    # check if the word is a known abbreviation
+    if suggestedReplacements:
         if len(suggestedReplacements) > 1:
             # this is a known vague abbreviation
 
@@ -46,7 +69,7 @@ def isAbbreviated(word: str, identifier: str) -> Diagonstics | None:
         return {
             "issueType": "abbreviation",
             "severity": Severity.INFO,
-            "suggestion": f"“{word}” appears to be an abbreviation. Consider using “{suggestedReplacements[0]}” instead.",
+            "suggestion": f"“{word}” appears to be an abbreviation for “{suggestedReplacements[0]}”.",
         }
 
     return None

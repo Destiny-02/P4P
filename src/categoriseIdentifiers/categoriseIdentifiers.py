@@ -5,10 +5,13 @@ from porter2stemmer import Porter2Stemmer
 # To fix import errors
 sys.path.insert(0, path.abspath(path.join(path.dirname(__file__), "..")))
 
-from typeDefs import CategorisedIdentifier, CategorisedWord
+from typeDefs import CategorisedIdentifier, CategorisedWord, GlobalValidatorContext
 from validators.index import validators
 from lexicon.addLexiconContext import addLexiconContext
 from lexicon.determineRelevanceToSchema import createDetermineRelevanceToSchema
+from helpers.createDomainSpecificAbbreviationDictionary import (
+    createDomainSpecificAbbreviationDictionary,
+)
 from helper.invokeParser import invokeParserWithMetadata, IdentifersWithContext
 from helper.io import findJavaFiles, readSheet, saveJsonFile
 from helper.conversion import preprocessIdentifier
@@ -25,6 +28,7 @@ def categoriseIdentifiers(
     identifiers: IdentifersWithContext,
     contextWords: set[str],
     designWords: set[str],
+    allComments: set[str],
 ):
     """
     This function processes each identifier, and runs various validators
@@ -39,6 +43,13 @@ def categoriseIdentifiers(
     determineRelevanceToContextSchema = createDetermineRelevanceToSchema(contextWords)
 
     output: list[CategorisedIdentifier] = []
+
+    # see typedef for info
+    context: GlobalValidatorContext = {
+        "domainSpecificAbbreviationDictionary": createDomainSpecificAbbreviationDictionary(
+            allComments
+        )
+    }
 
     for [identifier, sourceLocations] in identifiers.items():
         # this function splits the identifer into terms, normalises american
@@ -60,7 +71,13 @@ def categoriseIdentifiers(
                 # it's neither context nor design, so run the word thru each
                 # validator until we find a match
                 validatorResults = [
-                    validator(word, identifier) for validator in validators
+                    validator(
+                        word=word,
+                        identifier=identifier,
+                        context=context,
+                        allComments=allComments,
+                    )
+                    for validator in validators
                 ]
 
                 # filter out all checks that passed
@@ -103,11 +120,11 @@ def readFilesAndCategoriseIdentifiers(repoName: str):
     vocabFolder = path.join(ALL_VOCAB_FOLDER, repoName, "..")
     outputFile = path.join(TOOL_OUTPUT_FOLDER, repoName, "validator.json")
 
-    (identifiers, _) = invokeParserWithMetadata(findJavaFiles(repoFolder))
+    (identifiers, comments) = invokeParserWithMetadata(findJavaFiles(repoFolder))
     contextWords = readSheet(path.join(vocabFolder, "context.txt"))
     designWords = readSheet(path.join(vocabFolder, "design.txt"))
 
-    output = categoriseIdentifiers(identifiers, contextWords, designWords)
+    output = categoriseIdentifiers(identifiers, contextWords, designWords, comments)
 
     # save the results to a file
     saveJsonFile(output, outputFile)

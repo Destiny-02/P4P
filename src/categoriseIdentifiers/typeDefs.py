@@ -82,3 +82,23 @@ class AbbreviationsDictionary(TypedDict):
     abbreviations: dict[str, list[str]]
     skipIdentifiers: list[str]
     skipWords: list[str]
+
+
+class GlobalValidatorContext(TypedDict):
+    """
+    an object that's passed to each validator and shared globally.
+    Each validator can store arbitrary data.
+    """
+
+    domainSpecificAbbreviationDictionary: AbbreviationsDictionary
+
+
+class ValidatorArguments(TypedDict):
+    """
+    the keyword arguments (kwargs) passed to each validator function
+    """
+
+    word: str
+    identifier: str
+    context: GlobalValidatorContext
+    allComments: set[str]
