@@ -38,6 +38,7 @@ def test_validators():
     identifiers: IdentifersWithContext = {
         "getGtfsModeOfTransport": [context1],
         "currRouteConnexAct": [context1, context2],
+        "postPlan": [context2],
     }
     x = categoriseIdentifiers(identifiers, contextWords, designWords, allComments)
     assert x == [
@@ -252,5 +253,93 @@ def test_validators():
                 },
             ],
             "sourceLocations": [context1, context2],
+        },
+        {
+            "identifier": "postPlan",
+            "components": [
+                {
+                    "word": "post",
+                    "category": "neither",
+                    "metadata": {
+                        "posTypes": set(["v", "n"]),
+                        "qIds": set(),
+                        "wordnetIds": set(
+                            [
+                                "1031109-v",
+                                "1031256-v",
+                                "1088923-v",
+                                "11243562-n",
+                                "11243720-n",
+                                "11243907-n",
+                                "1570403-v",
+                                "1591476-v",
+                                "1591621-v",
+                                "1960105-v",
+                                "2233195-v",
+                                "2385634-v",
+                                "2473331-v",
+                                "318186-n",
+                                "3763403-n",
+                                "3988170-n",
+                                "586262-n",
+                                "6264398-n",
+                                "7257815-n",
+                                "8463063-n",
+                                "8624385-n",
+                                "991683-v",
+                                "999715-v",
+                            ]
+                        ),
+                    },
+                    "relevanceToContext": {
+                        "lch": (59.31, "trip"),
+                        "path": (4.76, "trip"),
+                        "wup": (9.09, "trip"),
+                    },
+                    "relevanceToDesign": {
+                        "lch": (69.31, "transportation/shipping/transport"),
+                        "path": (5.26, "transportation/shipping/transport"),
+                        "wup": (10.0, "transportation/shipping/transport"),
+                    },
+                    "diagnostics": [
+                        {
+                            "issueType": "synonym",
+                            "severity": Severity.WARNING,
+                            "suggestion": "“post” appears to be a synonym for the more well known term “station”.",
+                        }
+                    ],
+                },
+                {
+                    "word": "plan",
+                    "category": "neither",
+                    "metadata": {
+                        "posTypes": set(["n", "v"]),
+                        "qIds": set(),
+                        "wordnetIds": set(
+                            [
+                                "1638368-v",
+                                "1639714-v",
+                                "3954199-n",
+                                "5728678-n",
+                                "5898568-n",
+                                "704690-v",
+                                "705227-v",
+                            ]
+                        ),
+                    },
+                    "relevanceToContext": {
+                        "lch": (69.31, "trip"),
+                        "path": (5.26, "trip"),
+                        "wup": (10.0, "trip"),
+                    },
+                    "relevanceToDesign": {
+                        "lch": (80.44, "transportation/shipping/transport"),
+                        "path": (5.88, "transportation/shipping/transport"),
+                        "wup": (11.11, "transportation/shipping/transport"),
+                    },
+                    "diagnostics": [],
+                },
+            ],
+            "sourceLocations": [context2],
         },
     ]

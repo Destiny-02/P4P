@@ -91,6 +91,7 @@ class GlobalValidatorContext(TypedDict):
     """
 
     domainSpecificAbbreviationDictionary: AbbreviationsDictionary
+    synonymMap: dict[str, str]
 
 
 class ValidatorArguments(TypedDict):

@@ -12,6 +12,7 @@ from lexicon.determineRelevanceToSchema import createDetermineRelevanceToSchema
 from helpers.createDomainSpecificAbbreviationDictionary import (
     createDomainSpecificAbbreviationDictionary,
 )
+from helpers.createSynonymMap import createSynonymMap
 from helper.invokeParser import invokeParserWithMetadata, IdentifersWithContext
 from helper.io import findJavaFiles, readSheet, saveJsonFile
 from helper.conversion import preprocessIdentifier
@@ -48,7 +49,8 @@ def categoriseIdentifiers(
     context: GlobalValidatorContext = {
         "domainSpecificAbbreviationDictionary": createDomainSpecificAbbreviationDictionary(
             allComments
-        )
+        ),
+        "synonymMap": createSynonymMap(contextWords),
     }
 
     for [identifier, sourceLocations] in identifiers.items():
