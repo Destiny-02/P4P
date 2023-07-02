@@ -35,6 +35,18 @@ def findRepoPaths(pathToData):
       repoPaths.append(path.join(pathToData, folderName))
   return repoPaths
 
+def findFiles(folderPath: str):
+    """
+    Finds all the  files in the folder and its subfolders
+    """
+    files: set[str] = set()
+    for dirpath, _, filenames in os.walk(folderPath):
+      for filename in filenames:
+        # add all files, the parser will discard what it can't process
+        # (see getParserForLanguage.ts)
+        files.add(path.join(dirpath, filename))
+    return files
+
 def findJavaFiles(folderPath: str):
   """
   Finds all the java files in the folder and its subfolders

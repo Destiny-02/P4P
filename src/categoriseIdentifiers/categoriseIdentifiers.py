@@ -14,7 +14,7 @@ from helpers.createDomainSpecificAbbreviationDictionary import (
 )
 from helpers.createSynonymMap import createSynonymMap
 from helper.invokeParser import invokeParserWithMetadata, IdentifersWithContext
-from helper.io import findJavaFiles, readSheet, saveJsonFile
+from helper.io import findFiles, readSheet, saveJsonFile
 from helper.conversion import preprocessIdentifier
 
 ALL_DATA_FOLDER = path.join(path.dirname(__file__), "../../data")
@@ -122,7 +122,7 @@ def readFilesAndCategoriseIdentifiers(repoName: str):
     vocabFolder = path.join(ALL_VOCAB_FOLDER, repoName, "..")
     outputFile = path.join(TOOL_OUTPUT_FOLDER, repoName, "validator.json")
 
-    (identifiers, comments) = invokeParserWithMetadata(findJavaFiles(repoFolder))
+    (identifiers, comments) = invokeParserWithMetadata(findFiles(repoFolder))
     contextWords = readSheet(path.join(vocabFolder, "context.txt"))
     designWords = readSheet(path.join(vocabFolder, "design.txt"))
 
