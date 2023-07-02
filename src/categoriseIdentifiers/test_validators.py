@@ -96,42 +96,19 @@ def test_validators():
                         "wup": (9.09, "tape_drive/tape_transport/transport"),
                     },
                 },
-                # TODO: this is not ideal, it parsed it as "GT" + "FS" instead of "GTFS"
                 {
                     "category": "neither",
-                    "word": "gt",
+                    "word": "gtfs",
                     "diagnostics": [
                         {
                             "issueType": "abbreviation",
                             "severity": Severity.INFO,
-                            "suggestion": "“gt” appears to be an abbreviation for “greater than”.",
+                            "suggestion": "“gtfs” appears to be an abbreviation for “Google Transit Feed Specification”.",
                         }
                     ],
                     "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
                     "relevanceToContext": {"lch": None, "path": None, "wup": None},
                     "relevanceToDesign": {"lch": None, "path": None, "wup": None},
-                },
-                {
-                    "category": "neither",
-                    "word": "fs",
-                    "diagnostics": [
-                        {
-                            "issueType": "abbreviation",
-                            "severity": Severity.INFO,
-                            "suggestion": "“fs” appears to be an abbreviation for “file system”.",
-                        }
-                    ],
-                    "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
-                    "relevanceToContext": {
-                        "lch": (74.72, "tripper/trip"),
-                        "path": (5.56, "tripper/trip"),
-                        "wup": (10.53, "tripper/trip"),
-                    },
-                    "relevanceToDesign": {
-                        "lch": (80.44, "tape_drive/tape_transport/transport"),
-                        "path": (5.88, "tape_drive/tape_transport/transport"),
-                        "wup": (11.11, "tape_drive/tape_transport/transport"),
-                    },
                 },
                 {
                     "category": "neither",
