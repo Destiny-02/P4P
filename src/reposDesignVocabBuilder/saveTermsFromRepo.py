@@ -91,4 +91,4 @@ def getPath(relativePath):
 
 if __name__ == "__main__":
     # main(findRepoPaths(getPath("repos")))
-    saveDesignTermsAsVocabFile(5, 8)
+    saveDesignTermsAsVocabFile(5, 5)

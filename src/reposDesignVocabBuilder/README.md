@@ -14,6 +14,7 @@ This folder contains the `saveTermsFromRepo.py` script, which can be used to ext
 - To do this, ensure that only the call to is uncommented `saveDesignTermsAsVocabFile`.
 - Replace the first argument with the minimum number of repositories that a term must be used in to be saved.
 - Replace the second argument with the minimum number of repositories a short term (1 or 2 characters) must be used in to be saved.
+- Make the arguments the same if you want to treat all terms the same.
 - Run the script with `python saveTermsFromRepo.py`.
 - The results will be written to a text file called `design-terms.txt`.
 
