@@ -9,20 +9,12 @@ sys.path.insert(0, project_dir)
 from src.helper.invokeParser import invokeParserWithMetadata
 
 
-def conditionalDecorator(decorator, condition: bool):
-    """
-    If `condition` is true, the decorator is applied.
-    This allows us to conditionally invoke `pytest.mark.skip`
-    """
-    return lambda f: decorator(f) if condition else f
-
-
 # this is by far the slowest test, since it invokes the parser to
 # test that the whole pipeline actually works
 #
 # this test should be skipped when running locally, it only needs to
 # run in the CI.
-@conditionalDecorator(pytest.mark.skip, "CI" not in os.environ)
+@pytest.mark.skipif("CI" not in os.environ, reason="slow test, CI-only")
 def test_invokeParser():
     currentFolder = os.path.dirname(os.path.abspath(__file__))
     sampleFilesFolder = os.path.join(currentFolder, "../src/parsers/tests")
