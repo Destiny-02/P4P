@@ -204,7 +204,13 @@ def test_validators():
                     "relevanceToContext": {"lch": None, "path": None, "wup": None},
                     "relevanceToDesign": {"lch": None, "path": None, "wup": None},
                     # connex is not in the dictionary of abbreviations
-                    "diagnostics": [],
+                    "diagnostics": [
+                        {
+                            "issueType": "misspelling",
+                            "severity": Severity.WARNING,
+                            "suggestion": "“connex” appears to be misspelt, did you mean “conned”?",
+                        }
+                    ],
                 },
                 {
                     "word": "act",
