@@ -3,6 +3,7 @@
 import { JavaParser } from "./languages/java";
 import { JsTsParser } from "./languages/javascript";
 import { PythonParser } from "./languages/python";
+import { MarkdownParser } from "./languages/markdown";
 
 export const getParserForLanguage = (fileName: string) =>
   fileName.endsWith(".java")
@@ -11,4 +12,6 @@ export const getParserForLanguage = (fileName: string) =>
     ? JsTsParser
     : fileName.endsWith(".py")
     ? PythonParser
+    : fileName.endsWith(".md")
+    ? MarkdownParser
     : undefined;
