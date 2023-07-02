@@ -52,18 +52,38 @@ def main(repoPaths: list[str]):
     # Overwrite the file with the updated dictionary
     saveJsonFile(freqDict, getPath(DESIGN_TERMS_FILE))
 
-def saveDesignTermsAsVocabFile(minCount):
+def saveDesignTermsAsVocabFile(minCount, minCountForShortTerms):
     """
     Saves design-terms.json as design-terms.txt, but only including terms that
     appear at least minCount times.
+    For short terms (length of <=2), only includes terms that appear at least 
+    minCountForShortTerms times.
+    In reality, short terms are really terms of length 2 because terms of length 1 
+    are not included in the design terms file.
     """
+
+    # Read in the term and frequency dictionary
     designTerms: dict[str, int] = {}
     with open(getPath(DESIGN_TERMS_FILE), 'r', encoding="utf-8") as f:
         designTerms = json.load(f)
+
+    # Save the terms that were frequent enough    
+    finalTermsList = list()
     with open(getPath("design-terms.txt"), 'w', encoding="utf-8") as f:
         for term in designTerms:
-            if designTerms[term] >= minCount:
-                f.write(term + "\n")
+            count = designTerms[term]
+            if len(term) <= 2 and count >= minCountForShortTerms:
+                finalTermsList.append(term)
+            elif len(term) > 2 and count >= minCount:
+                finalTermsList.append(term)
+
+        # Sort the terms alphabetically
+        finalTermsList.sort()
+
+        # Write the terms to the file
+        for term in finalTermsList:
+            f.write(term + "\n")
+
 
 def getPath(relativePath):
     return path.join(path.dirname(__file__), relativePath)
@@ -71,4 +91,4 @@ def getPath(relativePath):
 
 if __name__ == "__main__":
     # main(findRepoPaths(getPath("repos")))
-    saveDesignTermsAsVocabFile(5)
+    saveDesignTermsAsVocabFile(5, 5)
