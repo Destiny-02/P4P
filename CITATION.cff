@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Li
+    given-names: Destiny
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: Hensel
+    given-names: Kyle
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "Identifier Meaningfulness"
+version: 1.0.0
+date-released: 2023
+url: "https://github.com/Destiny-02/P4P"
