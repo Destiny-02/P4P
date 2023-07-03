@@ -96,6 +96,50 @@ def dcnCountsIdentifiers(domainFolderName, vocabPath = None):
 
     return (allNumDesignIdentifiers, allNumContextIdentifiers, allNumNeitherIdentifiers, allTotalIdentifiers)
 
+def dcnCountsTerms(domainFolderName, vocabPath = None):
+    if vocabPath is None:
+        vocabPath = VOCAB_FOLDER + domainFolderName
+
+    contextTerms = txtToSet(getPath(vocabPath + "/context.txt"))
+    designTerms = txtToSet(getPath(vocabPath + "/design.txt"))
+
+    # To be used for stats
+    allNumDesignTerms = []
+    allNumContextTerms = []
+    allNumNeitherTerms = []
+    allTotalTerms = []
+
+    for repoPath in findRepoPaths(getPath(DATA_FOLDER + domainFolderName)):
+        print(repoPath)
+
+        # Parse the identifiers
+        (identifiers, _) = invokeParser(findJavaFiles(repoPath))
+
+        # Find the number of design, context and neither terms
+        # An identifier qualifies as design or context
+        # if it contains at least one design or context term
+        designTermsFromCodebase = set()
+        contextTermsFromCodebase = set()
+        neitherTermsFromCodebase = set()
+
+        for identifier in identifiers:
+            terms = setToStemmedSet(stringsToProcessable(set([identifier])))
+            for term in terms:
+                if term in contextTerms:
+                    contextTermsFromCodebase.add(term)
+                elif term in designTerms:
+                    designTermsFromCodebase.add(term)
+                else:
+                    neitherTermsFromCodebase.add(term)
+
+        # Add this to the stats sets
+        allNumDesignTerms.append(len(designTermsFromCodebase))
+        allNumContextTerms.append(len(contextTermsFromCodebase))
+        allNumNeitherTerms.append(len(neitherTermsFromCodebase))
+        allTotalTerms.append(len(designTermsFromCodebase) + len(contextTermsFromCodebase) + len(neitherTermsFromCodebase))
+
+    return (allNumDesignTerms, allNumContextTerms, allNumNeitherTerms, allTotalTerms)
+
 def findVocabsForLA(repoPaths, domainFolderName):
     contextTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
     designTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/design.txt"))
@@ -143,8 +187,8 @@ if __name__ == "__main__":
     """
     Find the number of terms that are design, context or neither
     """
-    (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsTerms("ugrad-009-01")
-    writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
+    # (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsTerms("ugrad-009-01")
+    # writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
 
     """
     Find the LA (takes a while to run)
