@@ -1,5 +1,5 @@
 from typing_extensions import Unpack
-from typeDefs import (
+from ..typeDefs import (
     Diagonstics,
     Severity,
     ValidatorArguments,

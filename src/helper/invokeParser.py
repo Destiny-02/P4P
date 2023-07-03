@@ -1,11 +1,7 @@
 import sys
 import json
 from os import path, system, name
-
-# To fix import errors
-sys.path.insert(0, path.abspath(path.join(path.dirname(__file__), "..")))
-
-from helper.parserTypes import ParsedEntityContext
+from .parserTypes import ParsedEntityContext
 
 # by default, don't use the cache unless the CLI
 # flag --cache is used or if this argument is set to true

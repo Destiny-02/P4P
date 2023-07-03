@@ -1,10 +1,10 @@
 from typing_extensions import Unpack
-from typeDefs import (
+from ..typeDefs import (
     Diagonstics,
     Severity,
     ValidatorArguments,
 )
-from helper.english import fixSpelling
+from ...helper.english import fixSpelling
 
 
 def isMisspelling(

@@ -1,8 +1,8 @@
 from typing_extensions import Any
 import nltk
 from nltk.corpus import wordnet
-from typeDefs import LexiconContext, Similarity
-from helper.generic import flatten
+from ..typeDefs import LexiconContext, Similarity
+from ...helper.generic import flatten
 from .LowestFinder import LowestFinder
 
 

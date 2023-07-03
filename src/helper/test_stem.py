@@ -1,22 +1,18 @@
 import os
-import sys
+from .stem import stem_file, stem_set
 
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, project_dir)
-
-from src.helper.stem import stem_file, stem_set
 
 def test_stem_set():
     # Test set with single word items
-    input = {'cats', 'dogs', 'houses'}
-    expected_output = {'cat', 'dog', 'hous'}
+    input = {"cats", "dogs", "houses"}
+    expected_output = {"cat", "dog", "hous"}
     assert stem_set(input) == expected_output
 
     # Test set with multi-word items
-    input = {'black cats', 'brown dogs', 'red houses'}
-    expected_output = {'black', 'cat', 'brown', 'dog', 'red', 'hous'}
+    input = {"black cats", "brown dogs", "red houses"}
+    expected_output = {"black", "cat", "brown", "dog", "red", "hous"}
     assert stem_set(input) == expected_output
+
 
 def test_stem_file():
     # Test with a file containing 2/3 terms that are not stemmed

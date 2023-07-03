@@ -1,7 +1,7 @@
 import json
 from os import path
 from typing_extensions import Unpack
-from typeDefs import (
+from ..typeDefs import (
     Diagonstics,
     AbbreviationsDictionary,
     Severity,

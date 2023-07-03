@@ -19,7 +19,7 @@ More specifically,
 ## Run the script
 
 - Modify the call to main with the name of the folder containing the codebases e.g. `main("../../data/ugrad-009-01/")`
-- Run the script with `python paper3Questions.py`.
+- From the repo root, run the script with `python -m src.paper3Questions`.
 
 ## Results
 

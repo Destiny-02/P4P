@@ -244,7 +244,7 @@ def preprocessIdentifier(identifier: str) -> list[str]:
 
     return terms
 
-def dictToCsv(myDict: dict[any, any]) -> str:
+def dictToCsv(myDict: dict) -> str:
   lines = []
   for k, v in myDict.items():
     if isinstance(v, list):

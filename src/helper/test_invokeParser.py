@@ -1,12 +1,6 @@
 import os
-import sys
 import pytest
-
-# To fix import errors
-project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.insert(0, project_dir)
-
-from src.helper.invokeParser import invokeParserWithMetadata
+from .invokeParser import invokeParserWithMetadata
 
 
 # this is by far the slowest test, since it invokes the parser to
@@ -17,7 +11,7 @@ from src.helper.invokeParser import invokeParserWithMetadata
 @pytest.mark.skipif("CI" not in os.environ, reason="slow test, CI-only")
 def test_invokeParser():
     currentFolder = os.path.dirname(os.path.abspath(__file__))
-    sampleFilesFolder = os.path.join(currentFolder, "../src/parsers/tests")
+    sampleFilesFolder = os.path.join(currentFolder, "../parsers/tests")
 
     # too keep this test simple, only look at a few files from the sample folder.
     # the rest are covered by other tests
