@@ -52,7 +52,7 @@ def checkIdentifierWithVocabularies(identifier, vocab):
             return True
     return False
 
-def main(domainFolderName, vocabPath = None):
+def dcnCountsIdentifiers(domainFolderName, vocabPath = None):
     if vocabPath is None:
         vocabPath = VOCAB_FOLDER + domainFolderName
 
@@ -60,10 +60,10 @@ def main(domainFolderName, vocabPath = None):
     designTerms = txtToSet(getPath(vocabPath + "/design.txt"))
 
     # To be used for stats
-    allNumDesignTerms = []
-    allNumContextTerms = []
-    allNumNeitherTerms = []
-    allTotalTerms = []
+    allNumDesignIdentifiers = []
+    allNumContextIdentifiers = []
+    allNumNeitherIdentifiers = []
+    allTotalIdentifiers = []
 
     for repoPath in findRepoPaths(getPath(DATA_FOLDER + domainFolderName)):
         print(repoPath)
@@ -71,30 +71,30 @@ def main(domainFolderName, vocabPath = None):
         # Parse the identifiers
         (identifiers, _) = invokeParser(findJavaFiles(repoPath))
 
-        # Count the number of design, context and neither terms in the identifiers
+        # Count the number of design, context and neither identifiers
         # An identifier qualifies as design or context
         # if it contains at least one design or context term
-        numDesignTerms = 0
-        numContextTerms = 0
-        numNeitherTerms = 0
+        numDesignIdentifiers = 0
+        numContextIdentifiers = 0
+        numNeitherIdentifiers = 0
 
         for identifier in identifiers:
             # Check for context terms, then design terms. The rest are neither.
             if checkIdentifierWithVocabularies(identifier, contextTerms):
-                numContextTerms += 1
+                numContextIdentifiers += 1
             elif checkIdentifierWithVocabularies(identifier, designTerms):
-                numDesignTerms += 1
+                numDesignIdentifiers += 1
             else:
-                numNeitherTerms += 1
+                numNeitherIdentifiers += 1
                 print(identifier)
 
         # Add this to the stats sets
-        allNumDesignTerms.append(numDesignTerms)
-        allNumContextTerms.append(numContextTerms)
-        allNumNeitherTerms.append(numNeitherTerms)
-        allTotalTerms.append(numDesignTerms + numContextTerms + numNeitherTerms)
+        allNumDesignIdentifiers.append(numDesignIdentifiers)
+        allNumContextIdentifiers.append(numContextIdentifiers)
+        allNumNeitherIdentifiers.append(numNeitherIdentifiers)
+        allTotalIdentifiers.append(numDesignIdentifiers + numContextIdentifiers + numNeitherIdentifiers)
 
-    return (allNumDesignTerms, allNumContextTerms, allNumNeitherTerms, allTotalTerms)
+    return (allNumDesignIdentifiers, allNumContextIdentifiers, allNumNeitherIdentifiers, allTotalIdentifiers)
 
 def findVocabsForLA(repoPaths, domainFolderName):
     contextTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
@@ -137,13 +137,13 @@ if __name__ == "__main__":
     """
     Find the number of identifiers that are design, context or neither
     """
-    (designCounts, contextCounts, neitherCounts, totalCounts) = main("ugrad-009-01")
+    (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsIdentifiers("ugrad-009-01")
     writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
 
     """
     Find the number of terms that are design, context or neither
     """
-    (designCounts, contextCounts, neitherCounts, totalCounts) = main("ugrad-009-01")
+    (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsTerms("ugrad-009-01")
     writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
 
     """
