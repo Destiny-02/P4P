@@ -65,7 +65,7 @@ def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
     terms = sorted(
         terms,
         key=lambda term: (
-            -frequencyDict.get(stemTerm(term), 0),
+            -frequencyDict.get(stemTerm(term), 1),
             term,  # TODO: investigate cases where get returns None
         ),
         reverse=False,
@@ -74,7 +74,7 @@ def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
     # Write the terms to be determined to a spreadsheet
     rows = list()
     for term in terms:
-        rows.append([term, "", frequencyDict.get(stemTerm(term), 0)])
+        rows.append([term, "", frequencyDict.get(stemTerm(term), 1)])
     nestedListToSheet(rows, getPath(TO_DETERMINE_FILE))
 
 
