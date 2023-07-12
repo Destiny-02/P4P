@@ -195,6 +195,46 @@ def removeSeenStemmed(data: set, seen: set) -> set:
       newDataStemmed.add(stemTerm(term))
   return newData
 
+def stringToTermsList(string: str) -> list[str]:
+  """
+  Converts a string into a list of clean terms
+  Does not remove duplicates or use stemming
+  """
+  # Split the string by whitespace
+  terms = string.split()
+
+  # Split each term further by treating it as an identifier
+  terms = [splitIdentifier(term) for term in terms]
+  # Flatten the list of lists
+  terms = [subterm for sublist in terms for subterm in sublist]
+
+  # Make sure terms consist of lowercase letters are stripped
+  terms = [convertToLowercase(term) for term in terms]
+  # Removes empty terms
+  terms = [term for term in terms if term != ""]
+
+  # Fix spelling
+  terms = [fixUSSpelling(term) for term in terms]
+
+  return terms
+
+def termsListToStemmedFrequencyDict(terms: list[str]) -> dict[str, int]:
+  """
+  Converts a list of terms into a dict of stemmed terms and their frequency
+  """
+  # Stem each term
+  terms = [stemTerm(term) for term in terms]
+
+  # Count the frequency of each term
+  frequencyDict = dict()
+  for term in terms:
+    if term in frequencyDict:
+      frequencyDict[term] += 1
+    else:
+      frequencyDict[term] = 1
+    
+  return frequencyDict
+
 def stringsToProcessable(strings: set[str], excludeListStemmed: set[str] | None = None) -> set[str]:
   """
   Converts a set of strings to a set of standardised terms that is ready for a human to process manually. 
