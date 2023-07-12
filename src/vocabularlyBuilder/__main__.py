@@ -13,7 +13,6 @@ from ..helper.io import findJavaFiles, setToSheet, deleteFileIfExists
 from ..pathConstants import VOCAB_FOLDER
 
 TO_CATEGORISE_FILE = "to-categorise.csv"
-TO_DETERMINE_FILE = "to-determine.csv"
 
 def saveTermsToBeCategorised(pathToDataList, domainFolderName):
 	"""
@@ -50,34 +49,6 @@ def saveTermsToBeCategorised(pathToDataList, domainFolderName):
 		setToSheet(termsAfterAnswers, getPath(TO_CATEGORISE_FILE), append=multipleCodebases)
 		print(str(len(termsAfterAnswers)) + " terms to categorise in " + pathToData)
 
-def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
-	"""
-	Saves the terms to be determined as from the domain or not from the descriptor to a spreadsheet
-	"""
-	# Get the terms in the domain description
-	with open(pathToDomainDescription, 'r') as file:
-		domainDescription = file.read()
-
-	# Split the domain description into terms by whitespace
-	terms = domainDescription.split()
-
-	# Get the answers to the context terms we have already seen and categorised
-	(_, _, _, combinedTerms, contextTermsAnswers, _, _, combinedTermsAnswers) = getVocabularies(domainFolderName, includeAnswers=True)
-	
-	# Split the words into standardised terms suitable for a human to manually look through
-	terms = stringsToProcessable(set(terms), combinedTerms)
-	
-	# Do the same but as if the seen terms included the answers
-	termsAfterAnswers = stringsToProcessable(terms, combinedTermsAnswers.union(combinedTerms))
-
-	# The terms we can automatically determine are the terms that are in context-answer.txt and in the domain description
-	# Write the terms to context.txt
-	knownTerms = setIntersectionStemmed(terms, contextTermsAnswers)
-	setToTxtNoDuplicates(setToStemmedSet(knownTerms), getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
-
-	# Write the terms to be determined to a spreadsheet
-	setToSheet(termsAfterAnswers, getPath(TO_DETERMINE_FILE))
-
 def saveCategoriseSheetToTxt(domainFolderName):
 	"""
 	Saves the to-categorise.csv spreadsheet containing terms that have been categorised as 
@@ -109,22 +80,6 @@ def saveCategoriseSheetToTxt(domainFolderName):
 		print("The following terms have not been categorised:")
 		print(undefinedSet)
 
-def saveDomainSheetToTxt(domainFolderName):
-	"""
-	Saves the to-determine.csv spreadsheet containing terms that have been categorised as 
-	domain terms / context schema (c) to the context.txt text file
-	"""
-	dSet = set()
-
-	with open(getPath(TO_DETERMINE_FILE), 'r') as file:
-		reader = csv.reader(file)
-		for row in reader:
-			word, letter = row
-			if letter == 'c':
-				dSet.add(stemTerm(word))
-
-	setToTxtNoDuplicates(dSet, getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
-
 def getVocabularies(domainFolderName, includeAnswers=False):
 	contextTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
 	designTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/design.txt"))
@@ -145,12 +100,8 @@ def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
 
 if __name__ == "__main__":
-	# Build the context terms from a piece of descriptive text
-	saveTermsToBeDetermined(getPath("../../data/ugrad-009-01/domain-description.txt"), "ugrad-009-01")
-	# saveDomainSheetToTxt("ugrad-009-01")
-
 	# Categorising terms from identifiers in a codebase
-	# saveTermsToBeCategorised([getPath("../../data/ugrad-009-01/design1000")], "ugrad-009-01")
+	saveTermsToBeCategorised([getPath("../../data/ugrad-009-01/design1000")], "ugrad-009-01")
 	# saveCategoriseSheetToTxt("ugrad-009-01")
 
 	# Categorising terms from identifiers in multiple codebases at once
