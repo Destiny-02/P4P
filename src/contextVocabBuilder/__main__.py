@@ -59,18 +59,21 @@ def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
         stringToTermsList(domainDescription)
     )
 
-    # Sort the terms by the number of times they were mentioned
-    # If the number of times they were mentioned is the same, sort alphabetically
+    # Sort the terms by the number of times they were mentioned (descending)
+    # If the number of times they were mentioned is the same, sort alphabetically (ascending)
     # to keep it deterministic
     terms = sorted(
         terms,
-        key=lambda term: (frequencyDict[stemTerm(term)], term),
-        reverse=True,
+        key=lambda term: (
+            -frequencyDict.get(stemTerm(term), 0),
+            term,  # TODO: investigate cases where get returns None
+        ),
+        reverse=False,
     )
 
     # Print the terms and their frequency
     for term in terms:
-        print(term, frequencyDict[stemTerm(term)])
+        print(term, frequencyDict.get(stemTerm(term), 0))
 
     # Write the terms to be determined to a spreadsheet
     setToSheet(terms, getPath(TO_DETERMINE_FILE))
