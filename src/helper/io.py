@@ -81,6 +81,15 @@ def setToSheet(data, sheetPath, append=False):
             writer.writerow([item])
 
 
+def nestedListToSheet(data: list[list[str]], sheetPath: str):
+    deleteFileIfExists(sheetPath)
+
+    with open(sheetPath, "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        for item in data:
+            writer.writerow(item)
+
+
 def csvToSheet(csv, sheetPath):
     deleteFileIfExists(sheetPath)
     with open(sheetPath, "w", encoding="utf-8") as csvfile:

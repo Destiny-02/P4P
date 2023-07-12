@@ -22,6 +22,7 @@ saveTermsToBeDetermined(getPath("../../data/chess/domain-description.txt"), "che
 - From the repo root, run the script with `python -m src.contextVocabBuilder`.
 - `to-determine.csv` will be created in this directory
 - For the terms that you want to add to the context vocabulary, write a `c` in the 2nd column and save the file.
+- The terms are sorted by the number of occurrences in the descriptive text. This number is shown in the 3rd column. We recommend that you start with the most frequent terms and stop when you notice that the terms start to become less relevant to the domain.
 - Uncomment this line. Ensure only this line in uncommented inside the `if __name__ == "__main__":` block.
 
 ```python

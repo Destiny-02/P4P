@@ -9,7 +9,7 @@ from ..helper.conversion import (
     termsListToStemmedFrequencyDict,
     stringToTermsList,
 )
-from ..helper.io import setToSheet
+from ..helper.io import nestedListToSheet
 from ..pathConstants import VOCAB_FOLDER
 from ..vocabularlyBuilder.__main__ import getVocabularies
 
@@ -71,12 +71,11 @@ def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
         reverse=False,
     )
 
-    # Print the terms and their frequency
-    for term in terms:
-        print(term, frequencyDict.get(stemTerm(term), 0))
-
     # Write the terms to be determined to a spreadsheet
-    setToSheet(terms, getPath(TO_DETERMINE_FILE))
+    rows = list()
+    for term in terms:
+        rows.append([term, "", frequencyDict.get(stemTerm(term), 0)])
+    nestedListToSheet(rows, getPath(TO_DETERMINE_FILE))
 
 
 def saveDomainSheetToTxt(domainFolderName):
