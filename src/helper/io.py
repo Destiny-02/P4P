@@ -1,5 +1,6 @@
-import os.path as path
 from pathlib import Path
+from os import path
+from typing import Any
 import os
 import json
 import csv
@@ -81,13 +82,20 @@ def setToSheet(data, sheetPath, append=False):
             writer.writerow([item])
 
 
-def nestedListToSheet(data: list[list[str]], sheetPath: str):
+def writeDictAsCsv(data: list[Any], sheetPath: str) -> None:
+    """
+    given a list of dicts, writes it to a CSV with headers
+    """
     deleteFileIfExists(sheetPath)
 
-    with open(sheetPath, "w", newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        for item in data:
-            writer.writerow(item)
+    columnNames = data[0].keys()
+
+    # newline='' is required if line endings are configured weirdly
+    # it will save the file with CRLF line endings...
+    with open(sheetPath, "w", newline="", encoding="utf8") as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=columnNames)
+        writer.writeheader()
+        writer.writerows(data)
 
 
 def csvToSheet(csv, sheetPath):
@@ -96,7 +104,7 @@ def csvToSheet(csv, sheetPath):
         csvfile.write(csv)
 
 
-def deleteFileIfExists(filePath):
+def deleteFileIfExists(filePath: str) -> None:
     if path.exists(filePath):
         os.remove(filePath)
 

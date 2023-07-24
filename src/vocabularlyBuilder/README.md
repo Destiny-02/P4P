@@ -18,7 +18,7 @@ saveTermsToBeCategorised([getPath("../../data/ugrad-009-01/design1000")], "ugrad
 
 - Replace the first argument with the path to the codebase.
 - Replace the second argument with the name of the folder containing the codebases and text files i.e. `your-domain-name` (referenced above).
-- From the repo root, run the script with `python -m src.vocabularyBuilder`.
+- From the repo root, run the script with `python -m src.vocabularlyBuilder`.
 - `to-categorise.csv` will be created in this directory
 - For the terms that you want to add to the context vocabulary, write a `c` in the 2nd column
 - For the terms that you want to add to the design vocabulary, write a `d` in the 2nd column
