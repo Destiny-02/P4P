@@ -45,7 +45,7 @@ jobs:
 
       - name: ✨ Python Lint
         run: |
-          pipenv run pylint --load-plugins pylint_actions src
+          pipenv run pylint -f actions src
         continue-on-error: true
 
       - name: ✨ TypeScript Lint
