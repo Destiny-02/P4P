@@ -80,6 +80,7 @@ caus
 centr
 ch
 chain
+chanc
 chang
 channel
 char
@@ -103,6 +104,7 @@ collect
 colour
 column
 combin
+combo
 command
 common
 compar
@@ -154,6 +156,7 @@ delet
 demo
 descript
 descriptor
+deselect
 deseri
 despatch
 dest
@@ -201,6 +204,7 @@ encod
 encrypt
 end
 endpoint
+enter
 entiti
 entri
 env
@@ -217,6 +221,7 @@ exec
 execut
 executor
 exist
+exit
 expect
 expir
 extend
@@ -228,6 +233,7 @@ fail
 failur
 fake
 fals
+fetch
 field
 file
 fill
@@ -266,6 +272,7 @@ height
 hello
 helper
 high
+highlight
 holder
 host
 hostnam
@@ -276,6 +283,7 @@ idl
 idx
 ignor
 imag
+img
 immedi
 impl
 includ
@@ -372,6 +380,7 @@ mock
 mode
 model
 modifi
+mous
 move
 ms
 msg
@@ -428,6 +437,7 @@ pattern
 payload
 pend
 per
+percent
 perform
 period
 persist
@@ -441,6 +451,7 @@ pool
 port
 pos
 posit
+possibl
 post
 pp
 pre
@@ -448,6 +459,7 @@ prefix
 prepar
 press
 prev
+previous
 price
 print
 process
@@ -556,6 +568,7 @@ singl
 size
 skip
 sleep
+slider
 socket
 someth
 sort

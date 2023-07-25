@@ -5,12 +5,15 @@ board
 bonus
 captur
 castl
+cell
 checkmat
 chess
 chessboard
 chessman
 chessmen
 corner
+countdown
+danger
 defend
 diagon
 en
@@ -39,6 +42,7 @@ rook
 skewer
 squar
 stalem
+timer
 turn
 white
 win
