@@ -15,9 +15,11 @@ corner
 countdown
 danger
 defend
+diag
 diagon
 en
 enemi
+evad
 fork
 forward
 game
@@ -42,6 +44,7 @@ rook
 skewer
 squar
 stalem
+threat
 timer
 turn
 white
