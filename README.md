@@ -22,6 +22,7 @@ The tools are located in:
 - `src/calcTermFrequency/`
 - `src/percentOfVocab/`
 - `src/categoriseIdentifiers/`
+- `src/contextVocabBuilder/`
 
 Instructions for running the tools are in the `README.md` of the respective folder.
 

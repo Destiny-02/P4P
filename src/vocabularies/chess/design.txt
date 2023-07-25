@@ -1,3 +1,4 @@
+abl
 absolut
 abstract
 accept
@@ -14,6 +15,7 @@ address
 admin
 ae
 age
+ahead
 algorithm
 allow
 alpha
@@ -75,11 +77,13 @@ callback
 cancel
 candid
 canva
+cap
 case
 caus
 centr
 ch
 chain
+chanc
 chang
 channel
 char
@@ -97,12 +101,15 @@ clean
 clear
 click
 client
+clock
 close
+cmd
 code
 collect
 colour
 column
 combin
+combo
 command
 common
 compar
@@ -132,6 +139,7 @@ counter
 creat
 creator
 credenti
+curr
 current
 cursor
 custom
@@ -154,6 +162,7 @@ delet
 demo
 descript
 descriptor
+deselect
 deseri
 despatch
 dest
@@ -170,6 +179,7 @@ direct
 directori
 dis
 disabl
+disp
 display
 distanc
 divid
@@ -180,6 +190,7 @@ dot
 doubl
 download
 dp
+drag
 draw
 drawabl
 drop
@@ -201,6 +212,7 @@ encod
 encrypt
 end
 endpoint
+enter
 entiti
 entri
 env
@@ -217,6 +229,7 @@ exec
 execut
 executor
 exist
+exit
 expect
 expir
 extend
@@ -228,6 +241,7 @@ fail
 failur
 fake
 fals
+fetch
 field
 file
 fill
@@ -250,6 +264,7 @@ frame
 full
 function
 futur
+gap
 gen
 gener
 get
@@ -266,9 +281,12 @@ height
 hello
 helper
 high
+highlight
 holder
 host
 hostnam
+hour
+hrs
 http
 icon
 id
@@ -276,6 +294,7 @@ idl
 idx
 ignor
 imag
+img
 immedi
 impl
 includ
@@ -372,6 +391,8 @@ mock
 mode
 model
 modifi
+mous
+movabl
 move
 ms
 msg
@@ -380,6 +401,7 @@ multipl
 mvc
 name
 nee
+neighbour
 nest
 new
 next
@@ -394,6 +416,8 @@ number
 obj
 object
 observ
+occupi
+occur
 offset
 ok
 old
@@ -428,6 +452,7 @@ pattern
 payload
 pend
 per
+percent
 perform
 period
 persist
@@ -435,12 +460,14 @@ person
 philtr
 pixel
 plain
+png
 point
 polici
 pool
 port
 pos
 posit
+possibl
 post
 pp
 pre
@@ -448,7 +475,9 @@ prefix
 prepar
 press
 prev
+previous
 price
+prime
 print
 process
 processor
@@ -465,9 +494,11 @@ put
 px
 queri
 queu
+quit
 radius
 random
 rang
+rank
 rate
 raw
 read
@@ -489,6 +520,7 @@ registri
 relat
 releas
 remain
+remind
 remot
 remov
 repeat
@@ -556,6 +588,7 @@ singl
 size
 skip
 sleep
+slider
 socket
 someth
 sort
@@ -570,6 +603,7 @@ src
 ssl
 stack
 stamp
+standard
 start
 stat
 state
