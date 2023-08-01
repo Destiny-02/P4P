@@ -1,0 +1,16 @@
+ascii
+camel
+digit
+hyphen
+joiner
+letter
+lower
+splitter
+suffix
+trail
+trim
+trimmer
+underscor
+upper
+utf
+whitespac

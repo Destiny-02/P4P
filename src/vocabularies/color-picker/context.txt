@@ -1,0 +1,12 @@
+blue
+gray
+green
+hex
+hsv
+hue
+opac
+palett
+picker
+rgb
+sat
+white

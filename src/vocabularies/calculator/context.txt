@@ -1,0 +1,8 @@
+calc
+cos
+ln
+minus
+multipli
+sin
+squar
+tan

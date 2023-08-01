@@ -1,0 +1,8 @@
+card
+chat
+inform
+logout
+phone
+profil
+registr
+sex
