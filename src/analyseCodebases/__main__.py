@@ -5,16 +5,19 @@ from ..helper.conversion import txtToSet, setToStemmedSet, stringsToProcessable
 from ..helper.io import findJavaFiles, findRepoPaths, deleteFileIfExists
 from ..pathConstants import DATA_FOLDER, VOCAB_FOLDER
 
+
 def getPath(relativePath):
     return path.join(path.dirname(__file__), relativePath)
 
+
 def writeResultsToCsv(designCounts, contextCounts, neitherCounts, csvPath):
     deleteFileIfExists(csvPath)
-    with open(csvPath, 'w', newline='') as file:
+    with open(csvPath, "w", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(["Design", "Context", "Neither"])
         for i in range(len(designCounts)):
             writer.writerow([designCounts[i], contextCounts[i], neitherCounts[i]])
+
 
 def splitRepoPathsByNumIdentifiers(repoPaths):
     """
@@ -41,6 +44,7 @@ def splitRepoPathsByNumIdentifiers(repoPaths):
 
     return (lessThanMedian, moreThanMedian, median)
 
+
 def checkIdentifierWithVocabularies(identifier, vocab):
     """
     Checks if the identifier contains any terms from the vocabulary
@@ -52,7 +56,8 @@ def checkIdentifierWithVocabularies(identifier, vocab):
             return True
     return False
 
-def dcnCountsIdentifiers(domainFolderName, vocabPath = None):
+
+def dcnCountsIdentifiers(domainFolderName, vocabPath=None):
     if vocabPath is None:
         vocabPath = VOCAB_FOLDER + domainFolderName
 
@@ -92,11 +97,19 @@ def dcnCountsIdentifiers(domainFolderName, vocabPath = None):
         allNumDesignIdentifiers.append(numDesignIdentifiers)
         allNumContextIdentifiers.append(numContextIdentifiers)
         allNumNeitherIdentifiers.append(numNeitherIdentifiers)
-        allTotalIdentifiers.append(numDesignIdentifiers + numContextIdentifiers + numNeitherIdentifiers)
+        allTotalIdentifiers.append(
+            numDesignIdentifiers + numContextIdentifiers + numNeitherIdentifiers
+        )
 
-    return (allNumDesignIdentifiers, allNumContextIdentifiers, allNumNeitherIdentifiers, allTotalIdentifiers)
+    return (
+        allNumDesignIdentifiers,
+        allNumContextIdentifiers,
+        allNumNeitherIdentifiers,
+        allTotalIdentifiers,
+    )
 
-def dcnCountsTerms(domainFolderName, vocabPath = None):
+
+def dcnCountsTerms(domainFolderName, vocabPath=None):
     if vocabPath is None:
         vocabPath = VOCAB_FOLDER + domainFolderName
 
@@ -136,9 +149,14 @@ def dcnCountsTerms(domainFolderName, vocabPath = None):
         allNumDesignTerms.append(len(designTermsFromCodebase))
         allNumContextTerms.append(len(contextTermsFromCodebase))
         allNumNeitherTerms.append(len(neitherTermsFromCodebase))
-        allTotalTerms.append(len(designTermsFromCodebase) + len(contextTermsFromCodebase) + len(neitherTermsFromCodebase))
+        allTotalTerms.append(
+            len(designTermsFromCodebase)
+            + len(contextTermsFromCodebase)
+            + len(neitherTermsFromCodebase)
+        )
 
     return (allNumDesignTerms, allNumContextTerms, allNumNeitherTerms, allTotalTerms)
+
 
 def findVocabsForLA(repoPaths, domainFolderName):
     contextTerms = txtToSet(getPath(VOCAB_FOLDER + domainFolderName + "/context.txt"))
@@ -177,18 +195,21 @@ def findVocabsForLA(repoPaths, domainFolderName):
 
     return (designVocabs, contextVocabs, neitherVocabs)
 
+
 if __name__ == "__main__":
     """
     Find the number of identifiers that are design, context or neither
     """
-    (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsIdentifiers("ugrad-009-01")
-    writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
+    # (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsIdentifiers("ugrad-009-01")
+    # writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
 
     """
     Find the number of terms that are design, context or neither
     """
-    # (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsTerms("ugrad-009-01")
-    # writeResultsToCsv(designCounts, contextCounts, neitherCounts, getPath("tool-results.csv"))
+    (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsTerms("chess")
+    writeResultsToCsv(
+        designCounts, contextCounts, neitherCounts, getPath("tool-results.csv")
+    )
 
     """
     Find the LA (takes a while to run)

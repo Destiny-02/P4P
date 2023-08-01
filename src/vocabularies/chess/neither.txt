@@ -12,6 +12,7 @@ bq
 bqueen
 brd
 brook
+cell
 chnc
 decr
 det
