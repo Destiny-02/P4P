@@ -18,6 +18,12 @@ class OOP:
     def doSomething(self):
         pass
 
+
+str1 = " # hashtag within a string. This is not a comment"
+str2 = """
+    # hashtag within a multiline string
+"""
+
 # these are all globals that should not be considered
 print()
 exit()

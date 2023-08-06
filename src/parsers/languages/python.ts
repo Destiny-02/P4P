@@ -1,6 +1,6 @@
 import { promises as fs } from "node:fs";
-import { execSync } from "node:child_process";
 import filbert, { ASTNode } from "filbert";
+import { visit } from "ast-types";
 import { Parser } from "../Parser";
 
 const AST_TYPES_TO_KEEP = new Set([
@@ -102,6 +102,39 @@ function walkTree(
   }
 }
 
+function extractComments(AST: ASTNode, fileInput: string) {
+  // filbert can't extract comments, but we can do this trivally
+  // because every # in a python file is a comment unless
+  // it's part of a string.
+  const possibleCommentLocations = Object.fromEntries(
+    [...fileInput.matchAll(/#/g)].map((match) => {
+      const startIndex = match.index!;
+      const endIndex = startIndex + fileInput.slice(startIndex).indexOf("\n");
+      return [startIndex, endIndex];
+    })
+  );
+
+  visit(AST, {
+    visitLiteral(node) {
+      for (const startIndex in possibleCommentLocations) {
+        if (
+          +startIndex > node.value.range[0] &&
+          +startIndex < node.value.range[1]
+        ) {
+          delete possibleCommentLocations[startIndex];
+        }
+      }
+      this.traverse(node);
+    },
+  });
+
+  const inlineComments = Object.entries(possibleCommentLocations).map(
+    ([startIndex, endIndex]) => fileInput.slice(+startIndex, endIndex)
+  );
+
+  return inlineComments;
+}
+
 export class PythonParser extends Parser {
   constructor() {
     super("python");
@@ -122,14 +155,7 @@ export class PythonParser extends Parser {
 
     walkTree(AST, output, undefined, undefined);
 
-    // now we need to invoke some python code to parse the inline comments
-    const inlineComments = execSync(
-      `python src/parsers/languages/pythonComments.py "${fileName}"`
-    )
-      .toString()
-      .replaceAll("\r\n", "\n") // CRLF to LF
-      .split("\n")
-      .filter((line) => line !== ""); // remove blank lines
+    const inlineComments = extractComments(AST, fileInput);
 
     output.comments.push(...inlineComments);
 
