@@ -1,6 +1,7 @@
 import os
 from .createDomainSpecificAbbreviationDictionary import (
     createDomainSpecificAbbreviationDictionary,
+    getWordsThatBelongToAbbreviation,
 )
 
 
@@ -12,21 +13,42 @@ def test_createDomainSpecificAbbreviationDictionary():
     with open(sampleFilePath, "r", encoding="utf8") as file:
         assert createDomainSpecificAbbreviationDictionary(set([file.read()])) == {
             "abbreviations": {
-                "ais": ["Automatic Identification System "],
+                "ais": ["Automatic Identification System"],
+                "chatgpt": ["Chat Generative Pre-Trained Transformer"],
                 "com": ["communication port"],
                 "cospas-sarsat": [
                     "Cosmicheskaya Sistema Poiska Avariynyh Sudov - Search And Rescue Satellite-Aided Tracking"
                 ],
-                "etc": ["S"],  # TODO: this is unexpected
-                "etcs": [
-                    "- European Train Control System "
-                ],  # TODO: should have been trimmed
+                "etcs": ["European Train Control System"],
                 "saaap": ["Sample Acronym and Abbreviation Parser"],
-                "stb": ["D"],  # TODO: this is unexpected
-                "stbd": [" or starboard "],  # TODO: this backtracked too greedily
-                "utc": ["Universal Coordinated Time"],
+                "softeng": ["Software Engineering"],
+                "stbd": ["starboard"],
+                # It did not accept UTC beacuse the words are the wrong way around
                 "vts": ["Vessel Traffic Services"],
             },
             "skipIdentifiers": [],
             "skipWords": [],
         }
+
+
+def test_getWordsThatBelongToAbbreviation():
+    assert (
+        getWordsThatBelongToAbbreviation("SE", "the words Software Engineering")
+        == "Software Engineering"
+    )
+    assert (
+        getWordsThatBelongToAbbreviation("SoftENG", "the words Software Engineering")
+        == "Software Engineering"
+    )
+    assert getWordsThatBelongToAbbreviation("stbd", "steer to starboard") == "starboard"
+
+    # it works for numbers too
+    assert (
+        getWordsThatBelongToAbbreviation(
+            "B2C", "easiest question was business 2 customer"
+        )
+        == "business 2 customer"
+    )
+
+    # no possible solution because the order is wrong
+    assert getWordsThatBelongToAbbreviation("ABC", "Charlie Alpha Bravo") == ""
