@@ -28,7 +28,10 @@ export namespace Parser {
      * so that could be `any`, `unknown`, `never`, or `intrinsic`).
      */
     typeName: string;
+    /** for functions only */
     argumentTypes?: string[];
+    /** for functions only */
+    returnType?: string;
     /** if explicitly marked as readonly */
     modifiers?: Modifier[];
   }

@@ -22,15 +22,23 @@ export function add(a: number, b: number) {
 
 const x = 1;
 let y = 2;
-var z = 3;
+var z: string | (number & {}) | (string & string) | Map<number, string> = 3;
 
 window.myCustomAttribute = "";
 
-class SomeClass {}
+class SomeClass {
+  public static myPublicMethod(): MyType {}
+  private myFakePrivateMethod(): string[] {}
+  static #myRealPrivateMethod(): number {}
+}
 
-interface MyIFace {}
+interface MyIFace {
+  property: number;
+}
 
-type MyType = {};
+type MyType = {
+  property: number;
+};
 
 enum MyEnum {
   ENUM_MEMBER_1,
@@ -39,3 +47,6 @@ enum MyEnum {
 
 // these are all globals that should not be considered
 console.log(document.getElementById(navigator.userAgent));
+
+// no type argument for the first parameter
+export function myOtherFunction(a, b: never, ...spread: number[]): ReturnType {}

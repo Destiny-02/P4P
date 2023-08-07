@@ -393,6 +393,15 @@ exports[`test case files parses sample.as (javascript) 1`] = `
         104,
       ],
       "type": "FunctionDeclaration.argument",
+      "typeDefinition": {
+        "argumentTypes": [
+          "any",
+          "any",
+        ],
+        "modifiers": undefined,
+        "returnType": "any",
+        "typeName": "function",
+      },
     },
     {
       "isLibraryName": false,
@@ -402,6 +411,15 @@ exports[`test case files parses sample.as (javascript) 1`] = `
         107,
       ],
       "type": "FunctionDeclaration.argument",
+      "typeDefinition": {
+        "argumentTypes": [
+          "any",
+          "any",
+        ],
+        "modifiers": undefined,
+        "returnType": "any",
+        "typeName": "function",
+      },
     },
     {
       "isLibraryName": false,
@@ -411,6 +429,15 @@ exports[`test case files parses sample.as (javascript) 1`] = `
         102,
       ],
       "type": "FunctionDeclaration.ownId",
+      "typeDefinition": {
+        "argumentTypes": [
+          "any",
+          "any",
+        ],
+        "modifiers": undefined,
+        "returnType": "any",
+        "typeName": "function",
+      },
     },
     {
       "isLibraryName": false,
@@ -420,6 +447,10 @@ exports[`test case files parses sample.as (javascript) 1`] = `
         161,
       ],
       "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
@@ -429,6 +460,10 @@ exports[`test case files parses sample.as (javascript) 1`] = `
         172,
       ],
       "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
@@ -438,6 +473,10 @@ exports[`test case files parses sample.as (javascript) 1`] = `
         183,
       ],
       "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
@@ -447,6 +486,10 @@ exports[`test case files parses sample.as (javascript) 1`] = `
         214,
       ],
       "type": "MemberExpression.property",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
@@ -456,6 +499,10 @@ exports[`test case files parses sample.as (javascript) 1`] = `
         237,
       ],
       "type": "ClassDeclaration.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
   ],
   "imports": {
@@ -487,6 +534,15 @@ exports[`test case files parses sample.js (javascript) 1`] = `
         561,
       ],
       "type": "FunctionDeclaration.argument",
+      "typeDefinition": {
+        "argumentTypes": [
+          "any",
+          "any",
+        ],
+        "modifiers": undefined,
+        "returnType": "any",
+        "typeName": "function",
+      },
     },
     {
       "isLibraryName": false,
@@ -496,6 +552,15 @@ exports[`test case files parses sample.js (javascript) 1`] = `
         564,
       ],
       "type": "FunctionDeclaration.argument",
+      "typeDefinition": {
+        "argumentTypes": [
+          "any",
+          "any",
+        ],
+        "modifiers": undefined,
+        "returnType": "any",
+        "typeName": "function",
+      },
     },
     {
       "isLibraryName": false,
@@ -505,6 +570,15 @@ exports[`test case files parses sample.js (javascript) 1`] = `
         559,
       ],
       "type": "FunctionDeclaration.ownId",
+      "typeDefinition": {
+        "argumentTypes": [
+          "any",
+          "any",
+        ],
+        "modifiers": undefined,
+        "returnType": "any",
+        "typeName": "function",
+      },
     },
     {
       "isLibraryName": false,
@@ -514,6 +588,10 @@ exports[`test case files parses sample.js (javascript) 1`] = `
         618,
       ],
       "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
@@ -523,6 +601,10 @@ exports[`test case files parses sample.js (javascript) 1`] = `
         629,
       ],
       "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
@@ -532,6 +614,10 @@ exports[`test case files parses sample.js (javascript) 1`] = `
         640,
       ],
       "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
@@ -541,6 +627,10 @@ exports[`test case files parses sample.js (javascript) 1`] = `
         671,
       ],
       "type": "MemberExpression.property",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
@@ -550,6 +640,10 @@ exports[`test case files parses sample.js (javascript) 1`] = `
         694,
       ],
       "type": "ClassDeclaration.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
   ],
   "imports": {
@@ -743,8 +837,63 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
     "* a comment  ",
     " another comment",
     " these are all globals that should not be considered",
+    " no type argument for the first parameter",
   ],
   "identifiers": [
+    {
+      "isLibraryName": false,
+      "name": "a",
+      "sourceLocation": [
+        715,
+        724,
+      ],
+      "type": "FunctionDeclaration.argument",
+      "typeDefinition": {
+        "argumentTypes": [
+          "number",
+          "number",
+        ],
+        "modifiers": undefined,
+        "returnType": "any",
+        "typeName": "function",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "b",
+      "sourceLocation": [
+        726,
+        735,
+      ],
+      "type": "FunctionDeclaration.argument",
+      "typeDefinition": {
+        "argumentTypes": [
+          "number",
+          "number",
+        ],
+        "modifiers": undefined,
+        "returnType": "any",
+        "typeName": "function",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "add",
+      "sourceLocation": [
+        711,
+        714,
+      ],
+      "type": "FunctionDeclaration.ownId",
+      "typeDefinition": {
+        "argumentTypes": [
+          "number",
+          "number",
+        ],
+        "modifiers": undefined,
+        "returnType": "any",
+        "typeName": "function",
+      },
+    },
     {
       "isLibraryName": false,
       "name": "x",
@@ -753,6 +902,10 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
         770,
       ],
       "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
@@ -762,78 +915,178 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
         781,
       ],
       "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
       "name": "z",
       "sourceLocation": [
         791,
-        792,
+        858,
       ],
       "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "string | (number & {}) | (string & string) | Map<number, string>",
+      },
     },
     {
       "isLibraryName": false,
       "name": "myCustomAttribute",
       "sourceLocation": [
-        806,
-        823,
+        872,
+        889,
       ],
       "type": "MemberExpression.property",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
       "name": "SomeClass",
       "sourceLocation": [
-        837,
-        846,
+        903,
+        912,
       ],
       "type": "ClassDeclaration.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
       "name": "MyIFace",
       "sourceLocation": [
-        861,
-        868,
+        1060,
+        1067,
       ],
       "type": "TSInterfaceDeclaration.ownId",
+      "typeDefinition": undefined,
     },
     {
       "isLibraryName": false,
       "name": "MyType",
       "sourceLocation": [
-        878,
-        884,
+        1098,
+        1104,
       ],
       "type": "TSTypeAliasDeclaration.ownId",
+      "typeDefinition": undefined,
     },
     {
       "isLibraryName": false,
       "name": "ENUM_MEMBER_1",
       "sourceLocation": [
-        908,
-        921,
+        1149,
+        1162,
       ],
       "type": "TSEnumMember.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
       "name": "ENUM_MEMBER_2",
       "sourceLocation": [
-        925,
-        938,
+        1166,
+        1179,
       ],
       "type": "TSEnumMember.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
     },
     {
       "isLibraryName": false,
       "name": "MyEnum",
       "sourceLocation": [
-        897,
-        903,
+        1138,
+        1144,
       ],
       "type": "TSEnumDeclaration.ownId",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "a",
+      "sourceLocation": [
+        1375,
+        1376,
+      ],
+      "type": "FunctionDeclaration.argument",
+      "typeDefinition": {
+        "argumentTypes": [
+          "any",
+          "never",
+          "number[]",
+        ],
+        "modifiers": undefined,
+        "returnType": "ReturnType",
+        "typeName": "function",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "b",
+      "sourceLocation": [
+        1378,
+        1386,
+      ],
+      "type": "FunctionDeclaration.argument",
+      "typeDefinition": {
+        "argumentTypes": [
+          "any",
+          "never",
+          "number[]",
+        ],
+        "modifiers": undefined,
+        "returnType": "ReturnType",
+        "typeName": "function",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "spread",
+      "sourceLocation": [
+        1391,
+        1397,
+      ],
+      "type": "RestElement.argument",
+      "typeDefinition": {
+        "modifiers": undefined,
+        "typeName": "number[]",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "myOtherFunction",
+      "sourceLocation": [
+        1359,
+        1374,
+      ],
+      "type": "FunctionDeclaration.ownId",
+      "typeDefinition": {
+        "argumentTypes": [
+          "any",
+          "never",
+          "number[]",
+        ],
+        "modifiers": undefined,
+        "returnType": "ReturnType",
+        "typeName": "function",
+      },
     },
   ],
   "imports": {
