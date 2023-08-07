@@ -49,5 +49,9 @@ public class Sample {
 
   static {
     SOME_CONST = paye_tax_bracket * 2;
+
+    for (int i = 0; i < 10; i++) {
+
+    }
   }
 }

@@ -34,6 +34,8 @@ export namespace Parser {
     returnType?: string;
     /** if explicitly marked as readonly */
     modifiers?: Modifier[];
+    /** if the identifier has a special purpose */
+    classification?: "index";
   }
 
   export interface Results {

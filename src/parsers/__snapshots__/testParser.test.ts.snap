@@ -37,6 +37,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
           "Map",
           "int",
         ],
+        "returnType": "int",
         "typeName": "function",
       },
     },
@@ -49,6 +50,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableDeclaratorId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": [
           "public",
         ],
@@ -64,6 +66,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableDeclaratorId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": [
           "public",
         ],
@@ -79,6 +82,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableDeclaratorId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": [
           "public",
         ],
@@ -94,6 +98,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableDeclaratorId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": [
           "public",
         ],
@@ -109,6 +114,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableDeclaratorId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": [
           "public",
         ],
@@ -124,6 +130,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableDeclaratorId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": [
           "private",
           "static",
@@ -141,6 +148,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableDeclaratorId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": [
           "public",
           "static",
@@ -164,6 +172,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
           "String",
           "int",
         ],
+        "returnType": "String",
         "typeName": "function",
       },
     },
@@ -176,6 +185,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableDeclaratorId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": [
           "protected",
           "synchronized",
@@ -192,6 +202,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableDeclaratorId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": [
           "protected",
           "synchronized",
@@ -208,6 +219,7 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableArityParameter",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": [
           "protected",
           "synchronized",
@@ -272,6 +284,21 @@ exports[`test case files parses Sample.java (java) 1`] = `
       ],
       "type": "variableDeclaratorId",
       "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "int",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "i",
+      "sourceLocation": [
+        1151,
+        1151,
+      ],
+      "type": "variableDeclaratorId",
+      "typeDefinition": {
+        "classification": "index",
         "modifiers": undefined,
         "typeName": "int",
       },

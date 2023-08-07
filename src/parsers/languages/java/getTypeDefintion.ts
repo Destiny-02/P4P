@@ -6,6 +6,19 @@ const firstChild = (
   object: CstChildrenDictionary | undefined
 ): CstElement | undefined => Object.values(object || {})[0]?.[0];
 
+/**
+ * returns true if the given `node` is a deep child
+ * of a node with the given `nodeType`.
+ */
+const isChildOf = (node: CstNode, nodeType: string) => {
+  let next: CstNode | undefined = node;
+  while (next) {
+    if (next.name === nodeType) return true;
+    next = next.parent;
+  }
+  return false;
+};
+
 export function getDeepTypeDefinitionForIdentifier(
   innerType: CstElement | undefined
 ): IToken | undefined {
@@ -91,6 +104,7 @@ export function getTypeDefinition(
       return {
         typeName: result?.image || "any",
         modifiers: getModifiers(token),
+        classification: isChildOf(token, "forInit") ? "index" : undefined,
       };
     }
     case "methodDeclarator": {
@@ -108,8 +122,11 @@ export function getTypeDefinition(
         getDeepTypeDefinitionForIdentifier
       );
 
+      const returnType = token.parent?.parent?.children.result?.[0];
+
       return {
         typeName: "function",
+        returnType: getDeepTypeDefinitionForIdentifier(returnType)?.image,
         argumentTypes: argumentTypes.map((type) => type?.image || "any"),
       };
     }
