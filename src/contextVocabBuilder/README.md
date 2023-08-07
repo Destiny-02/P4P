@@ -14,7 +14,7 @@ This folder contains a script, which can be used to help build the context vocab
 - Uncomment this line. Ensure only this line in uncommented inside the `if __name__ == "__main__":` block.
 
 ```python
-saveTermsToBeDetermined(getPath("../../data/chess/domain-description.txt"), "chess")
+saveTermsToBeDetermined(getPath("../../data/chess/domain-description.md"), "chess")
 ```
 
 - Replace the first argument with the path to the descriptive text.

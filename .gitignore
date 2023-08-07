@@ -11,12 +11,19 @@ dist
 
 # generated files
 output
-data/downloaded
 # results/ is for finalised and organised results so tools should not write to it
 # we need to manually move over the tool output to the results/ folder and rename it appropriately after there have been significant changes to the tools' logic
 # all the tools should write to their own folder
 # results/*/*.json
-src/categoriseIdentifiers/*.json
+
+# ignore everything in `data` except ugrad-009-01 which is the only
+# one we committed into this repo
+data/*/*
+!data/README.md
+!data/ugrad-009-01/*
+!data/*/domain-description.md
+!data/*/repos.ini
+
 
 # temp
 parser-input.txt

@@ -128,5 +128,5 @@ def getPath(relativePath):
 
 if __name__ == "__main__":
     # Build the context terms from a piece of descriptive text
-    saveTermsToBeDetermined(getPath("../../data/chess/domain-description.txt"), "chess")
+    saveTermsToBeDetermined(getPath("../../data/chess/domain-description.md"), "chess")
     # saveDomainSheetToTxt("chess")
