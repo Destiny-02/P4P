@@ -20,6 +20,9 @@ exports[`test case files parses Sample.java (java) 1`] = `
         372,
       ],
       "type": "typeIdentifier",
+      "typeDefinition": {
+        "typeName": "class",
+      },
     },
     {
       "isLibraryName": false,
@@ -29,123 +32,198 @@ exports[`test case files parses Sample.java (java) 1`] = `
         450,
       ],
       "type": "methodDeclarator",
+      "typeDefinition": {
+        "argumentTypes": [
+          "Map",
+          "int",
+        ],
+        "typeName": "function",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "myFirstArg",
+      "sourceLocation": [
+        473,
+        482,
+      ],
+      "type": "variableDeclaratorId",
+      "typeDefinition": {
+        "typeName": "Map",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "secondArg",
+      "sourceLocation": [
+        489,
+        497,
+      ],
+      "type": "variableDeclaratorId",
+      "typeDefinition": {
+        "typeName": "int",
+      },
     },
     {
       "isLibraryName": false,
       "name": "a",
       "sourceLocation": [
-        464,
-        464,
+        510,
+        510,
       ],
       "type": "variableDeclaratorId",
+      "typeDefinition": {
+        "typeName": "int",
+      },
     },
     {
       "isLibraryName": false,
       "name": "b",
       "sourceLocation": [
-        479,
-        479,
+        525,
+        525,
       ],
       "type": "variableDeclaratorId",
+      "typeDefinition": {
+        "typeName": "int",
+      },
     },
     {
       "isLibraryName": false,
       "name": "employees",
       "sourceLocation": [
-        496,
-        504,
+        558,
+        566,
       ],
       "type": "variableDeclaratorId",
+      "typeDefinition": {
+        "typeName": "List",
+      },
     },
     {
       "isLibraryName": false,
       "name": "paye_tax_bracket",
       "sourceLocation": [
-        606,
-        621,
+        668,
+        683,
       ],
       "type": "variableDeclaratorId",
+      "typeDefinition": {
+        "typeName": "double",
+      },
     },
     {
       "isLibraryName": false,
       "name": "get_payslip_for_paye",
       "sourceLocation": [
-        651,
-        670,
+        713,
+        732,
       ],
       "type": "methodDeclarator",
+      "typeDefinition": {
+        "argumentTypes": [
+          "int",
+          "String",
+          "int",
+        ],
+        "typeName": "function",
+      },
     },
     {
       "isLibraryName": false,
       "name": "arg1",
       "sourceLocation": [
-        676,
-        679,
+        738,
+        741,
       ],
       "type": "variableDeclaratorId",
+      "typeDefinition": {
+        "typeName": "int",
+      },
     },
     {
       "isLibraryName": false,
       "name": "arg2",
       "sourceLocation": [
-        689,
-        692,
+        751,
+        754,
       ],
       "type": "variableDeclaratorId",
+      "typeDefinition": {
+        "typeName": "String",
+      },
     },
     {
       "isLibraryName": false,
       "name": "spreadArguments",
       "sourceLocation": [
-        702,
-        716,
+        764,
+        778,
       ],
       "type": "variableArityParameter",
+      "typeDefinition": {
+        "typeName": "int",
+      },
     },
     {
       "isLibraryName": false,
       "name": "MyEnum",
       "sourceLocation": [
-        847,
-        852,
+        909,
+        914,
       ],
       "type": "typeIdentifier",
+      "typeDefinition": {
+        "typeName": "enum",
+      },
     },
     {
       "isLibraryName": false,
       "name": "ENUM_MEMBER_1",
       "sourceLocation": [
-        860,
-        872,
+        922,
+        934,
       ],
       "type": "enumConstant",
+      "typeDefinition": {
+        "typeName": "intrinsic",
+      },
     },
     {
       "isLibraryName": false,
       "name": "ENUM_MEMBER_2",
       "sourceLocation": [
-        879,
-        891,
+        941,
+        953,
       ],
       "type": "enumConstant",
+      "typeDefinition": {
+        "typeName": "intrinsic",
+      },
     },
     {
       "isLibraryName": false,
       "name": "MyIFace",
       "sourceLocation": [
-        911,
-        917,
+        973,
+        979,
       ],
       "type": "typeIdentifier",
+      "typeDefinition": {
+        "typeName": "interface",
+      },
     },
     {
       "isLibraryName": false,
       "name": "myInterfaceProperty",
       "sourceLocation": [
-        929,
-        947,
+        991,
+        1009,
       ],
       "type": "variableDeclaratorId",
+      "typeDefinition": {
+        "typeName": "int",
+      },
     },
   ],
   "imports": {

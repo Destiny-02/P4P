@@ -16,11 +16,11 @@ public class Sample {
   /**
    * Sample is a class
    */
-  public int get_annual_income_deduction() {
+  public int get_annual_income_deduction(Map<String, Integer> myFirstArg, int secondArg) {
     int a = 1;
     int b = 5;
 
-    List employees = new ArrayList<>();
+    List<String, String> employees = new ArrayList<>();
 
     // this is a comment
     return a + b;
@@ -43,5 +43,9 @@ public class Sample {
 
   interface MyIFace {
     int myInterfaceProperty;
+  }
+
+  static {
+    SOME_CONST = paye_tax_bracket * 2;
   }
 }

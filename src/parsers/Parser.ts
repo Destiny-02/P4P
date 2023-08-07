@@ -8,6 +8,19 @@ export namespace Parser {
     /** true if this import is from the language's std lib (as opposed to a local file) */
     isLibraryFile: boolean;
   }
+
+  export interface TypeDefinition {
+    /**
+     * this could be a user-defined name, a built in type
+     * or an intrinsic type (we follow the TS convention,
+     * so that could be `any`, `unknown`, `never`, or `intrinsic`).
+     */
+    typeName: string;
+    argumentTypes?: string[];
+    /** if explicitly marked as readonly */
+    isReadOnly?: boolean;
+  }
+
   export interface Results {
     imports: {
       named: {
@@ -23,6 +36,7 @@ export namespace Parser {
     identifiers: {
       type: string;
       name: string;
+      typeDefinition?: TypeDefinition;
       sourceLocation: Range;
     }[];
   }
