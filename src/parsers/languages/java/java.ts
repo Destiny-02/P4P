@@ -32,7 +32,6 @@ function walkTree(
   parents: string[] = []
 ) {
   const type = node.name || fallbackType;
-  // console.log("found", type);
 
   // if this is an import, record the variable name that was imported
   if (type === "importDeclaration") {

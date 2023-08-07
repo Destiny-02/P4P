@@ -24,9 +24,11 @@ type NodeWithContext = {
 
 const AST_TYPES_TO_KEEP = new Set((<const>[
   AST_NODE_TYPES.VariableDeclarator, // variable defintion
-  AST_NODE_TYPES.MemberExpression, // object property assignment
+  // AST_NODE_TYPES.MemberExpression, // object property assignment - deliberately not included
   AST_NODE_TYPES.AssignmentExpression, // object property assignment
   AST_NODE_TYPES.FunctionDeclaration, // function defintion
+  AST_NODE_TYPES.FunctionExpression, // function defintion
+  AST_NODE_TYPES.ArrowFunctionExpression, // function defintion
   AST_NODE_TYPES.ClassDeclaration, // class definition
   AST_NODE_TYPES.TSEnumDeclaration, // enum definition
   AST_NODE_TYPES.TSEnumMember, // enum property definition
@@ -51,7 +53,6 @@ function walkTree(
   fileInput: string
 ) {
   const type = node.type;
-  // console.log("found", type, node);
 
   if (type === AST_NODE_TYPES.ImportDeclaration) {
     for (const specifier of node.specifiers) {
@@ -89,8 +90,6 @@ function walkTree(
         sourceLocation: node.range,
         typeDefinition: getTypeDefinitionForJSTS(node, fileInput),
       });
-    } else {
-      console.warn("Skipping", parent?.type);
     }
   }
 
@@ -109,9 +108,46 @@ function walkTree(
     );
   }
 
+  // for-index loops
+  if (node.type === AST_NODE_TYPES.ForStatement && node.init) {
+    // add only the initialiser
+    children.push({ context: undefined, node: node.init });
+  }
+
+  // for-in and for-of loops
+  if (
+    node.type === AST_NODE_TYPES.ForInStatement ||
+    node.type === AST_NODE_TYPES.ForOfStatement
+  ) {
+    // add only the left side
+    children.push({ context: undefined, node: node.left });
+  }
+
+  // multiple variable declarations separated by a comma
+  if (node.type === AST_NODE_TYPES.VariableDeclaration) {
+    children.push(
+      ...node.declarations.map((declaration) => ({
+        context: undefined,
+        node: declaration,
+      }))
+    );
+  }
+
   // expressions
   if (node.type === AST_NODE_TYPES.ExpressionStatement) {
     children.push({ context: undefined, node: node.expression });
+  }
+  if (node.type === AST_NODE_TYPES.CallExpression) {
+    children.push(
+      { context: undefined, node: node.callee },
+      ...node.arguments.map((argument) => ({
+        context: undefined,
+        node: argument,
+      }))
+    );
+  }
+  if (node.type === AST_NODE_TYPES.MemberExpression) {
+    children.push({ context: undefined, node: node.object });
   }
 
   // assignment - check LHS and RHS sides

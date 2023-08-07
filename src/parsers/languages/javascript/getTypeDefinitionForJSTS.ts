@@ -1,6 +1,7 @@
 import { AST_NODE_TYPES, TSESTree } from "@typescript-eslint/types";
 import { Parser } from "../../Parser";
 import { getModifiersForJSTS } from "./getModifiersForJSTS";
+import { getIsIndex } from "./getIsIndex";
 
 const stringifyTypeAnnotation = (
   node: TSESTree.TSTypeAnnotation | undefined,
@@ -24,6 +25,8 @@ export function getTypeDefinitionForJSTS(
     case AST_NODE_TYPES.ClassDeclaration:
     case AST_NODE_TYPES.TSEnumDeclaration:
     case AST_NODE_TYPES.RestElement:
+    case AST_NODE_TYPES.ArrowFunctionExpression:
+    case AST_NODE_TYPES.FunctionExpression:
     case AST_NODE_TYPES.TSEnumMember: {
       let typeAnnotation =
         "typeAnnotation" in node ? node.typeAnnotation : undefined;
@@ -36,6 +39,7 @@ export function getTypeDefinitionForJSTS(
       return {
         typeName: stringifyTypeAnnotation(typeAnnotation, fileInput),
         modifiers: getModifiersForJSTS(node),
+        classification: getIsIndex(node) ? "index" : undefined,
       };
     }
 

@@ -35,7 +35,6 @@ def test_invokeParser():
             "y",
             "z",
             "myInterfaceProperty",
-            "myCustomAttribute",
             "SomeClass",
             "MyEnum",
             "paye_tax_bracket",
@@ -47,6 +46,13 @@ def test_invokeParser():
             "arg1",
             "arg2",
             "spreadArguments",
+            "add",
+            "i",
+            "myFirstArg",
+            "myOtherFunction",
+            "secondArg",
+            "spread",
+            "threadId",
         ]
     )
     assert comments == set(
@@ -62,5 +68,6 @@ def test_invokeParser():
             "// this is a comment",
             "// these are all globals that should not be considered",
             " these are all globals that should not be considered",
+            " no type argument for the first parameter",
         ]
     )

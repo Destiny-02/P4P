@@ -24,7 +24,6 @@ function walkTree(
   subType: string | undefined
 ) {
   const type = node.type;
-  // console.log("found", type);
 
   // check if this node is a triple-quote string, if so, record it as a comment
   // TODO: this needs refinement

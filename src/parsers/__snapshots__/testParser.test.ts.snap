@@ -475,6 +475,21 @@ exports[`test case files parses sample.as (javascript) 1`] = `
       ],
       "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "x",
+      "sourceLocation": [
+        160,
+        161,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -488,6 +503,21 @@ exports[`test case files parses sample.as (javascript) 1`] = `
       ],
       "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "y",
+      "sourceLocation": [
+        171,
+        172,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -501,19 +531,21 @@ exports[`test case files parses sample.as (javascript) 1`] = `
       ],
       "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
     },
     {
       "isLibraryName": false,
-      "name": "myCustomAttribute",
+      "name": "z",
       "sourceLocation": [
-        197,
-        214,
+        182,
+        183,
       ],
-      "type": "MemberExpression.property",
+      "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -527,6 +559,7 @@ exports[`test case files parses sample.as (javascript) 1`] = `
       ],
       "type": "ClassDeclaration.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -616,6 +649,21 @@ exports[`test case files parses sample.js (javascript) 1`] = `
       ],
       "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "x",
+      "sourceLocation": [
+        617,
+        618,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -629,6 +677,21 @@ exports[`test case files parses sample.js (javascript) 1`] = `
       ],
       "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "y",
+      "sourceLocation": [
+        628,
+        629,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -642,19 +705,21 @@ exports[`test case files parses sample.js (javascript) 1`] = `
       ],
       "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
     },
     {
       "isLibraryName": false,
-      "name": "myCustomAttribute",
+      "name": "z",
       "sourceLocation": [
-        654,
-        671,
+        639,
+        640,
       ],
-      "type": "MemberExpression.property",
+      "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -668,6 +733,231 @@ exports[`test case files parses sample.js (javascript) 1`] = `
       ],
       "type": "ClassDeclaration.ownId",
       "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "i",
+      "sourceLocation": [
+        823,
+        824,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": "index",
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "j",
+      "sourceLocation": [
+        830,
+        831,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": "index",
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "i",
+      "sourceLocation": [
+        823,
+        824,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": "index",
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "j",
+      "sourceLocation": [
+        830,
+        831,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": "index",
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "x1",
+      "sourceLocation": [
+        866,
+        868,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "x1",
+      "sourceLocation": [
+        866,
+        868,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "x2",
+      "sourceLocation": [
+        888,
+        890,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "x2",
+      "sourceLocation": [
+        888,
+        890,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "item",
+      "sourceLocation": [
+        917,
+        921,
+      ],
+      "type": "ArrowFunctionExpression.argument",
+      "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "index",
+      "sourceLocation": [
+        923,
+        928,
+      ],
+      "type": "ArrowFunctionExpression.argument",
+      "typeDefinition": {
+        "classification": "index",
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "undefined",
+      "sourceLocation": [
+        957,
+        966,
+      ],
+      "type": "ArrowFunctionExpression.undefined",
+      "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "x",
+      "sourceLocation": [
+        948,
+        949,
+      ],
+      "type": "ArrowFunctionExpression.argument",
+      "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "i",
+      "sourceLocation": [
+        951,
+        952,
+      ],
+      "type": "ArrowFunctionExpression.argument",
+      "typeDefinition": {
+        "classification": "index",
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "accumulator",
+      "sourceLocation": [
+        979,
+        990,
+      ],
+      "type": "ArrowFunctionExpression.argument",
+      "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "item",
+      "sourceLocation": [
+        992,
+        996,
+      ],
+      "type": "ArrowFunctionExpression.argument",
+      "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "index",
+      "sourceLocation": [
+        998,
+        1003,
+      ],
+      "type": "ArrowFunctionExpression.argument",
+      "typeDefinition": {
+        "classification": "index",
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -930,6 +1220,21 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
       ],
       "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "x",
+      "sourceLocation": [
+        769,
+        770,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -943,6 +1248,21 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
       ],
       "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
+        "modifiers": undefined,
+        "typeName": "any",
+      },
+    },
+    {
+      "isLibraryName": false,
+      "name": "y",
+      "sourceLocation": [
+        780,
+        781,
+      ],
+      "type": "VariableDeclarator.ownId",
+      "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -956,21 +1276,23 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
       ],
       "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "string | (number & {}) | (string & string) | Map<number, string>",
       },
     },
     {
       "isLibraryName": false,
-      "name": "myCustomAttribute",
+      "name": "z",
       "sourceLocation": [
-        872,
-        889,
+        791,
+        858,
       ],
-      "type": "MemberExpression.property",
+      "type": "VariableDeclarator.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
-        "typeName": "any",
+        "typeName": "string | (number & {}) | (string & string) | Map<number, string>",
       },
     },
     {
@@ -982,6 +1304,7 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
       ],
       "type": "ClassDeclaration.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -1015,6 +1338,7 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
       ],
       "type": "TSEnumMember.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -1028,6 +1352,7 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
       ],
       "type": "TSEnumMember.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -1041,6 +1366,7 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
       ],
       "type": "TSEnumDeclaration.ownId",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "any",
       },
@@ -1092,6 +1418,7 @@ exports[`test case files parses sample.ts (javascript) 1`] = `
       ],
       "type": "RestElement.argument",
       "typeDefinition": {
+        "classification": undefined,
         "modifiers": undefined,
         "typeName": "number[]",
       },
