@@ -60,6 +60,7 @@ def invokeParserWithMetadata(
                     "fileName": fileName,
                     "startOffset": identifier["sourceLocation"][0],
                     "endOffset": identifier["sourceLocation"][1],
+                    "typeInformation": identifier.get("typeDefinition"),
                 }
 
                 if identifier["name"] not in identifiers:

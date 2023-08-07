@@ -74,6 +74,7 @@ def categoriseIdentifiers(
                         identifier=identifier,
                         context=context,
                         allComments=allComments,
+                        sourceLocations=sourceLocations,
                     )
                     for validator in validators
                 ]

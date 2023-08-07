@@ -22,6 +22,10 @@ class Diagonstics(TypedDict):
 
     suggestion: str
 
+    # some diagnostics only apply in certain places or files,
+    # since the identifier could be used in multiple places.
+    appliesToTheseLocationsOnly: NotRequired[set[str]]
+
 
 class LexiconContext(TypedDict):
     """
@@ -103,3 +107,4 @@ class ValidatorArguments(TypedDict):
     identifier: str
     context: GlobalValidatorContext
     allComments: set[str]
+    sourceLocations: list[ParsedEntityContext]

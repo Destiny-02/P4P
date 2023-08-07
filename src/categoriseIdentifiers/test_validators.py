@@ -317,3 +317,54 @@ def test_validators():
             "sourceLocations": [context2],
         },
     ]
+
+
+def test_abbreviatedExceptions():
+    identifiers: IdentifersWithContext = {
+        "nase": [
+            {
+                "fileName": "someFile.java",
+                "startOffset": 1,
+                "endOffset": 2,
+                "typeInformation": {"typeName": "NegativeArraySizeException"},
+            }
+        ],
+        "sioobex": [
+            {
+                "fileName": "anotherFile.java",
+                "startOffset": 1,
+                "endOffset": 2,
+                "typeInformation": {"typeName": "StringIndexOutOfBoundsException"},
+            }
+        ],
+    }
+    result = categoriseIdentifiers(identifiers, set(), set(), set())
+    assert len(result) == 2  # two identifiers
+
+    assert len(result[0]["components"]) == 1  # first identifier comprises of 1 word
+    assert result[0]["components"][0].get("diagnostics") == [
+        {
+            "issueType": "abbreviatedException",
+            "severity": Severity.INFO,
+            "appliesToTheseLocationsOnly": set(["someFile.java:1:2"]),
+            "suggestion": "“nase” appears to be an abbreviation of its type (“NegativeArraySizeException”).",
+        }
+    ]
+
+    assert len(result[1]["components"]) == 1  # second identifier comprises of 1 word
+    assert result[1]["components"][0].get("diagnostics") == [
+        {
+            "issueType": "abbreviatedException",
+            "severity": Severity.INFO,
+            "appliesToTheseLocationsOnly": set(["anotherFile.java:1:2"]),
+            "suggestion": "“sioobex” appears to be an abbreviation of its type (“StringIndexOutOfBoundsException”).",
+        },
+        {
+            "issueType": "misspelling",
+            "severity": Severity.WARNING,
+            "suggestion": "“sioobex” appears to be misspelt, did you mean “excision”?",
+        },
+        # TODO: if a previous validator understands the identifier, it should not
+        #       be flagged by downstream validators. This would prevent this misspelling
+        #       suggestion.
+    ]
