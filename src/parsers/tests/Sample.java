@@ -28,7 +28,9 @@ public class Sample {
 
   private static final double paye_tax_bracket = 17.5;
 
-  protected String get_payslip_for_paye(int arg1, String arg2, int... spreadArguments) {
+  public static volatile transient int threadId = null;
+
+  protected synchronized String get_payslip_for_paye(int arg1, String arg2, int... spreadArguments) {
 
     // these are all globals that should not be considered
     System.out.println(new String());

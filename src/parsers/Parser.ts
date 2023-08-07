@@ -9,6 +9,18 @@ export namespace Parser {
     isLibraryFile: boolean;
   }
 
+  /** not all langauges support all of these modifiers */
+  export type Modifier =
+    | "public"
+    | "private"
+    | "protected"
+    | "final"
+    | "static"
+    | "abstract"
+    | "transient"
+    | "synchronized"
+    | "volatile";
+
   export interface TypeDefinition {
     /**
      * this could be a user-defined name, a built in type
@@ -18,7 +30,7 @@ export namespace Parser {
     typeName: string;
     argumentTypes?: string[];
     /** if explicitly marked as readonly */
-    isReadOnly?: boolean;
+    modifiers?: Modifier[];
   }
 
   export interface Results {

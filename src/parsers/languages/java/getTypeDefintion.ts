@@ -48,6 +48,30 @@ const getTypeNodeForVariableWithUserDefinedType = (token: CstNode) =>
 const getTypeNodeForVariable = (token: CstNode) =>
   token.parent?.parent?.parent?.parent?.children?.variableDeclaratorList?.[0];
 
+function getModifiers(token: CstNode): Parser.Modifier[] | undefined {
+  // explore uṗ the tree, until we find a sibling node which
+  // has modifiers.
+  let next: CstNode | undefined = token;
+  let modifiers: CstNode[] | undefined;
+  while (!modifiers && next) {
+    modifiers = <CstNode[] | undefined>(
+      (next.parent?.children?.fieldModifier ||
+        next.parent?.children?.methodModifier)
+    );
+    next = next.parent;
+  }
+
+  if (!modifiers) return undefined;
+
+  const modifierNames = modifiers.map(
+    (modifier) =>
+      (<IToken>firstChild(modifier.children))!.image as Parser.Modifier
+  );
+  if (!modifierNames.length) return undefined;
+
+  return modifierNames;
+}
+
 export function getTypeDefinition(
   token: CstNode,
   parentType: CstTypesWeUnderstand
@@ -64,7 +88,10 @@ export function getTypeDefinition(
 
       const result = getDeepTypeDefinitionForIdentifier(innerType);
 
-      return { typeName: result?.image || "any" };
+      return {
+        typeName: result?.image || "any",
+        modifiers: getModifiers(token),
+      };
     }
     case "methodDeclarator": {
       const methodArguments = <CstNode[]>(
