@@ -108,17 +108,17 @@ export function getTypeDefinition(
       };
     }
     case "methodDeclarator": {
-      const methodArguments = <CstNode[]>(
+      const methodArguments = <CstNode[] | undefined>(
         (<CstNode>token.parent?.children.formalParameterList?.[0])?.children
           .formalParameter
       );
 
-      const argumentIdentifiers = methodArguments.map(
+      const argumentIdentifiers = methodArguments?.map(
         (methodArgument) =>
           (<CstNode>firstChild(methodArgument.children))?.children?.unannType[0]
       );
 
-      const argumentTypes = argumentIdentifiers.map(
+      const argumentTypes = argumentIdentifiers?.map(
         getDeepTypeDefinitionForIdentifier
       );
 
@@ -127,7 +127,7 @@ export function getTypeDefinition(
       return {
         typeName: "function",
         returnType: getDeepTypeDefinitionForIdentifier(returnType)?.image,
-        argumentTypes: argumentTypes.map((type) => type?.image || "any"),
+        argumentTypes: argumentTypes?.map((type) => type?.image || "any"),
       };
     }
     // enum members can't have a custom type, they're intrinsic in java

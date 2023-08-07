@@ -53,10 +53,10 @@ export function getIsIndex(
     node.parent!.type === AST_NODE_TYPES.FunctionExpression ||
     node.parent!.type === AST_NODE_TYPES.FunctionDeclaration
   ) {
-    const callee = (<TSESTree.MemberExpression>(
-      (<TSESTree.CallExpression>node.parent!.parent!).callee
-    )).property;
-    const calleeName = "name" in callee ? callee.name : undefined;
+    const callee = (<TSESTree.MemberExpression | undefined>(
+      (<TSESTree.CallExpression | undefined>node.parent?.parent)?.callee
+    ))?.property;
+    const calleeName = callee && "name" in callee ? callee.name : undefined;
 
     const methodIndex = node.parent?.params.indexOf(node);
 

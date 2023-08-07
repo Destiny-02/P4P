@@ -41,6 +41,7 @@
   "jest": {
     "preset": "ts-jest",
     "testPathIgnorePatterns": [
+      "data",
       "dist"
     ],
     "testEnvironment": "node"

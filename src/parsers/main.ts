@@ -11,7 +11,12 @@ async function main() {
 
   const fileNames = inputString
     .split("📚")
-    .map((file) => file.replaceAll("^", "").trim());
+    .map((file) => file.replaceAll("^", "").trim())
+    .filter(
+      (filePath) =>
+        // don't try to parse certain internal folders
+        !filePath.includes(".git") && !filePath.includes("node_modules")
+    );
 
   // always save to repo root, no matter where this script is executed from
   const outputPath = join(__dirname, "../../parser-output.json");
