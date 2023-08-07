@@ -17,6 +17,7 @@ pylint = "*"
 pylint-actions = "*"
 nltk = "*"
 pyenchant = "*"
+argparse = "*"
 
 [dev-packages]
 

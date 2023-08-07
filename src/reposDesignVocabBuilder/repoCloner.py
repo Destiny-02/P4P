@@ -10,12 +10,15 @@ def clone_repos(repoList: list[str], destinationFolder: str):
 
     for repoName in repoList:
         repoUrl = f"https://github.com/{repoName}.git"
-        subprocess.call(['git', 'clone', repoUrl])
+        # --depth=1 majorly speeds up the download time
+        subprocess.call(["git", "clone", repoUrl, "--depth=1"])
 
     print("Cloning completed.")
 
+
 def getPath(relativePath):
     return path.join(path.dirname(__file__), relativePath)
+
 
 if __name__ == "__main__":
     baseApiUrl = "https://api.github.com/search/repositories?q="
