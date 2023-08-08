@@ -10,3 +10,6 @@ class TermToDetermine(TypedDict):
     userClassification: Literal[""] | Literal["c"]
     frequencyInDocument: int
     tfidf: float
+    freqScore: float
+    tfidfScore: float
+    contextLikelihoodScore: float

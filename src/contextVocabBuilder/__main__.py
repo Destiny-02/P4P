@@ -77,26 +77,79 @@ def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
     # load frequencies of each term within the entire corpus
     initialiseEnglishCorpus()
 
+    # calculate tf-idf for all the terms
+    tfidfDict: dict[str, float] = dict()
+    for term in terms:
+        tfidfDict[term] = determineIfContextSchema(term, termFrequencies.get(term, 0))
+
+    # used for min-max scaling
+    # we can't use dict.values() because it uses the original domainDescription,
+    # which includes stopwords like "the", which would skew the min-max scaling
+    # the next-values are used to avoid 0-scores
+    minFrequency = float("inf")
+    nextMinFrequency = float("inf")
+    maxFrequency = 1
+    minTfidf = 1
+    maxTfidf = 0
+    nextMaxTfidf = 1
+    for term in terms:
+        freq = frequencyDict.get(stemTerm(term), 1)
+        tfidf = tfidfDict.get(term, 0)
+        if freq < minFrequency:
+            nextMinFrequency = minFrequency
+            minFrequency = freq
+        if freq > maxFrequency:
+            maxFrequency = freq
+        if tfidf < minTfidf:
+            minTfidf = tfidf
+        if tfidf > maxTfidf:
+            nextMaxTfidf = maxTfidf
+            maxTfidf = tfidf
+    if nextMinFrequency == float("inf"):
+        nextMinFrequency = minFrequency + 1
+    if nextMaxTfidf == 1:
+        nextMaxTfidf = maxTfidf * 0.9
+
     # add extra columns to the output
     termsWithExtraColumns: list[TermToDetermine] = []
     for term in terms:
+        freq = frequencyDict.get(stemTerm(term), 1)
+        tfidf = tfidfDict.get(term, 0)
+        freqScaled = (freq - minFrequency) / (maxFrequency - minFrequency)
+        tfidfScaled = (tfidf - minTfidf) / (maxTfidf - minTfidf)
+
+        # avoid 0-scores
+        if freqScaled == 0:
+            freqScaled = ((freq + nextMinFrequency) / 2 - minFrequency) / (
+                maxFrequency - minFrequency
+            )
+        if tfidfScaled == 1:
+            tfidfScaled = ((freq + nextMaxTfidf) / 2 - minFrequency) / (
+                maxFrequency - minFrequency
+            )
+
+        # calculate scores
+        freqScore = freqScaled * 10
+        tfidfScore = (1 - tfidfScaled) * 10
+        contextLikelihoodScore = freqScaled * (1 - tfidfScaled) * 100
+
         termsWithExtraColumns.append(
             {
                 "term": term,
                 "userClassification": "",
-                "frequencyInDocument": frequencyDict.get(stemTerm(term), 1),
-                "tfidf": determineIfContextSchema(term, termFrequencies.get(term, 0)),
+                "frequencyInDocument": freq,
+                "tfidf": tfidf,
+                "freqScore": freqScore,
+                "tfidfScore": tfidfScore,
+                "contextLikelihoodScore": contextLikelihoodScore,
             }
         )
 
-    # Sort the terms by the number of times they were mentioned (descending)
-    # If the number of times they were mentioned is the same, sort alphabetically (ascending)
-    # to keep it deterministic
+    # Sort the terms by the context likelihood score (based on tf-idf and frequency in document)
     termsWithExtraColumns = sorted(
         termsWithExtraColumns,
-        # currently sorted by tfidf, this can be changed
-        key=lambda csvRow: csvRow["tfidf"],
-        reverse=False,
+        key=lambda csvRow: csvRow["contextLikelihoodScore"],
+        reverse=True,
     )
 
     # Write the terms to be determined to a spreadsheet
@@ -128,5 +181,7 @@ def getPath(relativePath):
 
 if __name__ == "__main__":
     # Build the context terms from a piece of descriptive text
-    saveTermsToBeDetermined(getPath("../../data/chess/domain-description.md"), "chess")
+    saveTermsToBeDetermined(
+        getPath("../../data/free-col/domain-description.md"), "free-col"
+    )
     # saveDomainSheetToTxt("chess")
