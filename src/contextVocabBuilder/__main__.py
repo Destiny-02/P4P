@@ -179,7 +179,8 @@ def saveDomainSheetToTxt(domainFolderName):
     with open(getPath(TO_DETERMINE_FILE), "r", encoding="utf8") as file:
         reader = csv.reader(file)
         for row in reader:
-            word, letter, _ = row
+            word = row[0]
+            letter = row[1]
             if letter == "c":
                 dSet.add(stemTerm(word))
 
@@ -194,9 +195,9 @@ def getPath(relativePath):
 
 if __name__ == "__main__":
     # Build the context terms from a piece of descriptive text
-    saveTermsToBeDetermined(
-        getPath("../../data/free-col/domain-description.md"),
-        "free-col",
-        getPath("../../src/vocabularlyBuilder/to-categorise.csv"),
-    )
-    # saveDomainSheetToTxt("chess")
+    # saveTermsToBeDetermined(
+    #     getPath("../../data/free-col/domain-description.md"),
+    #     "free-col",
+    #     getPath("../../src/vocabularlyBuilder/to-categorise.csv"),
+    # )
+    saveDomainSheetToTxt("free-col")
