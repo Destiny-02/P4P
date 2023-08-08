@@ -157,12 +157,22 @@ def setIntersectionStemmed2(
     stemmedIntersection = stemmedIntersection.difference(stopWords)
 
     returnSet = set()
+    returnSetStemmed = set()
+
     for word in firstSet:
-        if stemTerm(word) in stemmedIntersection:
+        if (
+            stemTerm(word) in stemmedIntersection
+            and stemTerm(word) not in returnSetStemmed
+        ):
             returnSet.add(word)
+            returnSetStemmed.add(stemTerm(word))
     for word in secondSet:
-        if stemTerm(word) in stemmedIntersection:
+        if (
+            stemTerm(word) in stemmedIntersection
+            and stemTerm(word) not in returnSetStemmed
+        ):
             returnSet.add(word)
+            returnSetStemmed.add(stemTerm(word))
 
     return returnSet
 
