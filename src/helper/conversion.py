@@ -258,7 +258,7 @@ def termsListToStemmedFrequencyDict(terms: list[str]) -> dict[str, int]:
 
 
 def stringsToProcessable(
-    strings: set[str], excludeListStemmed: set[str] | None = None
+    strings: set[str], excludeListStemmed: set[str] = {}
 ) -> set[str]:
     """
     Converts a set of strings to a set of standardised terms that is ready for a human to process manually.
@@ -273,15 +273,13 @@ def stringsToProcessable(
     terms = {term for term in terms if len(term) > 1}
 
     # Remove stop words
-    stopWords = set(nltk.corpus.stopwords.words("english"))
     terms = {term for term in terms if term not in stopWords}
 
     # Fix spelling
     terms = {fixUSSpelling(term) for term in terms}
 
     # Remove the terms we save seen i.e. the stemmed version is in the combined set
-    if excludeListStemmed:
-        terms = removeSeenStemmed(terms, excludeListStemmed)
+    terms = removeSeenStemmed(terms, excludeListStemmed)
 
     return terms
 
