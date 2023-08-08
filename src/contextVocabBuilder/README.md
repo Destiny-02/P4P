@@ -19,6 +19,7 @@ saveTermsToBeDetermined(getPath("../../data/chess/domain-description.md"), "ches
 
 - Replace the first argument with the path to the descriptive text.
 - Replace the second argument with the name of the folder containing the codebases and text files i.e. `your-domain-name` (referenced above).
+- (Optional) If you want to only consider the terms that are also in a spreadsheet, then replace the third argument with the path to the spreadsheet.
 - From the repo root, run the script with `python -m src.contextVocabBuilder`.
 - `to-determine.csv` will be created in this directory
 - For the terms that you want to add to the context vocabulary, write a `c` in the 2nd column and save the file.

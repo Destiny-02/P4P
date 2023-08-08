@@ -5,6 +5,7 @@ from ..helper.conversion import (
     setToTxtNoDuplicates,
     stringsToProcessable,
     setIntersectionStemmed,
+    setIntersectionStemmed2,
     setToStemmedSet,
     termsListToStemmedFrequencyDict,
     stringToTermsList,
@@ -21,7 +22,9 @@ from .types import TermToDetermine
 TO_DETERMINE_FILE = "to-determine.csv"
 
 
-def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
+def saveTermsToBeDetermined(
+    pathToDomainDescription, domainFolderName, termsCsvPath: str | None = None
+):
     """
     Saves the terms to be determined as from the domain or not from the descriptor to a spreadsheet
     """
@@ -76,6 +79,16 @@ def saveTermsToBeDetermined(pathToDomainDescription, domainFolderName):
 
     # load frequencies of each term within the entire corpus
     initialiseEnglishCorpus()
+
+    # Only keep the terms that are in the csv file
+    # (which are the terms that are used in the codebase)
+    if termsCsvPath is not None:
+        keepTheseTerms = set()
+        with open(termsCsvPath, "r", encoding="utf8") as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                keepTheseTerms.add(row[0])
+        terms = setIntersectionStemmed2(terms, keepTheseTerms, False, False)
 
     # calculate tf-idf for all the terms
     tfidfDict: dict[str, float] = dict()
@@ -182,6 +195,8 @@ def getPath(relativePath):
 if __name__ == "__main__":
     # Build the context terms from a piece of descriptive text
     saveTermsToBeDetermined(
-        getPath("../../data/free-col/domain-description.md"), "free-col"
+        getPath("../../data/free-col/domain-description.md"),
+        "free-col",
+        getPath("../../src/vocabularlyBuilder/to-categorise.csv"),
     )
     # saveDomainSheetToTxt("chess")

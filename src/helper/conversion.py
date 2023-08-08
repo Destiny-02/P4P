@@ -120,6 +120,7 @@ def convertEquivalents(data: set, equivalents: dict) -> set:
 
 def setIntersectionStemmed(firstSet: set, secondSetStemmed: set) -> set:
     """
+    DEPRECATED, use setIntersectionStemmed2 instead
     Returns a set of terms that are in both the first and second set
     The first set is not stemmed (normal English words)
     The second set is stemmed
@@ -130,6 +131,36 @@ def setIntersectionStemmed(firstSet: set, secondSetStemmed: set) -> set:
 
     returnSet = set()
     for word in firstSet:
+        if stemTerm(word) in stemmedIntersection:
+            returnSet.add(word)
+
+    return returnSet
+
+
+def setIntersectionStemmed2(
+    firstSet: set[str],
+    secondSet: set[str],
+    isFirstSetStemmed: bool,
+    isSecondSetStemmed: bool,
+) -> set:
+    """
+    Returns a set of terms that are in both the first and second set
+    """
+    firstSetStemmed = firstSet
+    if not isFirstSetStemmed:
+        firstSetStemmed = setToStemmedSet(firstSet)
+    secondSetStemmed = secondSet
+    if not isSecondSetStemmed:
+        secondSetStemmed = setToStemmedSet(secondSet)
+    stemmedIntersection = firstSetStemmed.intersection(secondSetStemmed)
+
+    stemmedIntersection = stemmedIntersection.difference(stopWords)
+
+    returnSet = set()
+    for word in firstSet:
+        if stemTerm(word) in stemmedIntersection:
+            returnSet.add(word)
+    for word in secondSet:
         if stemTerm(word) in stemmedIntersection:
             returnSet.add(word)
 
