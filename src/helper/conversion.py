@@ -7,6 +7,9 @@ import nltk
 nltk.download("stopwords")
 
 stopWords = set(nltk.corpus.stopwords.words("english"))
+stopWords = {
+    word.replace("'", "") for word in stopWords
+}  # remove apostrophe from stop words
 
 
 def txtToSet(filename):
@@ -153,8 +156,6 @@ def setIntersectionStemmed2(
     if not isSecondSetStemmed:
         secondSetStemmed = setToStemmedSet(secondSet)
     stemmedIntersection = firstSetStemmed.intersection(secondSetStemmed)
-
-    stemmedIntersection = stemmedIntersection.difference(stopWords)
 
     returnSet = set()
     returnSetStemmed = set()
