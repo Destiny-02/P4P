@@ -9,7 +9,7 @@ from ..helper.conversion import (
     setIntersectionStemmed,
     setToStemmedSet,
 )
-from ..helper.io import findJavaFiles, setToSheet, deleteFileIfExists
+from ..helper.io import findJavaFiles, setToSheet, deleteFileIfExists, findRepoPaths
 from ..pathConstants import VOCAB_FOLDER
 
 TO_CATEGORISE_FILE = "to-categorise.csv"
@@ -158,9 +158,9 @@ def getPath(relativePath):
 
 if __name__ == "__main__":
     # Categorising terms from identifiers in a codebase
-    saveTermsToBeCategorised([getPath("../../data/chess/ashish1294_ChessOOP")], "chess")
+    # saveTermsToBeCategorised([getPath("../../data/chess/ashish1294_ChessOOP")], "chess")
     # saveCategoriseSheetToTxt("chess")
 
     # Categorising terms from identifiers in multiple codebases at once
-    # saveTermsToBeCategorised(findRepoPaths(getPath("../../data/chess/")), "chess")
+    saveTermsToBeCategorised(findRepoPaths(getPath("../../data/free-col/")), "free-col")
     # saveCategoriseSheetToTxt("chess")

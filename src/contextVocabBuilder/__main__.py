@@ -10,6 +10,7 @@ from ..helper.conversion import (
     termsListToStemmedFrequencyDict,
     stringToTermsList,
     preprocessIdentifier,
+    extractCapitalisedWords,
 )
 from ..helper.io import writeDictAsCsv
 from ..helper.generic import flatten
@@ -73,6 +74,9 @@ def saveTermsToBeDetermined(
     frequencyDict = termsListToStemmedFrequencyDict(
         stringToTermsList(domainDescription)
     )
+
+    # Find terms that are capitalised in the domain description
+    capitalisedTerms = extractCapitalisedWords(domainDescription)
 
     # compute frequencies of each term within the doc
     termFrequencies = computeFrequency(processedOriginalTerms)
@@ -145,6 +149,8 @@ def saveTermsToBeDetermined(
         freqScore = freqScaled * 10
         tfidfScore = (1 - tfidfScaled) * 10
         contextLikelihoodScore = freqScaled * (1 - tfidfScaled) * 100
+        if stemTerm(term) in capitalisedTerms:
+            contextLikelihoodScore += 25
 
         termsWithExtraColumns.append(
             {
@@ -195,9 +201,9 @@ def getPath(relativePath):
 
 if __name__ == "__main__":
     # Build the context terms from a piece of descriptive text
-    # saveTermsToBeDetermined(
-    #     getPath("../../data/free-col/domain-description.md"),
-    #     "free-col",
-    #     getPath("../../src/vocabularlyBuilder/to-categorise.csv"),
-    # )
-    saveDomainSheetToTxt("free-col")
+    saveTermsToBeDetermined(
+        getPath("../../data/free-col/domain-description.md"),
+        "free-col",
+        getPath("../../src/vocabularlyBuilder/to-categorise.csv"),
+    )
+    # saveDomainSheetToTxt("free-col")

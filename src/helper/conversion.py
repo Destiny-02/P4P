@@ -231,6 +231,25 @@ def cleanSetOfTerms(data: set) -> set:
     return newData
 
 
+def extractCapitalisedWords(text: str) -> set[str]:
+    """
+    Extracts all capitalised words from a string.
+    Does not consider words that start with a capital letter if they are preceded by a period.
+    Returns a set of the stemmed and "cleaned" version of the words.
+    Similar "cleaning" to stringsToProcessable().
+    """
+    ret = set()
+    terms = text.split()
+    for i, term in enumerate(terms):
+        if term[0].isupper() and (
+            i == 0 or (terms[i - 1][-1] != "." and terms[i - 1][-1] != "!")
+        ):
+            ret.add(term)
+    ret = stringsToProcessable(ret)
+    ret = setToStemmedSet(ret)
+    return ret
+
+
 def convertToLowercase(term: str) -> str:
     """
     Converts a term to stripped lowercase

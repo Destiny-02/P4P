@@ -206,7 +206,9 @@ if __name__ == "__main__":
     """
     Find the number of terms that are design, context or neither
     """
-    (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsTerms("chess")
+    (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsTerms(
+        "free-col"
+    )
     writeResultsToCsv(
         designCounts, contextCounts, neitherCounts, getPath("tool-results.csv")
     )
