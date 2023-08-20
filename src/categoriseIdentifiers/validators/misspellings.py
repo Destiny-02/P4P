@@ -14,6 +14,10 @@ def isMisspelling(
 
     correctedSpelling = fixSpelling(word)
 
+    # discard suggestions to split into multiple words
+    if " " in correctedSpelling:
+        return None
+
     if correctedSpelling != word:
         # if the spellchecker gave us a suggestion, show it to the user
         return {

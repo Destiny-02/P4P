@@ -14,7 +14,7 @@ regExForAbbrThenDef = "([A-Z-]{2,}) *:? *\\(? *((\\w| |-)+)(\\)|\n|$)"
 # abbreviation in parathenses.
 # This regex itself is too greedy, it grabs the entire paragraph before
 # the definition so the python code has to remove surplus words.
-regExForDefThenAbbr = "((\\w| |-)+) *\\( *([A-Za-z]{2,}) *(\\)|\n|$)"
+regExForDefThenAbbr = "((\\w| |-)+) +\\( *([A-Za-z]{2,}) *(\\)|\n|$)"
 
 
 def getWordsThatBelongToAbbreviation(abbreviation: str, definition: str) -> str:
