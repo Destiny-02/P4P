@@ -7,15 +7,17 @@ async function main() {
   const inputString =
     process.argv[2] === "USE_INPUT_FILE"
       ? await fs.readFile(join(__dirname, "../../parser-input.txt"), "utf8")
-      : process.argv[2];
+      : process.argv[2] || "";
 
   const fileNames = inputString
     .split("📚")
     .map((file) => file.replaceAll("^", "").trim())
     .filter(
       (filePath) =>
+        filePath &&
         // don't try to parse certain internal folders
-        !filePath.includes(".git") && !filePath.includes("node_modules")
+        !filePath.includes(".git") &&
+        !filePath.includes("node_modules")
     );
 
   // always save to repo root, no matter where this script is executed from

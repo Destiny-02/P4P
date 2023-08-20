@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "parse": "tsc && node dist/parsers/main",
+    "parse": "node src/parsers",
     "downloadAbbrs": "ts-node src/helper/setup/downloadAbbreviationDictionary",
     "downloadOtherDictionaries": "cd src/helper/setup && downloadOtherDictionaries.bat",
     "downloadDictionaries": "npm run downloadAbbrs && npm run downloadOtherDictionaries",
