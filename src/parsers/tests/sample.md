@@ -2,7 +2,7 @@
 
 This is a sample markdown file, which serves as documentation for SAAAP (Sample Acronym and Abbreviation Parser).
 
-Some abbreivations are less straightforward, like COM (communication port) or starboard (STBD).
+Some abbreivations are less straightforward, like COM (Communication port) or Starboard (STBD).
 
 It's even more complicated when the full phrase is introduced within a body of prose, for example, the phase Software Engineering (SOFTENG) or Chat Generative Pre-Trained Transformer (ChatGPT).
 

@@ -17,7 +17,7 @@ regExForAbbrThenDef = "([A-Z-]{2,}) *:? *\\(? *((\\w| |-)+)(\\)|\n|$)"
 regExForDefThenAbbr = "((\\w| |-)+) +\\( *([A-Za-z]{2,}) *(\\)|\n|$)"
 
 
-def getWordsThatBelongToAbbreviation(abbreviation: str, definition: str) -> str:
+def getWordsThatBelongToAbbreviation(abbreviation: str, definition: str) -> str | None:
     """
     this is O(n), we have two pointers set to the ends of
     both strings, and we work backwards until we find evidence
@@ -46,6 +46,11 @@ def getWordsThatBelongToAbbreviation(abbreviation: str, definition: str) -> str:
 
         if defIndex == -1:
             return ""  # abort, we ran out of words that could form the defintion
+
+        # the first char must be a capital letter, this is eliminates
+        # a lot of false positives
+        if isFirstChar and definition[defIndex].islower():
+            return None
 
         # remove the char that we've just checked
         abbrWorking = abbrWorking[:-1]
@@ -78,6 +83,9 @@ def createDomainSpecificAbbreviationDictionary(
 
         # use some logic to strip down definition to the actual words
         definition = getWordsThatBelongToAbbreviation(abbr, definition)
+
+        if not definition:
+            return  # abort, the match wasn't valid
 
         if len(definition) < len(abbr):
             return  # abort, we've extracted it the wrong way around

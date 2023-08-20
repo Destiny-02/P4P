@@ -15,14 +15,14 @@ def test_createDomainSpecificAbbreviationDictionary():
             "abbreviations": {
                 "ais": ["Automatic Identification System"],
                 "chatgpt": ["Chat Generative Pre-Trained Transformer"],
-                "com": ["communication port"],
+                "com": ["Communication port"],
                 "cospas-sarsat": [
                     "Cosmicheskaya Sistema Poiska Avariynyh Sudov - Search And Rescue Satellite-Aided Tracking"
                 ],
                 "etcs": ["European Train Control System"],
                 "saaap": ["Sample Acronym and Abbreviation Parser"],
                 "softeng": ["Software Engineering"],
-                "stbd": ["starboard"],
+                "stbd": ["Starboard"],
                 # It did not accept UTC beacuse the words are the wrong way around
                 "vts": ["Vessel Traffic Services"],
             },
@@ -40,14 +40,17 @@ def test_getWordsThatBelongToAbbreviation():
         getWordsThatBelongToAbbreviation("SoftENG", "the words Software Engineering")
         == "Software Engineering"
     )
-    assert getWordsThatBelongToAbbreviation("stbd", "steer to starboard") == "starboard"
+    assert not getWordsThatBelongToAbbreviation(
+        "stbd", "steer to starboard"  # fails because it's lowercase
+    )
+    assert getWordsThatBelongToAbbreviation("stbd", "steer to Starboard") == "Starboard"
 
     # it works for numbers too
     assert (
         getWordsThatBelongToAbbreviation(
-            "B2C", "easiest question was business 2 customer"
+            "B2C", "easiest question was Business 2 Customer"
         )
-        == "business 2 customer"
+        == "Business 2 Customer"
     )
 
     # no possible solution because the order is wrong
