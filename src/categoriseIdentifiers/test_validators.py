@@ -31,7 +31,7 @@ def test_validators():
         "currRouteConnexAct": [context1, context2],
         "postPlan": [context2],
     }
-    x = categoriseIdentifiers(identifiers, contextWords, designWords, allComments)
+    x = categoriseIdentifiers(identifiers, contextWords, designWords, allComments, True)
     assert x == [
         {
             "identifier": "getGtfsModeOfTransport",
@@ -338,7 +338,7 @@ def test_abbreviatedExceptions():
             }
         ],
     }
-    result = categoriseIdentifiers(identifiers, set(), set(), set())
+    result = categoriseIdentifiers(identifiers, set(), set(), set(), True)
     assert len(result) == 2  # two identifiers
 
     assert len(result[0]["components"]) == 1  # first identifier comprises of 1 word

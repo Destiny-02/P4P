@@ -1,6 +1,10 @@
 import os
 from argparse import ArgumentParser
 from .repoCloner import clone_repos
+from ..categoriseIdentifiers.helpers.getPossibleDomains import (
+    domainList as choices,
+    outputFolderPath,
+)
 
 
 #
@@ -9,9 +13,6 @@ from .repoCloner import clone_repos
 # where [domainName] is the name of a domain (e.g. chess)
 #
 
-outputFolderPath = os.path.join(os.path.dirname(__file__), "../../data")
-
-choices = [folder.name for folder in os.scandir(outputFolderPath) if folder.is_dir()]
 
 parser = ArgumentParser()
 parser.add_argument("domainName", choices=choices)

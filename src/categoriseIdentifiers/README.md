@@ -8,7 +8,9 @@ The validators detect obvious issues and can suggest improvements.
 
 **Usage:**
 
-- Run `python -m src.categoriseIdentifiers --cache "ugrad-009-01/design1000"`, where `ugrad-009-01` is the domain name and `design1000` is the repo name.
+- Run `python -m src.categoriseIdentifiers --cache DOMAIN_NAME"`, where `DOMAIN_NAME` is the domain name.
+- If you only want to analyse one repository from the domain, add the CLI flag `-r REPO_NAME`
 - Like all scripts, the `--cache` flag is optional and will bypass the slow parser
+- The slowest checks are not run by default, you need to add `--slow` to generate these diagnostics.
 
 Results are saved to `design1000.json` (depending on the chosen repo) in the folder where the script is run.

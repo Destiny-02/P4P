@@ -59,8 +59,8 @@ class CategorisedWord(TypedDict):
 
     # the remaining properties are only included for neither-terms
     metadata: NotRequired[LexiconContext]
-    relevanceToDesign: NotRequired[Similarity]
-    relevanceToContext: NotRequired[Similarity]
+    relevanceToDesign: NotRequired[Similarity | None]
+    relevanceToContext: NotRequired[Similarity | None]
 
     diagnostics: NotRequired[list[Diagonstics]]
 

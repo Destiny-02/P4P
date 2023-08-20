@@ -1,4 +1,5 @@
 from os import path
+from argparse import ArgumentParser
 from porter2stemmer import Porter2Stemmer
 
 from .typeDefs import CategorisedIdentifier, CategorisedWord, GlobalValidatorContext
@@ -9,6 +10,7 @@ from .helpers.createDomainSpecificAbbreviationDictionary import (
     createDomainSpecificAbbreviationDictionary,
 )
 from .helpers.createSynonymMap import createSynonymMap
+from .helpers.getPossibleDomains import domainList, getReposForDomain
 from ..helper.invokeParser import invokeParserWithMetadata, IdentifersWithContext
 from ..helper.io import findFiles, readSheet, saveJsonFile
 from ..helper.conversion import preprocessIdentifier
@@ -26,6 +28,7 @@ def categoriseIdentifiers(
     contextWords: set[str],
     designWords: set[str],
     allComments: set[str],
+    shouldRunExpensiveChecks: bool,
 ):
     """
     This function processes each identifier, and runs various validators
@@ -36,8 +39,16 @@ def categoriseIdentifiers(
 
     # TODO: this doesn't work well because designWords is already stemmed, and
     # stemming is a lossy operation that we can't easily revert
-    determineRelevanceToDesignSchema = createDetermineRelevanceToSchema(designWords)
-    determineRelevanceToContextSchema = createDetermineRelevanceToSchema(contextWords)
+    determineRelevanceToDesignSchema = (
+        createDetermineRelevanceToSchema(designWords)
+        if shouldRunExpensiveChecks
+        else None
+    )
+    determineRelevanceToContextSchema = (
+        createDetermineRelevanceToSchema(contextWords)
+        if shouldRunExpensiveChecks
+        else None
+    )
 
     output: list[CategorisedIdentifier] = []
 
@@ -84,8 +95,16 @@ def categoriseIdentifiers(
 
                 metadata = addLexiconContext(word)
 
-                relevanceToDesign = determineRelevanceToDesignSchema(word, metadata)
-                relevanceToContext = determineRelevanceToContextSchema(word, metadata)
+                relevanceToDesign = (
+                    determineRelevanceToDesignSchema(word, metadata)
+                    if determineRelevanceToDesignSchema
+                    else None
+                )
+                relevanceToContext = (
+                    determineRelevanceToContextSchema(word, metadata)
+                    if determineRelevanceToContextSchema
+                    else None
+                )
 
                 components.append(
                     {
@@ -109,26 +128,65 @@ def categoriseIdentifiers(
     return output
 
 
-def readFilesAndCategoriseIdentifiers(repoName: str):
+def readFilesAndCategoriseIdentifiers(
+    domainName: str, repoNames: list[str], shouldRunExpensiveChecks: bool
+):
     """
     reads files and invokes categoriseIdentifiers. Separated from
     that function to make it easier to write tests
     """
 
-    repoFolder = path.join(ALL_DATA_FOLDER, repoName)
-    vocabFolder = path.join(ALL_VOCAB_FOLDER, repoName, "..")
-    outputFile = path.join(TOOL_OUTPUT_FOLDER, repoName, "validator.json")
-
-    (identifiers, comments) = invokeParserWithMetadata(findFiles(repoFolder))
+    vocabFolder = path.join(ALL_VOCAB_FOLDER, domainName)
     contextWords = readSheet(path.join(vocabFolder, "context.txt"))
     designWords = readSheet(path.join(vocabFolder, "design.txt"))
 
-    output = categoriseIdentifiers(identifiers, contextWords, designWords, comments)
+    for repoName in repoNames:
+        print(f"Processing {repoName}…")
+        repoFolder = path.join(ALL_DATA_FOLDER, domainName, repoName)
+        outputFile = path.join(
+            TOOL_OUTPUT_FOLDER, domainName, repoName, "validator.json"
+        )
 
-    # save the results to a file
-    saveJsonFile(output, outputFile)
+        (identifiers, comments) = invokeParserWithMetadata(findFiles(repoFolder))
+
+        output = categoriseIdentifiers(
+            identifiers, contextWords, designWords, comments, shouldRunExpensiveChecks
+        )
+
+        # save the results to a file
+        saveJsonFile(output, outputFile)
 
 
 if __name__ == "__main__":
-    # use CLI arguments or fallback to #9-1
-    readFilesAndCategoriseIdentifiers("ugrad-009-01/design1000")
+    parser = ArgumentParser()
+    parser.add_argument(
+        "domainName",
+        choices=domainList,
+        help="the name of the domain (i.e. the folder name)",
+    )
+    parser.add_argument(
+        "-s",
+        "--slow",
+        action="store_true",
+        help="run optional computationally expensive checks",
+    )
+    parser.add_argument(
+        "-r",
+        "--repo",
+        help="optional, the name of the repo. Defaults to all repos in the domain",
+    )
+    parser.add_argument(
+        "--cache",
+        help="(debugging only) This will use the cached data from the parser",
+    )
+
+    args = parser.parse_args()
+
+    # if a specific repository was specified, check only that one.
+    # otherwise check all repositories in that domain
+    repoNamesToScan = [args.repo] if args.repo else getReposForDomain(args.domainName)
+
+    if repoNamesToScan:
+        readFilesAndCategoriseIdentifiers(args.domainName, repoNamesToScan, args.slow)
+    else:
+        print(f"(!) There are no repositories in the folder “{args.domainName}”")
