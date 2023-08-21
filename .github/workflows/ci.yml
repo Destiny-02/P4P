@@ -56,7 +56,6 @@ jobs:
         run: |
           npm i -g pyright
           pipenv run pyright
-        continue-on-error: true
 
       - name: 🧮 TypeScript TypeCheck
         run: |
