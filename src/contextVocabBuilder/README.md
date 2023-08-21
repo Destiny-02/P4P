@@ -11,25 +11,12 @@ This folder contains a script, which can be used to help build the context vocab
 
 ## Build the context terms from a piece of descriptive text
 
-- Uncomment this line. Ensure only this line in uncommented inside the `if __name__ == "__main__":` block.
-
-```python
-saveTermsToBeDetermined(getPath("../../data/chess/domain-description.md"), "chess")
-```
-
-- Replace the first argument with the path to the descriptive text.
-- Replace the second argument with the name of the folder containing the codebases and text files i.e. `your-domain-name` (referenced above).
-- (Optional) If you want to only consider the terms that are also in a spreadsheet, then replace the third argument with the path to the spreadsheet.
-- From the repo root, run the script with `python -m src.contextVocabBuilder`.
+- Create a folder in `../data` for your domain
+- Within that folder, create a file called `domain-description.md`
+- From the repo root, run `python -m src.contextVocabBuilder your-domain-name -c createToDetermine`, replacing `your-domain-name` with the chosen name (referenced above).
+- (Optional) If you want to only consider the terms that are also in a spreadsheet, then append `-o` or `--onlyToCategorise` to the previous command
 - `to-determine.csv` will be created in this directory
 - For the terms that you want to add to the context vocabulary, write a `c` in the 2nd column and save the file.
 - The terms are sorted by how likely we think the term is a context term.
-- Uncomment this line. Ensure only this line in uncommented inside the `if __name__ == "__main__":` block.
-
-```python
-saveDomainSheetToTxt("chess")
-```
-
-- Replace the first argument with the name of the name of the folder containing the codebases and text files
-- From the repo root, run the script with `python -m src.contextVocabBuilder`.
+- From the repo root, run `python -m src.contextVocabBuilder your-domain-name -c readToDetermine`, replacing `your-domain-name` with the chosen name (referenced above).
 - The terms that you indicated with a `c` in `to-determine.csv` will be added to the context vocabulary in `context.txt`.

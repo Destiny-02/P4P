@@ -1,4 +1,5 @@
 from os import path
+import argparse
 import csv
 from ..helper.conversion import (
     stemTerm,
@@ -12,6 +13,7 @@ from ..helper.conversion import (
     preprocessIdentifier,
     extractCapitalisedWords,
 )
+from ..categoriseIdentifiers.helpers.getPossibleDomains import domainList
 from ..helper.io import writeDictAsCsv
 from ..helper.generic import flatten
 from ..pathConstants import VOCAB_FOLDER
@@ -200,10 +202,33 @@ def getPath(relativePath):
 
 
 if __name__ == "__main__":
-    # Build the context terms from a piece of descriptive text
-    saveTermsToBeDetermined(
-        getPath("../../data/free-col/domain-description.md"),
-        "free-col",
-        getPath("../../src/vocabularlyBuilder/to-categorise.csv"),
+    parser = argparse.ArgumentParser(
+        description="Build the context terms from a piece of descriptive text"
     )
-    # saveDomainSheetToTxt("free-col")
+    parser.add_argument("domainName", choices=domainList)
+
+    parser.add_argument(
+        "-c",
+        "--command",
+        required=True,
+        choices=["createToDetermine", "readToDetermine"],
+    )
+    parser.add_argument(
+        "-o",
+        "--onlyToCategorise",
+        action="store_true",
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "createToDetermine":
+        saveTermsToBeDetermined(
+            getPath(f"../../data/{args.domainName}/domain-description.md"),
+            args.domainName,
+            getPath("../../src/vocabularlyBuilder/to-categorise.csv")
+            if args.onlyToCategorise
+            else None,
+        )
+    else:
+        # command == readToDetermine
+        saveDomainSheetToTxt(args.domainName)
