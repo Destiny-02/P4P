@@ -97,7 +97,7 @@ def categoriseIdentifiers(
                     if diagnostic:
                         break  # once we have a match, skip the remaining validators
 
-                metadata = addLexiconContext(word)
+                metadata = addLexiconContext(word, shouldRunExpensiveChecks)
 
                 relevanceToDesign = (
                     determineRelevanceToDesignSchema(word, metadata)

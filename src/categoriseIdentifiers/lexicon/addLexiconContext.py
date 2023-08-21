@@ -15,7 +15,7 @@ wordnetToQId: dict[str, list[str]] = json.load(
 )
 
 
-def addLexiconContext(word: str) -> LexiconContext:
+def addLexiconContext(word: str, shouldRunExpensiveChecks: bool) -> LexiconContext:
     """
     given a word, this function determines its POS and wordnet IDs
     """
@@ -23,6 +23,17 @@ def addLexiconContext(word: str) -> LexiconContext:
     posTypes: set[str] = set()
     wordnetIds: set[str] = set()
     qIds: set[str] = set()
+
+    output: LexiconContext = {
+        "posTypes": posTypes,
+        "wordnetIds": wordnetIds,
+        "qIds": qIds,
+    }
+
+    if not shouldRunExpensiveChecks:
+        # abort immediately, since we don't need this
+        # context info
+        return output
 
     for lemma in wordnet.lemmas(word):
         synset = lemma.synset()
@@ -36,4 +47,4 @@ def addLexiconContext(word: str) -> LexiconContext:
         if qId:
             qIds.update(qId)
 
-    return {"posTypes": posTypes, "wordnetIds": wordnetIds, "qIds": qIds}
+    return output
