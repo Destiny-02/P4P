@@ -39,7 +39,13 @@ def test_validators():
                 {
                     "category": "neither",
                     "word": "get",
-                    "diagnostics": [],
+                    "diagnostics": [
+                        {
+                            "issueType": "unrecognised",
+                            "severity": Severity.INFO,
+                            "suggestion": "“get” was not recognised",
+                        }
+                    ],
                     "metadata": {
                         "posTypes": set(["n", "v"]),
                         "qIds": set(),
@@ -137,7 +143,13 @@ def test_validators():
                         "path": (5.56, "tape_drive/tape_transport/transport"),
                         "wup": (10.53, "tape_drive/tape_transport/transport"),
                     },
-                    "diagnostics": [],
+                    "diagnostics": [
+                        {
+                            "issueType": "unrecognised",
+                            "severity": Severity.INFO,
+                            "suggestion": "“mode” was not recognised",
+                        }
+                    ],
                 },
                 # the word "of" was removed
                 {"category": "design", "word": "transport"},
@@ -311,7 +323,13 @@ def test_validators():
                         "path": (5.88, "transportation/shipping/transport"),
                         "wup": (11.11, "transportation/shipping/transport"),
                     },
-                    "diagnostics": [],
+                    "diagnostics": [
+                        {
+                            "issueType": "unrecognised",
+                            "severity": Severity.INFO,
+                            "suggestion": "“plan” was not recognised",
+                        }
+                    ],
                 },
             ],
             "sourceLocations": [context2],
@@ -359,12 +377,4 @@ def test_abbreviatedExceptions():
             "appliesToTheseLocationsOnly": set(["anotherFile.java:1:2"]),
             "suggestion": "“sioobex” appears to be an abbreviation of its type (“StringIndexOutOfBoundsException”).",
         },
-        {
-            "issueType": "misspelling",
-            "severity": Severity.WARNING,
-            "suggestion": "“sioobex” appears to be misspelt, did you mean “excision”?",
-        },
-        # TODO: if a previous validator understands the identifier, it should not
-        #       be flagged by downstream validators. This would prevent this misspelling
-        #       suggestion.
     ]

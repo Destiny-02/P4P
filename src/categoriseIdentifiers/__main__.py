@@ -2,7 +2,12 @@ from os import path
 from argparse import ArgumentParser
 from porter2stemmer import Porter2Stemmer
 
-from .typeDefs import CategorisedIdentifier, CategorisedWord, GlobalValidatorContext
+from .typeDefs import (
+    CategorisedIdentifier,
+    CategorisedWord,
+    GlobalValidatorContext,
+    Diagonstics,
+)
 from .validators.index import validators
 from .lexicon.addLexiconContext import addLexiconContext
 from .lexicon.determineRelevanceToSchema import createDetermineRelevanceToSchema
@@ -79,19 +84,18 @@ def categoriseIdentifiers(
             else:
                 # it's neither context nor design, so run the word thru each
                 # validator until we find a match
-                validatorResults = [
-                    validator(
+                diagnostic: Diagonstics | None = None
+                for validator in validators:
+                    diagnostic = validator(
                         word=word,
                         identifier=identifier,
                         context=context,
                         allComments=allComments,
                         sourceLocations=sourceLocations,
                     )
-                    for validator in validators
-                ]
 
-                # filter out all checks that passed
-                issues = [issue for issue in validatorResults if issue]
+                    if diagnostic:
+                        break  # once we have a match, skip the remaining validators
 
                 metadata = addLexiconContext(word)
 
@@ -113,7 +117,7 @@ def categoriseIdentifiers(
                         "metadata": metadata,
                         "relevanceToDesign": relevanceToDesign,
                         "relevanceToContext": relevanceToContext,
-                        "diagnostics": issues,
+                        "diagnostics": [diagnostic] if diagnostic else [],
                     }
                 )
 
