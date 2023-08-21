@@ -378,3 +378,118 @@ def test_abbreviatedExceptions():
             "suggestion": "“sioobex” appears to be an abbreviation of its type (“StringIndexOutOfBoundsException”).",
         },
     ]
+
+
+def test_SingleLetter():
+    identifiers: IdentifersWithContext = {
+        "i": [
+            {
+                "fileName": "someFile.java",
+                "startOffset": 1,
+                "endOffset": 2,
+                "typeInformation": {"typeName": "int", "classification": "index"},
+            },
+            {
+                "fileName": "someOtherFile.py",
+                "startOffset": 1,
+                "endOffset": 2,
+                "typeInformation": {"typeName": "str"},  # not an index
+            },
+        ],
+        "xAxisLabel": [
+            {
+                "fileName": "anotherFile.java",
+                "startOffset": 1,
+                "endOffset": 2,
+            }
+        ],
+    }
+    result = categoriseIdentifiers(identifiers, set(), set(), set(), False)
+    assert result == [
+        {
+            "identifier": "i",
+            "components": [
+                {
+                    "word": "i",
+                    "category": "neither",
+                    "diagnostics": [
+                        {
+                            "issueType": "singleLetter",
+                            "severity": Severity.WARNING,
+                            "suggestion": "“i” does not appear to be an index. Consider using a more explicit name.",
+                            "appliesToTheseLocationsOnly": set(
+                                ["someOtherFile.py:1:2"]
+                            ),
+                        }
+                    ],
+                    "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
+                    "relevanceToContext": None,
+                    "relevanceToDesign": None,
+                },
+            ],
+            "sourceLocations": [
+                {
+                    "endOffset": 2,
+                    "fileName": "someFile.java",
+                    "startOffset": 1,
+                    "typeInformation": {"classification": "index", "typeName": "int"},
+                },
+                {
+                    "endOffset": 2,
+                    "fileName": "someOtherFile.py",
+                    "startOffset": 1,
+                    "typeInformation": {"typeName": "str"},
+                },
+            ],
+        },
+        {
+            "identifier": "xAxisLabel",
+            "components": [
+                {
+                    "word": "x",
+                    "category": "neither",
+                    "diagnostics": [
+                        {
+                            "issueType": "singleLetter",
+                            "severity": Severity.INFO,
+                            "suggestion": "",
+                        }
+                    ],
+                    "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
+                    "relevanceToContext": None,
+                    "relevanceToDesign": None,
+                },
+                {
+                    "word": "axis",
+                    "category": "neither",
+                    "diagnostics": [
+                        {
+                            "issueType": "unrecognised",
+                            "severity": Severity.INFO,
+                            "suggestion": "“axis” was not recognised",
+                        }
+                    ],
+                    "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
+                    "relevanceToContext": None,
+                    "relevanceToDesign": None,
+                },
+                {
+                    "word": "label",
+                    "category": "neither",
+                    "diagnostics": [
+                        {
+                            "issueType": "unrecognised",
+                            "severity": Severity.INFO,
+                            "suggestion": "“label” was not recognised",
+                        }
+                    ],
+                    "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
+                    "relevanceToContext": None,
+                    "relevanceToDesign": None,
+                },
+            ],
+            "sourceLocations": [
+                {"endOffset": 2, "fileName": "anotherFile.java", "startOffset": 1}
+            ],
+        },
+    ]

@@ -68,7 +68,7 @@ def categoriseIdentifiers(
     for [identifier, sourceLocations] in identifiers.items():
         # this function splits the identifer into terms, normalises american
         # english, and removes stop words etc.
-        words = preprocessIdentifier(identifier)
+        words = preprocessIdentifier(identifier, False)
 
         # a list of every word in the identifer, with out categorisation
         # and any relevant diagnostics

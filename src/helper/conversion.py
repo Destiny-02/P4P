@@ -11,6 +11,8 @@ stopWords = {
     word.replace("'", "") for word in stopWords
 }  # remove apostrophe from stop words
 
+stopWords.remove("i")  # not a stop word in software
+
 
 def txtToSet(filename) -> set[str]:
     """
@@ -319,7 +321,7 @@ def termsListToStemmedFrequencyDict(terms: list[str]) -> dict[str, int]:
 
 
 def stringsToProcessable(
-    strings: set[str], excludeListStemmed: set[str] = set()
+    strings: set[str], excludeListStemmed: set[str] | None = None
 ) -> set[str]:
     """
     Converts a set of strings to a set of standardised terms that is ready for a human to process manually.
@@ -340,12 +342,14 @@ def stringsToProcessable(
     terms = {fixUSSpelling(term) for term in terms}
 
     # Remove the terms we save seen i.e. the stemmed version is in the combined set
-    terms = removeSeenStemmed(terms, excludeListStemmed)
+    terms = removeSeenStemmed(terms, excludeListStemmed or set())
 
     return terms
 
 
-def preprocessIdentifier(identifier: str) -> list[str]:
+def preprocessIdentifier(
+    identifier: str, removeSingleLetterWords: bool = True
+) -> list[str]:
     """
     almost identical to `stringsToProcessable`, but this function uses
     a deterministic order
@@ -358,7 +362,8 @@ def preprocessIdentifier(identifier: str) -> list[str]:
     terms = [convertToLowercase(term) for term in terms if term != ""]
 
     # Remove single-letter words
-    terms = [term for term in terms if len(term) > 1]
+    if removeSingleLetterWords:
+        terms = [term for term in terms if len(term) > 1]
 
     # Remove stop words
     terms = [term for term in terms if term not in stopWords]
