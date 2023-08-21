@@ -12,7 +12,7 @@ stopWords = {
 }  # remove apostrophe from stop words
 
 
-def txtToSet(filename):
+def txtToSet(filename) -> set[str]:
     """
     Converts a text file with one term per line to a set
     """
@@ -319,7 +319,7 @@ def termsListToStemmedFrequencyDict(terms: list[str]) -> dict[str, int]:
 
 
 def stringsToProcessable(
-    strings: set[str], excludeListStemmed: set[str] = {}
+    strings: set[str], excludeListStemmed: set[str] = set()
 ) -> set[str]:
     """
     Converts a set of strings to a set of standardised terms that is ready for a human to process manually.

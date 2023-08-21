@@ -21,3 +21,6 @@ disable=[
 ]
 
 load-plugins = "pylint_actions"
+
+[tool.pyright]
+exclude=["**/data"]

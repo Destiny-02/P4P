@@ -1,6 +1,6 @@
 from os import path
 import csv
-from ..analyseCodebases.__main__ import main as analyseCodebases
+from ..analyseCodebases.__main__ import dcnCountsTerms as analyseCodebases
 from ..helper.io import deleteFileIfExists
 
 def main(pathToSmallVocabulary, pathToBigVocabulary, domainFolderName):

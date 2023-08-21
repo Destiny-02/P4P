@@ -35,7 +35,8 @@ def createDetermineRelevanceToSchema(
         wup = LowestFinder[str]()  # Wu-Palmer Similarity
         # TODO: could also consider Encyclopædic Similarity but this is much more complex
 
-        for targetSynset in wordnet.synsets(word):
+        for _targetSynset in wordnet.synsets(word):
+            targetSynset: Any = _targetSynset
             for schemaSynset in synsetsForSchema:
                 schemaName = "/".join([n.name() for n in schemaSynset.lemmas()])
 
