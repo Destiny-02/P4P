@@ -506,3 +506,109 @@ def test_SingleLetter():
             ],
         },
     ]
+
+
+def test_Misused1():
+    identifiers: IdentifersWithContext = {
+        "isEnabled": [
+            {
+                "fileName": "someFile.java",
+                "startOffset": 1,
+                "endOffset": 2,
+                "typeInformation": {"typeName": "boolean"},
+            },
+            {
+                "fileName": "badFile.py",
+                "startOffset": 1,
+                "endOffset": 2,
+                "typeInformation": {"typeName": "str"},
+            },
+            {
+                "fileName": "someOtherFile.py",
+                "startOffset": 1,
+                "endOffset": 2,
+                "typeInformation": {"typeName": "any"},
+            },
+        ]
+    }
+    result = categoriseIdentifiers(identifiers, set(), set(["enabl"]), set(), False)
+    assert result == [
+        {
+            "identifier": "isEnabled",
+            "components": [
+                {
+                    "word": "is",
+                    "category": "neither",
+                    "diagnostics": [
+                        {
+                            "issueType": "misused",
+                            "severity": Severity.WARNING,
+                            "suggestion": "“isEnabled” is not a boolean, but its name suggests that it is.",
+                            "appliesToTheseLocationsOnly": set(["badFile.py:1:2"]),
+                        }
+                    ],
+                    "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
+                    "relevanceToContext": None,
+                    "relevanceToDesign": None,
+                },
+                {
+                    "word": "enabled",
+                    "category": "design",
+                },
+            ],
+            "sourceLocations": identifiers["isEnabled"],
+        },
+    ]
+
+
+def test_Misused2():
+    # generate 20 examples where the identifier is used for a string
+    lotsOfExamples: list[ParsedEntityContext] = [
+        {
+            "fileName": f"file{i}.java",
+            "startOffset": 1,
+            "endOffset": 2,
+            "typeInformation": {"typeName": "String"},
+        }
+        for i in range(20)
+    ]
+    identifiers: IdentifersWithContext = {
+        # add one example where it's used as a different type.
+        "playerName": lotsOfExamples
+        + [
+            {
+                "fileName": "buggyFile.java",
+                "startOffset": 1,
+                "endOffset": 2,
+                "typeInformation": {"typeName": "Player"},
+            }
+        ]
+    }
+    result = categoriseIdentifiers(identifiers, set(), set(["name"]), set(), False)
+    assert result == [
+        {
+            "identifier": "playerName",
+            "components": [
+                {
+                    "word": "player",
+                    "category": "neither",
+                    "diagnostics": [
+                        {
+                            "issueType": "misused",
+                            "severity": Severity.WARNING,
+                            "suggestion": "“playerName” is almost always a “String”, but here it is a “Player”.",
+                            "appliesToTheseLocationsOnly": set(["buggyFile.java:1:2"]),
+                        }
+                    ],
+                    "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
+                    "relevanceToContext": None,
+                    "relevanceToDesign": None,
+                },
+                {
+                    "word": "name",
+                    "category": "design",
+                },
+            ],
+            "sourceLocations": identifiers["playerName"],
+        },
+    ]

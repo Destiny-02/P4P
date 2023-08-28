@@ -4,6 +4,7 @@ from .misspellings import isMisspelling
 from .synonyms import isSynonym
 from .singleLetter import isSingleLetter
 from .unrecognised import isUnrecognised
+from .misused import isMisused
 
 # reëxport all validators
 # this works since they all have the same method signature
@@ -14,6 +15,7 @@ validators = [
     isSingleLetter,  # must be before isAbbreviated
     isAbbreviated,
     isAbbreviatedException,
+    isMisused,
     isMisspelling,
     isSynonym,
     isUnrecognised,  # must be the last
