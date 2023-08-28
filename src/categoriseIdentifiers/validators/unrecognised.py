@@ -4,12 +4,20 @@ from ..typeDefs import (
     Severity,
     ValidatorArguments,
 )
+from ...helper.conversion import stopWords
 
 
 def isUnrecognised(
     **options: Unpack[ValidatorArguments],
 ) -> Diagonstics | None:
     word = options["word"]
+
+    if word in stopWords:
+        return {
+            "issueType": "stopWord",
+            "severity": Severity.INFO,
+            "suggestion": f"“{word}” is a stop-word",
+        }
 
     return {
         "issueType": "unrecognised",

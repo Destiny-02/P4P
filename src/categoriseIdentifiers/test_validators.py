@@ -151,7 +151,20 @@ def test_validators():
                         }
                     ],
                 },
-                # the word "of" was removed
+                {
+                    "category": "neither",
+                    "word": "of",
+                    "diagnostics": [
+                        {
+                            "issueType": "stopWord",
+                            "severity": Severity.INFO,
+                            "suggestion": "“of” is a stop-word",
+                        }
+                    ],
+                    "metadata": {"posTypes": set(), "qIds": set(), "wordnetIds": set()},
+                    "relevanceToContext": {"lch": None, "path": None, "wup": None},
+                    "relevanceToDesign": {"lch": None, "path": None, "wup": None},
+                },
                 {"category": "design", "word": "transport"},
             ],
             "sourceLocations": [context1],

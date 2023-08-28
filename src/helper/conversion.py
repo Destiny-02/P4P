@@ -348,7 +348,7 @@ def stringsToProcessable(
 
 
 def preprocessIdentifier(
-    identifier: str, removeSingleLetterWords: bool = True
+    identifier: str, removeSingleLetterAndStopWords: bool = True
 ) -> list[str]:
     """
     almost identical to `stringsToProcessable`, but this function uses
@@ -362,11 +362,11 @@ def preprocessIdentifier(
     terms = [convertToLowercase(term) for term in terms if term != ""]
 
     # Remove single-letter words
-    if removeSingleLetterWords:
+    if removeSingleLetterAndStopWords:
         terms = [term for term in terms if len(term) > 1]
 
-    # Remove stop words
-    terms = [term for term in terms if term not in stopWords]
+        # Remove stop words
+        terms = [term for term in terms if term not in stopWords]
 
     # Fix spelling
     terms = [fixUSSpelling(term) for term in terms]
