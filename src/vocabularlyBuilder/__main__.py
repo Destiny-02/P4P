@@ -9,7 +9,7 @@ from ..helper.conversion import (
     setIntersectionStemmed,
     setToStemmedSet,
 )
-from ..helper.io import findJavaFiles, setToSheet, deleteFileIfExists, findRepoPaths
+from ..helper.io import findFiles, setToSheet, deleteFileIfExists, findRepoPaths
 from ..pathConstants import VOCAB_FOLDER
 
 TO_CATEGORISE_FILE = "to-categorise.csv"
@@ -38,7 +38,7 @@ def saveTermsToBeCategorised(pathToDataList, domainFolderName):
 
     for pathToData in pathToDataList:
         # Parse the identifiers
-        (identifiers, _) = invokeParser(findJavaFiles(pathToData))
+        (identifiers, _) = invokeParser(findFiles(pathToData))
 
         # Split the identifiers into standardised terms suitable for a human to categorise manually
         terms = stringsToProcessable(identifiers, combinedTerms)

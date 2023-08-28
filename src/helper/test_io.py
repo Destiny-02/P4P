@@ -1,7 +1,8 @@
 import os
-from .io import findJavaFiles
+from .io import findFiles
 
-def test_findJavaFiles():
+
+def test_findFiles():
     # Create a temporary directory and some Java files for testing
     root_dir = 'test_find_java_files'
     os.mkdir(root_dir)
@@ -17,7 +18,7 @@ def test_findJavaFiles():
         f.write('public class Test2 {}')
 
     # Test find_java_files()
-    java_files = findJavaFiles(root_dir)
+    java_files = findFiles(root_dir)
     assert len(java_files) == 2
     assert os.path.join(sub_dir1, 'test1.java') in java_files
     assert os.path.join(sub_dir2, 'test2.java') in java_files

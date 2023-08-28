@@ -2,7 +2,7 @@ from os import path
 import json
 from ..helper.invokeParser import invokeParser
 from ..helper.conversion import setToStemmedSet, stringsToProcessable
-from ..helper.io import findJavaFiles, saveJsonFile
+from ..helper.io import findFiles, saveJsonFile
 
 DESIGN_TERMS_FILE = "design-terms.json"
 MAX_FILES_PER_INVOCATION = 10
@@ -20,7 +20,7 @@ def main(repoPaths: list[str]):
     for repoPath in repoPaths:
         # Get the terms from the repo
         # Parsing only needs to be done once for these repos so we don't need to cache the output
-        javaFiles = list(findJavaFiles(repoPath))
+        javaFiles = list(findFiles(repoPath))
         identifiers = set()
 
         # Split the Java files into chunks of maximum size

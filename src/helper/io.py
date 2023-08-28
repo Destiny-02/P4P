@@ -54,20 +54,6 @@ def findFiles(folderPath: str):
     return files
 
 
-def findJavaFiles(folderPath: str):
-    """
-    Finds all the java files in the folder and its subfolders
-    """
-    javaFiles: set[str] = set()
-    for dirpath, _, filenames in os.walk(folderPath):
-        for filename in filenames:
-            # add all files, the parser will discard what it can't process
-            # (see getParserForLanguage.ts)
-            if os.path.splitext(filename)[1] == ".java":
-                javaFiles.add(path.join(dirpath, filename))
-    return javaFiles
-
-
 def setToSheet(data, sheetPath, append=False):
     if append and os.path.exists(sheetPath):
         data = data.union(readSheet(sheetPath))
@@ -126,7 +112,7 @@ def saveAllRepoTermsToCache(repoPaths: list[str], cachedFilename: str):
     """
     allTerms: dict[str, list[str]] = {}
     for repoPath in repoPaths:
-        (identifiers, _) = invokeParser(findJavaFiles(repoPath))
+        (identifiers, _) = invokeParser(findFiles(repoPath))
         terms = setToStemmedSet(stringsToProcessable(identifiers))
         allTerms[repoPath] = list(terms)
     saveJsonFile(allTerms, getPath(cachedFilename))

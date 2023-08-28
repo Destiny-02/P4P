@@ -2,7 +2,7 @@ from os import path
 import csv
 from ..helper.invokeParser import invokeParser
 from ..helper.conversion import txtToSet, setToStemmedSet, stringsToProcessable
-from ..helper.io import findJavaFiles, findRepoPaths, deleteFileIfExists
+from ..helper.io import findFiles, findRepoPaths, deleteFileIfExists
 from ..pathConstants import DATA_FOLDER, VOCAB_FOLDER
 
 
@@ -27,7 +27,7 @@ def splitRepoPathsByNumIdentifiers(repoPaths):
     # Get the number of identifiers for each repo
     numIdentifiers = []
     for repoPath in repoPaths:
-        (identifiers, _) = invokeParser(findJavaFiles(repoPath))
+        (identifiers, _) = invokeParser(findFiles(repoPath))
         numIdentifiers.append(len(identifiers))
 
     # Get the median number of identifiers
@@ -74,7 +74,7 @@ def dcnCountsIdentifiers(domainFolderName, vocabPath=None):
         print(repoPath)
 
         # Parse the identifiers
-        (identifiers, _) = invokeParser(findJavaFiles(repoPath))
+        (identifiers, _) = invokeParser(findFiles(repoPath))
 
         # Count the number of design, context and neither identifiers
         # An identifier qualifies as design or context
@@ -126,7 +126,7 @@ def dcnCountsTerms(domainFolderName, vocabPath=None):
         print(repoPath)
 
         # Parse the identifiers
-        (identifiers, _) = invokeParser(findJavaFiles(repoPath))
+        (identifiers, _) = invokeParser(findFiles(repoPath))
 
         # Find the number of design, context and neither terms
         # An identifier qualifies as design or context
@@ -171,7 +171,7 @@ def findVocabsForLA(repoPaths, domainFolderName):
         print(repoPath)
 
         # Parse the identifiers
-        (identifiers, _) = invokeParser(findJavaFiles(repoPath))
+        (identifiers, _) = invokeParser(findFiles(repoPath))
 
         # Build up the context, design (and neither) vocabularies from the terms in the identifiers
         design = set()

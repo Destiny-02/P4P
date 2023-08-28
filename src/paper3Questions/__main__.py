@@ -7,7 +7,7 @@ from ..helper.conversion import (
     stringsToProcessable
 )
 from ..helper.stats import findLA, getDVInSet, average
-from ..helper.io import saveJsonFile, findRepoPaths, findJavaFiles
+from ..helper.io import saveJsonFile, findRepoPaths, findFiles
 
 
 def main(pathToData):
@@ -23,7 +23,7 @@ def main(pathToData):
     for repoPath in findRepoPaths(getPath(pathToData)):
         print("Processing " + repoPath)
 
-        (identifiers, comments) = invokeParser(findJavaFiles(repoPath))
+        (identifiers, comments) = invokeParser(findFiles(repoPath))
 
         # Split, clean and stem the identifiers and comments into terms
         identifierTerms = setToStemmedSet(stringsToProcessable(identifiers))
@@ -53,8 +53,10 @@ def main(pathToData):
 
     saveJsonFile(debugData, getPath("debug-output.json"))
 
+
 def getPath(relativePath):
   return path.join(path.dirname(__file__), relativePath)
+
 
 def printStats(isEitherSet, isOnlyIdentifiersSet, isOnlyCommentsSet, la):
     # Average % domain terms in source code
@@ -68,6 +70,7 @@ def printStats(isEitherSet, isOnlyIdentifiersSet, isOnlyCommentsSet, la):
 
     # LA between any 2 pairs of domain vocabs
     print("3: {:.2%}".format(la))
+
 
 if __name__ == "__main__":
     main("../../data/ugrad-009-01/")
