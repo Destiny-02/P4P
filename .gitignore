@@ -5,6 +5,7 @@ __pycache__
 to-categorise.csv
 to-determine.csv
 tool-results*.csv
+repos/
 
 # parsers
 dist
