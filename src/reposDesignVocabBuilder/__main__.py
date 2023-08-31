@@ -1,8 +1,16 @@
 from os import path
 import json
 from ..helper.invokeParser import invokeParser
-from ..helper.conversion import setToStemmedSet, stringsToProcessable
-from ..helper.io import findFiles, saveJsonFile
+from ..helper.conversion import (
+    setToStemmedSet,
+    stringsToProcessable,
+    txtToSet,
+    convertToLowercase,
+    fixUSSpelling,
+    stemTerm,
+)
+from ..helper.io import findFiles, saveJsonFile, deleteFileIfExists, findRepoPaths
+from ..categoriseIdentifiers.typeDefs import AbbreviationsDictionary
 
 DESIGN_TERMS_FILE = "design-terms.json"
 MAX_FILES_PER_INVOCATION = 10
@@ -77,10 +85,47 @@ def saveDesignTermsAsVocabFile(minCount, minCountForShortTerms):
             f.write(term + "\n")
 
 
+def addAbbreviationsToDesignTermsFile():
+    # Load the abbreviations from the JSON file
+    abbreviationDictionary: AbbreviationsDictionary = json.load(
+        open(
+            path.join(
+                path.dirname(__file__),
+                "../../data/downloaded/abbreviations-dict.json",
+            ),
+            encoding="utf8",
+        )
+    )
+    abbrevs = abbreviationDictionary.get("abbreviations")
+
+    # Load the design terms from the vocabulary text file
+    designTerms = txtToSet(getPath("design-terms.txt"))
+
+    # Add the stemmed & standardised abbreviations to the design terms
+    for abbrev in abbrevs:
+        cleanAbbrev = stemTerm(fixUSSpelling(convertToLowercase(abbrev)))
+        if cleanAbbrev != "":
+            designTerms.add(cleanAbbrev)
+
+    # Remove single-letter terms
+    designTerms = {term for term in designTerms if len(term) > 1}
+
+    # Alphabetical list
+    designTermsList = list(designTerms)
+    designTermsList.sort()
+
+    # Overwrite the vocabulary file with the updated set
+    deleteFileIfExists(getPath("design-terms.txt"))
+    with open(getPath("design-terms.txt"), "w", encoding="utf-8") as f:
+        for term in designTermsList:
+            f.write(term + "\n")
+
+
 def getPath(relativePath):
     return path.join(path.dirname(__file__), relativePath)
 
 
 if __name__ == "__main__":
-    # main(findRepoPaths(getPath("repos")))
-    saveDesignTermsAsVocabFile(5, 5)
+    main(findRepoPaths(getPath("repos")))
+    # saveDesignTermsAsVocabFile(5, 5)
+    # addAbbreviationsToDesignTermsFile()
