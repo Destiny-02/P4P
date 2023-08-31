@@ -8,9 +8,10 @@ The validators detect obvious issues and can suggest improvements.
 
 **Usage:**
 
-- Run `python -m src.categoriseIdentifiers --cache DOMAIN_NAME"`, where `DOMAIN_NAME` is the domain name.
+- Run `python -m src.categoriseIdentifiers DOMAIN_NAME"`, where `DOMAIN_NAME` is the domain name.
 - If you only want to analyse one repository from the domain, add the CLI flag `-r REPO_NAME`
+- If you want the list of meaningful and non-meaningful identifier classifications, add the CLI flag `--list`
 - Like all scripts, the `--cache` flag is optional and will bypass the slow parser
 - The slowest checks are not run by default, you need to add `--slow` to generate these diagnostics.
 
-Results are saved to `design1000.json` (depending on the chosen repo) in the folder where the script is run.
+Results are saved to the `output/` folder.

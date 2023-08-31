@@ -132,8 +132,39 @@ def categoriseIdentifiers(
     return output
 
 
+def evaluateIdentifiers(
+    categoriseOutput: list[CategorisedIdentifier],
+) -> tuple[list[str], list[str]]:
+    """
+    This function evaluates the results of the categorisation
+    and classifies each identifier as meaningful/non-meaningful.
+    """
+    meaningfulIdentifiers = set()
+    nonMeaningfulIdentifiers = set()
+    for o in categoriseOutput:
+        # count the number of terms that are design or context
+        # check if it's >= 50% of the terms
+        terms = o["components"]
+        count = sum(1 for t in terms if t["category"] in ("design", "context"))
+        if count / len(terms) >= 0.5:
+            meaningfulIdentifiers.add(o["identifier"])
+        else:
+            nonMeaningfulIdentifiers.add(o["identifier"])
+
+    # Alphabetical
+    meaningfulIdentifiers = list(meaningfulIdentifiers)
+    nonMeaningfulIdentifiers = list(nonMeaningfulIdentifiers)
+    meaningfulIdentifiers.sort()
+    nonMeaningfulIdentifiers.sort()
+
+    return meaningfulIdentifiers, nonMeaningfulIdentifiers
+
+
 def readFilesAndCategoriseIdentifiers(
-    domainName: str, repoNames: list[str], shouldRunExpensiveChecks: bool
+    domainName: str,
+    repoNames: list[str],
+    shouldRunExpensiveChecks: bool,
+    classifyIdentifiers: bool,
 ):
     """
     reads files and invokes categoriseIdentifiers. Separated from
@@ -160,6 +191,22 @@ def readFilesAndCategoriseIdentifiers(
         # save the results to a file
         saveJsonFile(output, outputFile)
 
+        # save meaningful/non-meaningful classifications to two text files
+        if classifyIdentifiers:
+            meaningfulIdentifiers, nonMeaningfulIdentifiers = evaluateIdentifiers(
+                output
+            )
+            meaningfulIdentifiersFile = outputFile = path.join(
+                TOOL_OUTPUT_FOLDER, domainName, repoName, "meaningful.txt"
+            )
+            nonMeaningfulIdentifiersFile = outputFile = path.join(
+                TOOL_OUTPUT_FOLDER, domainName, repoName, "nonmeaningful.txt"
+            )
+            with open(meaningfulIdentifiersFile, "w", encoding="utf-8") as f:
+                f.writelines("\n".join(meaningfulIdentifiers))
+            with open(nonMeaningfulIdentifiersFile, "w", encoding="utf-8") as f:
+                f.writelines("\n".join(nonMeaningfulIdentifiers))
+
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -183,6 +230,12 @@ if __name__ == "__main__":
         "--cache",
         help="(debugging only) This will use the cached data from the parser",
     )
+    parser.add_argument(
+        "--list",
+        action="store_true",
+        help="This will classify each identifier as meaningful/non-meaningful and"
+        + " save the results to two text files",
+    )
 
     args = parser.parse_args()
 
@@ -191,6 +244,8 @@ if __name__ == "__main__":
     repoNamesToScan = [args.repo] if args.repo else getReposForDomain(args.domainName)
 
     if repoNamesToScan:
-        readFilesAndCategoriseIdentifiers(args.domainName, repoNamesToScan, args.slow)
+        readFilesAndCategoriseIdentifiers(
+            args.domainName, repoNamesToScan, args.slow, args.list
+        )
     else:
         print(f"(!) There are no repositories in the folder “{args.domainName}”")
