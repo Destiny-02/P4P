@@ -21,6 +21,9 @@ from ..vocabularlyBuilder.__main__ import getVocabularies
 from .computeFrequency import computeFrequency
 from .determineIfContextSchema import initialiseEnglishCorpus, determineIfContextSchema
 from .types import TermToDetermine
+from ..categoriseIdentifiers.helpers.createDomainSpecificAbbreviationDictionary import (
+    createDomainSpecificAbbreviationDictionary,
+)
 
 TO_DETERMINE_FILE = "to-determine.csv"
 
@@ -79,6 +82,12 @@ def saveTermsToBeDetermined(
 
     # Find terms that are capitalised in the domain description
     capitalisedTerms = extractCapitalisedWords(domainDescription)
+
+    # Detect abbreviations and acronyms that are defined in the domain description
+    abbrevs = createDomainSpecificAbbreviationDictionary(set([domainDescription])).get(
+        "abbreviations"
+    )
+    print(abbrevs)
 
     # compute frequencies of each term within the doc
     termFrequencies = computeFrequency(processedOriginalTerms)
@@ -153,6 +162,8 @@ def saveTermsToBeDetermined(
         contextLikelihoodScore = freqScaled * (1 - tfidfScaled) * 100
         if stemTerm(term) in capitalisedTerms:
             contextLikelihoodScore += 25
+        if term in abbrevs:
+            contextLikelihoodScore += 25
 
         termsWithExtraColumns.append(
             {
@@ -162,6 +173,8 @@ def saveTermsToBeDetermined(
                 "tfidf": tfidf,
                 "freqScore": freqScore,
                 "tfidfScore": tfidfScore,
+                "isCapitalised": stemTerm(term) in capitalisedTerms,
+                "isAbbrevOrAcronym": term in abbrevs,
                 "contextLikelihoodScore": contextLikelihoodScore,
             }
         )

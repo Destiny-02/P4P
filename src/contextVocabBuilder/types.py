@@ -12,4 +12,6 @@ class TermToDetermine(TypedDict):
     tfidf: float
     freqScore: float
     tfidfScore: float
+    isCapitalised: bool
+    isAbbrevOrAcronym: bool
     contextLikelihoodScore: float
