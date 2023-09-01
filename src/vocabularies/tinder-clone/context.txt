@@ -6,3 +6,4 @@ phone
 profil
 registr
 sex
+upload
