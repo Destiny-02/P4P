@@ -162,5 +162,5 @@ if __name__ == "__main__":
     # saveCategoriseSheetToTxt("chess")
 
     # Categorising terms from identifiers in multiple codebases at once
-    saveTermsToBeCategorised(findRepoPaths(getPath("../../data/free-col/")), "free-col")
-    # saveCategoriseSheetToTxt("chess")
+    # saveTermsToBeCategorised(findRepoPaths(getPath("../../data/testing/")), "testing")
+    saveCategoriseSheetToTxt("testing")
