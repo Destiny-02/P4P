@@ -7,7 +7,6 @@ from .typeDefs import (
     CategorisedWord,
     GlobalValidatorContext,
     Diagonstics,
-    Severity,
 )
 from .validators.index import validators
 from .lexicon.addLexiconContext import addLexiconContext
@@ -149,8 +148,6 @@ def evaluateIdentifiers(
         count = sum(1 for t in terms if t["category"] in ("design", "context"))
         if count / len(terms) >= 0.5:
             meaningfulIdentifiers.add(o["identifier"])
-        elif isMeaningfulSingleLetter(o):
-            meaningfulIdentifiers.add(o["identifier"])
         else:
             nonMeaningfulIdentifiers.add(o["identifier"])
 
@@ -161,15 +158,6 @@ def evaluateIdentifiers(
     nonMeaningfulIdentifiers.sort()
 
     return meaningfulIdentifiers, nonMeaningfulIdentifiers
-
-
-def isMeaningfulSingleLetter(o: CategorisedIdentifier) -> bool:
-    if len(o["identifier"]) != 1 or "diagnostics" not in o["components"][0]:
-        return False
-    for diag in o["components"][0]["diagnostics"]:
-        if diag["issueType"] == "singleLetter" and diag["severity"] == Severity.INFO:
-            return True
-    return False
 
 
 def readFilesAndCategoriseIdentifiers(
