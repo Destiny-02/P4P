@@ -1,13 +1,12 @@
 ascii
 camel
+chunk
 digit
 hyphen
 joiner
 letter
-lower
 splitter
 suffix
-trail
 trim
 trimmer
 underscor
