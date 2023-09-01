@@ -1,12 +1,12 @@
 blue
 gray
 green
-hex
 hsv
 hue
 opac
 palett
 picker
+red
 rgb
 sat
 white
