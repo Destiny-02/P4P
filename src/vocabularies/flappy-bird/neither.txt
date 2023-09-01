@@ -1,0 +1,15 @@
+attrib
+bx
+frag
+ibo
+mat
+ml
+ns
+rot
+tbo
+tcoord
+tcs
+uniform
+vao
+vbo
+vid
