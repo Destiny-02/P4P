@@ -207,7 +207,7 @@ if __name__ == "__main__":
     Find the number of terms that are design, context or neither
     """
     (designCounts, contextCounts, neitherCounts, totalCounts) = dcnCountsTerms(
-        "free-col"
+        "ugrad-009-01"
     )
     writeResultsToCsv(
         designCounts, contextCounts, neitherCounts, getPath("tool-results.csv")
@@ -216,7 +216,7 @@ if __name__ == "__main__":
     """
     Find the LA (takes a while to run)
     """
-    # LA for small and large codebases
+    # # LA for small and large codebases
     # (smallRepoPaths, largeRepoPaths, threshold) = splitRepoPathsByNumIdentifiers(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")))
     # (smallDesignVocabs, smallContextVocabs, smallNeitherVocabs) = findVocabsForLA(smallRepoPaths, "ugrad-009-01")
     # (largeDesignVocabs, largeContextVocabs, largeNeitherVocabs) = findVocabsForLA(largeRepoPaths, "ugrad-009-01")

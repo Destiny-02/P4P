@@ -158,9 +158,9 @@ def getPath(relativePath):
 
 if __name__ == "__main__":
     # Categorising terms from identifiers in a codebase
-    # saveTermsToBeCategorised([getPath("../../data/chess/ashish1294_ChessOOP")], "chess")
-    # saveCategoriseSheetToTxt("chess")
+    # saveTermsToBeCategorised([getPath("../../data/ugrad-009-01/design1000")], "ugrad-009-01")
+    # saveCategoriseSheetToTxt("ugrad-009-01")
 
-    # Categorising terms from identifiers in multiple codebases at once
-    # saveTermsToBeCategorised(findRepoPaths(getPath("../../data/testing/")), "testing")
-    saveCategoriseSheetToTxt("testing")
+    # Categorising terms from identifiers in multiple codebases (of the same domain) at once
+    # saveTermsToBeCategorised(findRepoPaths(getPath("../../data/ugrad-009-01/")), "ugrad-009-01")
+    saveCategoriseSheetToTxt("ugrad-009-01")

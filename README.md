@@ -13,24 +13,24 @@ Supervised by: Prof. Ewan Tempero
 - run `python --version` to confirm that the python version in PATH is v3
 - run `python -m pip install --user pipenv` to install [the package manager](https://packaging.python.org/en/latest/tutorials/managing-dependencies/)
 - run `pipenv install` to install [the dependencies listed in Pipfile](./Pipfile)
-- run `npm run downloadDictionaries` and `npm run downloadAbbrs` to download some required JSON files
+- run `npm run downloadDictionaries` to download some required JSON files
 
 # Run The Tools
 
 Instructions for running the tools are in the `README.md` of the respective folder.
 
-The ugrad-009-01 domain is used as an example in the instructions. 20 implementations of ugrad-009-01 is included as part of this repository.
+The ugrad-009-01 domain and 20 implementations of ugrad-009-01 is included as part of this repository.
 
 The tools are located in:
 
-- `/src/paper3Questions/`
-- `/src/vocabularyBuilder/`
-- `/src/analyseCodebases/`
-- `/src/machineLearningExperiment/`
-- `src/calcTermFrequency/`
-- `src/percentOfVocab/`
-- `src/categoriseIdentifiers/`
-- `src/contextVocabBuilder/`
+- [/src/paper3Questions/](/src/paper3Questions/)
+- [/src/vocabularyBuilder/](/src/vocabularyBuilder/)
+- [/src/analyseCodebases/](/src/analyseCodebases/)
+- [/src/machineLearningExperiment/](/src/machineLearningExperiment/)
+- [/src/calcTermFrequency/](/src/calcTermFrequency/)
+- [/src/percentOfVocab/](/src/percentOfVocab/)
+- [/src/categoriseIdentifiers/](/src/categoriseIdentifiers/)
+- [/src/contextVocabBuilder/](/src/contextVocabBuilder/)
 
 # Run The Tests
 

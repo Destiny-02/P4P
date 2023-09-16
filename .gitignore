@@ -2,37 +2,30 @@ node_modules
 parsers/output
 out
 __pycache__
-to-categorise.csv
-to-determine.csv
-tool-results*.csv
-repos/
+
+# repositories downloaded and used by reposDesignVocabBuilder
+src/reposDesignVocabBuilder/repos/
 
 # parsers
 dist
 
 # generated files
 output
-# results/ is for finalised and organised results so tools should not write to it
-# we need to manually move over the tool output to the results/ folder and rename it appropriately after there have been significant changes to the tools' logic
-# all the tools should write to their own folder
-# results/*/*.json
+to-categorise.csv
+to-determine.csv
+tool-results*.csv
+design-terms.json
 
 # ignore everything in `data` except ugrad-009-01 which is the only
-# one we committed into this repo
+# one we committed to this repo
 data/*/*
 !data/README.md
 !data/ugrad-009-01/*
 !data/*/domain-description.md
 !data/*/repos.ini
 
-
 # temp
 parser-input.txt
 parser-output.json
 debug-output.json
 cached-terms.json
-
-# my experimental files and folders
-donotcommit
-data2
-openSourceRepos

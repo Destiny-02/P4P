@@ -17,7 +17,7 @@ from ..categoriseIdentifiers.helpers.getPossibleDomains import domainList
 from ..helper.io import writeDictAsCsv
 from ..helper.generic import flatten
 from ..pathConstants import VOCAB_FOLDER
-from ..vocabularlyBuilder.__main__ import getVocabularies
+from ..vocabularyBuilder.__main__ import getVocabularies
 from .computeFrequency import computeFrequency
 from .determineIfContextSchema import initialiseEnglishCorpus, determineIfContextSchema
 from .types import TermToDetermine
@@ -238,7 +238,7 @@ if __name__ == "__main__":
         saveTermsToBeDetermined(
             getPath(f"../../data/{args.domainName}/domain-description.md"),
             args.domainName,
-            getPath("../../src/vocabularlyBuilder/to-categorise.csv")
+            getPath("../../src/vocabularyBuilder/to-categorise.csv")
             if args.onlyToCategorise
             else None,
         )

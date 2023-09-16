@@ -1,6 +1,6 @@
 # 3 Questions
 
-This folder contains the `paper3Questions.py` script, which can be used to calculate the answers to the 3 questions asked in the paper [On the Use of Domain Terms in Source Code](https://ieeexplore-ieee-org.ezproxy.auckland.ac.nz/document/4556123).
+This folder contains a script, which can be used to calculate the answers to the 3 questions asked in the paper [On the Use of Domain Terms in Source Code](https://ieeexplore-ieee-org.ezproxy.auckland.ac.nz/document/4556123).
 
 More specifically,
 
@@ -10,15 +10,14 @@ More specifically,
 
 ## Prerequisites
 
-- Ensure that `domain-terms.txt` is in the same directory as `paper3Questions.py`.
+- Ensure that `domain-terms.txt` is in the same folder as `paper3Questions.py`.
   - Each line contains one or two domain terms separated by a space.
   - For lines with two domain terms, the first term is the equivalent of the second term e.g. `curr current`.
-- Ensure that the codebases are in the `../../data/` directory.
-- Ensure that the helper files and functions have not been deleted.
+- Ensure that the codebases are in the `../../data/your-domain-name` folder.
 
-## Run the script
+## Usage
 
-- Modify the call to main with the name of the folder containing the codebases e.g. `main("../../data/ugrad-009-01/")`
+- Modify the call to main with the name of the folder containing the codebases e.g. `main("../../data/your-domain-name/")`
 - From the repo root, run the script with `python -m src.paper3Questions`.
 
 ## Results
