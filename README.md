@@ -41,10 +41,10 @@ pytest
 
 # Other folders
 
-- `data/`: Contains the codebases. Each folder nested in `data/` is a domain. Each folder nested in a domain folder is a codebase.
-- `data/downloaded`: Contains JSON and CSV files that are downloaded when the repository is set up.
-- `src/vocabularies/`: Contains the vocabulary files. Each folder nested in `src/vocabularies/` is a domain. Each file nested in a domain folder is a vocabulary file (`context.txt`, `design.txt` or `neither.txt`).
-- `src/helper`: Contains helper functions and scripts used by multiple tools.
+- [data/](data/): Contains the codebases. Each folder nested in `data/` is a domain. Each folder nested in a domain folder is a codebase.
+- [data/downloaded](data/downloaded): Contains JSON and CSV files that are downloaded when the repository is set up.
+- [src/vocabularies/](src/vocabularies/): Contains the vocabulary files. Each folder nested in `src/vocabularies/` is a domain. Each file nested in a domain folder is a vocabulary file (`context.txt`, `design.txt` or `neither.txt`).
+- [src/helper](src/helper): Contains helper functions and scripts used by multiple tools.
 
 # Acknowledgements
 
