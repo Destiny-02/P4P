@@ -1,3 +1,0 @@
-Original 3 descriptions: 9961 words
-to-dermine.csv: 595 words
-Words in the description saved to the context vocabulary: 45 words
