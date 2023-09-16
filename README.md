@@ -1,3 +1,11 @@
+# Introduction
+
+This repository contains a number of tools which were used in Project #42, "Evaluating Identifier Meaningfulness".
+
+Authors: Destiny Li, Kyle Hensel
+
+Supervised by: Prof. Ewan Tempero
+
 # Setup
 
 - Install python 3.10
@@ -7,11 +15,11 @@
 - run `pipenv install` to install [the dependencies listed in Pipfile](./Pipfile)
 - run `npm run downloadDictionaries` and `npm run downloadAbbrs` to download some required JSON files
 
-# Run Python Scripts
-
-`python <filename.py>`
-
 # Run The Tools
+
+Instructions for running the tools are in the `README.md` of the respective folder.
+
+The ugrad-009-01 domain is used as an example in the instructions. 20 implementations of ugrad-009-01 is included as part of this repository.
 
 The tools are located in:
 
@@ -24,36 +32,34 @@ The tools are located in:
 - `src/categoriseIdentifiers/`
 - `src/contextVocabBuilder/`
 
-Instructions for running the tools are in the `README.md` of the respective folder.
+# Run The Tests
 
-# Run Tests
-
-`pip install pytest` # if not already installed
-`pytest`
+```bash
+pip install pytest # if not already installed
+pytest
+```
 
 # Other folders
 
-- `data/` contains the codebases
-- `results/` contains the (manually) saved results of the tools
+- `data/`: Contains the codebases. Each folder nested in `data/` is a domain. Each folder nested in a domain folder is a codebase.
+- `data/downloaded`: Contains JSON and CSV files that are downloaded when the repository is set up.
+- `src/vocabularies/`: Contains the vocabulary files. Each folder nested in `src/vocabularies/` is a domain. Each file nested in a domain folder is a vocabulary file (`context.txt`, `design.txt` or `neither.txt`).
+- `src/helper`: Contains helper functions and scripts used by multiple tools.
 
-# Speeding up the tool
-
-If you find it is taking a long time to run, it is because it is parsing a lot of codebases, transforming a lot of strings and looking up words in large dictionaries.
-
-If you are running the tool multiple times, or are running multiple tools, you can speed up the tool by using the cached results.
-
-To do this:
-
-- Ensure that you have run the tool at least once and that the cached terms have been stored in a json file
-- Use `python --cache ...` instead of `python ...` (works in all scripts). Alternatively:
-- Comment out the following line
-
-```python
-saveAllRepoTermsToCache(findRepoPaths(getPath(DATA_FOLDER + "ugrad-009-01")), CACHED_TERMS)
-```
-
-This currently works for `calcTermFrequency` and `percentOfVocab`.
-
-# References
+# Acknowledgements
 
 [American to British English Dictionary](https://raw.githubusercontent.com/hyperreality/American-British-English-Translator/master/data/american_spellings.json)
+
+[Wikipedia Word Frequency Data](https://github.com/IlyaSemenov/wikipedia-word-frequency/)
+
+[Identifier Term Frequency Data](https://github.com/casics/spiral/tree/master/spiral/data)
+
+[Common Code Abbreviations](https://github.com/sindresorhus/eslint-plugin-unicorn)
+
+[More Code Abbreviations](https://github.com/abbrcode/abbreviations-in-code)
+
+[Porter2 Stemmer](https://github.com/evandempsey/porter2-stemmer)
+
+[NLTK](https://www.nltk.org/)
+
+[JavaParser](https://www.npmjs.com/package/java-parser)
